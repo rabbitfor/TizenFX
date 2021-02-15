@@ -213,8 +213,13 @@ namespace Tizen.NUI.Binding
         [EditorBrowsable(EditorBrowsableState.Never)]
         public void Add(string key, object value)
         {
+            // _innerDictionary[key] = value;
             if (ContainsKey(key))
-                throw new ArgumentException($"A resource with the key '{key}' is already present in the ResourceDictionary.");
+            {
+                return;
+                // throw new ArgumentException($"A resource with the key '{key}' is already present in the ResourceDictionary.");
+            }
+
             _innerDictionary.Add(key, value);
             OnValueChanged(key, value);
         }

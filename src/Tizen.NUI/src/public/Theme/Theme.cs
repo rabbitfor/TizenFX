@@ -38,7 +38,7 @@ namespace Tizen.NUI
     /// </para>
     /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public class Theme : BindableObject
+    public class Theme : BindableObject, IResourcesProvider
     {
         private readonly Dictionary<string, ViewStyle> map;
         private IEnumerable<KeyValuePair<string, string>> changedResources = null;
@@ -125,37 +125,39 @@ namespace Tizen.NUI
 
         /// <inheritdoc/>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool IsResourcesCreated => resources != null;
+        public bool IsResourcesCreated => true;
 
-        /// <inheritdoc/>
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        internal ResourceDictionary Resources
-        {
-            get
-            {
-                if (resources != null)
-                    return resources;
-                resources = new ResourceDictionary();
-                ((IResourceDictionary)resources).ValuesChanged += OnThemeResourcesChanged;
-                return resources;
-            }
-            set
-            {
-                if (resources == value)
-                    return;
+        public ResourceDictionary XamlResources { get; set; } = new ResourceDictionary();
 
-                if (resources != null)
-                {
-                    ((IResourceDictionary)resources).ValuesChanged -= OnThemeResourcesChanged;
-                }
-                resources = value;
-                if (resources != null)
-                {
-                    // This callback will be removed when Resource.Source is assigned.
-                    ((IResourceDictionary)resources).ValuesChanged += OnThemeResourcesChanged;
-                }
-            }
-        }
+        // /// <inheritdoc/>
+        // [EditorBrowsable(EditorBrowsableState.Never)]
+        // public ResourceDictionary Resources
+        // {
+        //     get
+        //     {
+        //         if (resources != null)
+        //             return resources;
+        //         resources = new ResourceDictionary();
+        //         ((IResourceDictionary)resources).ValuesChanged += OnThemeResourcesChanged;
+        //         return resources;
+        //     }
+        //     set
+        //     {
+        //         if (resources == value)
+        //             return;
+
+        //         if (resources != null)
+        //         {
+        //             ((IResourceDictionary)resources).ValuesChanged -= OnThemeResourcesChanged;
+        //         }
+        //         resources = value;
+        //         if (resources != null)
+        //         {
+        //             // This callback will be removed when Resource.Source is assigned.
+        //             ((IResourceDictionary)resources).ValuesChanged += OnThemeResourcesChanged;
+        //         }
+        //     }
+        // }
 
         /// <summary>
         /// For Xaml use only.
@@ -260,7 +262,7 @@ namespace Tizen.NUI
             var result = new Theme()
             {
                 Id = this.Id,
-                Resources = Resources
+                // Resources = Resources
             };
 
             foreach (var item in this)
@@ -331,13 +333,13 @@ namespace Tizen.NUI
                 }
             }
 
-            if (theme.resources != null)
-            {
-                foreach (var res in theme.resources)
-                {
-                    Resources[res.Key] = res.Value;
-                }
-            }
+            // if (theme.resources != null)
+            // {
+            //     foreach (var res in theme.resources)
+            //     {
+            //         Resources[res.Key] = res.Value;
+            //     }
+            // }
         }
 
         /// <summary>

@@ -6,6 +6,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="res/Theme/Tizen.NUI.Components_Tizen.NUI.Theme.Common.xaml">
+      <!--Generator>MSBuild:Compile</Generator-->
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Tizen.NUI.XamlBuild" Version="1.0.10" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Tizen.Log\Tizen.Log.csproj" />
     <ProjectReference Include="..\Tizen.NUI\Tizen.NUI.csproj" />
     <ProjectReference Include="..\Tizen.System.Feedback\Tizen.System.Feedback.csproj" />
