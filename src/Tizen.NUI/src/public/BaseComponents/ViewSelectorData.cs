@@ -15,6 +15,10 @@
  *
  */
 
+using System;
+using System.Collections.Generic;
+using Tizen.NUI.Binding;
+
 namespace Tizen.NUI.BaseComponents
 {
     /// <summary>
@@ -24,6 +28,8 @@ namespace Tizen.NUI.BaseComponents
     {
         internal ViewSelectorData() { }
 
+        public Type AppliedStyleType { get; set; }
+        public Dictionary<BindableProperty, object> AppliedStyle { get; private set; }
         public TriggerableSelector<Color> BackgroundColor { get;  private set; }
         public TriggerableSelector<string> BackgroundImage { get;  private set; }
         public TriggerableSelector<Rectangle> BackgroundImageBorder { get;  private set; }
@@ -32,6 +38,7 @@ namespace Tizen.NUI.BaseComponents
         public TriggerableSelector<ImageShadow> ImageShadow { get;  private set; }
         public TriggerableSelector<Shadow> BoxShadow { get;  private set; }
 
+        public Dictionary<BindableProperty, object> EnsureAppliedStyle() => AppliedStyle ?? (AppliedStyle = new Dictionary<BindableProperty, object>());
         public TriggerableSelector<Color> EnsureBackgroundColor() => BackgroundColor ?? (BackgroundColor = new TriggerableSelector<Color>(View.BackgroundColorProperty));
         public TriggerableSelector<string> EnsureBackgroundImage() => BackgroundImage ?? (BackgroundImage = new TriggerableSelector<string>(View.BackgroundImageProperty));
         public TriggerableSelector<Rectangle> EnsureBackgroundImageBorder() => BackgroundImageBorder ?? (BackgroundImageBorder = new TriggerableSelector<Rectangle>(View.BackgroundImageBorderProperty));      
@@ -52,5 +59,3 @@ namespace Tizen.NUI.BaseComponents
         }
     }
 }
-
-

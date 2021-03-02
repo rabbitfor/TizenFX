@@ -27,6 +27,7 @@ namespace Tizen.NUI.BaseComponents
     public partial class View
     {
         private ViewSelectorData selectorData;
+        private bool isThemeApplying = false;
 
         internal string styleName;
 
@@ -1077,15 +1078,6 @@ namespace Tizen.NUI.BaseComponents
             shadow.Dispose();
         }
 
-        internal void UpdateStyle()
-        {
-            ViewStyle newStyle;
-            if (styleName == null) newStyle = ThemeManager.GetStyle(GetType());
-            else newStyle = ThemeManager.GetStyle(styleName);
-
-            if (newStyle != null && (viewStyle == null || viewStyle.GetType() == newStyle.GetType())) ApplyStyle(newStyle);
-        }
-
         /// <summary>
         /// Get selector value from the triggerable selector or related property.
         /// </summary>
@@ -1365,10 +1357,28 @@ namespace Tizen.NUI.BaseComponents
             return false;
         }
 
+        private void UpdateStyle()
+        {
+            ViewStyle newStyle;
+            if (styleName == null) newStyle = ThemeManager.GetStyleWithoutClone(GetType());
+            else newStyle = ThemeManager.GetStyle(styleName);
+
+            if (newStyle != null && (viewStyle == null || viewStyle.GetType() == newStyle.GetType())) ApplyStyleInternal(newStyle);
+        }
+
         private void InitializeStyle(ViewStyle style)
         {
-            if (style != null) ApplyStyle(style.Clone());   // Use given style
+            if (style != null) ApplyStyleInternal(style.Clone());   // Use given style
             else if (ThemeManager.ThemeApplied) UpdateStyle(); // Use style in the current theme
+        }
+
+        private void ApplyStyleInternal(ViewStyle viewStyle)
+        {
+            isThemeApplying = true;
+
+            ApplyStyle(viewStyle);
+
+            isThemeApplying = false;
         }
 
         private ViewSelectorData EnsureSelectorData() => selectorData ?? (selectorData = new ViewSelectorData());

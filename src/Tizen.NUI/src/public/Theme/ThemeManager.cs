@@ -155,6 +155,16 @@ namespace Tizen.NUI
         }
 
         /// <summary>
+        /// Load a style with View type in the current theme.
+        /// </summary>
+        /// <param name="viewType">The type of View.</param>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        internal static ViewStyle GetStyleWithoutClone(Type viewType)
+        {
+            return currentTheme?.GetStyle(viewType) ?? defaultTheme.GetStyle(viewType);
+        }
+
+        /// <summary>
         /// Get a built-in theme.
         /// </summary>
         /// <param name="themeId">The built-in theme id.</param>

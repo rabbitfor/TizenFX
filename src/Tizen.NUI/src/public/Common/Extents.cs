@@ -285,6 +285,36 @@ namespace Tizen.NUI
             return ret;
         }
 
+        /// <summary>
+        /// Determines whether the specified object is equal to the current object.
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public override bool Equals(System.Object other)
+        {
+            var x = other as Extents;
+
+            if (x == null)
+            {
+                return false;
+            }
+
+            return x.Start == Start && x.End == End && x.Top == Top && x.Bottom == Bottom;
+        }
+
+        /// <summary>
+        /// Serves as the default hash function.
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public override int GetHashCode()
+        {
+            int hash = 17;
+            hash = (hash * 23) + (int)Start;
+            hash = (hash * 23) + (int)End;
+            hash = (hash * 23) + (int)Top;
+            hash = (hash * 23) + (int)Bottom;
+            return hash;
+        }
+
         /// <inheritdoc/>
         [EditorBrowsable(EditorBrowsableState.Never)]
         public object Clone() => new Extents(this);
