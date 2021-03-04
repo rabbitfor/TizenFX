@@ -54,7 +54,7 @@ namespace Tizen.NUI.Components
 
             theme.AddStyleWithoutClone("Tizen.NUI.Components.CheckBox", new ButtonStyle()
             {
-                Size = new Size(30, 30),
+                MinimumSize = new Size(30, 30),
                 Icon = new ImageViewStyle()
                 {
                     Opacity = new Selector<float?>()
@@ -65,16 +65,16 @@ namespace Tizen.NUI.Components
                     },
                     BackgroundImage = new Selector<string>()
                     {
-                        Pressed = FrameworkInformation.ResourcePath + "nui_component_default_checkbox_bg_p.png",
-                        Selected = FrameworkInformation.ResourcePath + "nui_component_default_checkbox_bg_p.png",
-                        Other = FrameworkInformation.ResourcePath + "nui_component_default_checkbox_bg_n.png",
+                        Normal = FrameworkInformation.ResourcePath + "IoT_check_off_active.svg",
+                        // Pressed = FrameworkInformation.ResourcePath + "IoT_check_on_active_bg.svg",
+                        // Selected = FrameworkInformation.ResourcePath + "IoT_check_on_active_bg.svg",
+                        // Other = FrameworkInformation.ResourcePath + "IoT_check_off_active.svg",
                     },
-                    ResourceUrl = new Selector<string>()
-                    {
-                        Pressed = "",
-                        Selected = FrameworkInformation.ResourcePath + "nui_component_default_checkbox_s.png",
-                        Other = "",
-                    },
+                    // ResourceUrl = new Selector<string>()
+                    // {
+                    //     Selected = FrameworkInformation.ResourcePath + "IoT_check_on_active_icon.svg",
+                    //     Other = "",
+                    // },
                 },
                 Text = new TextLabelStyle()
                 {
