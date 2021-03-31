@@ -98,6 +98,11 @@ namespace Tizen.NUI.BaseComponents
 
                 Tizen.NUI.Object.SetProperty((System.Runtime.InteropServices.HandleRef)view.SwigCPtr, View.Property.BACKGROUND, new PropertyValue(map));
             }
+            if (view.selectorData != null)
+            {
+                view.selectorData.BackgroundImage?.Reset(view);
+                view.selectorData.BackgroundColor?.Reset(view);
+            }
         }),
         defaultValueCreator: (bindable) =>
         {
@@ -126,6 +131,7 @@ namespace Tizen.NUI.BaseComponents
             {
                 view.SetColor((Color)newValue);
             }
+            view.selectorData?.Color?.Reset(view);
         },
         defaultValueCreator: (bindable) =>
         {
@@ -181,6 +187,12 @@ namespace Tizen.NUI.BaseComponents
             }
 
             Tizen.NUI.Object.SetProperty((System.Runtime.InteropServices.HandleRef)view.SwigCPtr, View.Property.BACKGROUND, new PropertyValue(map));
+
+            if (view.selectorData != null)
+            {
+                view.selectorData.BackgroundColor?.Reset(view);
+                view.selectorData.BackgroundImage?.Reset(view);
+            }
         }),
         defaultValueCreator: (bindable) =>
         {
@@ -228,6 +240,8 @@ namespace Tizen.NUI.BaseComponents
             }
 
             Tizen.NUI.Object.SetProperty((System.Runtime.InteropServices.HandleRef)view.SwigCPtr, View.Property.BACKGROUND, new PropertyValue(map));
+
+            view.selectorData?.BackgroundImageBorder?.Reset(view);
 
         }),
         defaultValueCreator: (bindable) =>
@@ -646,6 +660,8 @@ namespace Tizen.NUI.BaseComponents
             {
                 Tizen.NUI.Object.SetProperty((System.Runtime.InteropServices.HandleRef)view.SwigCPtr, View.Property.OPACITY, new Tizen.NUI.PropertyValue((float)newValue));
             }
+
+            view.selectorData?.Opacity?.Reset(view);
         }),
         defaultValueCreator: (BindableProperty.CreateDefaultValueDelegate)((bindable) =>
         {
@@ -1536,6 +1552,12 @@ namespace Tizen.NUI.BaseComponents
             var shadow = (ImageShadow)newValue;
             var view = (View)bindable;
             Tizen.NUI.Object.SetProperty((System.Runtime.InteropServices.HandleRef)view.SwigCPtr, View.Property.SHADOW, shadow == null ? new PropertyValue() : shadow.ToPropertyValue(view));
+
+            if (view.selectorData != null)
+            {
+                view.selectorData.BoxShadow?.Reset(view);
+                view.selectorData.ImageShadow?.Reset(view);
+            }
         }),
         defaultValueCreator: (BindableProperty.CreateDefaultValueDelegate)((bindable) =>
         {
@@ -1557,6 +1579,12 @@ namespace Tizen.NUI.BaseComponents
             var shadow = (Shadow)newValue;
             var view = (View)bindable;
             Tizen.NUI.Object.SetProperty((System.Runtime.InteropServices.HandleRef)view.SwigCPtr, View.Property.SHADOW, shadow == null ? new PropertyValue() : shadow.ToPropertyValue(view));
+
+            if (view.selectorData != null)
+            {
+                view.selectorData.ImageShadow?.Reset(view);
+                view.selectorData.BoxShadow?.Reset(view);
+            }
         }),
         defaultValueCreator: (BindableProperty.CreateDefaultValueDelegate)((bindable) =>
         {
