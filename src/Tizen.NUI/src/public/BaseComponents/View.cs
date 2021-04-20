@@ -2667,12 +2667,13 @@ namespace Tizen.NUI.BaseComponents
 
         private bool IsViewPropertyDirty(BindableProperty styleProperty)
         {
-            if (dirtyPropertySet.Count == 0)
-            {
-                return false;
-            }
+            // if (dirtyPropertySet.Count == 0)
+            // {
+            //     return false;
+            // }
 
-            return dirtyPropertySet.Contains(styleProperty.PropertyName);
+            // return dirtyPropertySet.Contains(styleProperty.PropertyName);
+            return false;
         }
 
         /// <summary>
@@ -2692,10 +2693,10 @@ namespace Tizen.NUI.BaseComponents
                 return;
             }
 
-            if (dirtyPropertySet == null)
-            {
-                dirtyPropertySet = new HashSet<string>();
-            }
+            // if (dirtyPropertySet == null)
+            // {
+            //     dirtyPropertySet = new HashSet<string>();
+            // }
 
             BindableProperty.GetBindablePropertysOfType(GetType(), out var bindablePropertyOfView);
 
