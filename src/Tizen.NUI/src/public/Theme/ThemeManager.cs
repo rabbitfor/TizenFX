@@ -15,6 +15,8 @@
  *
  */
 
+// #define ThemeEnabled
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -215,6 +217,7 @@ namespace Tizen.NUI
         /// <param name="externalTheme">The external theme instance to be applied as base.</param>
         internal static void ApplyExternalTheme(IExternalTheme externalTheme)
         {
+#if ThemeEnabled
             Debug.Assert(defaultTheme != null);
 
             if (defaultTheme.HasSameIdAndVersion(externalTheme))
@@ -249,6 +252,7 @@ namespace Tizen.NUI
 
             defaultTheme = newTheme;
             NotifyThemeChanged();
+#endif
         }
 
         internal static void AddPackageTheme(IThemeCreator themeCreator)
@@ -259,6 +263,7 @@ namespace Tizen.NUI
             }
             packages.Add(themeCreator);
 
+#if ThemeEnabled
             var packageTheme = themeCreator.Create();
             Debug.Assert(packageTheme != null);
 
@@ -267,19 +272,25 @@ namespace Tizen.NUI
             {
                 packageTheme.ApplyExternalTheme(externalTheme, themeCreator.GetExternalThemeKeyListSet());
             }
-
+#endif
             if (defaultTheme == null)
             {
                 defaultTheme = new Theme()
                 {
+#if ThemeEnabled
                     Id = packageTheme.Id,
                     Version = packageTheme.Version
+#else
+                    Id = DefaultThemeCreator.DefaultId,
+                    Version = DefaultThemeCreator.DefaultVersion
+#endif
                 };
                 AddToBuiltinThemes(defaultTheme);
             }
-
+#if ThemeEnabled
             defaultTheme.MergeWithoutClone(packageTheme);
             defaultTheme.PackageCount++;
+#endif
         }
 
         private static void AddToBuiltinThemes(Theme theme)
