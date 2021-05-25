@@ -1317,7 +1317,7 @@ namespace Tizen.NUI.BaseComponents
         /// Apply initial style to the view.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        protected void InitializeStyle(ViewStyle style = null)
+        protected virtual void InitializeStyle(ViewStyle style = null)
         {
             if (style != null) ApplyStyle(style); // Use given style
             else UpdateStyle(); // Use style in the current theme

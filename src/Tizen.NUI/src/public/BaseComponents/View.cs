@@ -55,6 +55,7 @@ namespace Tizen.NUI.BaseComponents
             public bool themeChangeSensitive = false;
             public ControlState controlStates = ControlState.Normal;
             public ViewSelectorData selectorData;
+            public bool useThemeBackgroundColor = false;
         }
 
         static View()
@@ -2601,6 +2602,17 @@ namespace Tizen.NUI.BaseComponents
         }
 
         /// <summary>
+        /// Follows the theme background color.
+        /// Note that if you want the view to change it's background color by theme changing, you need to set ThemeChangeSensitive property to true.
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool UseThemeBackgroundColor
+        {
+            get => (bool)GetValue(UseThemeBackgroundColorProperty);
+            set => SetValue(UseThemeBackgroundColorProperty, value);
+        }
+
+        /// <summary>
         /// Create Style, it is abstract function and must be override.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
@@ -2624,6 +2636,12 @@ namespace Tizen.NUI.BaseComponents
         protected virtual void OnThemeChanged(object sender, ThemeChangedEventArgs e)
         {
             UpdateStyle();
+
+            if (UseThemeBackgroundColor)
+            {
+                var color = ThemeManager.GetBackgroundColor();
+                if (color != null) BackgroundColor = color;
+            }
         }
 
         /// <summary>

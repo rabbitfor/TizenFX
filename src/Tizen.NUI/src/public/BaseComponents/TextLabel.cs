@@ -1049,6 +1049,21 @@ namespace Tizen.NUI.BaseComponents
             base.OnBindingContextChanged();
         }
 
+        /// <summary>
+        /// Apply initial style to the view.
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        protected override void InitializeStyle(ViewStyle style = null)
+        {
+            if (style == null)
+            {
+                var size = ThemeManager.GetTextPixelSize();
+                if (size != null) PixelSize = (float)size;
+            }
+
+            base.InitializeStyle(style);
+        }
+
         private void SystemSettings_LocaleLanguageChanged(object sender, LocaleLanguageChangedEventArgs e)
         {
             Text = NUIApplication.MultilingualResourceManager?.GetString(textLabelSid, new CultureInfo(e.Value.Replace("_", "-")));

@@ -108,6 +108,18 @@ namespace Tizen.NUI
         public string Version { get; set; } = null;
 
         /// <summary>
+        /// The main background color of the theme.
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public Color BackgroundColor { get; set; }
+
+        /// <summary>
+        /// The default pixel size of the text.
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public float? TextPixelSize { get; set; }
+
+        /// <summary>
         /// For Xaml use only.
         /// The bulit-in theme id that will be used as base of this.
         /// View styles with same key are merged.
@@ -320,6 +332,12 @@ namespace Tizen.NUI
 
             if (Id == null) Id = theme.Id;
 
+            if (Version == null) Version = theme.Version;
+
+            if (theme.BackgroundColor != null) BackgroundColor = theme.BackgroundColor;
+
+            if (theme.TextPixelSize != null) TextPixelSize = theme.TextPixelSize;
+
             foreach (var item in theme)
             {
                 if (item.Value == null)
@@ -352,6 +370,10 @@ namespace Tizen.NUI
                 Version = theme.Version;
             }
 
+            if (theme.BackgroundColor != null) BackgroundColor = theme.BackgroundColor;
+
+            if (theme.TextPixelSize != null) TextPixelSize = theme.TextPixelSize;
+
             foreach (var item in theme)
             {
                 if (item.Value == null)
@@ -381,23 +403,6 @@ namespace Tizen.NUI
         /// Internal use only.
         /// </summary>
         internal void AddStyleWithoutClone(string styleName, ViewStyle value) => map[styleName] = value;
-
-        internal void ApplyExternalTheme(IExternalTheme externalTheme, HashSet<ExternalThemeKeyList> keyListSet)
-        {
-            Id = externalTheme.Id;
-            Version = externalTheme.Version;
-
-            if (keyListSet == null)
-            {
-                // Nothing to apply
-                return;
-            }
-
-            foreach (var keyList in keyListSet)
-            {
-                keyList?.ApplyKeyActions(externalTheme, this);
-            }
-        }
 
         internal bool HasSameIdAndVersion(IExternalTheme externalTheme)
         {

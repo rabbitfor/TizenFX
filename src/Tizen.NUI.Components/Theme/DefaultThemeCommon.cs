@@ -47,7 +47,6 @@ namespace Tizen.NUI.Components
                 },
                 Text = new TextLabelStyle()
                 {
-                    PixelSize = 32,
                     TextColor = Color.White,
                 }
             });
@@ -73,7 +72,6 @@ namespace Tizen.NUI.Components
                 },
                 Text = new TextLabelStyle()
                 {
-                    PixelSize = 32,
                     TextColor = new Color("#001447")
                 }
             });
@@ -161,7 +159,6 @@ namespace Tizen.NUI.Components
                 },
                 Text = new TextLabelStyle()
                 {
-                    PixelSize = 32,
                     TextColor = new Color("#001447")
                 }
             });
@@ -237,7 +234,6 @@ namespace Tizen.NUI.Components
                 },
                 Text = new TextLabelStyle()
                 {
-                    PixelSize = 32,
                     TextColor = new Color("#001447")
                 }
             });
@@ -551,7 +547,9 @@ namespace Tizen.NUI.Components
             {
                 Size = new Size(-2, -2),
                 Padding = new Extents(80, 80, 0, 0),
-                BackgroundImage = FrameworkInformation.ResourcePath + "nui_component_default_dialog_bg.#.png",
+                BackgroundColor = Color.White,
+                CornerRadius = 28.0f,
+                BoxShadow = new Shadow(2.0f, new Color("#00000029"), new Vector2(2.0f, 2.0f)),
                 TitleTextLabel = new TextLabelStyle()
                 {
                     Size = new Size(1024, -2),
