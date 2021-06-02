@@ -24,6 +24,9 @@ namespace Tizen.NUI.Components
     // It is a C# version of res/Tizen.NUI.Components_Tizen.NUI.Theme.Common.xaml
     internal partial class DefaultThemeCreator : IThemeCreator
     {
+        /// <summary>
+        /// The base theme description.
+        /// </summary>
         [SuppressMessage("Microsoft.Reliability", "CA2000: Dispose objects before losing scope", Justification = "The responsibility to dispose the object is transferred to the theme object.")]
         public Theme Create()
         {
@@ -33,6 +36,7 @@ namespace Tizen.NUI.Components
                 Version = Tizen.NUI.DefaultThemeCreator.DefaultVersion
             };
 
+            // Button base style
             theme.AddStyleWithoutClone("Tizen.NUI.Components.Button", new ButtonStyle()
             {
                 Size = new Size(339, 96),
@@ -51,6 +55,7 @@ namespace Tizen.NUI.Components
                 }
             });
 
+            // CheckBox base style
             theme.AddStyleWithoutClone("Tizen.NUI.Components.CheckBox", new ButtonStyle()
             {
                 ItemSpacing = new Size2D(32, 32),
@@ -76,6 +81,7 @@ namespace Tizen.NUI.Components
                 }
             });
 
+            // Popup base style
             theme.AddStyleWithoutClone("Tizen.NUI.Components.Popup", new PopupStyle()
             {
                 Size = new Size(500, 280),
@@ -114,6 +120,7 @@ namespace Tizen.NUI.Components
                 }
             });
 
+            // Progress base style
             theme.AddStyleWithoutClone("Tizen.NUI.Components.Progress", new ProgressStyle()
             {
                 Size = new Size(200, 25),
@@ -138,6 +145,7 @@ namespace Tizen.NUI.Components
                 IndeterminateImageUrl = FrameworkInformation.ResourcePath + "nui_component_default_progress_indeterminate.png",
             });
 
+            // RadioButton base style
             theme.AddStyleWithoutClone("Tizen.NUI.Components.RadioButton", new ButtonStyle()
             {
                 ItemSpacing = new Size2D(32, 32),
@@ -163,6 +171,7 @@ namespace Tizen.NUI.Components
                 }
             });
 
+            // Slider base style
             theme.AddStyleWithoutClone("Tizen.NUI.Components.Slider", new SliderStyle()
             {
                 Size = new Size(200, 50),
@@ -201,6 +210,7 @@ namespace Tizen.NUI.Components
                 },
             });
 
+            // Switch base style
             theme.AddStyleWithoutClone("Tizen.NUI.Components.Switch", new SwitchStyle()
             {
                 ItemSpacing = new Size2D(32, 32),
@@ -238,11 +248,13 @@ namespace Tizen.NUI.Components
                 }
             });
 
+            // Loading base style
             theme.AddStyleWithoutClone("Tizen.NUI.Components.Loading", new LoadingStyle()
             {
                 LoadingSize = new Size(100, 100),
             });
 
+            // Pagination base style
             theme.AddStyleWithoutClone("Tizen.NUI.Components.Pagination", new PaginationStyle()
             {
                 IndicatorImageUrl = new Selector<string>()
@@ -253,32 +265,37 @@ namespace Tizen.NUI.Components
                 IndicatorSize = new Size(10, 10),
             });
 
+            // Scrollbar base style
             theme.AddStyleWithoutClone("Tizen.NUI.Components.Scrollbar", new ScrollbarStyle()
             {
                 TrackThickness = 12,
                 ThumbThickness = 12,
                 TrackColor = new Color(0f, 0f, 0f, 0f),
-                ThumbColor = new Color("#0A0E4AFF"),
+                ThumbColor = new Color("#0A0E4A"),
                 TrackPadding = 4,
                 ThumbVerticalImageUrl = FrameworkInformation.ResourcePath + "nui_component_default_scroll_vbar.#.png",
                 ThumbHorizontalImageUrl = FrameworkInformation.ResourcePath + "nui_component_default_scroll_hbar.#.png",
             });
 
+            // LinearLayouter base style
             theme.AddStyleWithoutClone("Tizen.NUI.Components.LinearLayouter", new ViewStyle()
             {
                 Padding = new Extents(64, 64, 0, 0)
             });
 
+            // GridLayouter base style
             theme.AddStyleWithoutClone("Tizen.NUI.Components.GridLayouter", new ViewStyle()
             {
                 Padding = new Extents(0, 0, 0, 0),
             });
 
+            // ItemsLayouter base style
             theme.AddStyleWithoutClone("Tizen.NUI.Components.ItemsLayouter", new ViewStyle()
             {
                 Padding = new Extents(0, 0, 0, 0),
             });
 
+            // RecyclerViewItem base style
             theme.AddStyleWithoutClone("Tizen.NUI.Components.RecyclerViewItem", new RecyclerViewItemStyle()
             {
                 BackgroundColor = new Selector<Color>()
@@ -290,6 +307,7 @@ namespace Tizen.NUI.Components
                 },
             });
 
+            // DefaultLinearItem base style
             theme.AddStyleWithoutClone("Tizen.NUI.Components.DefaultLinearItem", new DefaultLinearItemStyle()
             {
                 SizeHeight = 108,
@@ -307,14 +325,14 @@ namespace Tizen.NUI.Components
                     PixelSize = 32,
                     Ellipsis = true,
                     FontFamily = "BreezeSans", //FXIME Font Weight is Light
-                    TextColor = new Color("#001447FF"),
+                    TextColor = new Color("#001447"),
                 },
                 SubLabel = new TextLabelStyle()
                 {
                     PixelSize = 28,
                     Ellipsis = true,
                     FontFamily = "BreezeSans",
-                    TextColor = new Color("#001447FF"),
+                    TextColor = new Color("#001447"),
                 },
                 Icon = new ViewStyle()
                 {
@@ -328,9 +346,11 @@ namespace Tizen.NUI.Components
                 {
                     SizeHeight = 1,
                     Margin = new Extents(64, 64, 0, 0),
-                    BackgroundColor = new Color("#C3CAD2FF"),
+                    BackgroundColor = new Color("#C3CAD2"),
                 },
             });
+
+            // DefaultGridItem base style
             theme.AddStyleWithoutClone("Tizen.NUI.Components.DefaultGridItem", new DefaultGridItemStyle()
             {
                 Padding = new Extents(0, 0, 0, 0),
@@ -347,6 +367,7 @@ namespace Tizen.NUI.Components
                 },
             });
 
+            // DefaultTitleItem base style
             theme.AddStyleWithoutClone("Tizen.NUI.Components.DefaultTitleItem", new DefaultTitleItemStyle()
             {
                 SizeHeight = 60,
@@ -354,13 +375,13 @@ namespace Tizen.NUI.Components
                 Margin = new Extents(0, 0, 0, 0),
                 BackgroundColor = new Selector<Color>()
                 {
-                    Normal = new Color("#EEEEF1FF"),
+                    Normal = new Color("#EEEEF1"),
                 },
                 Label = new TextLabelStyle()
                 {
                     PixelSize = 28,
                     Ellipsis = true,
-                    TextColor = new Color("#001447FF"),
+                    TextColor = new Color("#001447"),
                 },
                 Icon = new ViewStyle()
                 {
@@ -373,15 +394,17 @@ namespace Tizen.NUI.Components
                 },
             });
 
+            // ContentPage base style
             theme.AddStyleWithoutClone("Tizen.NUI.Components.ContentPage", new ViewStyle()
             {
-                BackgroundColor = new Color("#EEEFF1FF"),
+                BackgroundColor = new Color("#EEEFF1"),
             });
 
+            // AppBar base style
             theme.AddStyleWithoutClone("Tizen.NUI.Components.AppBar", new AppBarStyle()
             {
                 Size = new Size(-1, 120),
-                BackgroundColor = new Color("#EEEFF1FF"),
+                BackgroundColor = new Color("#EEEFF1"),
                 BackButton = new ButtonStyle()
                 {
                     Size = new Size(48, 48),
@@ -393,10 +416,10 @@ namespace Tizen.NUI.Components
                         ResourceUrl = FrameworkInformation.ResourcePath + "nui_component_default_back_button.png",
                         Color = new Selector<Color>()
                         {
-                            Normal = new Color("#0A0E4AFF"),
-                            Focused = new Color("#00338BFF"),
-                            Pressed = new Color("#1B69CAFF"),
-                            Disabled = new Color("#C3CAD2FF"),
+                            Normal = new Color("#0A0E4A"),
+                            Focused = new Color("#00338B"),
+                            Pressed = new Color("#1B69CA"),
+                            Disabled = new Color("#C3CAD2"),
                         },
                     },
                 },
@@ -406,7 +429,7 @@ namespace Tizen.NUI.Components
                     VerticalAlignment = VerticalAlignment.Center,
                     TextColor = new Selector<Color>()
                     {
-                        Normal = new Color("#000C2BFF"),
+                        Normal = new Color("#000C2B"),
                     }
                 },
                 ActionView = new ViewStyle()
@@ -425,10 +448,10 @@ namespace Tizen.NUI.Components
                         PixelSize = 26,
                         TextColor = new Selector<Color>()
                         {
-                            Normal = new Color("#0A0E4AFF"),
-                            Focused = new Color("#00338BFF"),
-                            Pressed = new Color("#1B69CAFF"),
-                            Disabled = new Color("#C3CAD2FF"),
+                            Normal = new Color("#0A0E4A"),
+                            Focused = new Color("#00338B"),
+                            Pressed = new Color("#1B69CA"),
+                            Disabled = new Color("#C3CAD2"),
                         },
                     },
                     Icon = new ImageViewStyle()
@@ -436,10 +459,10 @@ namespace Tizen.NUI.Components
                         Size = new Size(-1, 48),
                         Color = new Selector<Color>()
                         {
-                            Normal = new Color("#0A0E4AFF"),
-                            Focused = new Color("#00338BFF"),
-                            Pressed = new Color("#1B69CAFF"),
-                            Disabled = new Color("#C3CAD2FF"),
+                            Normal = new Color("#0A0E4A"),
+                            Focused = new Color("#00338B"),
+                            Pressed = new Color("#1B69CA"),
+                            Disabled = new Color("#C3CAD2"),
                         },
                     },
                 },
@@ -449,6 +472,7 @@ namespace Tizen.NUI.Components
                 ActionCellPadding = new Size2D(40, 0),
             });
 
+            // Picker base style
             theme.AddStyleWithoutClone("Tizen.NUI.Components.Picker", new PickerStyle()
             {
                 Size = new Size(160, 339),
@@ -461,7 +485,7 @@ namespace Tizen.NUI.Components
                     Size = new Size(0,72),
                     TextColor = new Selector<Color>()
                     {
-                        Normal = new Color("#000C2BFF"),
+                        Normal = new Color("#000C2B"),
                     },
                     BackgroundColor = Color.White,
                 },
@@ -470,11 +494,12 @@ namespace Tizen.NUI.Components
                     SizeHeight = 2.0f,
                     WidthResizePolicy = ResizePolicyType.FillToParent,
                     Position = new Position(0, 132),
-                    BackgroundColor = new Color("#0A0E4AFF"),
+                    BackgroundColor = new Color("#0A0E4A"),
                 },
                 StartScrollOffset = new Size(0, 12),
             });
 
+            // TabButton base style
             theme.AddStyleWithoutClone("Tizen.NUI.Components.TabButton", new TabButtonStyle()
             {
                 Size = new Size(-1, 84),
@@ -486,10 +511,10 @@ namespace Tizen.NUI.Components
                     Size = new Size(-2, -2),
                     TextColor = new Selector<Color>()
                     {
-                        Normal = new Color("#000C2BFF"),
-                        Selected = new Color("#000C2BFF"),
-                        Pressed = new Color("#1473E6FF"),
-                        Disabled = new Color("#C3CAD2FF"),
+                        Normal = new Color("#000C2B"),
+                        Selected = new Color("#000C2B"),
+                        Pressed = new Color("#1473E6"),
+                        Disabled = new Color("#C3CAD2"),
                     },
                 },
                 Icon = new ImageViewStyle()
@@ -497,10 +522,10 @@ namespace Tizen.NUI.Components
                     Size = new Size(48, 48),
                     Color = new Selector<Color>()
                     {
-                        Normal = new Color("#000C2BFF"),
-                        Selected = new Color("#000C2BFF"),
-                        Pressed = new Color("#1473E6FF"),
-                        Disabled = new Color("#C3CAD2FF"),
+                        Normal = new Color("#000C2B"),
+                        Selected = new Color("#000C2B"),
+                        Pressed = new Color("#1473E6"),
+                        Disabled = new Color("#C3CAD2"),
                     },
                 },
                 TopLine = new ViewStyle()
@@ -508,10 +533,10 @@ namespace Tizen.NUI.Components
                     Size = new Size(-1, 1),
                     BackgroundColor = new Selector<Color>()
                     {
-                        Normal = new Color("#000C2BFF"),
-                        Selected = new Color("#000C2BFF"),
-                        Pressed = new Color("#1473E6FF"),
-                        Disabled = new Color("#C3CAD2FF"),
+                        Normal = new Color("#000C2B"),
+                        Selected = new Color("#000C2B"),
+                        Pressed = new Color("#1473E6"),
+                        Disabled = new Color("#C3CAD2"),
                     },
                 },
                 BottomLine = new ViewStyle()
@@ -521,17 +546,19 @@ namespace Tizen.NUI.Components
                     BackgroundColor = new Selector<Color>()
                     {
                         Normal = Color.Transparent,
-                        Selected = new Color("#000C2BFF"),
-                        Pressed = new Color("#1473E6FF"),
+                        Selected = new Color("#000C2B"),
+                        Pressed = new Color("#1473E6"),
                         Disabled = Color.Transparent,
                     },
                 },
             });
 
+            // NotificationToast base style
             theme.AddStyleWithoutClone("NotificationToast", new TextLabelStyle()
             {
-                BackgroundImage = FrameworkInformation.ResourcePath + "IoT_Toast_1.png",
-                BackgroundImageBorder = new Rectangle(28, 28, 28, 28),
+                BackgroundColor = new Color("#F2F7FF"),
+                CornerRadius = 20.0f,
+                BoxShadow = new Shadow(5.0f, new Color("#00000066"), new Vector2(2.0f, 2.0f)),
                 TextColor = new Color("#000C2B"),
                 PixelSize = 32,
                 WidthResizePolicy = ResizePolicyType.UseNaturalSize,
@@ -543,6 +570,7 @@ namespace Tizen.NUI.Components
                 PositionY = 120,
             });
 
+            // AlertDialog base style
             theme.AddStyleWithoutClone("Tizen.NUI.Components.AlertDialog", new AlertDialogStyle()
             {
                 Size = new Size(-2, -2),
@@ -552,35 +580,30 @@ namespace Tizen.NUI.Components
                 BoxShadow = new Shadow(2.0f, new Color("#00000029"), new Vector2(2.0f, 2.0f)),
                 TitleTextLabel = new TextLabelStyle()
                 {
-                    Size = new Size(1024, -2),
+                    Size = new Size(600, -2),
                     Margin = new Extents(0, 0, 40, 40),
                     PixelSize = 40,
                     HorizontalAlignment = HorizontalAlignment.Center,
                     VerticalAlignment = VerticalAlignment.Center,
-                    TextColor = new Selector<Color>()
-                    {
-                        Normal = new Color("#000C2BFF"),
-                    },
+                    TextColor = new Color("#000C2B"),
                 },
                 MessageTextLabel = new TextLabelStyle()
                 {
-                    Size = new Size(1024, -2),
+                    Size = new Size(600, -2),
                     Margin = new Extents(0, 0, 0, 64),
                     PixelSize = 32,
                     MultiLine = true,
                     HorizontalAlignment = HorizontalAlignment.Center,
                     VerticalAlignment = VerticalAlignment.Center,
-                    TextColor = new Selector<Color>()
-                    {
-                        Normal = new Color("#000C2BFF"),
-                    },
+                    TextColor = new Color("#000C2B"),
                 },
                 ActionContent = new ViewStyle()
                 {
-                    Size = new Size(1024, -2),
+                    Size = new Size(600, -2),
                 },
             });
 
+            // TimePicker base style
             theme.AddStyleWithoutClone("Tizen.NUI.Components.TimePicker", new TimePickerStyle()
             {
                 CellPadding = new Size(50, 339),
@@ -595,10 +618,7 @@ namespace Tizen.NUI.Components
                         VerticalAlignment = VerticalAlignment.Center,
                         HorizontalAlignment = HorizontalAlignment.Center,
                         Size = new Size(0,72),
-                        TextColor = new Selector<Color>()
-                        {
-                            Normal = new Color("#000C2BFF"),
-                        },
+                        TextColor = new Color("#000C2B"),
                         BackgroundColor = Color.White,
                     },
                     Divider = new ViewStyle()
@@ -606,12 +626,13 @@ namespace Tizen.NUI.Components
                         SizeHeight = 2.0f,
                         WidthResizePolicy = ResizePolicyType.FillToParent,
                         Position = new Position(0, 132),
-                        BackgroundColor = new Color("#0A0E4AFF"),
+                        BackgroundColor = new Color("#0A0E4A"),
                     },
                     StartScrollOffset = new Size2D(0, 12),
                 }
             });
 
+            // DatePicker base style
             theme.AddStyleWithoutClone("Tizen.NUI.Components.DatePicker", new DatePickerStyle()
             {
                 CellPadding = new Size(50, 339),
@@ -628,7 +649,7 @@ namespace Tizen.NUI.Components
                         Size = new Size(0,72),
                         TextColor = new Selector<Color>()
                         {
-                            Normal = new Color("#000C2BFF"),
+                            Normal = new Color("#000C2B"),
                         },
                         BackgroundColor = Color.White,
                     },
@@ -637,12 +658,13 @@ namespace Tizen.NUI.Components
                         SizeHeight = 2.0f,
                         WidthResizePolicy = ResizePolicyType.FillToParent,
                         Position = new Position(0, 132),
-                        BackgroundColor = new Color("#0A0E4AFF"),
+                        BackgroundColor = new Color("#0A0E4A"),
                     },
                     StartScrollOffset = new Size2D(0, 12),
                 }
             });
 
+            // MenuItem base style
             theme.AddStyleWithoutClone("Tizen.NUI.Components.MenuItem", new ButtonStyle()
             {
                 Size = new Size(480, -2),
@@ -658,10 +680,10 @@ namespace Tizen.NUI.Components
                     VerticalAlignment = VerticalAlignment.Center,
                     TextColor = new Selector<Color>()
                     {
-                        Normal = new Color("#001447FF"),
-                        Focused = new Color("#00338BFF"),
-                        Pressed = new Color("#1B69CAFF"),
-                        Disabled = new Color("#C3CAD2FF"),
+                        Normal = new Color("#001447"),
+                        Focused = new Color("#00338B"),
+                        Pressed = new Color("#1B69CA"),
+                        Disabled = new Color("#C3CAD2"),
                     },
                 },
                 Icon = new ImageViewStyle()
@@ -669,10 +691,10 @@ namespace Tizen.NUI.Components
                     Size = new Size(-2, 48),
                     Color = new Selector<Color>()
                     {
-                        Normal = new Color("#001447FF"),
-                        Focused = new Color("#00338BFF"),
-                        Pressed = new Color("#1B69CAFF"),
-                        Disabled = new Color("#C3CAD2FF"),
+                        Normal = new Color("#001447"),
+                        Focused = new Color("#00338B"),
+                        Pressed = new Color("#1B69CA"),
+                        Disabled = new Color("#C3CAD2"),
                     },
                 },
             });
@@ -682,4 +704,4 @@ namespace Tizen.NUI.Components
     }
 }
 
-#endif
+#endif // !PROFILE_WEARABLE

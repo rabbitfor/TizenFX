@@ -15,9 +15,6 @@
  *
  */
 
-using System.Collections.Generic;
-using Tizen.NUI.BaseComponents;
-
 namespace Tizen.NUI.Components
 {
     internal partial class DefaultThemeCreator
@@ -30,26 +27,6 @@ namespace Tizen.NUI.Components
         {
             ThemeManager.AddPackageTheme(Instance);
         }
-
-        private static void SetBackgroundColor(ViewStyle style, Selector<Color> value) => style.BackgroundColor = value;
-
-        private static void SetBackgroundImage(ViewStyle style, Selector<string> value) => style.BackgroundImage = value;
-
-        private static void SetBackgroundBorder(ViewStyle style, Rectangle value) => style.BackgroundImageBorder = value;
-
-        private static void SetButtonTextColor(ViewStyle style, Selector<Color> value) => ((ButtonStyle)style).Text.TextColor = value;
-
-        private static void SetButtonTextPixelSize(ViewStyle style, Selector<float?> value) => ((ButtonStyle)style).Text.PixelSize = value;
-
-        private static void SetButtonIconResourceUrl(ViewStyle style, Selector<string> value) => ((ButtonStyle)style).Icon.ResourceUrl = value;
-
-        private static void SetButtonIconBorder(ViewStyle style, Rectangle value) => ((ButtonStyle)style).Icon.Border = value;
-
-        private static void SetButtonIconBackgroundColor(ViewStyle style, Selector<Color> value) => ((ButtonStyle)style).Icon.BackgroundColor = value;
-
-        private static void SetButtonIconBackgroundImageUrl(ViewStyle style, Selector<string> value) => ((ButtonStyle)style).Icon.BackgroundImage = value;
-
-        private static void SetButtonIconBackgroundBorder(ViewStyle style, Rectangle value) => ((ButtonStyle)style).Icon.BackgroundImageBorder = value;
     }
 }
 

@@ -108,18 +108,6 @@ namespace Tizen.NUI
         public string Version { get; set; } = null;
 
         /// <summary>
-        /// The main background color of the theme.
-        /// </summary>
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public Color BackgroundColor { get; set; }
-
-        /// <summary>
-        /// The default pixel size of the text.
-        /// </summary>
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public float? TextPixelSize { get; set; }
-
-        /// <summary>
         /// For Xaml use only.
         /// The bulit-in theme id that will be used as base of this.
         /// View styles with same key are merged.
@@ -133,7 +121,7 @@ namespace Tizen.NUI
 
                 if (string.IsNullOrEmpty(baseTheme)) return;
 
-                var baseThemeInstance = (Theme)ThemeManager.GetBuiltinTheme(baseTheme)?.Clone();
+                var baseThemeInstance = (Theme)ThemeManager.LoadPlatformTheme(baseTheme)?.Clone();
 
                 if (baseThemeInstance != null)
                 {
@@ -334,10 +322,6 @@ namespace Tizen.NUI
 
             if (Version == null) Version = theme.Version;
 
-            if (theme.BackgroundColor != null) BackgroundColor = theme.BackgroundColor;
-
-            if (theme.TextPixelSize != null) TextPixelSize = theme.TextPixelSize;
-
             foreach (var item in theme)
             {
                 if (item.Value == null)
@@ -370,10 +354,6 @@ namespace Tizen.NUI
                 Version = theme.Version;
             }
 
-            if (theme.BackgroundColor != null) BackgroundColor = theme.BackgroundColor;
-
-            if (theme.TextPixelSize != null) TextPixelSize = theme.TextPixelSize;
-
             foreach (var item in theme)
             {
                 if (item.Value == null)
@@ -404,15 +384,9 @@ namespace Tizen.NUI
         /// </summary>
         internal void AddStyleWithoutClone(string styleName, ViewStyle value) => map[styleName] = value;
 
-        internal bool HasSameIdAndVersion(IExternalTheme externalTheme)
-        {
-            if (externalTheme == null)
-            {
-                return false;
-            }
+        internal bool HasSameIdAndVersion(ExternalPlatformTheme theme) => theme != null && HasSameIdAndVersion(theme.Id, theme.Version);
 
-            return string.Equals(Id, externalTheme.Id, StringComparison.OrdinalIgnoreCase) && string.Equals(Version, externalTheme.Version, StringComparison.OrdinalIgnoreCase);
-        }
+        internal bool HasSameIdAndVersion(string id, string version) => string.Equals(Id, id, StringComparison.OrdinalIgnoreCase) && string.Equals(Version, version, StringComparison.OrdinalIgnoreCase);
 
         internal void SetChangedResources(IEnumerable<KeyValuePair<string, string>> changedResources)
         {

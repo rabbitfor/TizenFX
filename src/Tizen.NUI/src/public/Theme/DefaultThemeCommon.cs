@@ -23,6 +23,9 @@ namespace Tizen.NUI
 {
     internal partial class DefaultThemeCreator
     {
+        /// <summary>
+        /// The base theme description.
+        /// </summary>
         [SuppressMessage("Microsoft.Reliability", "CA2000: Dispose objects before losing scope", Justification = "The responsibility to dispose the object is transferred to the theme object.")]
         public Theme Create()
         {
@@ -30,14 +33,13 @@ namespace Tizen.NUI
             {
                 Id = DefaultId,
                 Version = DefaultVersion,
-                BackgroundColor = new Color("#EEEFF1"),
-                TextPixelSize = 32,
             };
 
             // TextLabel style.
             theme.AddStyleWithoutClone("Tizen.NUI.BaseComponents.TextLabel", new TextLabelStyle()
             {
                 FontFamily = "BreezeSans",
+                PixelSize = 32,
                 TextColor = new Color(0.00f, 0.05f, 0.17f, 1),
                 FontStyle = new PropertyMap().Add("weight", new PropertyValue("light")),
             });
@@ -46,6 +48,7 @@ namespace Tizen.NUI
             theme.AddStyleWithoutClone("Tizen.NUI.BaseComponents.TextField", new TextFieldStyle()
             {
                 FontFamily = "BreezeSans",
+                PixelSize = 32,
                 TextColor = new Color(0.00f, 0.05f, 0.17f, 1),
                 FontStyle = new PropertyMap().Add("weight", new PropertyValue("regular")),
                 PrimaryCursorColor = new Vector4(0.08f, 0.45f, 0.90f, 1),
@@ -62,6 +65,7 @@ namespace Tizen.NUI
             theme.AddStyleWithoutClone("Tizen.NUI.BaseComponents.TextEditor", new TextEditorStyle()
             {
                 FontFamily = "BreezeSans",
+                PixelSize = 32,
                 TextColor = new Color(0.00f, 0.05f, 0.17f, 1),
                 FontStyle = new PropertyMap().Add("weight", new PropertyValue("regular")),
                 PrimaryCursorColor = new Vector4(0.08f, 0.45f, 0.90f, 1),
@@ -78,4 +82,5 @@ namespace Tizen.NUI
         }
     }
 }
-#endif
+
+#endif // !PROFILE_TV

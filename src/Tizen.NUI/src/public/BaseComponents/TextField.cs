@@ -1528,21 +1528,6 @@ namespace Tizen.NUI.BaseComponents
             Interop.TextField.DeleteTextField(swigCPtr);
         }
 
-        /// <summary>
-        /// Apply initial style to the view.
-        /// </summary>
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        protected override void InitializeStyle(ViewStyle style = null)
-        {
-            if (style == null)
-            {
-                var size = ThemeManager.GetTextPixelSize();
-                if (size != null) PixelSize = (float)size;
-            }
-
-            base.InitializeStyle(style);
-        }
-
         private string SetTranslatable(string textFieldSid)
         {
             string translatableText = null;

@@ -1319,8 +1319,18 @@ namespace Tizen.NUI.BaseComponents
         [EditorBrowsable(EditorBrowsableState.Never)]
         protected virtual void InitializeStyle(ViewStyle style = null)
         {
-            if (style != null) ApplyStyle(style); // Use given style
-            else UpdateStyle(); // Use style in the current theme
+            // NOTE This is special case to support TCT with empty style.
+            // Please remove this part after modifying TCT cases (e.g. new Button(new ButtonStyle()))
+            if (style != null && style.DirtyProperties.Count == 0)
+            {
+                return;
+            }
+
+            // First, apply initial style for the component.
+            ApplyStyle(ThemeManager.GetInitialStyleWithoutClone(GetType()));
+
+            // Then, apply given style.
+            ApplyStyle(style);
         }
 
         private View ConvertIdToView(uint id)

@@ -28,10 +28,10 @@ namespace Tizen.NUI
         /// <summary>
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public ThemeChangedEventArgs(string themeId, string tizenThemeId)
+        public ThemeChangedEventArgs(string themeId, string platformThemeId)
         {
             ThemeId = themeId;
-            TizenThemeId = tizenThemeId;
+            PlatformThemeId = platformThemeId;
         }
 
         /// <summary>
@@ -41,9 +41,9 @@ namespace Tizen.NUI
         public string ThemeId { get; }
 
         /// <summary>
-        /// The tizen theme's ID. (e.g. org.tizen.default-light-theme)
+        /// The platform theme's ID. (e.g. org.tizen.default-light-theme)
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public string TizenThemeId { get; }
+        public string PlatformThemeId { get; }
     }
 }

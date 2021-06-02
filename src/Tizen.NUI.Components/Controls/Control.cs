@@ -87,7 +87,7 @@ namespace Tizen.NUI.Components
         /// <since_tizen> 6 </since_tizen>
         /// This will be public opened in tizen_5.5 after ACR done. Before ACR, need to be hidden as inhouse API.
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public Control(string styleName) : this(new ControlStyle() /* Apply empty style */)
+        public Control(string styleName) : this()
         {
             if (ThemeManager.GetStyle(styleName) == null)
             {

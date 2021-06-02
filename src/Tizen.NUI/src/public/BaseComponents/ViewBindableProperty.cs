@@ -1693,31 +1693,6 @@ namespace Tizen.NUI.BaseComponents
         });
 
         /// <summary>
-        /// ThemeChangeSensitive property
-        /// </summary>
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly BindableProperty UseThemeBackgroundColorProperty = BindableProperty.Create(nameof(UseThemeBackgroundColor), typeof(bool), typeof(View), false, propertyChanged: (bindable, oldValue, newValue) =>
-        {
-            var view = (View)bindable;
-
-            if (view.UseThemeBackgroundColor == (bool)newValue) return;
-
-            if (view.themeData == null) view.themeData = new ThemeData();
-
-            view.themeData.useThemeBackgroundColor = (bool)newValue;
-
-            if (view.themeData.useThemeBackgroundColor)
-            {
-                var color = ThemeManager.GetBackgroundColor();
-                if (color != null) view.BackgroundColor = color;
-            }
-        },
-        defaultValueCreator: (bindable) =>
-        {
-            return ((View)bindable).themeData?.useThemeBackgroundColor ?? false;
-        });
-
-        /// <summary>
         /// AccessibilityNameProperty
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]

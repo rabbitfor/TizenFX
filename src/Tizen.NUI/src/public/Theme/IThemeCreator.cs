@@ -15,8 +15,6 @@
  *
  */
 
-using System.Collections.Generic;
-
 namespace Tizen.NUI
 {
     internal interface IThemeCreator

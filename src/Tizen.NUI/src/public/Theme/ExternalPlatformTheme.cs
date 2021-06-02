@@ -23,12 +23,12 @@ namespace Tizen.NUI
     /// <summary>
     /// This is a wrapper to express tizen-theme-manager's theme.
     /// </summary>
-    internal class TizenExternalTheme : IExternalTheme
+    internal class ExternalPlatformTheme
     {
         private const string prefix = "/theme/";
         private readonly Tizen.Applications.ThemeManager.Theme theme;
 
-        internal TizenExternalTheme(Tizen.Applications.ThemeManager.Theme theme)
+        internal ExternalPlatformTheme(Tizen.Applications.ThemeManager.Theme theme)
         {
             this.theme = theme;
         }

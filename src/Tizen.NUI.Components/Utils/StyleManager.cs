@@ -87,7 +87,7 @@ namespace Tizen.NUI.Components
         /// <summary>
         /// (Theme name, Theme instance)
         /// </summary>
-        private Dictionary<string, Theme> ThemeMap { get; } = new Dictionary<string, Theme> { ["DEFAULT"] = ThemeManager.DefaultTheme };
+        private Dictionary<string, Theme> ThemeMap { get; } = new Dictionary<string, Theme> { ["DEFAULT"] = ThemeManager.BaseTheme };
 
         /// <summary>
         /// Register style in StyleManager.
