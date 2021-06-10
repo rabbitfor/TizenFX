@@ -25,18 +25,26 @@ namespace Tizen.NUI
     [SuppressMessage("Microsoft.Design", "CA1031: Do not catch general exception types", Justification = "This method is to handle external resources that may throw an exception but ignorable. This method should not interrupt the main stream.")]
     internal static class ExternalThemeManager
     {
-        private static Tizen.Applications.ThemeManager.ThemeLoader themeLoader = InitializeThemeLoader();
+        private static Tizen.Applications.ThemeManager.ThemeLoader themeLoader;
 
         static ExternalThemeManager() { }
 
         public static void Initialize()
         {
-            if (themeLoader == null)
+            if (themeLoader != null)
             {
                 return;
             }
 
-            themeLoader.ThemeChanged += OnExternalPlatformThemeChanged;
+            try
+            {
+                themeLoader = new Tizen.Applications.ThemeManager.ThemeLoader();
+                themeLoader.ThemeChanged += OnExternalPlatformThemeChanged;
+            }
+            catch (Exception e)
+            {
+                Tizen.Log.Info("NUI", $"[Ignorable] {e.GetType().Name} occurred while setting Tizen.Applications.ThemeManager: {e.Message}");
+            }
         }
 
 
@@ -159,22 +167,10 @@ namespace Tizen.NUI
 
         private static void OnExternalPlatformThemeChanged(object sender, Tizen.Applications.ThemeManager.ThemeEventArgs e)
         {
+            if (!ThemeManager.PlatformThemeEnabled) return;
+
             Tizen.Log.Info("NUI", $"TizenTheme: Id({e.Theme.Id}), Version({e.Theme.Version}), Title({e.Theme.Title})");
             ThemeManager.ApplyExternalPlatformTheme(new ExternalPlatformTheme(e.Theme));
-        }
-
-        private static Tizen.Applications.ThemeManager.ThemeLoader InitializeThemeLoader()
-        {
-            try
-            {
-                return new Tizen.Applications.ThemeManager.ThemeLoader();
-            }
-            catch (Exception e)
-            {
-                Tizen.Log.Info("NUI", $"[Ignorable] {e.GetType().Name} occurred while setting Tizen.Applications.ThemeManager: {e.Message}");
-            }
-
-            return null;
         }
     }
 }

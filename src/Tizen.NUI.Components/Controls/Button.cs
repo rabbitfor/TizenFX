@@ -799,6 +799,7 @@ namespace Tizen.NUI.Components
 
                 if (buttonStyle.Text != null)
                 {
+                    buttonText.ThemeChangeSensitive = false;
                     buttonText.ApplyStyle(buttonStyle.Text);
                 }
 

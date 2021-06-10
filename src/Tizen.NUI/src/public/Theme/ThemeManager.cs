@@ -48,9 +48,11 @@ namespace Tizen.NUI
         private static Theme userTheme; // The user custom theme.
         private static readonly List<Theme> cachedPlatformThemes = new List<Theme>(); // Themes provided by framework.
         private static readonly List<IThemeCreator> packages = new List<IThemeCreator>();// This is to store base theme creators by packages.
+        private static bool platformThemeEnabled = false;
 
         static ThemeManager()
         {
+            ExternalThemeManager.Initialize();
             AddPackageTheme(DefaultThemeCreator.Instance);
         }
 
@@ -64,6 +66,15 @@ namespace Tizen.NUI
         /// Internal one should be called before calling public ThemeChanged
         /// </summary>
         internal static WeakEvent<EventHandler<ThemeChangedEventArgs>> ThemeChangedInternal = new WeakEvent<EventHandler<ThemeChangedEventArgs>>();
+
+        /// <summary>
+        /// Return current platform theme Id (e.g. org.tizen.default-light-theme)
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public static string CurrentPlatformThemeId
+        {
+            get => platformTheme?.Id ?? baseTheme.Id;
+        }
 
         /// <summary>
         /// To support deprecated StyleManager.
@@ -93,10 +104,28 @@ namespace Tizen.NUI
             }
         }
 
+        internal static bool PlatformThemeEnabled
+        {
+            get => platformThemeEnabled;
+            set
+            {
+                if (platformThemeEnabled == value) return;
+
+                platformThemeEnabled = value;
+
+                if (platformThemeEnabled)
+                {
+                    ApplyExternalPlatformTheme(ExternalThemeManager.GetCurrentTheme());
+                }
+            }
+        }
+
+        internal static bool ApplicationThemeChangeSensitive { get; set; } = false;
+
         private static bool ThemeApplied => baseTheme.Count > 0 || (userTheme != null && userTheme.Count > 0);
 
         /// <summary>
-        /// Apply theme to the NUI.
+        /// Apply custom theme to the NUI.
         /// This will change the appearance of the existing components with property <seealso cref="View.ThemeChangeSensitive"/> on.
         /// This also affects all components created afterwards.
         /// </summary>
@@ -161,42 +190,44 @@ namespace Tizen.NUI
         /// Load a style with style name in the current theme.
         /// </summary>
         /// <param name="styleName">The style name.</param>
-        internal static ViewStyle GetStyleWithoutClone(string styleName)
-        {
-            if (!ThemeApplied) return null;
-
-            return userTheme?.GetStyle(styleName) ?? platformTheme?.GetStyle(styleName) ?? baseTheme.GetStyle(styleName);
-        }
+        internal static ViewStyle GetStyleWithoutClone(string styleName) => userTheme?.GetStyle(styleName);
 
         /// <summary>
         /// Load a style with View type in the current theme.
         /// </summary>
         /// <param name="viewType">The type of View.</param>
-        internal static ViewStyle GetStyleWithoutClone(Type viewType)
+        internal static ViewStyle GetStyleWithoutClone(Type viewType) => userTheme?.GetStyle(viewType);
+
+        /// <summary>
+        /// Load a style with style name in the current theme.
+        /// </summary>
+        /// <param name="styleName">The style name.</param>
+        internal static ViewStyle GetPlatformStyleWithoutClone(string styleName) => platformTheme?.GetStyle(styleName);
+
+        /// <summary>
+        /// Load a style with View type in the current theme.
+        /// </summary>
+        /// <param name="viewType">The type of View.</param>
+        internal static ViewStyle GetPlatformStyleWithoutClone(Type viewType) => platformTheme?.GetStyle(viewType);
+
+        /// <summary>
+        /// Load a initial component style.
+        /// </summary>
+        internal static ViewStyle GetBaseStyleWithoutClone(string styleName)
         {
             if (!ThemeApplied) return null;
 
-            return userTheme?.GetStyle(viewType) ?? platformTheme?.GetStyle(viewType) ?? baseTheme.GetStyle(viewType);
+            return userTheme?.GetStyle(styleName) ?? combinedTheme.GetStyle(styleName);
         }
 
         /// <summary>
         /// Load a initial component style.
         /// </summary>
-        internal static ViewStyle GetInitialStyleWithoutClone(string styleName)
+        internal static ViewStyle GetBaseStyleWithoutClone(Type viewType)
         {
             if (!ThemeApplied) return null;
 
-            return combinedTheme.GetStyle(styleName);
-        }
-
-        /// <summary>
-        /// Load a initial component style.
-        /// </summary>
-        internal static ViewStyle GetInitialStyleWithoutClone(Type viewType)
-        {
-            if (!ThemeApplied) return null;
-
-            return combinedTheme.GetStyle(viewType);
+            return userTheme?.GetStyle(viewType) ?? combinedTheme.GetStyle(viewType);
         }
 
         /// <summary>
@@ -226,7 +257,7 @@ namespace Tizen.NUI
             if (newTheme != null)
             {
                 cachedPlatformThemes.Add(newTheme);
-                Tizen.Log.Info("NUI", $"Platform theme has successfully loaded.");
+                Tizen.Log.Info("NUI", $"Platform theme has been loaded successfully.");
             }
             return newTheme;
         }
@@ -277,7 +308,7 @@ namespace Tizen.NUI
 
             if (loaded != null)
             {
-                Tizen.Log.Info("NUI", $"{platformTheme.Id} has been applied successfully.");
+                Tizen.Log.Info("NUI", $"{loaded.Id} has been applied successfully.");
                 platformTheme = loaded;
                 UpdateCombinedTheme();
                 NotifyThemeChanged();
@@ -303,22 +334,44 @@ namespace Tizen.NUI
             else baseTheme.MergeWithoutClone(packageBaseTheme);
             baseTheme.PackageCount++;
 
-#if ExternalThemeEnabled
-            var externalTheme = ExternalThemeManager.GetCurrentTheme();
-            if (externalTheme != null && !baseTheme.HasSameIdAndVersion(externalTheme))
+            Tizen.Log.Info("NUI", $"> Base theme created");
+
+            if (platformThemeEnabled)
             {
-                if (platformTheme == null)
+                Tizen.Log.Info("NUI", $"> Platform theme enabled");
+                if (platformTheme != null)
                 {
-                    platformTheme = CreatePlatformTheme(externalTheme.Id);
-                    AddToPlatformThemes(platformTheme);
+                    Tizen.Log.Info("NUI", $"> Platform need to update");
+                    UpdatePlatformTheme(platformTheme);
                 }
                 else
                 {
-                    UpdatePlatformTheme(platformTheme);
+                    Tizen.Log.Info("NUI", $"> Platform need to initialize");
+                    var theme = ExternalThemeManager.GetCurrentTheme();
+                    Tizen.Log.Info("NUI", $"> current theme is null? { theme == null }");
+                    if (theme != null && !baseTheme.HasSameIdAndVersion(theme))
+                    {
+                        var loaded = LoadPlatformTheme(theme.Id);
+                        if (loaded != null)
+                        {
+                            platformTheme = loaded;
+                        }
+                    }
                 }
             }
-#endif
+
             UpdateCombinedTheme();
+        }
+
+        internal static void Preload()
+        {
+            Debug.Assert(baseTheme != null);
+
+            var theme = ExternalThemeManager.GetCurrentTheme();
+
+            if (theme == null) return;
+
+            LoadPlatformTheme(theme.Id);
         }
 
         private static void UpdateCombinedTheme()

@@ -35,13 +35,13 @@ namespace Tizen.NUI
         }
 
         /// <summary>
-        /// The new theme's ID.
+        /// The new theme's Id.
         /// </summary>
         /// <since_tizen> 9 </since_tizen>
         public string ThemeId { get; }
 
         /// <summary>
-        /// The platform theme's ID. (e.g. org.tizen.default-light-theme)
+        /// The platform theme's Id. (e.g. org.tizen.default-light-theme)
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
         public string PlatformThemeId { get; }

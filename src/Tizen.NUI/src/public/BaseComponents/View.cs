@@ -50,11 +50,43 @@ namespace Tizen.NUI.BaseComponents
 
         internal class ThemeData
         {
-            public bool controlStatePropagation = false;
+            [Flags]
+            internal enum Option : byte
+            {
+                None = 0,
+                ControlStatePropagation = 1 << 0,
+                ThemeChangeSensitive = 1 << 1,
+                ThemeApplied = 1 << 2,
+            };
+
+            private Option options = ThemeManager.ApplicationThemeChangeSensitive ? Option.ThemeChangeSensitive : Option.None;
             public ViewStyle viewStyle;
-            public bool themeChangeSensitive = false;
             public ControlState controlStates = ControlState.Normal;
             public ViewSelectorData selectorData;
+
+            public bool ControlStatePropagation
+            {
+                get => ((options & Option.ControlStatePropagation) != 0);
+                set => SetOption(Option.ControlStatePropagation, value);
+            }
+
+            public bool ThemeChangeSensitive
+            {
+                get => ((options & Option.ThemeChangeSensitive) != 0);
+                set => SetOption(Option.ThemeChangeSensitive, value);
+            }
+
+            public bool ThemeApplied
+            {
+                get => ((options & Option.ThemeApplied) != 0);
+                set => SetOption(Option.ThemeApplied, value);
+            }
+
+            private void SetOption(Option option, bool value)
+            {
+                if (value) options |= option;
+                else options &= ~option;
+            }
         }
 
         static View()
@@ -225,7 +257,7 @@ namespace Tizen.NUI.BaseComponents
 
                 ControlStateChangeEventInternal?.Invoke(this, changeInfo);
 
-                if (themeData.controlStatePropagation)
+                if (themeData.ControlStatePropagation)
                 {
                     foreach (View child in Children)
                     {
@@ -2507,14 +2539,14 @@ namespace Tizen.NUI.BaseComponents
         [EditorBrowsable(EditorBrowsableState.Never)]
         public bool EnableControlStatePropagation
         {
-            get => themeData?.controlStatePropagation ?? false;
+            get => themeData?.ControlStatePropagation ?? false;
             set
             {
                 if (EnableControlStatePropagation == value) return;
 
                 if (themeData == null) themeData = new ThemeData();
 
-                themeData.controlStatePropagation = value;
+                themeData.ControlStatePropagation = value;
 
                 foreach (View child in Children)
                 {
@@ -2591,7 +2623,7 @@ namespace Tizen.NUI.BaseComponents
 
         /// <summary>
         /// If the value is true, the View will change its style as the theme changes.
-        /// It is false by default, but turned to true when setting StyleName (by setting property or using specified constructor).
+        /// The default value is false in normal case but it can be true when the NUIApplication is created with <see cref="NUIApplication.ThemeOption.ThemeChangeSensitive"/>.
         /// </summary>
         /// <since_tizen> 9 </since_tizen>
         public bool ThemeChangeSensitive
@@ -2623,7 +2655,20 @@ namespace Tizen.NUI.BaseComponents
         [EditorBrowsable(EditorBrowsableState.Never)]
         protected virtual void OnThemeChanged(object sender, ThemeChangedEventArgs e)
         {
-            UpdateStyle();
+            ViewStyle userStyle, platformStyle;
+            if (string.IsNullOrEmpty(styleName))
+            {
+                platformStyle = ThemeManager.GetPlatformStyleWithoutClone(GetType());
+                userStyle = ThemeManager.GetStyleWithoutClone(GetType());
+            }
+            else
+            {
+                platformStyle = ThemeManager.GetPlatformStyleWithoutClone(styleName);
+                userStyle = ThemeManager.GetStyleWithoutClone(styleName);
+            }
+
+            ApplyStyle(platformStyle);
+            ApplyStyle(userStyle);
         }
 
         /// <summary>

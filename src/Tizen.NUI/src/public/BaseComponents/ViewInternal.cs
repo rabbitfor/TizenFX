@@ -18,6 +18,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 
 namespace Tizen.NUI.BaseComponents
@@ -1134,10 +1135,13 @@ namespace Tizen.NUI.BaseComponents
                 //Called by User
                 //Release your own managed resources here.
                 //You should release all of your own disposable objects here.
-                themeData?.selectorData?.Reset(this);
-                if (ThemeChangeSensitive)
+                if (themeData != null)
                 {
-                    ThemeManager.ThemeChangedInternal.Remove(OnThemeChanged);
+                    themeData.selectorData?.Reset(this);
+                    if (themeData.ThemeApplied && themeData.ThemeChangeSensitive)
+                    {
+                        ThemeManager.ThemeChangedInternal.Remove(OnThemeChanged);
+                    }
                 }
             }
 
@@ -1319,15 +1323,25 @@ namespace Tizen.NUI.BaseComponents
         [EditorBrowsable(EditorBrowsableState.Never)]
         protected virtual void InitializeStyle(ViewStyle style = null)
         {
-            // NOTE This is special case to support TCT with empty style.
-            // Please remove this part after modifying TCT cases (e.g. new Button(new ButtonStyle()))
-            if (style != null && style.DirtyProperties.Count == 0)
+            // It is used internally and also in TCT (e.g. new Button(new ButtonStyle()))
+            if (style != null && (style.DirtyProperties == null || style.DirtyProperties.Count == 0))
             {
                 return;
             }
 
             // First, apply initial style for the component.
-            ApplyStyle(ThemeManager.GetInitialStyleWithoutClone(GetType()));
+            var initialStyle = ThemeManager.GetBaseStyleWithoutClone(GetType());
+            if (initialStyle != null)
+            {
+                ApplyStyle(initialStyle);
+                Debug.Assert(themeData != null);
+
+                themeData.ThemeApplied = true;
+                if (themeData.ThemeChangeSensitive)
+                {
+                    ThemeManager.ThemeChangedInternal.Add(OnThemeChanged);
+                }
+            }
 
             // Then, apply given style.
             ApplyStyle(style);
@@ -1408,18 +1422,6 @@ namespace Tizen.NUI.BaseComponents
         private bool EmptyOnTouch(object target, TouchEventArgs args)
         {
             return false;
-        }
-
-        private void UpdateStyle()
-        {
-            ViewStyle newStyle;
-            if (string.IsNullOrEmpty(styleName)) newStyle = ThemeManager.GetStyleWithoutClone(GetType());
-            else newStyle = ThemeManager.GetStyleWithoutClone(styleName);
-
-            if (newStyle != null)
-            {
-                ApplyStyle(newStyle);
-            }
         }
 
         private ViewSelectorData EnsureSelectorData()

@@ -326,6 +326,7 @@ namespace Tizen.NUI.Components
                     Ellipsis = true,
                     FontFamily = "BreezeSans", //FXIME Font Weight is Light
                     TextColor = new Color("#001447"),
+                    ThemeChangeSensitive = false
                 },
                 SubLabel = new TextLabelStyle()
                 {
@@ -333,6 +334,7 @@ namespace Tizen.NUI.Components
                     Ellipsis = true,
                     FontFamily = "BreezeSans",
                     TextColor = new Color("#001447"),
+                    ThemeChangeSensitive = false
                 },
                 Icon = new ViewStyle()
                 {
@@ -360,6 +362,7 @@ namespace Tizen.NUI.Components
                     SizeHeight = 60,
                     PixelSize = 24,
                     LineWrapMode = LineWrapMode.Character,
+                    ThemeChangeSensitive = false
                 },
                 Badge = new ViewStyle()
                 {
@@ -382,6 +385,7 @@ namespace Tizen.NUI.Components
                     PixelSize = 28,
                     Ellipsis = true,
                     TextColor = new Color("#001447"),
+                    ThemeChangeSensitive = false
                 },
                 Icon = new ViewStyle()
                 {
@@ -422,6 +426,7 @@ namespace Tizen.NUI.Components
                             Disabled = new Color("#C3CAD2"),
                         },
                     },
+                    ThemeChangeSensitive = false
                 },
                 TitleTextLabel = new TextLabelStyle()
                 {
@@ -430,7 +435,8 @@ namespace Tizen.NUI.Components
                     TextColor = new Selector<Color>()
                     {
                         Normal = new Color("#000C2B"),
-                    }
+                    },
+                    ThemeChangeSensitive = false
                 },
                 ActionView = new ViewStyle()
                 {
@@ -465,6 +471,7 @@ namespace Tizen.NUI.Components
                             Disabled = new Color("#C3CAD2"),
                         },
                     },
+                    ThemeChangeSensitive = false,
                 },
                 Padding = new Extents(64, 64, 0, 0),
                 NavigationPadding = new Extents(0, 24, 0, 0),
@@ -516,6 +523,7 @@ namespace Tizen.NUI.Components
                         Pressed = new Color("#1473E6"),
                         Disabled = new Color("#C3CAD2"),
                     },
+                    ThemeChangeSensitive = false,
                 },
                 Icon = new ImageViewStyle()
                 {
@@ -586,6 +594,7 @@ namespace Tizen.NUI.Components
                     HorizontalAlignment = HorizontalAlignment.Center,
                     VerticalAlignment = VerticalAlignment.Center,
                     TextColor = new Color("#000C2B"),
+                    ThemeChangeSensitive = false,
                 },
                 MessageTextLabel = new TextLabelStyle()
                 {
@@ -596,6 +605,7 @@ namespace Tizen.NUI.Components
                     HorizontalAlignment = HorizontalAlignment.Center,
                     VerticalAlignment = VerticalAlignment.Center,
                     TextColor = new Color("#000C2B"),
+                    ThemeChangeSensitive = false,
                 },
                 ActionContent = new ViewStyle()
                 {
@@ -620,6 +630,7 @@ namespace Tizen.NUI.Components
                         Size = new Size(0,72),
                         TextColor = new Color("#000C2B"),
                         BackgroundColor = Color.White,
+                        ThemeChangeSensitive = false
                     },
                     Divider = new ViewStyle()
                     {
@@ -647,11 +658,9 @@ namespace Tizen.NUI.Components
                         VerticalAlignment = VerticalAlignment.Center,
                         HorizontalAlignment = HorizontalAlignment.Center,
                         Size = new Size(0,72),
-                        TextColor = new Selector<Color>()
-                        {
-                            Normal = new Color("#000C2B"),
-                        },
+                        TextColor = new Color("#000C2B"),
                         BackgroundColor = Color.White,
+                        ThemeChangeSensitive = false
                     },
                     Divider = new ViewStyle()
                     {
@@ -685,6 +694,7 @@ namespace Tizen.NUI.Components
                         Pressed = new Color("#1B69CA"),
                         Disabled = new Color("#C3CAD2"),
                     },
+                    ThemeChangeSensitive = false
                 },
                 Icon = new ImageViewStyle()
                 {
