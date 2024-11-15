@@ -21,6 +21,7 @@ using Tizen.NUI.BaseComponents;
 using Tizen.NUI.Binding;
 using System.Windows.Input;
 using Tizen.System;
+using System.Collections.Generic;
 
 namespace Tizen.NUI.Components
 {
@@ -36,28 +37,16 @@ namespace Tizen.NUI.Components
         /// FeedbackProperty
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly BindableProperty FeedbackProperty = BindableProperty.Create(nameof(Feedback), typeof(bool), typeof(Control), default(bool), propertyChanged: (bindable, oldValue, newValue) =>
-        {
-            var instance = (Control)bindable;
-            if (newValue != null)
-            {
-                instance.InternalFeedback = (bool)newValue;
-            }
-        },
-        defaultValueCreator: (bindable) =>
-        {
-            var instance = (Control)bindable;
-            return instance.InternalFeedback;
-        });
+        public static readonly BindableProperty FeedbackProperty = null;
+
 
         /// Internal used.
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly BindableProperty CommandProperty = BindableProperty.Create(nameof(Command), typeof(ICommand), typeof(Control), null, propertyChanged: (bo, o, n) => ((Control)bo).OnCommandChanged());
+        public static readonly BindableProperty CommandProperty = null;
 
         /// Internal used.
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly BindableProperty CommandParameterProperty = BindableProperty.Create(nameof(CommandParameter), typeof(object), typeof(Button), null,
-            propertyChanged: (bindable, oldvalue, newvalue) => ((Button)bindable).CommandCanExecuteChanged(bindable, EventArgs.Empty));
+        public static readonly BindableProperty CommandParameterProperty = null;
 
         private bool onThemeChangedEventOverrideChecker;
 
@@ -66,6 +55,32 @@ namespace Tizen.NUI.Components
         static Control()
         {
             ThemeManager.AddPackageTheme(DefaultThemeCreator.Instance);
+
+            CommandProperty = BindableProperty.Create(nameof(Command), typeof(ICommand), typeof(Control), null,
+                propertyChanged: (bindable, oldValue, newvalue) => ((Control)bindable).Command = (ICommand)newvalue,
+                defaultValueCreator: (bindable) => ((Control)bindable).Command);
+
+            if (!NUIApplication.IsUsingXaml)
+                return;
+
+            FeedbackProperty = BindableProperty.Create(nameof(Feedback), typeof(bool), typeof(Control), default(bool),
+                propertyChanged: (bindable, oldValue, newValue) =>
+                {
+                    var instance = (Control)bindable;
+                    if (newValue != null)
+                    {
+                        instance.InternalFeedback = (bool)newValue;
+                    }
+                },
+                defaultValueCreator: (bindable) =>
+                {
+                    var instance = (Control)bindable;
+                    return instance.InternalFeedback;
+                });
+
+            CommandParameterProperty = BindableProperty.Create(nameof(CommandParameter), typeof(object), typeof(Button), null,
+                propertyChanged: (bindable, oldvalue, newvalue) => ((Button)bindable).CommandParameter = newvalue,
+                defaultValueCreator: (bindable) => ((Control)bindable).CommandParameter);
         }
 
         /// <summary>
@@ -118,13 +133,10 @@ namespace Tizen.NUI.Components
         [EditorBrowsable(EditorBrowsableState.Never)]
         public bool Feedback
         {
-            get
-            {
-                return (bool)GetValue(FeedbackProperty);
-            }
+            get => InternalFeedback;
             set
             {
-                SetValue(FeedbackProperty, value);
+                InternalFeedback = value;
                 NotifyPropertyChanged();
             }
         }
@@ -189,17 +201,29 @@ namespace Tizen.NUI.Components
         [EditorBrowsable(EditorBrowsableState.Never)]
         public ICommand Command
         {
-            get { return (ICommand)GetValue(CommandProperty); }
-            set { SetValue(CommandProperty, value); }
+            get => _command;
+            set
+            {
+                _command = value;
+                OnCommandChanged();
+            }
         }
+
+        private ICommand _command = null;
 
         /// Internal used.
         [EditorBrowsable(EditorBrowsableState.Never)]
         public object CommandParameter
         {
-            get { return GetValue(CommandParameterProperty); }
-            set { SetValue(CommandParameterProperty, value); }
+            get => _commandParameter;
+            set
+            {
+                _commandParameter = value;
+                CommandCanExecuteChanged(this, EventArgs.Empty);
+            }
         }
+
+        private object _commandParameter = null;
 
         /// <summary>
         /// Whether focusable when touch

@@ -32,35 +32,30 @@ namespace Tizen.NUI.Components
         /// <since_tizen> 9 </since_tizen>
         public new static readonly BindableProperty IsEnabledProperty = View.IsEnabledProperty;
 
-        /// <summary>
-        /// Property of boolean Selected flag.
-        /// </summary>
-        /// <since_tizen> 9 </since_tizen>
-        public static readonly BindableProperty IsSelectedProperty = BindableProperty.Create(nameof(IsSelected), typeof(bool), typeof(RecyclerViewItem), false, propertyChanged: (bindable, oldValue, newValue) =>
+        bool InternalIsSelected
         {
-            var instance = (RecyclerViewItem)bindable;
-            if (newValue != null)
+            get => isSelectable && isSelected;
+            set
             {
-                bool newSelected = (bool)newValue;
-                if (instance.isSelected != newSelected)
+                if (isSelected != value)
                 {
-                    instance.isSelected = newSelected;
+                    isSelected = value;
 
-                    if (instance.isSelectable)
+                    if (isSelectable)
                     {
-                        instance.UpdateState();
+                        UpdateState();
                     }
-                    if (instance.ParentItemsView is CollectionView collectionView)
+                    if (ParentItemsView is CollectionView collectionView)
                     {
-                        var context = instance.BindingContext;
+                        var context = BindingContext;
                         if (collectionView.SelectionMode is ItemSelectionMode.Single ||
                             collectionView.SelectionMode is ItemSelectionMode.SingleAlways)
                         {
-                            if (newSelected && collectionView.SelectedItem != context)
+                            if (value && collectionView.SelectedItem != context)
                             {
                                 collectionView.SelectedItem = context;
                             }
-                            else if (!newSelected && collectionView.SelectedItem == context)
+                            else if (!value && collectionView.SelectedItem == context)
                             {
                                 collectionView.SelectedItem = null;
                             }
@@ -71,11 +66,11 @@ namespace Tizen.NUI.Components
                             if (selectedList != null && context != null)
                             {
                                 bool contains = selectedList.Contains(context);
-                                if (newSelected && !contains)
+                                if (value && !contains)
                                 {
                                     selectedList.Add(context);
                                 }
-                                else if (!newSelected && contains)
+                                else if (!value && contains)
                                 {
                                     selectedList.Remove(context);
                                 }
@@ -84,37 +79,63 @@ namespace Tizen.NUI.Components
                     }
                 }
             }
-        },
-        defaultValueCreator: (bindable) =>
+        }
+
+        /// <summary>
+        /// Property of boolean Selected flag.
+        /// </summary>
+        /// <since_tizen> 9 </since_tizen>
+        public static readonly BindableProperty IsSelectedProperty = null;
+
+        bool InternalIsSelectable
         {
-            var instance = (RecyclerViewItem)bindable;
-            return instance.isSelectable && instance.isSelected;
-        });
+            get => isSelectable;
+            set
+            {
+                if (isSelectable != value)
+                {
+                    isSelectable = value;
+                    UpdateState();
+                }
+            }
+        }
 
         /// <summary>
         /// Property of boolean Selectable flag.
         /// </summary>
         /// <since_tizen> 9 </since_tizen>
-        public static readonly BindableProperty IsSelectableProperty = BindableProperty.Create(nameof(IsSelectable), typeof(bool), typeof(RecyclerViewItem), true, propertyChanged: (bindable, oldValue, newValue) =>
-        {
-            var instance = (RecyclerViewItem)bindable;
-            if (newValue != null)
-            {
-                bool newSelectable = (bool)newValue;
-                if (instance.isSelectable != newSelectable)
-                {
-                    instance.isSelectable = newSelectable;
-                    instance.UpdateState();
-                }
-            }
-        },
-        defaultValueCreator: (bindable) => ((RecyclerViewItem)bindable).isSelectable);
+        public static readonly BindableProperty IsSelectableProperty = null;
 
         private bool isSelected = false;
         private bool isSelectable = true;
         private RecyclerViewItemStyle ItemStyle => ViewStyle as RecyclerViewItemStyle;
 
-        static RecyclerViewItem() { }
+        static RecyclerViewItem()
+        {
+            if (!NUIApplication.IsUsingXaml)
+                return;
+
+            IsSelectedProperty = BindableProperty.Create(nameof(IsSelected), typeof(bool), typeof(RecyclerViewItem), false, propertyChanged: (bindable, oldValue, newValue) =>
+            {
+                if (newValue != null)
+                {
+                    ((RecyclerViewItem)bindable).InternalIsSelected = (bool)newValue;
+                }
+            },
+            defaultValueCreator: (bindable) =>
+            {
+                return ((RecyclerViewItem)bindable).InternalIsSelected;
+            });
+
+            IsSelectableProperty = BindableProperty.Create(nameof(IsSelectable), typeof(bool), typeof(RecyclerViewItem), true, propertyChanged: (bindable, oldValue, newValue) =>
+            {
+                if (newValue != null)
+                {
+                    ((RecyclerViewItem)bindable).InternalIsSelectable = (bool)newValue;
+                }
+            },
+            defaultValueCreator: (bindable) => ((RecyclerViewItem)bindable).InternalIsSelectable);
+        }
 
         /// <summary>
         /// Creates a new instance of RecyclerViewItem.
@@ -148,16 +169,27 @@ namespace Tizen.NUI.Components
         /// <since_tizen> 9 </since_tizen>
         public event EventHandler<ClickedEventArgs> Clicked;
 
+        protected override void SetDefaultStyle()
+        {
+            SetBackgroundColor(new Selector<Color>()
+            {
+                Normal = new Color(1, 1, 1, 1),
+                Pressed = new Color(0.85f, 0.85f, 0.85f, 1),
+                Disabled = new Color(0.70f, 0.70f, 0.70f, 1),
+                Selected = new Color(0.701f, 0.898f, 0.937f, 1),
+            });
+        }
+
         /// <summary>
         /// Flag to decide RecyclerViewItem can be selected or not.
         /// </summary>
         /// <since_tizen> 9 </since_tizen>
         public bool IsSelectable
         {
-            get => (bool)GetValue(IsSelectableProperty);
+            get => InternalIsSelectable;
             set
             {
-                SetValue(IsSelectableProperty, value);
+                InternalIsSelectable = value;
                 OnPropertyChanged(nameof(IsSelectable));
             }
         }
@@ -168,10 +200,10 @@ namespace Tizen.NUI.Components
         /// <since_tizen> 9 </since_tizen>
         public bool IsSelected
         {
-            get => (bool)GetValue(IsSelectedProperty);
+            get => InternalIsSelected;
             set
             {
-                SetValue(IsSelectedProperty, value);
+                InternalIsSelected = value;
                 OnPropertyChanged(nameof(IsSelected));
             }
         }

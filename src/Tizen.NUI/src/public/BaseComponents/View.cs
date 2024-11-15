@@ -96,6 +96,9 @@ namespace Tizen.NUI.BaseComponents
 
         static View()
         {
+            IsEnabledProperty = BindableProperty.Create(nameof(IsEnabled), typeof(bool), typeof(View), false,
+                propertyChanged: SetInternalIsEnabledProperty, defaultValueCreator: GetInternalIsEnabledProperty);
+
             if (NUIApplication.IsUsingXaml)
             {
                 StyleNameProperty = BindableProperty.Create(nameof(StyleName), typeof(string), typeof(View), string.Empty,
@@ -250,9 +253,6 @@ namespace Tizen.NUI.BaseComponents
 
                 SensitiveProperty = BindableProperty.Create(nameof(Sensitive), typeof(bool), typeof(View), false,
                     propertyChanged: SetInternalSensitiveProperty, defaultValueCreator: GetInternalSensitiveProperty);
-
-                IsEnabledProperty = BindableProperty.Create(nameof(IsEnabled), typeof(bool), typeof(View), false,
-                    propertyChanged: SetInternalIsEnabledProperty, defaultValueCreator: GetInternalIsEnabledProperty);
 
                 DispatchKeyEventsProperty = BindableProperty.Create(nameof(DispatchKeyEvents), typeof(bool), typeof(View), false,
                     propertyChanged: SetInternalDispatchKeyEventsProperty, defaultValueCreator: GetInternalDispatchKeyEventsProperty);
@@ -5186,8 +5186,8 @@ namespace Tizen.NUI.BaseComponents
                     else
                     {
                         // Layout not being replaced so restore margin and padding to View.
-                        SetValue(MarginProperty, layout.Margin);
-                        SetValue(PaddingProperty, layout.Padding);
+                        Margin = layout.Margin;
+                        Padding = layout.Padding;
                         NotifyPropertyChanged();
                     }
                 }
@@ -5207,7 +5207,7 @@ namespace Tizen.NUI.BaseComponents
                         {
                             // If View already has a margin set then store it in Layout instead.
                             value.Margin = margin;
-                            SetValue(MarginProperty, new Extents(0, 0, 0, 0));
+                            Margin = new Extents(0, 0, 0, 0);
                             setMargin = true;
                         }
 
@@ -5221,7 +5221,7 @@ namespace Tizen.NUI.BaseComponents
                         {
                             // If View already has a padding set then store it in Layout instead.
                             value.Padding = padding;
-                            SetValue(PaddingProperty, new Extents(0, 0, 0, 0));
+                            Padding = new Extents(0, 0, 0, 0);
                             setPadding = true;
                         }
 

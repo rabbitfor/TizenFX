@@ -1814,6 +1814,16 @@ namespace Tizen.NUI.BaseComponents
         [EditorBrowsable(EditorBrowsableState.Never)]
         protected void InitializeStyle(ViewStyle style = null)
         {
+            if (!NUIApplication.IsUsingXaml)
+            {
+                SetDefaultStyle();
+                if (style != null)
+                {
+                    Tizen.Log.Error("NUI", "Should not use custom style when xaml is disabled");
+                }
+                return;
+            }
+
             if (style == null && ThemeManager.InitialThemeDisabled)
             {
                 // Fast return in most TV cases.
@@ -1840,6 +1850,10 @@ namespace Tizen.NUI.BaseComponents
             {
                 SetThemeApplied();
             }
+        }
+
+        protected virtual void SetDefaultStyle()
+        {
         }
 
         private View ConvertIdToView(uint id)

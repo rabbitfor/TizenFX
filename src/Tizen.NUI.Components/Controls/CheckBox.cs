@@ -56,6 +56,36 @@ namespace Tizen.NUI.Components
             HeightSpecification = LayoutParamPolicies.WrapContent;
         }
 
+        protected override void SetDefaultStyle()
+        {
+            Padding = new Extents(8, 8, 8, 8);
+            ItemSpacing = new Size2D(16, 16);
+            ItemHorizontalAlignment = HorizontalAlignment.Center;
+            ItemVerticalAlignment = VerticalAlignment.Center;
+
+            if (Icon != null)
+            {
+                Icon.Size = new Size(32, 32);
+                Icon.ResourceUrlSelector = new Selector<string>()
+                {
+                    Normal = FrameworkInformation.ResourcePath + "IoT_check_off.png",
+                    Pressed = FrameworkInformation.ResourcePath + "IoT_check_off_p.png",
+                    Disabled = FrameworkInformation.ResourcePath + "IoT_check_off_d.png",
+                    Focused = FrameworkInformation.ResourcePath + "IoT_check_off_f.png",
+                    Selected = FrameworkInformation.ResourcePath + "IoT_check_on.png",
+                    SelectedPressed = FrameworkInformation.ResourcePath + "IoT_check_on_p.png",
+                    SelectedFocused = FrameworkInformation.ResourcePath + "IoT_check_on_f.png",
+                    DisabledSelected = FrameworkInformation.ResourcePath + "IoT_check_on_d.png",
+                };
+            }
+            if (TextLabel != null)
+            {
+                TextLabel.TextColor = new Color("#090E21");
+                TextLabel.PixelSize = 24;
+                TextLabel.FontSizeScale = FontSizeScale.UseSystemSetting;
+            }
+        }
+
         /// <summary>
         /// Get CheckBoxGroup to which this CheckBox belong.
         /// </summary>

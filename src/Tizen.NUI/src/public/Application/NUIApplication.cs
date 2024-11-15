@@ -34,7 +34,7 @@ namespace Tizen.NUI
     public class NUIApplication : CoreApplication
     {
         /// <summary>
-        /// Set to true if XAML is used. 
+        /// Set to true if XAML is used.
         /// This must be called before or immediately after the NUIApplication constructor is called.
         /// The default value is true.
         /// </summary>

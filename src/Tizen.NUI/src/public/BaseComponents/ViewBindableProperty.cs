@@ -92,24 +92,28 @@ namespace Tizen.NUI.BaseComponents
         [EditorBrowsable(EditorBrowsableState.Never)]
         public static readonly BindableProperty BackgroundColorProperty = null;
 
+        internal void SetBackgroundColor(object newValue)
+        {
+            themeData?.selectorData?.ClearBackground(this);
+
+            if (newValue is Selector<Color> selector)
+            {
+                if (selector.HasAll()) SetBackgroundColor(selector.All);
+                else EnsureSelectorData().BackgroundColor = new TriggerableSelector<Color>(this, selector, SetBackgroundColor, true);
+            }
+            else
+            {
+                SetBackgroundColor((Color)newValue);
+            }
+        }
+
         internal static void SetInternalBackgroundColorProperty(BindableObject bindable, object oldValue, object newValue)
         {
             var view = (View)bindable;
 
             if (NUIApplication.IsUsingXaml)
             {
-                view.themeData?.selectorData?.ClearBackground(view);
-
-                if (newValue is Selector<Color> selector)
-                {
-                    if (selector.HasAll()) view.SetBackgroundColor(selector.All);
-                    else view.EnsureSelectorData().BackgroundColor = new TriggerableSelector<Color>(view, selector, view.SetBackgroundColor, true);
-                }
-                else
-                {
-                    view.SetBackgroundColor((Color)newValue);
-                }
-
+                view.SetBackgroundColor(newValue);
             }
             else
             {
@@ -221,8 +225,8 @@ namespace Tizen.NUI.BaseComponents
             return view.GetInternalColorBlue();
         }
 
-        /// <summary> 
-        /// BackgroundImageProperty 
+        /// <summary>
+        /// BackgroundImageProperty
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
         public static readonly BindableProperty BackgroundImageProperty = null;

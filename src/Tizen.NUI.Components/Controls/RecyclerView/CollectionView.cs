@@ -31,114 +31,306 @@ namespace Tizen.NUI.Components
     /// <since_tizen> 9 </since_tizen>
     public partial class CollectionView : RecyclerView
     {
+
+        object InternalSelectedItem
+        {
+            get => selectedItem;
+            set
+            {
+                if (selectedItem == value)
+                    return;
+
+                var oldValue = selectedItem;
+                selectedItem = value;
+
+                var args = new SelectionChangedEventArgs(oldValue, value);
+                foreach (RecyclerViewItem item in ContentContainer.Children.Where((item) => item is RecyclerViewItem))
+                {
+                    if (item.BindingContext == null)
+                    {
+                        continue;
+                    }
+
+                    if (item.BindingContext == oldValue)
+                    {
+                        item.IsSelected = false;
+                    }
+                    else if (item.BindingContext == value)
+                    {
+                        item.IsSelected = true;
+                    }
+                }
+
+                SelectionPropertyChanged(this, args);
+            }
+        }
         /// <summary>
         /// Binding Property of selected item in single selection.
         /// </summary>
         /// <since_tizen> 9 </since_tizen>
-        public static readonly BindableProperty SelectedItemProperty =
-            BindableProperty.Create(nameof(SelectedItem), typeof(object), typeof(CollectionView), null,
-                propertyChanged: (bindable, oldValue, newValue) =>
-                {
-                    var colView = bindable as CollectionView;
-                    if (colView == null)
-                    {
-                        throw new Exception("Bindable object is not CollectionView.");
-                    }
+        public static readonly BindableProperty SelectedItemProperty = null;
 
-                    oldValue = colView.selectedItem;
-                    colView.selectedItem = newValue;
-
-                    var args = new SelectionChangedEventArgs(oldValue, newValue);
-                    foreach (RecyclerViewItem item in colView.ContentContainer.Children.Where((item) => item is RecyclerViewItem))
-                    {
-                        if (item.BindingContext == null)
-                        {
-                            continue;
-                        }
-
-                        if (item.BindingContext == oldValue)
-                        {
-                            item.IsSelected = false;
-                        }
-                        else if (item.BindingContext == newValue)
-                        {
-                            item.IsSelected = true;
-                        }
-                    }
-
-                    SelectionPropertyChanged(colView, args);
-                },
-                defaultValueCreator: (bindable) =>
-                {
-                    var colView = bindable as CollectionView;
-                    if (colView == null)
-                    {
-                        throw new Exception("Bindable object is not CollectionView.");
-                    }
-
-                    return colView.selectedItem;
-                });
+        IList<object> InternalSelectedItems
+        {
+            get => selectedItems ??= new SelectionList(this);
+            set
+            {
+                var oldSelection = selectedItems ?? selectEmpty;
+                //FIXME : CoerceSelectedItems calls only isCreatedByXaml
+                var newSelection = (SelectionList)CoerceSelectedItems(this, value);
+                selectedItems = newSelection;
+                SelectedItemsPropertyChanged(oldSelection, newSelection);
+            }
+        }
 
         /// <summary>
         /// Binding Property of selected items list in multiple selection.
         /// </summary>
         /// <since_tizen> 9 </since_tizen>
-        public static readonly BindableProperty SelectedItemsProperty =
-            BindableProperty.Create(nameof(SelectedItems), typeof(IList<object>), typeof(CollectionView), null,
-                propertyChanged: (bindable, oldValue, newValue) =>
-                {
-                    var colView = bindable as CollectionView;
-                    if (colView == null)
-                    {
-                        throw new Exception("Bindable object is not CollectionView.");
-                    }
+        public static readonly BindableProperty SelectedItemsProperty = null;
 
-                    var oldSelection = colView.selectedItems ?? selectEmpty;
-                    //FIXME : CoerceSelectedItems calls only isCreatedByXaml
-                    var newSelection = (SelectionList)CoerceSelectedItems(colView, newValue);
-                    colView.selectedItems = newSelection;
-                    colView.SelectedItemsPropertyChanged(oldSelection, newSelection);
-                },
-                defaultValueCreator: (bindable) =>
-                {
-                    var colView = bindable as CollectionView;
-                    if (colView == null)
-                    {
-                        throw new Exception("Bindable object is not CollectionView.");
-                    }
-
-                    colView.selectedItems = colView.selectedItems ?? new SelectionList(colView);
-                    return colView.selectedItems;
-                });
+        ItemSelectionMode InternalSelectionMode
+        {
+            get => selectionMode;
+            set
+            {
+                var oldValue = selectionMode;
+                selectionMode = value;
+                SelectionModePropertyChanged(this, oldValue, value);
+            }
+        }
 
         /// <summary>
         /// Binding Property of selected items list in multiple selection.
         /// </summary>
         /// <since_tizen> 9 </since_tizen>
-        public static readonly BindableProperty SelectionModeProperty =
-            BindableProperty.Create(nameof(SelectionMode), typeof(ItemSelectionMode), typeof(CollectionView), ItemSelectionMode.None,
+        public static readonly BindableProperty SelectionModeProperty = null;
+
+
+        static CollectionView()
+        {
+            SelectionChangedCommandProperty = BindableProperty.Create(nameof(SelectionChangedCommand), typeof(ICommand), typeof(CollectionView), null, propertyChanged: (bindable, oldValue, newValue) =>
+            {
+                var instance = bindable as CollectionView;
+                if (instance == null)
+                {
+                    throw new Exception("Bindable object is not CollectionView.");
+                }
+                if (newValue != null)
+                {
+                    instance.InternalSelectionChangedCommand = newValue as ICommand;
+                }
+            },
+            defaultValueCreator: (bindable) =>
+            {
+                var instance = bindable as CollectionView;
+                if (instance == null)
+                {
+                    throw new Exception("Bindable object is not CollectionView.");
+                }
+                return instance.InternalSelectionChangedCommand;
+            });
+
+            if (!NUIApplication.IsUsingXaml)
+                return;
+
+            SelectedItemProperty = BindableProperty.Create(nameof(SelectedItem), typeof(object), typeof(CollectionView), null,
                 propertyChanged: (bindable, oldValue, newValue) =>
                 {
-                    var colView = bindable as CollectionView;
-                    if (colView == null)
-                    {
-                        throw new Exception("Bindable object is not CollectionView.");
-                    }
-
-                    oldValue = colView.selectionMode;
-                    colView.selectionMode = (ItemSelectionMode)newValue;
-                    SelectionModePropertyChanged(colView, oldValue, newValue);
+                    (bindable as CollectionView).InternalSelectedItem = newValue;
                 },
-                defaultValueCreator: (bindable) =>
-                {
-                    var colView = bindable as CollectionView;
-                    if (colView == null)
-                    {
-                        throw new Exception("Bindable object is not CollectionView.");
-                    }
+                defaultValueCreator: (bindable) => (bindable as CollectionView).InternalSelectedItem);
 
-                    return colView.selectionMode;
-                });
+            SelectedItemsProperty = BindableProperty.Create(nameof(SelectedItems), typeof(IList<object>), typeof(CollectionView), null,
+                propertyChanged: (bindable, oldValue, newValue) =>
+                {
+                    (bindable as CollectionView).InternalSelectedItems = (IList<object>)newValue;
+                },
+                defaultValueCreator: (bindable) => (bindable as CollectionView).InternalSelectedItems);
+
+            SelectionModeProperty = BindableProperty.Create(nameof(SelectionMode), typeof(ItemSelectionMode), typeof(CollectionView), ItemSelectionMode.None,
+                propertyChanged: (bindable, oldValue, newValue) =>
+                {
+                    (bindable as CollectionView).InternalSelectionMode = (ItemSelectionMode)newValue;
+                },
+                defaultValueCreator: (bindable) => (bindable as CollectionView).InternalSelectionMode);
+
+            ItemsLayouterProperty = BindableProperty.Create(nameof(ItemsLayouter), typeof(ItemsLayouter), typeof(CollectionView), null, propertyChanged: (bindable, oldValue, newValue) =>
+            {
+                var instance = bindable as CollectionView;
+                if (instance == null)
+                {
+                    throw new Exception("Bindable object is not CollectionView.");
+                }
+                if (newValue != null)
+                {
+                    instance.InternalItemsLayouter = newValue as ItemsLayouter;
+                }
+            },
+            defaultValueCreator: (bindable) =>
+            {
+                var instance = bindable as CollectionView;
+                if (instance == null)
+                {
+                    throw new Exception("Bindable object is not CollectionView.");
+                }
+                return instance.InternalItemsLayouter;
+            });
+
+            ScrollingDirectionProperty = BindableProperty.Create(nameof(ScrollingDirection), typeof(Tizen.NUI.Components.ScrollableBase.Direction), typeof(CollectionView), default(Direction), propertyChanged: (bindable, oldValue, newValue) =>
+            {
+                var instance = bindable as CollectionView;
+                if (instance == null)
+                {
+                    throw new Exception("Bindable object is not CollectionView.");
+                }
+                if (newValue != null)
+                {
+                    instance.InternalScrollingDirection = (Direction)newValue;
+                }
+            },
+            defaultValueCreator: (bindable) =>
+            {
+                var instance = bindable as CollectionView;
+                if (instance == null)
+                {
+                    throw new Exception("Bindable object is not CollectionView.");
+                }
+                return instance.InternalScrollingDirection;
+            });
+
+            SelectionChangedCommandParameterProperty = BindableProperty.Create(nameof(SelectionChangedCommandParameter), typeof(object), typeof(CollectionView), null, propertyChanged: (bindable, oldValue, newValue) =>
+            {
+                var instance = bindable as CollectionView;
+                if (instance == null)
+                {
+                    throw new Exception("Bindable object is not CollectionView.");
+                }
+                if (newValue != null)
+                {
+                    instance.InternalSelectionChangedCommandParameter = newValue;
+                }
+            },
+            defaultValueCreator: (bindable) =>
+            {
+                var instance = bindable as CollectionView;
+                if (instance == null)
+                {
+                    throw new Exception("Bindable object is not CollectionView.");
+                }
+                return instance.InternalSelectionChangedCommandParameter;
+            });
+
+            HeaderProperty = BindableProperty.Create(nameof(Header), typeof(RecyclerViewItem), typeof(CollectionView), null, propertyChanged: (bindable, oldValue, newValue) =>
+            {
+                var instance = bindable as CollectionView;
+                if (instance == null)
+                {
+                    throw new Exception("Bindable object is not CollectionView.");
+                }
+                if (newValue != null)
+                {
+                    instance.InternalHeader = newValue as RecyclerViewItem;
+                }
+            },
+            defaultValueCreator: (bindable) =>
+            {
+                var instance = bindable as CollectionView;
+                if (instance == null)
+                {
+                    throw new Exception("Bindable object is not CollectionView.");
+                }
+                return instance.InternalHeader;
+            });
+
+            FooterProperty = BindableProperty.Create(nameof(Footer), typeof(RecyclerViewItem), typeof(CollectionView), null, propertyChanged: (bindable, oldValue, newValue) =>
+            {
+                var instance = bindable as CollectionView;
+                if (instance == null)
+                {
+                    throw new Exception("Bindable object is not CollectionView.");
+                }
+                if (newValue != null)
+                {
+                    instance.InternalFooter = newValue as RecyclerViewItem;
+                }
+            },
+            defaultValueCreator: (bindable) =>
+            {
+                var instance = bindable as CollectionView;
+                if (instance == null)
+                {
+                    throw new Exception("Bindable object is not CollectionView.");
+                }
+                return instance.InternalFooter;
+            });
+
+            IsGroupedProperty = BindableProperty.Create(nameof(IsGrouped), typeof(bool), typeof(CollectionView), default(bool), propertyChanged: (bindable, oldValue, newValue) =>
+            {
+                var instance = bindable as CollectionView;
+                if (instance == null)
+                {
+                    throw new Exception("Bindable object is not CollectionView.");
+                }
+                if (newValue != null)
+                {
+                    instance.InternalIsGrouped = (bool)newValue;
+                }
+            },
+            defaultValueCreator: (bindable) =>
+            {
+                var instance = bindable as CollectionView;
+                if (instance == null)
+                {
+                    throw new Exception("Bindable object is not CollectionView.");
+                }
+                return instance.InternalIsGrouped;
+            });
+
+            GroupHeaderTemplateProperty = BindableProperty.Create(nameof(GroupHeaderTemplate), typeof(DataTemplate), typeof(CollectionView), null, propertyChanged: (bindable, oldValue, newValue) =>
+            {
+                var instance = bindable as CollectionView;
+                if (instance == null)
+                {
+                    throw new Exception("Bindable object is not CollectionView.");
+                }
+                if (newValue != null)
+                {
+                    instance.InternalGroupHeaderTemplate = newValue as DataTemplate;
+                }
+            },
+            defaultValueCreator: (bindable) =>
+            {
+                var instance = bindable as CollectionView;
+                if (instance == null)
+                {
+                    throw new Exception("Bindable object is not CollectionView.");
+                }
+                return instance.InternalGroupHeaderTemplate;
+            });
+
+            GroupFooterTemplateProperty = BindableProperty.Create(nameof(GroupFooterTemplate), typeof(DataTemplate), typeof(CollectionView), null, propertyChanged: (bindable, oldValue, newValue) =>
+            {
+                var instance = bindable as CollectionView;
+                if (instance == null)
+                {
+                    throw new Exception("Bindable object is not CollectionView.");
+                }
+                if (newValue != null)
+                {
+                    instance.InternalGroupFooterTemplate = newValue as DataTemplate;
+                }
+            },
+            defaultValueCreator: (bindable) =>
+            {
+                var instance = bindable as CollectionView;
+                if (instance == null)
+                {
+                    throw new Exception("Bindable object is not CollectionView.");
+                }
+                return instance.InternalGroupFooterTemplate;
+            });
+        }
 
 
         private static readonly IList<object> selectEmpty = new List<object>(0);
@@ -257,8 +449,12 @@ namespace Tizen.NUI.Components
         /// <since_tizen> 9 </since_tizen>
         public override IEnumerable ItemsSource
         {
-            get => GetValue(RecyclerView.ItemsSourceProperty) as IEnumerable;
-            set => SetValue(RecyclerView.ItemsSourceProperty, value);
+            get => InternalItemsSource;
+            set
+            {
+                InternalItemsSource = value;
+                NotifyPropertyChanged();
+            }
         }
 
         internal override IEnumerable InternalItemsSource
@@ -318,13 +514,10 @@ namespace Tizen.NUI.Components
         /// <since_tizen> 9 </since_tizen>
         public override DataTemplate ItemTemplate
         {
-            get
-            {
-                return GetValue(ItemTemplateProperty) as DataTemplate;
-            }
+            get => InternalItemTemplate;
             set
             {
-                SetValue(ItemTemplateProperty, value);
+                InternalItemTemplate = value;
                 NotifyPropertyChanged();
             }
         }
@@ -357,13 +550,10 @@ namespace Tizen.NUI.Components
         /// <since_tizen> 9 </since_tizen>
         public virtual ItemsLayouter ItemsLayouter
         {
-            get
-            {
-                return GetValue(ItemsLayouterProperty) as ItemsLayouter;
-            }
+            get => InternalItemsLayouter;
             set
             {
-                SetValue(ItemsLayouterProperty, value);
+                InternalItemsLayouter = value;
                 NotifyPropertyChanged();
             }
         }
@@ -408,13 +598,10 @@ namespace Tizen.NUI.Components
         /// <since_tizen> 9 </since_tizen>
         public new Direction ScrollingDirection
         {
-            get
-            {
-                return (Direction)GetValue(ScrollingDirectionProperty);
-            }
+            get => InternalScrollingDirection;
             set
             {
-                SetValue(ScrollingDirectionProperty, value);
+                InternalScrollingDirection = value;
                 NotifyPropertyChanged();
             }
         }
@@ -441,8 +628,8 @@ namespace Tizen.NUI.Components
         /// <since_tizen> 9 </since_tizen>
         public object SelectedItem
         {
-            get => GetValue(SelectedItemProperty);
-            set => SetValue(SelectedItemProperty, value);
+            get => InternalSelectedItem;
+            set => InternalSelectedItem = value;
         }
 
         /// <summary>
@@ -451,7 +638,7 @@ namespace Tizen.NUI.Components
         /// <since_tizen> 9 </since_tizen>
         public IList<object> SelectedItems
         {
-            get => GetValue(SelectedItemsProperty) as IList<object>;
+            get => InternalSelectedItems;
             // set => SetValue(SelectedItemsProperty, new SelectionList(this, value));
         }
 
@@ -461,8 +648,8 @@ namespace Tizen.NUI.Components
         /// <since_tizen> 9 </since_tizen>
         public ItemSelectionMode SelectionMode
         {
-            get => (ItemSelectionMode)GetValue(SelectionModeProperty);
-            set => SetValue(SelectionModeProperty, value);
+            get => InternalSelectionMode;
+            set => InternalSelectionMode = value;
         }
 
         /// <summary>
@@ -471,13 +658,10 @@ namespace Tizen.NUI.Components
         [EditorBrowsable(EditorBrowsableState.Never)]
         public ICommand SelectionChangedCommand
         {
-            get
-            {
-                return GetValue(SelectionChangedCommandProperty) as ICommand;
-            }
+            get => InternalSelectionChangedCommand;
             set
             {
-                SetValue(SelectionChangedCommandProperty, value);
+                InternalSelectionChangedCommand = value;
                 NotifyPropertyChanged();
             }
         }
@@ -489,13 +673,10 @@ namespace Tizen.NUI.Components
         [EditorBrowsable(EditorBrowsableState.Never)]
         public object SelectionChangedCommandParameter
         {
-            get
-            {
-                return GetValue(SelectionChangedCommandParameterProperty);
-            }
+            get => InternalSelectionChangedCommandParameter;
             set
             {
-                SetValue(SelectionChangedCommandParameterProperty, value);
+                InternalSelectionChangedCommandParameter = value;
                 NotifyPropertyChanged();
             }
         }
@@ -508,13 +689,10 @@ namespace Tizen.NUI.Components
         /// <since_tizen> 9 </since_tizen>
         public RecyclerViewItem Header
         {
-            get
-            {
-                return GetValue(HeaderProperty) as RecyclerViewItem;
-            }
+            get => InternalHeader;
             set
             {
-                SetValue(HeaderProperty, value);
+                InternalHeader = value;
                 NotifyPropertyChanged();
             }
         }
@@ -552,13 +730,10 @@ namespace Tizen.NUI.Components
         /// <since_tizen> 9 </since_tizen>
         public RecyclerViewItem Footer
         {
-            get
-            {
-                return GetValue(FooterProperty) as RecyclerViewItem;
-            }
+            get => InternalFooter;
             set
             {
-                SetValue(FooterProperty, value);
+                InternalFooter = value;
                 NotifyPropertyChanged();
             }
         }
@@ -595,13 +770,10 @@ namespace Tizen.NUI.Components
         [EditorBrowsable(EditorBrowsableState.Never)]
         public bool IsGrouped
         {
-            get
-            {
-                return (bool)GetValue(IsGroupedProperty);
-            }
+            get => InternalIsGrouped;
             set
             {
-                SetValue(IsGroupedProperty, value);
+                InternalIsGrouped = value;
                 NotifyPropertyChanged();
             }
         }
@@ -635,13 +807,10 @@ namespace Tizen.NUI.Components
         [EditorBrowsable(EditorBrowsableState.Never)]
         public DataTemplate GroupHeaderTemplate
         {
-            get
-            {
-                return GetValue(GroupHeaderTemplateProperty) as DataTemplate;
-            }
+            get => InternalGroupHeaderTemplate;
             set
             {
-                SetValue(GroupHeaderTemplateProperty, value);
+                InternalGroupHeaderTemplate = value;
                 NotifyPropertyChanged();
             }
         }
@@ -679,13 +848,10 @@ namespace Tizen.NUI.Components
         [EditorBrowsable(EditorBrowsableState.Never)]
         public DataTemplate GroupFooterTemplate
         {
-            get
-            {
-                return GetValue(GroupFooterTemplateProperty) as DataTemplate;
-            }
+            get => InternalGroupFooterTemplate;
             set
             {
-                SetValue(GroupFooterTemplateProperty, value);
+                InternalGroupFooterTemplate = value;
                 NotifyPropertyChanged();
             }
         }

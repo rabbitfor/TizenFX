@@ -10,36 +10,12 @@ namespace Tizen.NUI.Components
         /// IconProperty
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly BindableProperty IconProperty = BindableProperty.Create(nameof(Icon), typeof(View), typeof(DefaultTitleItem), null, propertyChanged: (bindable, oldValue, newValue) =>
-        {
-            var instance = (DefaultTitleItem)bindable;
-            if (newValue != null)
-            {
-                instance.InternalIcon = newValue as View;
-            }
-        },
-        defaultValueCreator: (bindable) =>
-        {
-            var instance = (DefaultTitleItem)bindable;
-            return instance.InternalIcon;
-        });
+        public static readonly BindableProperty IconProperty = null;
 
         /// <summary>
         /// TextProperty
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly BindableProperty TextProperty = BindableProperty.Create(nameof(Text), typeof(string), typeof(DefaultTitleItem), default(string), propertyChanged: (bindable, oldValue, newValue) =>
-        {
-            var instance = (DefaultTitleItem)bindable;
-            if (newValue != null)
-            {
-                instance.InternalText = newValue as string;
-            }
-        },
-        defaultValueCreator: (bindable) =>
-        {
-            var instance = (DefaultTitleItem)bindable;
-            return instance.InternalText;
-        });
+        public static readonly BindableProperty TextProperty = null;
     }
 }

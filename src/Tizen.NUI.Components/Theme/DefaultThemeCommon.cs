@@ -36,6 +36,9 @@ namespace Tizen.NUI.Components
                 Version = Tizen.NUI.DefaultThemeCreator.DefaultVersion
             };
 
+            if (!NUIApplication.IsUsingXaml)
+                return theme;
+
             // Button base style
             theme.AddStyleWithoutClone("Tizen.NUI.Components.Button", new ButtonStyle()
             {

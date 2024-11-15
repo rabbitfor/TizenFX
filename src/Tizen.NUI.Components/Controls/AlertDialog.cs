@@ -19,6 +19,7 @@ using System;
 using System.ComponentModel;
 using System.Collections.Generic;
 using Tizen.NUI.BaseComponents;
+using Tizen.NUI.Binding;
 
 namespace Tizen.NUI.Components
 {
@@ -68,6 +69,139 @@ namespace Tizen.NUI.Components
         public AlertDialog(AlertDialogStyle alertDialogStyle) : base(alertDialogStyle)
         {
             Initialize();
+        }
+
+        static AlertDialog()
+        {
+            if (!NUIApplication.IsUsingXaml)
+                return;
+
+            TitleProperty = BindableProperty.Create(nameof(Title), typeof(string), typeof(AlertDialog), default(string), propertyChanged: (bindable, oldValue, newValue) =>
+            {
+                var instance = (AlertDialog)bindable;
+                if (newValue != null)
+                {
+                    instance.InternalTitle = newValue as string;
+                }
+            },
+            defaultValueCreator: (bindable) =>
+            {
+                var instance = (AlertDialog)bindable;
+                return instance.InternalTitle;
+            });
+
+            TitleContentProperty = BindableProperty.Create(nameof(TitleContent), typeof(View), typeof(AlertDialog), null, propertyChanged: (bindable, oldValue, newValue) =>
+            {
+                var instance = (AlertDialog)bindable;
+                if (newValue != null)
+                {
+                    instance.InternalTitleContent = newValue as View;
+                }
+            },
+            defaultValueCreator: (bindable) =>
+            {
+                var instance = (AlertDialog)bindable;
+                return instance.InternalTitleContent;
+            });
+
+            MessageProperty = BindableProperty.Create(nameof(Message), typeof(string), typeof(AlertDialog), default(string), propertyChanged: (bindable, oldValue, newValue) =>
+            {
+                var instance = (AlertDialog)bindable;
+                if (newValue != null)
+                {
+                    instance.InternalMessage = newValue as string;
+                }
+            },
+            defaultValueCreator: (bindable) =>
+            {
+                var instance = (AlertDialog)bindable;
+                return instance.InternalMessage;
+            });
+
+            ContentProperty = BindableProperty.Create(nameof(Content), typeof(View), typeof(AlertDialog), null, propertyChanged: (bindable, oldValue, newValue) =>
+            {
+                var instance = (AlertDialog)bindable;
+                if (newValue != null)
+                {
+                    instance.InternalContent = newValue as View;
+                }
+            },
+            defaultValueCreator: (bindable) =>
+            {
+                var instance = (AlertDialog)bindable;
+                return instance.InternalContent;
+            });
+
+            ActionsProperty = BindableProperty.Create(nameof(Actions), typeof(IEnumerable<View>), typeof(AlertDialog), null, propertyChanged: (bindable, oldValue, newValue) =>
+            {
+                var instance = (AlertDialog)bindable;
+                if (newValue != null)
+                {
+                    instance.InternalActions = newValue as IEnumerable<View>;
+                }
+            },
+            defaultValueCreator: (bindable) =>
+            {
+                var instance = (AlertDialog)bindable;
+                return instance.InternalActions;
+            });
+
+            ActionContentProperty = BindableProperty.Create(nameof(ActionContent), typeof(View), typeof(AlertDialog), null, propertyChanged: (bindable, oldValue, newValue) =>
+            {
+                var instance = (AlertDialog)bindable;
+                if (newValue != null)
+                {
+                    instance.InternalActionContent = newValue as View;
+                }
+            },
+            defaultValueCreator: (bindable) =>
+            {
+                var instance = (AlertDialog)bindable;
+                return instance.InternalActionContent;
+            });
+        }
+
+        protected override void SetDefaultStyle()
+        {
+            Size = new Size(-2, -2);
+            Padding = new Extents(32, 32, 32, 32);
+
+            if (Layout is LinearLayout linearLayout)
+            {
+                linearLayout.CellPadding = new Size2D(0, 32);
+            }
+
+            BackgroundColor = new Color("#FAFAFA");
+            CornerRadius = 12.0f;
+            BoxShadow = new Shadow(8.0f, new Color(0.0f, 0.0f, 0.0f, 0.16f), new Vector2(0.0f, 2.0f));
+
+            if (DefaultTitleContent is TextLabel textLabel)
+            {
+                textLabel.Size = new Size(626, -2);
+                textLabel.PixelSize = 24;
+                textLabel.HorizontalAlignment = HorizontalAlignment.Center;
+                textLabel.VerticalAlignment = VerticalAlignment.Center;
+                textLabel.TextColor = new Color("#090E21");
+                textLabel.FontSizeScale = FontSizeScale.UseSystemSetting;
+                textLabel.ThemeChangeSensitive = false;
+            }
+
+            if (DefaultContent is TextLabel contentLabel)
+            {
+                contentLabel.Size = new Size(626, -2);
+                contentLabel.PixelSize = 24;
+                contentLabel.MultiLine = true;
+                contentLabel.HorizontalAlignment = HorizontalAlignment.Center;
+                contentLabel.VerticalAlignment = VerticalAlignment.Center;
+                contentLabel.TextColor = new Color("#090E21");
+                contentLabel.FontSizeScale = FontSizeScale.UseSystemSetting;
+                contentLabel.ThemeChangeSensitive = false;
+            }
+
+            if (ActionContent != null)
+            {
+                ActionContent.Size = new Size(626, -2);
+            }
         }
 
         /// <inheritdoc/>
@@ -159,13 +293,10 @@ namespace Tizen.NUI.Components
         /// <since_tizen> 9 </since_tizen>
         public string Title
         {
-            get
-            {
-                return GetValue(TitleProperty) as string;
-            }
+            get => InternalTitle;
             set
             {
-                SetValue(TitleProperty, value);
+                InternalTitle = value;
                 NotifyPropertyChanged();
             }
         }
@@ -202,13 +333,10 @@ namespace Tizen.NUI.Components
         /// <since_tizen> 9 </since_tizen>
         public View TitleContent
         {
-            get
-            {
-                return GetValue(TitleContentProperty) as View;
-            }
+            get => InternalTitleContent;
             set
             {
-                SetValue(TitleContentProperty, value);
+                InternalTitleContent = value;
                 NotifyPropertyChanged();
             }
         }
@@ -253,13 +381,10 @@ namespace Tizen.NUI.Components
         /// <since_tizen> 9 </since_tizen>
         public string Message
         {
-            get
-            {
-                return GetValue(MessageProperty) as string;
-            }
+            get => InternalMessage;
             set
             {
-                SetValue(MessageProperty, value);
+                InternalMessage = value;
                 NotifyPropertyChanged();
             }
         }
@@ -296,13 +421,10 @@ namespace Tizen.NUI.Components
         /// <since_tizen> 9 </since_tizen>
         public View Content
         {
-            get
-            {
-                return GetValue(ContentProperty) as View;
-            }
+            get => InternalContent;
             set
             {
-                SetValue(ContentProperty, value);
+                InternalContent = value;
                 NotifyPropertyChanged();
             }
         }
@@ -347,13 +469,10 @@ namespace Tizen.NUI.Components
         /// <since_tizen> 9 </since_tizen>
         public IEnumerable<View> Actions
         {
-            get
-            {
-                return GetValue(ActionsProperty) as IEnumerable<View>;
-            }
+            get => InternalActions;
             set
             {
-                SetValue(ActionsProperty, value);
+                InternalActions = value;
                 NotifyPropertyChanged();
             }
         }
@@ -405,13 +524,10 @@ namespace Tizen.NUI.Components
         /// <since_tizen> 9 </since_tizen>
         public View ActionContent
         {
-            get
-            {
-                return GetValue(ActionContentProperty) as View;
-            }
+            get => InternalActionContent;
             set
             {
-                SetValue(ActionContentProperty, value);
+                InternalActionContent = value;
                 NotifyPropertyChanged();
             }
         }

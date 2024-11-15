@@ -17,6 +17,7 @@ using System;
 using System.ComponentModel;
 using Tizen.NUI.BaseComponents;
 using Tizen.NUI.Accessibility;
+using Tizen.NUI.Binding;
 
 namespace Tizen.NUI.Components
 {
@@ -34,7 +35,39 @@ namespace Tizen.NUI.Components
         private Size prevSize;
         private DefaultTitleItemStyle ItemStyle => ViewStyle as DefaultTitleItemStyle;
 
-        static DefaultTitleItem() { }
+        static DefaultTitleItem()
+        {
+            if (!NUIApplication.IsUsingXaml)
+                return;
+
+            IconProperty = BindableProperty.Create(nameof(Icon), typeof(View), typeof(DefaultTitleItem), null, propertyChanged: (bindable, oldValue, newValue) =>
+            {
+                var instance = (DefaultTitleItem)bindable;
+                if (newValue != null)
+                {
+                    instance.InternalIcon = newValue as View;
+                }
+            },
+            defaultValueCreator: (bindable) =>
+            {
+                var instance = (DefaultTitleItem)bindable;
+                return instance.InternalIcon;
+            });
+
+            TextProperty = BindableProperty.Create(nameof(Text), typeof(string), typeof(DefaultTitleItem), default(string), propertyChanged: (bindable, oldValue, newValue) =>
+            {
+                var instance = (DefaultTitleItem)bindable;
+                if (newValue != null)
+                {
+                    instance.InternalText = newValue as string;
+                }
+            },
+            defaultValueCreator: (bindable) =>
+            {
+                var instance = (DefaultTitleItem)bindable;
+                return instance.InternalText;
+            });
+        }
 
         /// <summary>
         /// Creates a new instance of DefaultTitleItem.
@@ -62,19 +95,47 @@ namespace Tizen.NUI.Components
         {
         }
 
+        protected override void SetDefaultStyle()
+        {
+            base.SetDefaultStyle();
+
+            SizeHeight = 48;
+            Padding = new Extents(20, 20, 0, 0);
+            Margin = new Extents(0, 0, 0, 0);
+            BackgroundColor = Color.Transparent;
+
+            if (Label != null)
+            {
+                Label.PixelSize = 24;
+                Label.Ellipsis = true;
+                Label.FontFamily = "SamsungOneUI400";
+                Label.TextColor = new Color("#090E217F");
+                Label.FontSizeScale = FontSizeScale.UseSystemSetting;
+                Label.ThemeChangeSensitive = false;
+            };
+
+            if (Icon != null)
+            {
+                Icon.Margin = new Extents(24, 0, 0, 0);
+            }
+
+            if (Seperator != null)
+            {
+                Seperator.Margin = new Extents(0, 0, 0, 0);
+                Seperator.BackgroundColor = new Color(0, 0, 0, 0);
+            }
+        }
+
         /// <summary>
         /// Icon part of DefaultTitleItem.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
         public View Icon
         {
-            get
-            {
-                return GetValue(IconProperty) as View;
-            }
+            get => InternalIcon;
             set
             {
-                SetValue(IconProperty, value);
+                InternalIcon = value;
                 NotifyPropertyChanged();
             }
         }
@@ -127,7 +188,7 @@ namespace Tizen.NUI.Components
                     // Tizen.Log.Error("IconUrl only can set Icon is ImageView");
                     return;
                 }
-                (Icon as ImageView).ResourceUrl = value; 
+                (Icon as ImageView).ResourceUrl = value;
             }
         }
         */
@@ -164,13 +225,10 @@ namespace Tizen.NUI.Components
         [EditorBrowsable(EditorBrowsableState.Never)]
         public string Text
         {
-            get
-            {
-                return GetValue(TextProperty) as string;
-            }
+            get => InternalText;
             set
             {
-                SetValue(TextProperty, value);
+                InternalText = value;
                 NotifyPropertyChanged();
             }
         }

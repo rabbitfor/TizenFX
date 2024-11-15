@@ -257,6 +257,45 @@ namespace Tizen.NUI.BaseComponents
             TextChanged += TextEditorTextChanged;
         }
 
+        protected override void SetDefaultStyle()
+        {
+            FontFamily = Tizen.NUI.FontFamily.UseSystemSetting;
+            PixelSize = 24;
+            TextColor = new Color(0.04f, 0.05f, 0.13f, 1);
+            PlaceholderTextColor = new Color(0.79f, 0.79f, 0.79f, 1);
+            FontStyle = new PropertyMap().Add("weight", new PropertyValue("regular"));
+            PrimaryCursorColor = new Vector4(0.04f, 0.05f, 0.13f, 1);
+            SecondaryCursorColor = new Vector4(0.04f, 0.05f, 0.13f, 1);
+            CursorWidth = 2;
+            EnableScrollBar = true;
+            ScrollBarShowDuration = 0.8f;
+            ScrollBarFadeDuration = 0.5f;
+            FontSizeScale = Tizen.NUI.FontSizeScale.UseSystemSetting;
+            SelectionHighlightColor = new Vector4(1.00f, 0.38f, 0.00f, 0.30f);
+            GrabHandleColor = new Color(1.00f, 1.00f, 1.00f, 1);
+            GrabHandleImage = FrameworkInformation.ResourcePath + "IoT_handler_center_downW.png";
+            SelectionHandleImageLeft = new PropertyMap().Add("filename", new PropertyValue(FrameworkInformation.ResourcePath + "IoT_handler_downleftW.png"));
+            SelectionHandleImageRight = new PropertyMap().Add("filename", new PropertyValue(FrameworkInformation.ResourcePath + "IoT_handler_downrightW.png"));
+            SelectionPopupStyle = new PropertyMap()
+                .Add(NUI.SelectionPopupStyleProperty.MaxSize, new PropertyValue(new Vector2(1200.0f, 40.0f)))
+                .Add(NUI.SelectionPopupStyleProperty.DividerSize, new PropertyValue(new Vector2(0.0f, 0.0f)))
+                .Add(NUI.SelectionPopupStyleProperty.DividerPadding, new PropertyValue(new Vector4(0.0f, 0.0f, 0.0f, 0.0f)))
+                .Add(NUI.SelectionPopupStyleProperty.Background, new PropertyValue(new PropertyMap().Add(ImageVisualProperty.URL, new PropertyValue(FrameworkInformation.ResourcePath + "IoT-selection-popup-background.9.png"))))
+                .Add(NUI.SelectionPopupStyleProperty.BackgroundBorder, new PropertyValue(new PropertyMap().Add(ImageVisualProperty.URL, new PropertyValue(FrameworkInformation.ResourcePath + "IoT-selection-popup-border.9.png"))))
+                .Add(NUI.SelectionPopupStyleProperty.PressedColor, new PropertyValue(new Vector4(1.0f, 0.39f, 0.0f, 0.16f)))
+                .Add(NUI.SelectionPopupStyleProperty.PressedCornerRadius, new PropertyValue(12.0f))
+                .Add(NUI.SelectionPopupStyleProperty.FadeInDuration, new PropertyValue(0.25f))
+                .Add(NUI.SelectionPopupStyleProperty.FadeOutDuration, new PropertyValue(0.25f))
+                .Add(NUI.SelectionPopupStyleProperty.EnableScrollBar, new PropertyValue(false))
+                .Add(NUI.SelectionPopupStyleProperty.LabelMinimumSize, new PropertyValue(new Vector2(0, 40.0f)))
+                .Add(NUI.SelectionPopupStyleProperty.LabelPadding, new PropertyValue(new Vector4(-4.0f, -4.0f, 0.0f, 0.0f)))
+                .Add(NUI.SelectionPopupStyleProperty.LabelTextVisual, new PropertyValue(new PropertyMap()
+                .Add(TextVisualProperty.PointSize, new PropertyValue(6.0f))
+                    .Add(TextVisualProperty.TextColor, new PropertyValue(new Vector4(1.00f, 0.38f, 0.00f, 1)))
+                    .Add(TextVisualProperty.FontFamily, new PropertyValue("TizenSans"))
+                    .Add(TextVisualProperty.FontStyle, new PropertyValue(new PropertyMap().Add("weight", new PropertyValue("regular"))))));
+        }
+
         private bool HasStyle()
         {
             return ThemeManager.GetStyle(this.GetType()) == null ? false : true;

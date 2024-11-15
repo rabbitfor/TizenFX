@@ -34,6 +34,9 @@ namespace Tizen.NUI
                 Version = DefaultVersion,
             };
 
+            if (!NUIApplication.IsUsingXaml)
+                return theme;
+
             // TextLabel style.
             theme.AddStyleWithoutClone("Tizen.NUI.BaseComponents.TextLabel", new TextLabelStyle()
             {

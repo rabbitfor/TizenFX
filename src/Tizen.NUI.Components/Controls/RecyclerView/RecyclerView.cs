@@ -31,57 +31,66 @@ namespace Tizen.NUI.Components
         /// ItemsSourceProperty
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create(nameof(ItemsSource), typeof(IEnumerable), typeof(RecyclerView), null, propertyChanged: (bindable, oldValue, newValue) =>
-        {
-            var instance = bindable as RecyclerView;
-            if (instance == null)
-            {
-                throw new Exception("Bindable object is not RecyclerView.");
-            }
-            if (newValue != null)
-            {
-                instance.InternalItemsSource = newValue as IEnumerable;
-            }
-        },
-        defaultValueCreator: (bindable) =>
-        {
-            var instance = bindable as RecyclerView;
-            if (instance == null)
-            {
-                throw new Exception("Bindable object is not RecyclerView.");
-            }
-            return instance.InternalItemsSource;
-        });
+        public static readonly BindableProperty ItemsSourceProperty = null;
 
         /// <summary>
         /// ItemTemplateProperty
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly BindableProperty ItemTemplateProperty = BindableProperty.Create(nameof(ItemTemplate), typeof(DataTemplate), typeof(RecyclerView), null, propertyChanged: (bindable, oldValue, newValue) =>
-        {
-            var instance = bindable as RecyclerView;
-            if (instance == null)
-            {
-                throw new Exception("Bindable object is not RecyclerView.");
-            }
-            if (newValue != null)
-            {
-                instance.InternalItemTemplate = newValue as DataTemplate;
-            }
-        },
-        defaultValueCreator: (bindable) =>
-        {
-            var instance = bindable as RecyclerView;
-            if (instance == null)
-            {
-                throw new Exception("Bindable object is not RecyclerView.");
-            }
-            return instance.InternalItemTemplate;
-        });
+        public static readonly BindableProperty ItemTemplateProperty = null;
 
         private void Initialize()
         {
             Scrolling += OnScrolling;
+        }
+
+        static RecyclerView()
+        {
+            // Do not check NUIApplication.IsUsingXaml for recycle view
+
+            ItemsSourceProperty = BindableProperty.Create(nameof(ItemsSource), typeof(IEnumerable), typeof(RecyclerView), null, propertyChanged: (bindable, oldValue, newValue) =>
+            {
+                var instance = bindable as RecyclerView;
+                if (instance == null)
+                {
+                    throw new Exception("Bindable object is not RecyclerView.");
+                }
+                if (newValue != null)
+                {
+                    instance.InternalItemsSource = newValue as IEnumerable;
+                }
+            },
+            defaultValueCreator: (bindable) =>
+            {
+                var instance = bindable as RecyclerView;
+                if (instance == null)
+                {
+                    throw new Exception("Bindable object is not RecyclerView.");
+                }
+                return instance.InternalItemsSource;
+            });
+
+            ItemTemplateProperty = BindableProperty.Create(nameof(ItemTemplate), typeof(DataTemplate), typeof(RecyclerView), null, propertyChanged: (bindable, oldValue, newValue) =>
+            {
+                var instance = bindable as RecyclerView;
+                if (instance == null)
+                {
+                    throw new Exception("Bindable object is not RecyclerView.");
+                }
+                if (newValue != null)
+                {
+                    instance.InternalItemTemplate = newValue as DataTemplate;
+                }
+            },
+            defaultValueCreator: (bindable) =>
+            {
+                var instance = bindable as RecyclerView;
+                if (instance == null)
+                {
+                    throw new Exception("Bindable object is not RecyclerView.");
+                }
+                return instance.InternalItemTemplate;
+            });
         }
 
         /// <summary>
@@ -109,13 +118,10 @@ namespace Tizen.NUI.Components
         /// <since_tizen> 9 </since_tizen>
         public virtual IEnumerable ItemsSource
         {
-            get
-            {
-                return GetValue(ItemsSourceProperty) as IEnumerable;
-            }
+            get => InternalItemsSource;
             set
             {
-                SetValue(ItemsSourceProperty, value);
+                InternalItemsSource = value;
                 NotifyPropertyChanged();
             }
         }
@@ -127,13 +133,10 @@ namespace Tizen.NUI.Components
         /// <since_tizen> 9 </since_tizen>
         public virtual DataTemplate ItemTemplate
         {
-            get
-            {
-                return GetValue(ItemTemplateProperty) as DataTemplate;
-            }
+            get => InternalItemTemplate;
             set
             {
-                SetValue(ItemTemplateProperty, value);
+                InternalItemTemplate = value;
                 NotifyPropertyChanged();
             }
         }
