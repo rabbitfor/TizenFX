@@ -14,8 +14,9 @@
  * limitations under the License.
  *
  */
+using System;
 using System.ComponentModel;
-using Tizen.NUI.Binding;
+using System.Collections.Generic;
 
 namespace Tizen.NUI.BaseComponents
 {
@@ -26,6 +27,9 @@ namespace Tizen.NUI.BaseComponents
     [EditorBrowsable(EditorBrowsableState.Never)]
     public class ImageViewStyle : ViewStyle
     {
+        static readonly Dictionary<string, Action<ImageView, object>> viewSetters = new Dictionary<string, Action<ImageView, object>>()
+        {
+        };
         /// This will be public opened in tizen_6.0 after ACR done. Before ACR, need to be hidden as inhouse API.
         [EditorBrowsable(EditorBrowsableState.Never)]
         public static readonly BindableProperty ResourceUrlProperty = BindableProperty.Create(nameof(ResourceUrl), typeof(Selector<string>), typeof(ImageViewStyle), null, propertyChanged: (bindable, oldValue, newValue) =>
@@ -175,6 +179,19 @@ namespace Tizen.NUI.BaseComponents
                 return (null != tmp) ? tmp : border = new Selector<Rectangle>();
             }
             set => SetValue(BorderProperty, value);
+        }
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        protected override void ApplyTo(View view, string propertyName, object value)
+        {
+            if (view is ImageView imageView && viewSetters.TryGetValue(propertyName, out var setter))
+            {
+                setter(imageView, value);
+            }
+            else
+            {
+                base.ApplyTo(view, propertyName, value);
+            }
         }
     }
 }

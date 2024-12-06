@@ -17,6 +17,7 @@
 using System;
 using System.ComponentModel;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Tizen.NUI.Binding;
 
 namespace Tizen.NUI.BaseComponents
@@ -28,43 +29,53 @@ namespace Tizen.NUI.BaseComponents
     /// <since_tizen> 9 </since_tizen>
     public partial class ViewStyle : BindableObject, IDisposable
     {
-        private bool disposed = false;
-        private bool? focusable;
-        private bool? focusableChildren;
-        private bool? focusableInTouch;
-        private bool? positionUsesPivotPoint;
-        private Position parentOrigin;
-        private Position pivotPoint;
-        private Position position;
-        private Rotation orientation;
-        private DrawModeType? drawMode;
-        private Vector3 sizeModeFactor;
-        private ResizePolicyType? widthResizePolicy;
-        private ResizePolicyType? heightResizePolicy;
-        private bool? widthForHeight;
-        private bool? heightForWidth;
-        private Extents padding;
-        private Size2D minimumSize;
-        private Size2D maximumSize;
-        private ClippingModeType? clippingMode;
-        private Size size;
-        private Extents margin;
-        private bool? themeChangeSensitive;
-        private Vector4 cornerRadius;
-        private float? borderlineWidth;
-        private Color borderlineColor;
-        private float? borderlineOffset;
-        private bool? isEnabled;
+        static readonly Dictionary<string, Action<View, object>> viewSetters = new Dictionary<string, Action<View, object>>()
+        {
+            { nameof(BackgroundImage), (v, o) => View.SetInternalBackgroundImageProperty(v, null, o) },
+            { nameof(Focusable), (v, o) => v.Focusable = (bool)o },
+            { nameof(FocusableChildren), (v, o) => v.FocusableChildren = (bool)o },
+            { nameof(FocusableInTouch), (v, o) => v.FocusableInTouch = (bool)o },
+            { nameof(Size2D), (v, o) => v.Size2D = (Size2D)o },
+            { nameof(Opacity), (v, o) => View.SetInternalOpacityProperty(v, null, o) },
+            { nameof(Position2D), (v, o) => v.Position2D = (Position2D)o },
+            { nameof(PositionUsesPivotPoint), (v, o) => v.PositionUsesPivotPoint = (bool)o },
+            { nameof(ParentOrigin), (v, o) => v.ParentOrigin = (Position)o },
+            { nameof(PivotPoint), (v, o) => v.PivotPoint = (Position)o },
+            { nameof(SizeWidth), (v, o) => v.SizeWidth = (float)o },
+            { nameof(SizeHeight), (v, o) => v.SizeHeight = (float)o },
+            { nameof(Position), (v, o) => v.Position = (Position)o },
+            { nameof(PositionX), (v, o) => v.PositionX = (float)o },
+            { nameof(PositionY), (v, o) => v.PositionY = (float)o },
+            { nameof(Orientation), (v, o) => v.Orientation = (Rotation)o },
+            { nameof(DrawMode), (v, o) => v.DrawMode = (DrawModeType)o },
+            { nameof(SizeModeFactor), (v, o) => v.SizeModeFactor = (Vector3)o },
+            { nameof(WidthResizePolicy), (v, o) => v.WidthResizePolicy = (ResizePolicyType)o },
+            { nameof(HeightResizePolicy), (v, o) => v.HeightResizePolicy = (ResizePolicyType)o },
+            { nameof(WidthForHeight), (v, o) => v.WidthForHeight = (bool)o },
+            { nameof(HeightForWidth), (v, o) => v.HeightForWidth = (bool)o },
+            { nameof(Padding), (v, o) => v.Padding = (Extents)o },
+            { nameof(MinimumSize), (v, o) => v.MinimumSize = (Size2D)o },
+            { nameof(MaximumSize), (v, o) => v.MaximumSize = (Size2D)o },
+            { nameof(ClippingMode), (v, o) => v.ClippingMode = (ClippingModeType)o },
+            { nameof(Size), (v, o) => v.Size = (Size)o },
+            { nameof(Margin), (v, o) => v.Margin = (Extents)o },
+            { nameof(BackgroundColor), (v, o) => View.SetInternalBackgroundColorProperty(v, null, o) },
+            { nameof(Color), (v, o) => View.SetInternalColorProperty(v, null, o) },
+            { nameof(BackgroundImageBorder), (v, o) => View.SetInternalBackgroundImageBorderProperty(v, null, o) },
+            { nameof(ImageShadow), (v, o) => View.SetInternalImageShadowProperty(v, null, o) },
+            { nameof(BoxShadow), (v, o) => View.SetInternalBoxShadowProperty(v, null, o) },
+            { nameof(CornerRadius), (v, o) => v.CornerRadius = (Vector4)o },
+            { nameof(CornerRadiusPolicy), (v, o) => v.CornerRadiusPolicy = (VisualTransformPolicyType)o },
+            { nameof(BorderlineWidth), (v, o) => v.BorderlineWidth = (float)o },
+            { nameof(BorderlineColor), (v, o) => v.BorderlineColor = (Color)o },
+            { nameof(BorderlineColorSelector), (v, o) => View.SetInternalBorderlineColorSelectorProperty(v, null, o) },
+            { nameof(BorderlineOffset), (v, o) => v.BorderlineOffset = (float)o },
+            { nameof(ThemeChangeSensitive), (v, o) => v.ThemeChangeSensitive = (bool)o },
+            { nameof(IsEnabled), (v, o) => v.IsEnabled = (bool)o },
+        };
 
-        private Selector<ImageShadow> imageShadow;
-        private Selector<Shadow> boxShadow;
-        private Selector<string> backgroundImageSelector;
-        private Selector<float?> opacitySelector;
-        private Selector<Color> backgroundColorSelector;
-        private Selector<Rectangle> backgroundImageBorderSelector;
-        private Selector<Color> colorSelector;
-        private VisualTransformPolicyType? cornerRadiusPolicy;
-        private Selector<Color> borderlineColorSelector;
+        private Dictionary<string, object> values = new Dictionary<string, object>();
+        private bool disposed = false;
 
         static ViewStyle() { }
 
@@ -96,20 +107,16 @@ namespace Tizen.NUI.BaseComponents
         /// <since_tizen> 9 </since_tizen>
         public Selector<string> BackgroundImage
         {
-            get
-            {
-                Selector<string> image = (Selector<string>)GetValue(BackgroundImageProperty);
-                return (null != image) ? image : backgroundImageSelector = new Selector<string>();
-            }
-            set => SetValue(BackgroundImageProperty, value);
+            get => GetOrCreateSelectorValue<string>();
+            set => SetValue(value);
         }
 
         /// This will be public opened after ACR done. Before ACR, need to be hidden as inhouse API.
         [EditorBrowsable(EditorBrowsableState.Never)]
         public bool? Focusable
         {
-            get => (bool?)GetValue(FocusableProperty);
-            set => SetValue(FocusableProperty, value);
+            get => GetValue<bool?>();
+            set => SetValue(value);
         }
 
         /// <summary>
@@ -119,8 +126,8 @@ namespace Tizen.NUI.BaseComponents
         [EditorBrowsable(EditorBrowsableState.Never)]
         public bool? FocusableChildren
         {
-            get => (bool?)GetValue(FocusableChildrenProperty);
-            set => SetValue(FocusableChildrenProperty, value);
+            get => GetValue<bool?>();
+            set => SetValue(value);
         }
 
         /// <summary>
@@ -131,8 +138,8 @@ namespace Tizen.NUI.BaseComponents
         [EditorBrowsable(EditorBrowsableState.Never)]
         public bool? FocusableInTouch
         {
-            get => (bool?)GetValue(FocusableInTouchProperty);
-            set => SetValue(FocusableInTouchProperty, value);
+            get => GetValue<bool?>();
+            set => SetValue(value);
         }
 
         /// This will be public opened after ACR done. Before ACR, need to be hidden as inhouse API.
@@ -140,8 +147,8 @@ namespace Tizen.NUI.BaseComponents
         [EditorBrowsable(EditorBrowsableState.Never)]
         public Size2D Size2D
         {
-            get => (Size2D)GetValue(Size2DProperty);
-            set => SetValue(Size2DProperty, value);
+            get => GetValue<Size2D>();
+            set => SetValue(value);
         }
 
         /// <summary>
@@ -152,12 +159,8 @@ namespace Tizen.NUI.BaseComponents
         /// <since_tizen> 9 </since_tizen>
         public Selector<float?> Opacity
         {
-            get
-            {
-                Selector<float?> opacity = (Selector<float?>)GetValue(OpacityProperty);
-                return (null != opacity) ? opacity : opacitySelector = new Selector<float?>();
-            }
-            set => SetValue(OpacityProperty, value);
+            get => GetOrCreateSelectorValue<float?>();
+            set => SetValue(value);
         }
 
         /// This will be public opened after ACR done. Before ACR, need to be hidden as inhouse API.
@@ -165,8 +168,8 @@ namespace Tizen.NUI.BaseComponents
         [EditorBrowsable(EditorBrowsableState.Never)]
         public Position2D Position2D
         {
-            get => (Position2D)GetValue(Position2DProperty);
-            set => SetValue(Position2DProperty, value);
+            get => GetValue<Position2D>();
+            set => SetValue(value);
         }
 
         /// <summary>
@@ -175,8 +178,8 @@ namespace Tizen.NUI.BaseComponents
         /// <since_tizen> 9 </since_tizen>
         public bool? PositionUsesPivotPoint
         {
-            get => (bool?)GetValue(PositionUsesPivotPointProperty);
-            set => SetValue(PositionUsesPivotPointProperty, value);
+            get => GetValue<bool?>();
+            set => SetValue(value);
         }
 
         /// <summary>
@@ -188,8 +191,8 @@ namespace Tizen.NUI.BaseComponents
         /// <since_tizen> 9 </since_tizen>
         public Position ParentOrigin
         {
-            get => (Position)GetValue(ParentOriginProperty);
-            set => SetValue(ParentOriginProperty, value);
+            get => GetValue<Position2D>();
+            set => SetValue(value);
         }
 
         /// <summary>
@@ -202,8 +205,8 @@ namespace Tizen.NUI.BaseComponents
         /// <since_tizen> 9 </since_tizen>
         public Position PivotPoint
         {
-            get => (Position)GetValue(PivotPointProperty);
-            set => SetValue(PivotPointProperty, value);
+            get => GetValue<Position2D>();
+            set => SetValue(value);
         }
 
         /// <summary>
@@ -212,8 +215,8 @@ namespace Tizen.NUI.BaseComponents
         /// <since_tizen> 9 </since_tizen>
         public float? SizeWidth
         {
-            get => (float?)GetValue(SizeWidthProperty);
-            set => SetValue(SizeWidthProperty, value);
+            get => GetValue<float?>();
+            set => SetValue(value);
         }
 
         /// <summary>
@@ -222,8 +225,8 @@ namespace Tizen.NUI.BaseComponents
         /// <since_tizen> 9 </since_tizen>
         public float? SizeHeight
         {
-            get => (float?)GetValue(SizeHeightProperty);
-            set => SetValue(SizeHeightProperty, value);
+            get => GetValue<float?>();
+            set => SetValue(value);
         }
 
         /// <summary>
@@ -232,40 +235,40 @@ namespace Tizen.NUI.BaseComponents
         /// <since_tizen> 9 </since_tizen>
         public Position Position
         {
-            get => (Position)GetValue(PositionProperty);
-            set => SetValue(PositionProperty, value);
+            get => GetValue<Position2D>();
+            set => SetValue(value);
         }
 
         /// This will be public opened after ACR done. Before ACR, need to be hidden as inhouse API.
         [EditorBrowsable(EditorBrowsableState.Never)]
         public float? PositionX
         {
-            get => (float?)GetValue(PositionXProperty);
-            set => SetValue(PositionXProperty, value);
+            get => GetValue<float?>();
+            set => SetValue(value);
         }
 
         /// This will be public opened after ACR done. Before ACR, need to be hidden as inhouse API.
         [EditorBrowsable(EditorBrowsableState.Never)]
         public float? PositionY
         {
-            get => (float?)GetValue(PositionYProperty);
-            set => SetValue(PositionYProperty, value);
+            get => GetValue<float?>();
+            set => SetValue(value);
         }
 
         /// This will be public opened after ACR done. Before ACR, need to be hidden as inhouse API.
         [EditorBrowsable(EditorBrowsableState.Never)]
         public Rotation Orientation
         {
-            get => (Rotation)GetValue(OrientationProperty);
-            set => SetValue(OrientationProperty, value);
+            get => GetValue<Rotation>();
+            set => SetValue(value);
         }
 
         /// This will be public opened after ACR done. Before ACR, need to be hidden as inhouse API.
         [EditorBrowsable(EditorBrowsableState.Never)]
         public DrawModeType? DrawMode
         {
-            get => (DrawModeType?)GetValue(DrawModeProperty);
-            set => SetValue(DrawModeProperty, value);
+            get => GetValue<DrawModeType?>();
+            set => SetValue(value);
         }
 
         /// <summary>
@@ -276,8 +279,8 @@ namespace Tizen.NUI.BaseComponents
         /// <since_tizen> 9 </since_tizen>
         public Vector3 SizeModeFactor
         {
-            get => (Vector3)GetValue(SizeModeFactorProperty);
-            set => SetValue(SizeModeFactorProperty, value);
+            get => GetValue<Vector3>();
+            set => SetValue(value);
         }
 
         /// <summary>
@@ -286,8 +289,8 @@ namespace Tizen.NUI.BaseComponents
         /// <since_tizen> 9 </since_tizen>
         public ResizePolicyType? WidthResizePolicy
         {
-            get => (ResizePolicyType?)GetValue(WidthResizePolicyProperty);
-            set => SetValue(WidthResizePolicyProperty, value);
+            get => GetValue<ResizePolicyType?>();
+            set => SetValue(value);
         }
 
         /// <summary>
@@ -296,24 +299,24 @@ namespace Tizen.NUI.BaseComponents
         /// <since_tizen> 9 </since_tizen>
         public ResizePolicyType? HeightResizePolicy
         {
-            get => (ResizePolicyType?)GetValue(HeightResizePolicyProperty);
-            set => SetValue(HeightResizePolicyProperty, value);
+            get => GetValue<ResizePolicyType?>();
+            set => SetValue(value);
         }
 
         /// This will be public opened after ACR done. Before ACR, need to be hidden as inhouse API.
         [EditorBrowsable(EditorBrowsableState.Never)]
         public bool? WidthForHeight
         {
-            get => (bool?)GetValue(WidthForHeightProperty);
-            set => SetValue(WidthForHeightProperty, value);
+            get => GetValue<bool?>();
+            set => SetValue(value);
         }
 
         /// This will be public opened after ACR done. Before ACR, need to be hidden as inhouse API.
         [EditorBrowsable(EditorBrowsableState.Never)]
         public bool? HeightForWidth
         {
-            get => (bool?)GetValue(HeightForWidthProperty);
-            set => SetValue(HeightForWidthProperty, value);
+            get => GetValue<bool?>();
+            set => SetValue(value);
         }
 
         /// <summary>
@@ -322,8 +325,8 @@ namespace Tizen.NUI.BaseComponents
         /// <since_tizen> 9 </since_tizen>
         public Extents Padding
         {
-            get => (Extents)GetValue(PaddingProperty) ?? (padding = new Extents());
-            set => SetValue(PaddingProperty, value);
+            get => GetValue<Extents>();
+            set => SetValue(value);
         }
 
         /// <summary>
@@ -332,8 +335,8 @@ namespace Tizen.NUI.BaseComponents
         /// <since_tizen> 9 </since_tizen>
         public Size2D MinimumSize
         {
-            get => (Size2D)GetValue(MinimumSizeProperty);
-            set => SetValue(MinimumSizeProperty, value);
+            get => GetValue<Size2D>();
+            set => SetValue(value);
         }
 
         /// <summary>
@@ -342,16 +345,16 @@ namespace Tizen.NUI.BaseComponents
         /// <since_tizen> 9 </since_tizen>
         public Size2D MaximumSize
         {
-            get => (Size2D)GetValue(MaximumSizeProperty);
-            set => SetValue(MaximumSizeProperty, value);
+            get => GetValue<Size2D>();
+            set => SetValue(value);
         }
 
         /// This will be public opened after ACR done. Before ACR, need to be hidden as inhouse API.
         [EditorBrowsable(EditorBrowsableState.Never)]
         public ClippingModeType? ClippingMode
         {
-            get => (ClippingModeType?)GetValue(ClippingModeProperty);
-            set => SetValue(ClippingModeProperty, value);
+            get => GetValue<ClippingModeType?>();
+            set => SetValue(value);
         }
 
         /// <summary>
@@ -360,8 +363,8 @@ namespace Tizen.NUI.BaseComponents
         /// <since_tizen> 9 </since_tizen>
         public Size Size
         {
-            get => (Size)GetValue(SizeProperty);
-            set => SetValue(SizeProperty, value);
+            get => GetValue<Size>();
+            set => SetValue(value);
         }
 
         /// <summary>
@@ -370,8 +373,8 @@ namespace Tizen.NUI.BaseComponents
         /// <since_tizen> 9 </since_tizen>
         public Extents Margin
         {
-            get => (Extents)GetValue(MarginProperty) ?? (margin = new Extents());
-            set => SetValue(MarginProperty, value);
+            get => GetValue<Extents>();
+            set => SetValue(value);
         }
 
         /// <summary>
@@ -381,12 +384,8 @@ namespace Tizen.NUI.BaseComponents
         /// <since_tizen> 9 </since_tizen>
         public Selector<Color> BackgroundColor
         {
-            get
-            {
-                Selector<Color> color = (Selector<Color>)GetValue(BackgroundColorProperty);
-                return (null != color) ? color : backgroundColorSelector = new Selector<Color>();
-            }
-            set => SetValue(BackgroundColorProperty, value);
+            get => GetOrCreateSelectorValue<Color>();
+            set => SetValue(value);
         }
 
         /// <summary>
@@ -395,8 +394,8 @@ namespace Tizen.NUI.BaseComponents
         [EditorBrowsable(EditorBrowsableState.Never)]
         public Selector<Color> Color
         {
-            get => (Selector<Color>)GetValue(ColorProperty) ?? (colorSelector = new Selector<Color>());
-            set => SetValue(ColorProperty, value);
+            get => GetOrCreateSelectorValue<Color>();
+            set => SetValue(value);
         }
 
         /// <summary>View BackgroundBorder</summary>
@@ -404,12 +403,8 @@ namespace Tizen.NUI.BaseComponents
         [EditorBrowsable(EditorBrowsableState.Never)]
         public Selector<Rectangle> BackgroundImageBorder
         {
-            get
-            {
-                Selector<Rectangle> border = (Selector<Rectangle>)GetValue(BackgroundImageBorderProperty);
-                return (null != border) ? border : backgroundImageBorderSelector = new Selector<Rectangle>();
-            }
-            set => SetValue(BackgroundImageBorderProperty, value);
+            get => GetOrCreateSelectorValue<Rectangle>();
+            set => SetValue(value);
         }
 
         /// <summary>
@@ -422,8 +417,8 @@ namespace Tizen.NUI.BaseComponents
         [EditorBrowsable(EditorBrowsableState.Never)]
         public Selector<ImageShadow> ImageShadow
         {
-            get => (Selector<ImageShadow>)GetValue(ImageShadowProperty);
-            set => SetValue(ImageShadowProperty, value);
+            get => GetOrCreateSelectorValue<ImageShadow>();
+            set => SetValue(value);
         }
 
         /// <summary>
@@ -432,8 +427,8 @@ namespace Tizen.NUI.BaseComponents
         /// <since_tizen> 9 </since_tizen>
         public Selector<Shadow> BoxShadow
         {
-            get => (Selector<Shadow>)GetValue(BoxShadowProperty);
-            set => SetValue(BoxShadowProperty, value);
+            get => GetOrCreateSelectorValue<Shadow>();
+            set => SetValue(value);
         }
 
         /// <summary>
@@ -444,8 +439,8 @@ namespace Tizen.NUI.BaseComponents
         /// <since_tizen> 9 </since_tizen>
         public Vector4 CornerRadius
         {
-            get => (Vector4)GetValue(CornerRadiusProperty);
-            set => SetValue(CornerRadiusProperty, value);
+            get => GetValue<Vector4>();
+            set => SetValue(value);
         }
 
         /// <summary>
@@ -456,8 +451,8 @@ namespace Tizen.NUI.BaseComponents
         /// <since_tizen> 9 </since_tizen>
         public VisualTransformPolicyType? CornerRadiusPolicy
         {
-            get => (VisualTransformPolicyType?)GetValue(CornerRadiusPolicyProperty);
-            set => SetValue(CornerRadiusPolicyProperty, value);
+            get => GetValue<VisualTransformPolicyType?>();
+            set => SetValue(value);
         }
 
         /// <summary>
@@ -466,8 +461,8 @@ namespace Tizen.NUI.BaseComponents
         /// <since_tizen> 9 </since_tizen>
         public float? BorderlineWidth
         {
-            get => (float?)GetValue(BorderlineWidthProperty);
-            set => SetValue(BorderlineWidthProperty, value);
+            get => GetValue<float?>();
+            set => SetValue(value);
         }
 
         /// <summary>
@@ -476,8 +471,8 @@ namespace Tizen.NUI.BaseComponents
         /// <since_tizen> 9 </since_tizen>
         public Color BorderlineColor
         {
-            get => (Color)GetValue(BorderlineColorProperty);
-            set => SetValue(BorderlineColorProperty, value);
+            get => GetValue<Vector4>();
+            set => SetValue(value);
         }
 
         /// <summary>
@@ -486,12 +481,8 @@ namespace Tizen.NUI.BaseComponents
         [EditorBrowsable(EditorBrowsableState.Never)]
         public Selector<Color> BorderlineColorSelector
         {
-            get
-            {
-                Selector<Color> color = (Selector<Color>)GetValue(BorderlineColorSelectorProperty);
-                return (null != color) ? color : borderlineColorSelector = new Selector<Color>();
-            }
-            set => SetValue(BorderlineColorSelectorProperty, value);
+            get => GetOrCreateSelectorValue<Color>();
+            set => SetValue(value);
         }
 
         /// <summary>
@@ -504,8 +495,8 @@ namespace Tizen.NUI.BaseComponents
         /// <since_tizen> 9 </since_tizen>
         public float? BorderlineOffset
         {
-            get => (float?)GetValue(BorderlineOffsetProperty);
-            set => SetValue(BorderlineOffsetProperty, value);
+            get => GetValue<float?>();
+            set => SetValue(value);
         }
 
         /// <summary>
@@ -514,8 +505,8 @@ namespace Tizen.NUI.BaseComponents
         [EditorBrowsable(EditorBrowsableState.Never)]
         public bool? ThemeChangeSensitive
         {
-            get => (bool?)GetValue(ThemeChangeSensitiveProperty);
-            set => SetValue(ThemeChangeSensitiveProperty, value);
+            get => GetValue<bool?>();
+            set => SetValue(value);
         }
 
         /// <summary>
@@ -524,8 +515,8 @@ namespace Tizen.NUI.BaseComponents
         [EditorBrowsable(EditorBrowsableState.Never)]
         public bool? IsEnabled
         {
-            get => (bool?)GetValue(IsEnabledProperty);
-            set => SetValue(IsEnabledProperty, value);
+            get => GetValue<bool?>();
+            set => SetValue(value);
         }
 
 
@@ -565,13 +556,21 @@ namespace Tizen.NUI.BaseComponents
             global::System.GC.SuppressFinalize(this);
         }
 
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public void ApplyTo(View view)
+        {
+            foreach (var (propertyName, value) in values)
+            {
+                if (value != null)
+                    ApplyTo(view, propertyName, value);
+            }
+        }
+
         /// <inheritdoc/>
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override void CopyFrom(BindableObject other)
         {
-            var source = other as ViewStyle;
-
-            if (source == null || source.DirtyProperties == null || source.DirtyProperties.Count == 0)
+            if (!(other is ViewStyle source))
             {
                 return;
             }
@@ -579,29 +578,13 @@ namespace Tizen.NUI.BaseComponents
             IncludeDefaultStyle = source.IncludeDefaultStyle;
             SolidNull = source.SolidNull;
 
-            BindableProperty.GetBindablePropertysOfType(GetType(), out var thisBindableProperties);
-
-            if (thisBindableProperties == null)
+            foreach (var (propertyName, value) in source.values)
             {
-                return;
+                values[propertyName] = value;
             }
 
-            foreach (var sourceProperty in source.DirtyProperties)
-            {
-                var sourceValue = source.GetValue(sourceProperty);
-
-                if (sourceValue == null)
-                {
-                    continue;
-                }
-
-                thisBindableProperties.TryGetValue(sourceProperty.PropertyName, out var destinationProperty);
-
-                if (destinationProperty != null)
-                {
-                    InternalSetValue(destinationProperty, sourceValue);
-                }
-            }
+            // NOTE Please remove the code in this block after clean up styles with bindable property.
+            CopyBindableProperty(source);
         }
 
         /// <summary>
@@ -619,18 +602,7 @@ namespace Tizen.NUI.BaseComponents
             if (disposing)
             {
                 // Dispose managed state (managed objects).
-                margin?.Dispose();
-                maximumSize?.Dispose();
-                minimumSize?.Dispose();
-                orientation?.Dispose();
-                padding?.Dispose();
-                parentOrigin?.Dispose();
-                pivotPoint?.Dispose();
-                position?.Dispose();
-                size?.Dispose();
-                sizeModeFactor?.Dispose();
-                cornerRadius?.Dispose();
-                borderlineColor?.Dispose();
+                values = null;
             }
 
             disposed = true;
@@ -660,6 +632,80 @@ namespace Tizen.NUI.BaseComponents
         internal void MergeDirectly(ViewStyle other)
         {
             CopyFrom(other);
+        }
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        protected T GetValue<T>([CallerMemberName] string propertyName = "")
+        {
+            if (values.TryGetValue(propertyName, out var value))
+            {
+                return (T)value;
+            }
+            return default;
+        }
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        protected Selector<T> GetOrCreateSelectorValue<T>([CallerMemberName] string propertyName = "")
+        {
+            if (values.TryGetValue(propertyName, out var value))
+            {
+                return (Selector<T>)value;
+            }
+
+            var created = new Selector<T>();
+            SetValue(created, propertyName);
+
+            return created;
+        }
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        protected void SetValue<T>(T value, [CallerMemberName] string propertyName = "")
+        {
+            // NOTE Allow null value. It is used when merging styles with solid null option
+            values[propertyName] = value;
+        }
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        protected virtual void ApplyTo(View view, string propertyName, object value)
+        {
+            if (viewSetters.TryGetValue(propertyName, out var setter))
+            {
+                setter(view, value);
+            }
+        }
+
+        // NOTE This should not be used anymore
+        void CopyBindableProperty(ViewStyle source)
+        {
+            if (source.DirtyProperties != null)
+            {
+                IncludeDefaultStyle = source.IncludeDefaultStyle;
+                SolidNull = source.SolidNull;
+
+                BindableProperty.GetBindablePropertysOfType(GetType(), out var thisBindableProperties);
+
+                if (thisBindableProperties == null)
+                {
+                    return;
+                }
+
+                foreach (var sourceProperty in source.DirtyProperties)
+                {
+                    var sourceValue = source.GetValue(sourceProperty);
+
+                    if (sourceValue == null)
+                    {
+                        continue;
+                    }
+
+                    thisBindableProperties.TryGetValue(sourceProperty.PropertyName, out var destinationProperty);
+
+                    if (destinationProperty != null)
+                    {
+                        InternalSetValue(destinationProperty, sourceValue);
+                    }
+                }
+            }
         }
     }
 

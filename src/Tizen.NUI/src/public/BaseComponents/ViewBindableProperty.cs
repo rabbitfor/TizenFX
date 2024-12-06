@@ -221,8 +221,8 @@ namespace Tizen.NUI.BaseComponents
             return view.GetInternalColorBlue();
         }
 
-        /// <summary> 
-        /// BackgroundImageProperty 
+        /// <summary>
+        /// BackgroundImageProperty
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
         public static readonly BindableProperty BackgroundImageProperty = null;
