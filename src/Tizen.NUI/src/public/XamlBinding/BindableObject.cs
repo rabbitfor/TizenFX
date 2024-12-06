@@ -445,7 +445,7 @@ namespace Tizen.NUI.Binding
         [EditorBrowsable(EditorBrowsableState.Never)]
         protected virtual void OnPropertyChanging([CallerMemberName] string propertyName = null)
             => PropertyChanging?.Invoke(this, new PropertyChangingEventArgs(propertyName));
-        
+
         /// <summary>
         /// Method that is called when a bound property is changed.
         /// </summary>

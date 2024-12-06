@@ -287,7 +287,7 @@ namespace Tizen.NUI
         }
 
         /// <summary>
-        /// Logical OR operator for ||. 
+        /// Logical OR operator for ||.
         /// It's possible when doing a || this function (opBitwiseOr) is never called due to short circuiting.
         /// </summary>
         /// <param name="x">The first BaseHandle to be compared.</param>
@@ -375,7 +375,7 @@ namespace Tizen.NUI
 
         /// <summary>
         /// Hidden API (Inhouse API).
-        /// Dispose. 
+        /// Dispose.
         /// Releases any unmanaged resources used by this object. Can also dispose any other disposable objects.
         /// </summary>
         /// <remarks>
