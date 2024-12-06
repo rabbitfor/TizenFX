@@ -17,6 +17,7 @@
 
 using System;
 using System.ComponentModel;
+using Tizen.NUI.BaseComponents;
 using Tizen.NUI.Binding;
 
 namespace Tizen.NUI
@@ -26,7 +27,7 @@ namespace Tizen.NUI
     /// </summary>
     /// <since_tizen> 4 </since_tizen>
     [Binding.TypeConverter(typeof(ExtentsTypeConverter))]
-    public class Extents : Disposable, ICloneable
+    public class Extents : Disposable, ICloneable, IImmutable
     {
 
 
@@ -133,7 +134,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Extents extents = new Extents();
-        /// extents.Start = 1; 
+        /// extents.Start = 1;
         /// // USE like this
         /// ushort start = 1, end = 2, top = 3, bottom = 4;
         /// Extents extents = new Extents(start, end, top, bottom);
@@ -144,6 +145,7 @@ namespace Tizen.NUI
             [Obsolete("Do not use this setter, that is deprecated in API8 and will be removed in API10. Use new Extents(...) constructor")]
             set
             {
+                this.ThrowWhenImmutable();
                 Interop.Extents.StartSet(SwigCPtr, value);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
 
@@ -166,7 +168,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Extents extents = new Extents();
-        /// extents.End = 2; 
+        /// extents.End = 2;
         /// // USE like this
         /// ushort start = 1, end = 2, top = 3, bottom = 4;
         /// Extents extents = new Extents(start, end, top, bottom);
@@ -177,6 +179,7 @@ namespace Tizen.NUI
             [Obsolete("Do not use this setter, that is deprecated in API8 and will be removed in API10. Use new Extents(...) constructor")]
             set
             {
+                this.ThrowWhenImmutable();
                 Interop.Extents.EndSet(SwigCPtr, value);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
 
@@ -199,7 +202,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Extents extents = new Extents();
-        /// extents.Top = 3; 
+        /// extents.Top = 3;
         /// // USE like this
         /// ushort start = 1, end = 2, top = 3, bottom = 4;
         /// Extents extents = new Extents(start, end, top, bottom);
@@ -210,6 +213,7 @@ namespace Tizen.NUI
             [Obsolete("Do not use this setter, that is deprecated in API8 and will be removed in API10. Use new Extents(...) constructor")]
             set
             {
+                this.ThrowWhenImmutable();
                 Interop.Extents.TopSet(SwigCPtr, value);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
 
@@ -232,7 +236,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Extents extents = new Extents();
-        /// extents.Bottom = 4; 
+        /// extents.Bottom = 4;
         /// // USE like this
         /// ushort start = 1, end = 2, top = 3, bottom = 4;
         /// Extents extents = new Extents(start, end, top, bottom);
@@ -243,6 +247,7 @@ namespace Tizen.NUI
             [Obsolete("Do not use this setter, that is deprecated in API8 and will be removed in API10. Use new Extents(...) constructor")]
             set
             {
+                this.ThrowWhenImmutable();
                 Interop.Extents.BottomSet(SwigCPtr, value);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
 
@@ -255,6 +260,12 @@ namespace Tizen.NUI
                 return ret;
             }
         }
+
+        /// <summary>
+        /// Gets a value indicating whether it is read-only.
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool IsImmutable { get; set; }
 
         /// <summary>
         /// Equality operator.

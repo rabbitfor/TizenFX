@@ -96,20 +96,10 @@ namespace Tizen.NUI.BaseComponents
         {
             var view = (View)bindable;
 
-            if (NUIApplication.IsUsingXaml)
+            if (newValue is Selector<Color> selector)
             {
-                view.themeData?.selectorData?.ClearBackground(view);
-
-                if (newValue is Selector<Color> selector)
-                {
-                    if (selector.HasAll()) view.SetBackgroundColor(selector.All);
-                    else view.EnsureSelectorData().BackgroundColor = new TriggerableSelector<Color>(view, selector, view.SetBackgroundColor, true);
-                }
-                else
-                {
-                    view.SetBackgroundColor((Color)newValue);
-                }
-
+                if (selector.HasAll()) view.SetBackgroundColor(selector.All);
+                else view.EnsureSelectorData().BackgroundColor = new TriggerableSelector<Color>(view, selector, view.SetBackgroundColor, true);
             }
             else
             {
@@ -221,8 +211,8 @@ namespace Tizen.NUI.BaseComponents
             return view.GetInternalColorBlue();
         }
 
-        /// <summary> 
-        /// BackgroundImageProperty 
+        /// <summary>
+        /// BackgroundImageProperty
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
         public static readonly BindableProperty BackgroundImageProperty = null;

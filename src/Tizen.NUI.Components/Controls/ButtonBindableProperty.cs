@@ -5,223 +5,433 @@ namespace Tizen.NUI.Components
 {
     public partial class Button
     {
+        /// This will be public opened in tizen_6.0 after ACR done. Before ACR, need to be hidden as inhouse API.
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public static readonly BindableProperty IconRelativeOrientationProperty;
+
+        /// This will be public opened in tizen_6.0 after ACR done. Before ACR, need to be hidden as inhouse API.
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public static readonly BindableProperty IsSelectedProperty;
+
+        /// This will be public opened in tizen_6.0 after ACR done. Before ACR, need to be hidden as inhouse API.
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public static readonly BindableProperty IsSelectableProperty;
+
+        /// This will be public opened in tizen_6.0 after ACR done. Before ACR, need to be hidden as inhouse API.
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public static readonly BindableProperty IconPaddingProperty;
+
+        /// This will be public opened in tizen_6.0 after ACR done. Before ACR, need to be hidden as inhouse API.
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public static readonly BindableProperty TextPaddingProperty;
+
+        /// <summary> The bindable property of ItemAlignment. </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        internal static readonly BindableProperty ItemAlignmentProperty;
+
+        /// <summary> The bindable property of ItemHorizontalAlignment. </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        internal static readonly BindableProperty ItemHorizontalAlignmentProperty;
+
+        /// <summary> The bindable property of ItemVerticalAlignment. </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        internal static readonly BindableProperty ItemVerticalAlignmentProperty;
+
+        /// <summary> The bindable property of ItemSpacing. </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        internal static readonly BindableProperty ItemSpacingProperty;
+
         /// <summary>
         /// TextProperty
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly BindableProperty TextProperty = BindableProperty.Create(nameof(Text), typeof(string), typeof(Button), default(string), propertyChanged: (bindable, oldValue, newValue) =>
+        public static readonly BindableProperty TextProperty;
+
+        /// <summary>
+        /// TranslatableTextProperty
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public static readonly BindableProperty TranslatableTextProperty;
+
+        /// <summary>
+        /// PointSizeProperty
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public static readonly BindableProperty PointSizeProperty;
+
+        /// <summary>
+        /// FontFamilyProperty
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public static readonly BindableProperty FontFamilyProperty;
+
+        /// <summary>
+        /// TextColorProperty
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public static readonly BindableProperty TextColorProperty;
+
+        /// <summary>
+        /// TextAlignmentProperty
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public static readonly BindableProperty TextAlignmentProperty;
+
+        /// <summary>
+        /// IconURLProperty
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public static readonly BindableProperty IconURLProperty;
+
+        /// <summary>
+        /// IconSizeProperty
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public static readonly BindableProperty IconSizeProperty;
+
+        /// <summary>
+        /// TextSelectorProperty
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public static readonly BindableProperty TextSelectorProperty;
+
+        /// <summary>
+        /// TranslatableTextSelectorProperty
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public static readonly BindableProperty TranslatableTextSelectorProperty;
+
+        /// <summary>
+        /// TextColorSelectorProperty
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public static readonly BindableProperty TextColorSelectorProperty;
+
+        /// <summary>
+        /// PointSizeSelectorProperty
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public static readonly BindableProperty PointSizeSelectorProperty;
+
+        /// <summary>
+        /// IconURLSelectorProperty
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public static readonly BindableProperty IconURLSelectorProperty;
+
+        internal static void SetInternalIconRelativeOrientationProperty(BindableObject bindable, object oldValue, object newValue)
+        {
+            var instance = (Button)bindable;
+            if (newValue != null)
+            {
+                instance.InternalIconRelativeOrientation = (IconOrientation?)newValue;
+            }
+        }
+
+        internal static object GetInternalIconRelativeOrientationProperty(BindableObject bindable)
+        {
+            var instance = (Button)bindable;
+            return instance.InternalIconRelativeOrientation;
+        }
+
+        internal static void SetInternalIsSelectedProperty(BindableObject bindable, object oldValue, object newValue)
+        {
+            var instance = (Button)bindable;
+            if (newValue != null)
+            {
+                instance.InternalIsSelected = (bool)newValue;
+            }
+        }
+
+        internal static object GetInternalIsSelectedProperty(BindableObject bindable)
+        {
+            var instance = (Button)bindable;
+            return instance.InternalIsSelected;
+        }
+
+        internal static void SetInternalIsSelectableProperty(BindableObject bindable, object oldValue, object newValue)
+        {
+            var instance = (Button)bindable;
+            if (newValue != null)
+            {
+                instance.InternalIsSelectable = (bool)newValue;
+            }
+        }
+
+        internal static object GetInternalIsSelectableProperty(BindableObject bindable)
+        {
+            var instance = (Button)bindable;
+            return instance.InternalIsSelectable;
+        }
+
+        internal static void SetInternalIconPaddingProperty(BindableObject bindable, object oldValue, object newValue)
+        {
+            var instance = (Button)bindable;
+            if (newValue != null)
+            {
+                instance.InternalIconPadding = newValue as Extents;
+            }
+        }
+
+        internal static object GetInternalIconPaddingProperty(BindableObject bindable)
+        {
+            var instance = (Button)bindable;
+            return instance.InternalIconPadding;
+        }
+
+        internal static void SetInternalTextPaddingProperty(BindableObject bindable, object oldValue, object newValue)
+        {
+            var instance = (Button)bindable;
+            if (newValue != null)
+            {
+                instance.InternalTextPadding = newValue as Extents;
+            }
+        }
+
+        internal static object GetInternalTextPaddingProperty(BindableObject bindable)
+        {
+            var instance = (Button)bindable;
+            return instance.InternalTextPadding;
+        }
+
+        internal static void SetInternalItemAlignmentProperty(BindableObject bindable, object oldValue, object newValue)
+        {
+            var instance = (Button)bindable;
+            if (newValue != null)
+            {
+                instance.InternalItemAlignment = (LinearLayout.Alignment)newValue;
+            }
+        }
+
+        internal static object GetInternalItemAlignmentProperty(BindableObject bindable)
+        {
+            var instance = (Button)bindable;
+            return instance.InternalItemAlignment;
+        }
+
+        internal static void SetInternalItemHorizontalAlignmentProperty(BindableObject bindable, object oldValue, object newValue)
+        {
+            var instance = (Button)bindable;
+            if (newValue != null)
+            {
+                instance.InternalItemHorizontalAlignment = (HorizontalAlignment)newValue;
+            }
+        }
+
+        internal static object GetInternalItemHorizontalAlignmentProperty(BindableObject bindable)
+        {
+            var instance = (Button)bindable;
+            return instance.InternalItemHorizontalAlignment;
+        }
+
+        internal static void SetInternalItemVerticalAlignmentProperty(BindableObject bindable, object oldValue, object newValue)
+        {
+            var instance = (Button)bindable;
+            if (newValue != null)
+            {
+                instance.InternalItemVerticalAlignment = (VerticalAlignment)newValue;
+            }
+        }
+
+        internal static object GetInternalItemVerticalAlignmentProperty(BindableObject bindable)
+        {
+            var instance = (Button)bindable;
+            return instance.InternalItemVerticalAlignment;
+        }
+
+        internal static void SetInternalItemSpacingProperty(BindableObject bindable, object oldValue, object newValue)
+        {
+            var instance = (Button)bindable;
+            if (newValue != null)
+            {
+                instance.InternalItemSpacing = (Size2D)newValue;
+            }
+        }
+
+        internal static object GetInternalItemSpacingProperty(BindableObject bindable)
+        {
+            var instance = (Button)bindable;
+            return instance.InternalItemSpacing;
+        }
+
+        internal static void SetInternalTextProperty(BindableObject bindable, object oldValue, object newValue)
         {
             var instance = (Button)bindable;
             if (newValue != null)
             {
                 instance.InternalText = newValue as string;
             }
-        },
-        defaultValueCreator: (bindable) =>
+        }
+
+        internal static object GetInternalTextProperty(BindableObject bindable)
         {
             var instance = (Button)bindable;
             return instance.InternalText;
-        });
+        }
 
-        /// <summary>
-        /// TranslatableTextProperty
-        /// </summary>
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly BindableProperty TranslatableTextProperty = BindableProperty.Create(nameof(TranslatableText), typeof(string), typeof(Button), default(string), propertyChanged: (bindable, oldValue, newValue) =>
+        internal static void SetInternalTranslatableTextProperty(BindableObject bindable, object oldValue, object newValue)
         {
             var instance = (Button)bindable;
             if (newValue != null)
             {
                 instance.InternalTranslatableText = newValue as string;
             }
-        },
-        defaultValueCreator: (bindable) =>
+        }
+
+        internal static object GetInternalTranslatableTextProperty(BindableObject bindable)
         {
             var instance = (Button)bindable;
             return instance.InternalTranslatableText;
-        });
+        }
 
-        /// <summary>
-        /// PointSizeProperty
-        /// </summary>
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly BindableProperty PointSizeProperty = BindableProperty.Create(nameof(PointSize), typeof(float), typeof(Button), default(float), propertyChanged: (bindable, oldValue, newValue) =>
+        internal static void SetInternalPointSizeProperty(BindableObject bindable, object oldValue, object newValue)
         {
             var instance = (Button)bindable;
             if (newValue != null)
             {
                 instance.InternalPointSize = (float)newValue;
             }
-        },
-        defaultValueCreator: (bindable) =>
+        }
+
+        internal static object GetInternalPointSizeProperty(BindableObject bindable)
         {
             var instance = (Button)bindable;
             return instance.InternalPointSize;
-        });
+        }
 
-        /// <summary>
-        /// FontFamilyProperty
-        /// </summary>
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly BindableProperty FontFamilyProperty = BindableProperty.Create(nameof(FontFamily), typeof(string), typeof(Button), default(string), propertyChanged: (bindable, oldValue, newValue) =>
+        internal static void SetInternalFontFamilyProperty(BindableObject bindable, object oldValue, object newValue)
         {
             var instance = (Button)bindable;
             if (newValue != null)
             {
                 instance.InternalFontFamily = newValue as string;
             }
-        },
-        defaultValueCreator: (bindable) =>
+        }
+
+        internal static object GetInternalFontFamilyProperty(BindableObject bindable)
         {
             var instance = (Button)bindable;
             return instance.InternalFontFamily;
-        });
+        }
 
-        /// <summary>
-        /// TextColorProperty
-        /// </summary>
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly BindableProperty TextColorProperty = BindableProperty.Create(nameof(TextColor), typeof(Color), typeof(Button), null, propertyChanged: (bindable, oldValue, newValue) =>
+        internal static void SetInternalTextColorProperty(BindableObject bindable, object oldValue, object newValue)
         {
             var instance = (Button)bindable;
             if (newValue != null)
             {
                 instance.InternalTextColor = newValue as Color;
             }
-        },
-        defaultValueCreator: (bindable) =>
+        }
+
+        internal static object GetInternalTextColorProperty(BindableObject bindable)
         {
             var instance = (Button)bindable;
             return instance.InternalTextColor;
-        });
+        }
 
-        /// <summary>
-        /// TextAlignmentProperty
-        /// </summary>
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly BindableProperty TextAlignmentProperty = BindableProperty.Create(nameof(TextAlignment), typeof(HorizontalAlignment), typeof(Button), default(HorizontalAlignment), propertyChanged: (bindable, oldValue, newValue) =>
+        internal static void SetInternalTextAlignmentProperty(BindableObject bindable, object oldValue, object newValue)
         {
             var instance = (Button)bindable;
             if (newValue != null)
             {
                 instance.InternalTextAlignment = (HorizontalAlignment)newValue;
             }
-        },
-        defaultValueCreator: (bindable) =>
+        }
+
+        internal static object GetInternalTextAlignmentProperty(BindableObject bindable)
         {
             var instance = (Button)bindable;
             return instance.InternalTextAlignment;
-        });
+        }
 
-        /// <summary>
-        /// IconURLProperty
-        /// </summary>
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly BindableProperty IconURLProperty = BindableProperty.Create(nameof(IconURL), typeof(string), typeof(Button), default(string), propertyChanged: (bindable, oldValue, newValue) =>
+        internal static void SetInternalIconURLProperty(BindableObject bindable, object oldValue, object newValue)
         {
             var instance = (Button)bindable;
             if (newValue != null)
             {
                 instance.InternalIconURL = newValue as string;
             }
-        },
-        defaultValueCreator: (bindable) =>
+        }
+
+        internal static object GetInternalIconURLProperty(BindableObject bindable)
         {
             var instance = (Button)bindable;
             return instance.InternalIconURL;
-        });
+        }
 
-        /// <summary>
-        /// IconSizeProperty
-        /// </summary>
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly BindableProperty IconSizeProperty = BindableProperty.Create(nameof(IconSize), typeof(Size), typeof(Button), null, propertyChanged: (bindable, oldValue, newValue) =>
+        internal static void SetInternalIconSizeProperty(BindableObject bindable, object oldValue, object newValue)
         {
             var instance = (Button)bindable;
             if (newValue != null)
             {
                 instance.InternalIconSize = newValue as Size;
             }
-        },
-        defaultValueCreator: (bindable) =>
+        }
+
+        internal static object GetInternalIconSizeProperty(BindableObject bindable)
         {
             var instance = (Button)bindable;
             return instance.InternalIconSize;
-        });
+        }
 
-        /// <summary>
-        /// TextSelectorProperty
-        /// </summary>
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly BindableProperty TextSelectorProperty = BindableProperty.Create(nameof(TextSelector), typeof(StringSelector), typeof(Button), null, propertyChanged: (bindable, oldValue, newValue) =>
+        internal static void SetInternalTextSelectorProperty(BindableObject bindable, object oldValue, object newValue)
         {
             var instance = (Button)bindable;
             instance.InternalTextSelector = newValue as StringSelector;
-        },
-        defaultValueCreator: (bindable) =>
+        }
+
+        internal static object GetInternalTextSelectorProperty(BindableObject bindable)
         {
             var instance = (Button)bindable;
             return instance.InternalTextSelector;
-        });
+        }
 
-        /// <summary>
-        /// TranslatableTextSelectorProperty
-        /// </summary>
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly BindableProperty TranslatableTextSelectorProperty = BindableProperty.Create(nameof(TranslatableTextSelector), typeof(StringSelector), typeof(Button), null, propertyChanged: (bindable, oldValue, newValue) =>
+        internal static void SetInternalTranslatableTextSelectorProperty(BindableObject bindable, object oldValue, object newValue)
         {
             var instance = (Button)bindable;
             instance.InternalTranslatableTextSelector = newValue as StringSelector;
-        },
-        defaultValueCreator: (bindable) =>
+        }
+
+        internal static object GetInternalTranslatableTextSelectorProperty(BindableObject bindable)
         {
             var instance = (Button)bindable;
             return instance.InternalTranslatableTextSelector;
-        });
+        }
 
-        /// <summary>
-        /// TextColorSelectorProperty
-        /// </summary>
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly BindableProperty TextColorSelectorProperty = BindableProperty.Create(nameof(TextColorSelector), typeof(ColorSelector), typeof(Button), null, propertyChanged: (bindable, oldValue, newValue) =>
+        internal static void SetInternalTextColorSelectorProperty(BindableObject bindable, object oldValue, object newValue)
         {
             var instance = (Button)bindable;
             instance.InternalTextColorSelector = newValue as ColorSelector;
-        },
-        defaultValueCreator: (bindable) =>
+        }
+
+        internal static object GetInternalTextColorSelectorProperty(BindableObject bindable)
         {
             var instance = (Button)bindable;
             return instance.InternalTextColorSelector;
-        });
+        }
 
-        /// <summary>
-        /// PointSizeSelectorProperty
-        /// </summary>
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly BindableProperty PointSizeSelectorProperty = BindableProperty.Create(nameof(PointSizeSelector), typeof(FloatSelector), typeof(Button), null, propertyChanged: (bindable, oldValue, newValue) =>
+        internal static void SetInternalPointSizeSelectorProperty(BindableObject bindable, object oldValue, object newValue)
         {
             var instance = (Button)bindable;
             instance.InternalPointSizeSelector = newValue as FloatSelector;
-        },
-        defaultValueCreator: (bindable) =>
+        }
+
+        internal static object GetInternalPointSizeSelectorProperty(BindableObject bindable)
         {
             var instance = (Button)bindable;
             return instance.InternalPointSizeSelector;
-        });
+        }
 
-        /// <summary>
-        /// IconURLSelectorProperty
-        /// </summary>
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly BindableProperty IconURLSelectorProperty = BindableProperty.Create(nameof(IconURLSelector), typeof(StringSelector), typeof(Button), null, propertyChanged: (bindable, oldValue, newValue) =>
+        internal static void SetInternalIconURLSelectorProperty(BindableObject bindable, object oldValue, object newValue)
         {
             var instance = (Button)bindable;
             instance.InternalIconURLSelector = newValue as StringSelector;
-        },
-        defaultValueCreator: (bindable) =>
+        }
+
+        internal static object GetInternalIconURLSelectorProperty(BindableObject bindable)
         {
             var instance = (Button)bindable;
             return instance.InternalIconURLSelector;
-        });
+        }
     }
 }

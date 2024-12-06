@@ -26,7 +26,7 @@ namespace Tizen.NUI
     /// </summary>
     /// <since_tizen> 3 </since_tizen>
     [Binding.TypeConverter(typeof(Vector3TypeConverter))]
-    public class Vector3 : Disposable, ICloneable
+    public class Vector3 : Disposable, ICloneable, IImmutable
     {
         /// <summary>
         /// The default constructor of Vector3 class.
@@ -222,7 +222,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Vector3 vector3 = new Vector3();
-        /// vector3.X = 0.1f; 
+        /// vector3.X = 0.1f;
         /// // USE like this
         /// float x = 0.1f, y = 0.5f, z = 0.9f;
         /// Vector3 vector3 = new Vector3(x, y, z);
@@ -233,6 +233,7 @@ namespace Tizen.NUI
             [Obsolete("Do not use this setter, that is deprecated in API8 and will be removed in API10. Use new Vector3(...) constructor")]
             set
             {
+                this.ThrowWhenImmutable();
                 Interop.Vector3.XSet(SwigCPtr, value);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
 
@@ -255,7 +256,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Vector3 vector3 = new Vector3();
-        /// vector3.Width = 1.0f; 
+        /// vector3.Width = 1.0f;
         /// // USE like this
         /// float width = 1.0f, height = 2.0f, depth = 3.0f;
         /// Vector3 vector3 = new Vector3(width, height, depth);
@@ -266,6 +267,7 @@ namespace Tizen.NUI
             [Obsolete("Do not use this setter, that is deprecated in API8 and will be removed in API10. Use new Vector3(...) constructor")]
             set
             {
+                this.ThrowWhenImmutable();
                 Interop.Vector3.WidthSet(SwigCPtr, value);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
 
@@ -288,7 +290,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Vector3 vector3 = new Vector3();
-        /// vector3.R = 0.1f; 
+        /// vector3.R = 0.1f;
         /// // USE like this
         /// float r = 0.1f, g = 0.5f, b = 0.9f;
         /// Vector3 vector3 = new Vector3(r, g, b);
@@ -299,6 +301,7 @@ namespace Tizen.NUI
             [Obsolete("Do not use this setter, that is deprecated in API8 and will be removed in API10. Use new Vector3(...) constructor")]
             set
             {
+                this.ThrowWhenImmutable();
                 Interop.Vector3.RSet(SwigCPtr, value);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
 
@@ -321,7 +324,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Vector3 vector3 = new Vector3();
-        /// vector3.Y = 0.5f; 
+        /// vector3.Y = 0.5f;
         /// // USE like this
         /// float x = 0.1f, y = 0.5f, z = 0.9f;
         /// Vector3 vector3 = new Vector3(x, y, z);
@@ -332,6 +335,7 @@ namespace Tizen.NUI
             [Obsolete("Do not use this setter, that is deprecated in API8 and will be removed in API10. Use new Vector3(...) constructor")]
             set
             {
+                this.ThrowWhenImmutable();
                 Interop.Vector3.YSet(SwigCPtr, value);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
 
@@ -354,7 +358,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Vector3 vector3 = new Vector3();
-        /// vector3.Height = 2.0f; 
+        /// vector3.Height = 2.0f;
         /// // USE like this
         /// float width = 1.0f, height = 2.0f, depth = 3.0f;
         /// Vector3 vector3 = new Vector3(width, height, depth);
@@ -365,6 +369,7 @@ namespace Tizen.NUI
             [Obsolete("Do not use this setter, that is deprecated in API8 and will be removed in API10. Use new Vector3(...) constructor")]
             set
             {
+                this.ThrowWhenImmutable();
                 Interop.Vector3.HeightSet(SwigCPtr, value);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
 
@@ -387,7 +392,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Vector3 vector3 = new Vector3();
-        /// vector3.G = 0.5f; 
+        /// vector3.G = 0.5f;
         /// // USE like this
         /// float r = 0.1f, g = 0.5f, b = 0.9f;
         /// Vector3 vector3 = new Vector3(r, g, b);
@@ -398,6 +403,7 @@ namespace Tizen.NUI
             [Obsolete("Do not use this setter, that is deprecated in API8 and will be removed in API10. Use new Vector3(...) constructor")]
             set
             {
+                this.ThrowWhenImmutable();
                 Interop.Vector3.GSet(SwigCPtr, value);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
 
@@ -420,7 +426,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Vector3 vector3 = new Vector3();
-        /// vector3.Z = 0.9f; 
+        /// vector3.Z = 0.9f;
         /// // USE like this
         /// float x = 0.1f, y = 0.5f, z = 0.9f;
         /// Vector3 vector3 = new Vector3(x, y, z);
@@ -431,6 +437,7 @@ namespace Tizen.NUI
             [Obsolete("Do not use this setter, that is deprecated in API8 and will be removed in API10. Use new Vector3(...) constructor")]
             set
             {
+                this.ThrowWhenImmutable();
                 Interop.Vector3.ZSet(SwigCPtr, value);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
 
@@ -453,7 +460,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Vector3 vector3 = new Vector3();
-        /// vector3.Depth = 3.0f; 
+        /// vector3.Depth = 3.0f;
         /// // USE like this
         /// float width = 1.0f, height = 2.0f, depth = 3.0f;
         /// Vector3 vector3 = new Vector3(width, height, depth);
@@ -464,6 +471,7 @@ namespace Tizen.NUI
             [Obsolete("Do not use this setter, that is deprecated in API8 and will be removed in API10. Use new Vector3(...) constructor")]
             set
             {
+                this.ThrowWhenImmutable();
                 Interop.Vector3.DepthSet(SwigCPtr, value);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
 
@@ -486,7 +494,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Vector3 vector3 = new Vector3();
-        /// vector3.B = 0.9f; 
+        /// vector3.B = 0.9f;
         /// // USE like this
         /// float r = 0.1f, g = 0.5f, b = 0.9f;
         /// Vector3 vector3 = new Vector3(r, g, b);
@@ -497,6 +505,7 @@ namespace Tizen.NUI
             [Obsolete("Do not use this setter, that is deprecated in API8 and will be removed in API10. Use new Vector3(...) constructor")]
             set
             {
+                this.ThrowWhenImmutable();
                 Interop.Vector3.BSet(SwigCPtr, value);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
 
@@ -509,6 +518,10 @@ namespace Tizen.NUI
                 return ret;
             }
         }
+
+        /// <inheritdoc/>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool IsImmutable { get; set; }
 
         /// <summary>
         /// An array subscript operator overload.
@@ -665,6 +678,7 @@ namespace Tizen.NUI
         /// <since_tizen> 3 </since_tizen>
         public void Normalize()
         {
+            this.ThrowWhenImmutable();
             Interop.Vector3.Normalize(SwigCPtr);
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
         }
@@ -677,6 +691,7 @@ namespace Tizen.NUI
         /// <since_tizen> 3 </since_tizen>
         public void Clamp(Vector3 min, Vector3 max)
         {
+            this.ThrowWhenImmutable();
             Interop.Vector3.Clamp(SwigCPtr, Vector3.getCPtr(min), Vector3.getCPtr(max));
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
         }

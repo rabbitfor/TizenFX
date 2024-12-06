@@ -54,13 +54,8 @@ namespace Tizen.NUI.Components
 
         /// <summary>The ImageList bindable property.</summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly BindableProperty ImageListProperty = BindableProperty.Create(nameof(ImageList), typeof(IList<string>), typeof(Loading), null, propertyChanged: (bindable, oldValue, newValue) =>
-        {
-            Debug.Assert(((Loading)bindable).imageVisual != null);
-
-            var newList = newValue as List<string>;
-            ((Loading)bindable).imageVisual.URLS = newList == null ? new List<string>() : newList;
-        },
+        public static readonly BindableProperty ImageListProperty = BindableProperty.Create(nameof(ImageList), typeof(IList<string>), typeof(Loading), null,
+            propertyChanged: SetInternalImageListProperty,
         defaultValueCreator: (bindable) =>
         {
             Debug.Assert(((Loading)bindable).imageVisual != null);
@@ -437,6 +432,14 @@ namespace Tizen.NUI.Components
             RemoveVisual(ImageVisualName);
             imageVisual.Dispose();
             imageVisual = null;
+        }
+
+        internal static void SetInternalImageListProperty(BindableObject bindable, object oldValue, object newValue)
+        {
+            Debug.Assert(((Loading)bindable).imageVisual != null);
+
+            var newList = newValue as List<string>;
+            ((Loading)bindable).imageVisual.URLS = newList == null ? new List<string>() : newList;
         }
     }
 }

@@ -18,6 +18,7 @@
 using System;
 using Tizen.NUI.Binding;
 using System.ComponentModel;
+using Tizen.NUI.BaseComponents;
 
 namespace Tizen.NUI
 {
@@ -27,7 +28,7 @@ namespace Tizen.NUI
     /// </summary>
     /// <since_tizen> 3 </since_tizen>
     [Tizen.NUI.Binding.TypeConverter(typeof(PositionTypeConverter))]
-    public class Position : Disposable, ICloneable
+    public class Position : Disposable, ICloneable, IImmutable
     {
 
         /// <summary>
@@ -526,7 +527,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Position position = new Position();
-        /// position.X = 1.0f; 
+        /// position.X = 1.0f;
         /// // USE like this
         /// float x = 1.0f, y = 2.0f, z = 3.0f;
         /// Position position = new Position(x, y, z);
@@ -537,6 +538,7 @@ namespace Tizen.NUI
             [Obsolete("Do not use this setter, that is deprecated in API8 and will be removed in API10. Use new Position(...) constructor")]
             set
             {
+                this.ThrowWhenImmutable();
                 Interop.Vector3.XSet(SwigCPtr, value);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
 
@@ -559,7 +561,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Position position = new Position();
-        /// position.Y = 2.0f; 
+        /// position.Y = 2.0f;
         /// // USE like this
         /// float x = 1.0f, y = 2.0f, z = 3.0f;
         /// Position position = new Position(x, y, z);
@@ -570,6 +572,7 @@ namespace Tizen.NUI
             [Obsolete("Do not use this setter, that is deprecated in API8 and will be removed in API10. Use new Position(...) constructor")]
             set
             {
+                this.ThrowWhenImmutable();
                 Interop.Vector3.YSet(SwigCPtr, value);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
 
@@ -592,7 +595,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Position position = new Position();
-        /// position.Z = 3.0f; 
+        /// position.Z = 3.0f;
         /// // USE like this
         /// float x = 1.0f, y = 2.0f, z = 3.0f;
         /// Position position = new Position(x, y, z);
@@ -603,6 +606,7 @@ namespace Tizen.NUI
             [Obsolete("Do not use this setter, that is deprecated in API8 and will be removed in API10. Use new Position(...) constructor")]
             set
             {
+                this.ThrowWhenImmutable();
                 Interop.Vector3.ZSet(SwigCPtr, value);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
 
@@ -615,6 +619,10 @@ namespace Tizen.NUI
                 return ret;
             }
         }
+
+        /// <inheritdoc/>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool IsImmutable { get; set; }
 
         internal static Position XAxis
         {

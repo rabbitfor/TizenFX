@@ -19,6 +19,7 @@ using System;
 using Tizen.NUI.Binding;
 using System.ComponentModel;
 using System.Globalization;
+using Tizen.NUI.BaseComponents;
 
 namespace Tizen.NUI
 {
@@ -28,7 +29,7 @@ namespace Tizen.NUI
     /// It provides methods to create and manipulate colors.
     /// </summary>
     [Tizen.NUI.Binding.TypeConverter(typeof(ColorTypeConverter))]
-    public class Color : Disposable, ICloneable
+    public class Color : Disposable, ICloneable, IImmutable
     {
         /// <summary>
         /// Gets the alice_blue colored Color class.
@@ -1089,7 +1090,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use as follows:
         /// Color color = new Color();
-        /// color.R = 0.1f; 
+        /// color.R = 0.1f;
         /// // USE like this
         /// float r = 0.1f, g = 0.5f, b = 0.9f, a = 1.0f;
         /// Color color = new Color(r, g, b, a);
@@ -1107,6 +1108,7 @@ namespace Tizen.NUI
             }
             get
             {
+                this.ThrowWhenImmutable();
                 float ret = Interop.Vector4.RGet(SwigCPtr);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw new InvalidOperationException("FATAL: get Exception", NDalicPINVOKE.SWIGPendingException.Retrieve());
                 return ret;
@@ -1122,7 +1124,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use as follows:
         /// Color color = new Color();
-        /// color.G = 0.5f; 
+        /// color.G = 0.5f;
         /// // USE like this
         /// float r = 0.1f, g = 0.5f, b = 0.9f, a = 1.0f;
         /// Color color = new Color(r, g, b, a);
@@ -1140,6 +1142,7 @@ namespace Tizen.NUI
             }
             get
             {
+                this.ThrowWhenImmutable();
                 float ret = Interop.Vector4.GGet(SwigCPtr);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw new InvalidOperationException("FATAL: get Exception", NDalicPINVOKE.SWIGPendingException.Retrieve());
                 return ret;
@@ -1155,7 +1158,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use as follows:
         /// Color color = new Color();
-        /// color.B = 0.9f; 
+        /// color.B = 0.9f;
         /// // USE like this
         /// float r = 0.1f, g = 0.5f, b = 0.9f, a = 1.0f;
         /// Color color = new Color(r, g, b, a);
@@ -1173,6 +1176,7 @@ namespace Tizen.NUI
             }
             get
             {
+                this.ThrowWhenImmutable();
                 float ret = Interop.Vector4.BGet(SwigCPtr);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw new InvalidOperationException("FATAL: get Exception", NDalicPINVOKE.SWIGPendingException.Retrieve());
                 return ret;
@@ -1188,7 +1192,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use as follows:
         /// Color color = new Color();
-        /// color.A = 1.0f; 
+        /// color.A = 1.0f;
         /// // USE like this
         /// float r = 0.1f, g = 0.5f, b = 0.9f, a = 1.0f;
         /// Color color = new Color(r, g, b, a);
@@ -1206,11 +1210,16 @@ namespace Tizen.NUI
             }
             get
             {
+                this.ThrowWhenImmutable();
                 float ret = Interop.Vector4.AGet(SwigCPtr);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw new InvalidOperationException("FATAL: get Exception", NDalicPINVOKE.SWIGPendingException.Retrieve());
                 return ret;
             }
         }
+
+        /// <inheritdoc/>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool IsImmutable { get; set; }
 
         /// <summary>
         /// The array subscript operator overload.
@@ -1631,7 +1640,7 @@ namespace Tizen.NUI
             {
                 if (arg2 is null)
                     return true;
-                
+
                 return false;
             }
 

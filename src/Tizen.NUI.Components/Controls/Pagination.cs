@@ -672,7 +672,7 @@ namespace Tizen.NUI.Components
             else
             {
                 indicator.Color = indicatorColor;
-            }            
+            }
         }
 
         private void CreateIndicator(int index)

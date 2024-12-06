@@ -25,7 +25,7 @@ namespace Tizen.NUI
     /// </summary>
     /// <since_tizen> 3 </since_tizen>
     [Tizen.NUI.Binding.TypeConverter(typeof(Position2DTypeConverter))]
-    public class Position2D : Disposable, ICloneable
+    public class Position2D : Disposable, ICloneable, IImmutable
     {
         private Position2DChangedCallback callback = null;
 
@@ -92,7 +92,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Position2D position2d = new Position2D();
-        /// position2d.X = 1; 
+        /// position2d.X = 1;
         /// // USE like this
         /// int x = 1, y = 2;
         /// Position2D position2d = new Position2D(x, y);
@@ -103,6 +103,7 @@ namespace Tizen.NUI
             [Obsolete("Do not use this setter, that is deprecated in API8 and will be removed in API10. Use new Position2D(...) constructor")]
             set
             {
+                this.ThrowWhenImmutable();
                 Interop.Vector2.XSet(SwigCPtr, (float)value);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
 
@@ -125,7 +126,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Position2D position2d = new Position2D();
-        /// position2d.Y = 2; 
+        /// position2d.Y = 2;
         /// // USE like this
         /// int x = 1, y = 2;
         /// Position2D position2d = new Position2D(x, y);
@@ -136,6 +137,7 @@ namespace Tizen.NUI
             [Obsolete("Do not use this setter, that is deprecated in API8 and will be removed in API10. Use new Position2D(...) constructor")]
             set
             {
+                this.ThrowWhenImmutable();
                 Interop.Vector2.YSet(SwigCPtr, (float)value);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
 
@@ -148,6 +150,10 @@ namespace Tizen.NUI
                 return (int)ret;
             }
         }
+
+        /// <inheritdoc/>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool IsImmutable { get; set; }
 
         /// <summary>
         /// The const array subscript operator overload. Should be 0, or 1.

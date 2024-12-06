@@ -16,6 +16,7 @@
  */
 using System;
 using System.ComponentModel;
+using Tizen.NUI.BaseComponents;
 using Tizen.NUI.Binding;
 
 namespace Tizen.NUI
@@ -27,7 +28,7 @@ namespace Tizen.NUI
     /// </summary>
     /// <since_tizen> 3 </since_tizen>
     [Binding.TypeConverter(typeof(RectangleTypeConverter))]
-    public class Rectangle : Disposable, ICloneable
+    public class Rectangle : Disposable, ICloneable, IImmutable
     {
         /// <summary>
         /// The default constructor of Rectangle class.
@@ -97,7 +98,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Rectangle rectangle = new Rectangle();
-        /// rectangle.X = 1; 
+        /// rectangle.X = 1;
         /// // USE like this
         /// int x = 1, y = 2, width = 3, height = 4;
         /// Rectangle rectangle = new Rectangle(x, y, width, height);
@@ -127,7 +128,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Rectangle rectangle = new Rectangle();
-        /// rectangle.Y = 2; 
+        /// rectangle.Y = 2;
         /// // USE like this
         /// int x = 1, y = 2, width = 3, height = 4;
         /// Rectangle rectangle = new Rectangle(x, y, width, height);
@@ -157,7 +158,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Rectangle rectangle = new Rectangle();
-        /// rectangle.Width = 3; 
+        /// rectangle.Width = 3;
         /// // USE like this
         /// int x = 1, y = 2, width = 3, height = 4;
         /// Rectangle rectangle = new Rectangle(x, y, width, height);
@@ -187,7 +188,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Rectangle rectangle = new Rectangle();
-        /// rectangle.Height = 4; 
+        /// rectangle.Height = 4;
         /// // USE like this
         /// int x = 1, y = 2, width = 3, height = 4;
         /// Rectangle rectangle = new Rectangle(x, y, width, height);
@@ -208,10 +209,15 @@ namespace Tizen.NUI
             }
         }
 
+        /// <inheritdoc/>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool IsImmutable { get; set; }
+
         private int x
         {
             set
             {
+                this.ThrowWhenImmutable();
                 Interop.Rectangle.XSet(SwigCPtr, value);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
             }
@@ -227,6 +233,7 @@ namespace Tizen.NUI
         {
             set
             {
+                this.ThrowWhenImmutable();
                 Interop.Rectangle.LeftSet(SwigCPtr, value);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
             }
@@ -242,6 +249,7 @@ namespace Tizen.NUI
         {
             set
             {
+                this.ThrowWhenImmutable();
                 Interop.Rectangle.YSet(SwigCPtr, value);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
             }
@@ -257,6 +265,7 @@ namespace Tizen.NUI
         {
             set
             {
+                this.ThrowWhenImmutable();
                 Interop.Rectangle.RightSet(SwigCPtr, value);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
             }
@@ -272,6 +281,7 @@ namespace Tizen.NUI
         {
             set
             {
+                this.ThrowWhenImmutable();
                 Interop.Rectangle.WidthSet(SwigCPtr, value);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
             }
@@ -287,6 +297,7 @@ namespace Tizen.NUI
         {
             set
             {
+                this.ThrowWhenImmutable();
                 Interop.Rectangle.BottomSet(SwigCPtr, value);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
             }
@@ -302,6 +313,7 @@ namespace Tizen.NUI
         {
             set
             {
+                this.ThrowWhenImmutable();
                 Interop.Rectangle.HeightSet(SwigCPtr, value);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
             }
@@ -317,6 +329,7 @@ namespace Tizen.NUI
         {
             set
             {
+                this.ThrowWhenImmutable();
                 Interop.Rectangle.TopSet(SwigCPtr, value);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
             }
@@ -407,6 +420,7 @@ namespace Tizen.NUI
         /// <since_tizen> 3 </since_tizen>
         public void Set(int newX, int newY, int newWidth, int newHeight)
         {
+            this.ThrowWhenImmutable();
             Interop.Rectangle.Set(SwigCPtr, newX, newY, newWidth, newHeight);
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
         }
