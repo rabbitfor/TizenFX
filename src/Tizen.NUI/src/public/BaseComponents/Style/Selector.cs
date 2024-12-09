@@ -30,7 +30,7 @@ namespace Tizen.NUI.BaseComponents
     [SuppressMessage("Microsoft.Naming",
                      "CA1710:IdentifiersShouldHaveCorrectSuffix",
                      Justification = "The name Selector provides meaningful information about the characteristics.")]
-    public class Selector<T> : IEnumerable<SelectorItem<T>>
+    public class Selector<T> : IEnumerable<SelectorItem<T>>, IImmutable
     {
         private readonly bool cloneable = typeof(ICloneable).IsAssignableFrom(typeof(T));
         private SelectorItem<T> all;
@@ -197,11 +197,9 @@ namespace Tizen.NUI.BaseComponents
         [EditorBrowsable(EditorBrowsableState.Never)]
         public int Count => SelectorItems.Count;
 
-        /// <summary>
-        /// Gets a value indicating whether the selector is read-only.
-        /// </summary>
+        /// <inheritdoc/>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool IsReadOnly => false;
+        public bool IsImmutable { get; set; }
 
         /// <summary>
         /// Adds the specified state and value to the selector.
@@ -211,6 +209,8 @@ namespace Tizen.NUI.BaseComponents
         [EditorBrowsable(EditorBrowsableState.Never)]
         public void Add(ControlState state, T value)
         {
+            this.ThrowWhenImmutable();
+
             // To prevent a state from having multiple values, remove existing state-value pair.
             int index = SelectorItems.FindIndex(x => x.State == state);
             if (index != -1)
@@ -432,7 +432,7 @@ namespace Tizen.NUI.BaseComponents
         {
             if (converter == null) throw new ArgumentNullException(nameof(converter));
 
-            Selector<TOut> result = new Selector<TOut>();            
+            Selector<TOut> result = new Selector<TOut>();
             result.SelectorItems = SelectorItems.ConvertAll<SelectorItem<TOut>>(m => new SelectorItem<TOut>(m.State, converter(m.Value)));
             UpdateAllLink();
 
@@ -511,7 +511,7 @@ namespace Tizen.NUI.BaseComponents
             int hash = 17;
             hash = (hash * 23) + (All == null ? 0 : All.GetHashCode());
             hash = (hash * 23) + SelectorItems.Count;
-            
+
             // Order of items should not effect to the result value.
             int itemSum = 0;
             foreach (var item in SelectorItems)
@@ -549,7 +549,7 @@ namespace Tizen.NUI.BaseComponents
             int index = SelectorItems.FindIndex(x => x.State == ControlState.All);
             if (index >= 0)
             {
-                all = SelectorItems[index];   
+                all = SelectorItems[index];
             }
             else
             {

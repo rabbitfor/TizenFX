@@ -17,6 +17,7 @@
 
 using System;
 using System.ComponentModel;
+using Tizen.NUI.BaseComponents;
 using Tizen.NUI.Binding;
 
 namespace Tizen.NUI
@@ -26,7 +27,7 @@ namespace Tizen.NUI
     /// </summary>
     /// <since_tizen> 5 </since_tizen>
     [Tizen.NUI.Binding.TypeConverter(typeof(SizeTypeConverter))]
-    public class Size : Disposable, ICloneable
+    public class Size : Disposable, ICloneable, IImmutable
     {
 
         /// <summary>
@@ -100,7 +101,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Size size = new Size();
-        /// size.Width = 0.1f; 
+        /// size.Width = 0.1f;
         /// // USE like this
         /// float width = 0.1f, height = 0.5f, depth = 0.9f;
         /// Size size = new Size(width, height, depth);
@@ -111,6 +112,7 @@ namespace Tizen.NUI
             [Obsolete("Do not use this setter, that is deprecated in API8 and will be removed in API10. Use new Size(...) constructor")]
             set
             {
+                this.ThrowWhenImmutable();
                 Interop.Vector3.WidthSet(SwigCPtr, value);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
 
@@ -133,7 +135,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Size size = new Size();
-        /// size.Height = 0.5f; 
+        /// size.Height = 0.5f;
         /// // USE like this
         /// float width = 0.1f, height = 0.5f, depth = 0.9f;
         /// Size size = new Size(width, height, depth);
@@ -144,6 +146,7 @@ namespace Tizen.NUI
             [Obsolete("Do not use this setter, that is deprecated in API8 and will be removed in API10. Use new Size(...) constructor")]
             set
             {
+                this.ThrowWhenImmutable();
                 Interop.Vector3.HeightSet(SwigCPtr, value);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
 
@@ -166,7 +169,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Size size = new Size();
-        /// size.Depth = 0.9f; 
+        /// size.Depth = 0.9f;
         /// // USE like this
         /// float width = 0.1f, height = 0.5f, depth = 0.9f;
         /// Size size = new Size(width, height, depth);
@@ -177,6 +180,7 @@ namespace Tizen.NUI
             [Obsolete("Do not use this setter, that is deprecated in API8 and will be removed in API10. Use new Size(...) constructor")]
             set
             {
+                this.ThrowWhenImmutable();
                 Interop.Vector3.DepthSet(SwigCPtr, value);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
 
@@ -189,6 +193,10 @@ namespace Tizen.NUI
                 return ret;
             }
         }
+
+        /// <inheritdoc/>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool IsImmutable { get; set; }
 
         /// <summary>
         /// The addition operator for A+B.

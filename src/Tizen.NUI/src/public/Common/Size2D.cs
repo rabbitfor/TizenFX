@@ -16,6 +16,7 @@
  */
 using System;
 using System.ComponentModel;
+using Tizen.NUI.BaseComponents;
 using Tizen.NUI.Binding;
 
 namespace Tizen.NUI
@@ -25,7 +26,7 @@ namespace Tizen.NUI
     /// </summary>
     /// <since_tizen> 3 </since_tizen>
     [Tizen.NUI.Binding.TypeConverter(typeof(Size2DTypeConverter))]
-    public class Size2D : Disposable, ICloneable
+    public class Size2D : Disposable, ICloneable, IImmutable
     {
 
         private Size2DChangedCallback callback = null;
@@ -70,7 +71,7 @@ namespace Tizen.NUI
 
         /// <summary>
         /// Hidden API (Inhouse API).
-        /// Dispose. 
+        /// Dispose.
         /// </summary>
         /// <remarks>
         /// Following the guide of https://docs.microsoft.com/en-us/dotnet/standard/garbage-collection/implementing-dispose.
@@ -113,7 +114,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Size2D size2d = new Size2D();
-        /// size2d.Width = 1; 
+        /// size2d.Width = 1;
         /// // USE like this
         /// int width = 1, height = 2;
         /// Size2D size2d = new Size2D(width, height);
@@ -124,6 +125,7 @@ namespace Tizen.NUI
             [Obsolete("Do not use this setter, that is deprecated in API8 and will be removed in API10. Use new Size2D(...) constructor")]
             set
             {
+                this.ThrowWhenImmutable();
                 Interop.Vector2.WidthSet(SwigCPtr, (float)value);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
 
@@ -146,7 +148,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Size2D size2d = new Size2D();
-        /// size2d.Height = 2; 
+        /// size2d.Height = 2;
         /// // USE like this
         /// int width = 1, height = 2;
         /// Size2D size2d = new Size2D(width, height);
@@ -157,6 +159,7 @@ namespace Tizen.NUI
             [Obsolete("Do not use this setter, that is deprecated in API8 and will be removed in API10. Use new Size2D(...) constructor")]
             set
             {
+                this.ThrowWhenImmutable();
                 Interop.Vector2.HeightSet(SwigCPtr, (float)value);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
 
@@ -169,6 +172,10 @@ namespace Tizen.NUI
                 return ClampToInt(ret);
             }
         }
+
+        /// <inheritdoc/>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool IsImmutable { get; set; }
 
         /// <summary>
         /// The addition operator for A+B.

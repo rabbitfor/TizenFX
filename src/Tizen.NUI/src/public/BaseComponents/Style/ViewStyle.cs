@@ -657,6 +657,11 @@ namespace Tizen.NUI.BaseComponents
         {
             // NOTE Allow null value. It is used when merging styles with solid null option
             values[styleProperty] = value;
+
+            if (value is IImmutable immutable)
+            {
+                immutable.IsImmutable = true;
+            }
         }
 
         private void CopyBindablePropertyValues(ViewStyle source)

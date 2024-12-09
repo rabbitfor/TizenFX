@@ -573,6 +573,7 @@ namespace Tizen.NUI
         internal void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
         {
             PropertySet?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            ChangedPropertiesSetExcludingStyle.Add(propertyName);
         }
 
         internal void UnregisterFromRegistry()
