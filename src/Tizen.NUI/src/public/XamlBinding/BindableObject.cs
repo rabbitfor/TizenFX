@@ -293,7 +293,6 @@ namespace Tizen.NUI.Binding
         public void SetValue(BindableProperty property, object value)
         {
             InternalSetValue(property, value);
-            ChangedPropertiesSetExcludingStyle.Add(property);
         }
 
         internal void InternalSetValue(BindableProperty property, object value)
@@ -326,14 +325,14 @@ namespace Tizen.NUI.Binding
             }
         }
 
-        private HashSet<BindableProperty> changedPropertiesSetExcludingStyle;
-        internal protected HashSet<BindableProperty> ChangedPropertiesSetExcludingStyle
+        private HashSet<string> changedPropertiesSetExcludingStyle;
+        internal protected HashSet<string> ChangedPropertiesSetExcludingStyle
         {
             get
             {
                 if (null == changedPropertiesSetExcludingStyle)
                 {
-                    changedPropertiesSetExcludingStyle = new HashSet<BindableProperty>();
+                    changedPropertiesSetExcludingStyle = new HashSet<string>();
                 }
 
                 return changedPropertiesSetExcludingStyle;

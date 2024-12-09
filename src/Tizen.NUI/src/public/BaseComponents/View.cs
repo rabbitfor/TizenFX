@@ -5829,44 +5829,10 @@ namespace Tizen.NUI.BaseComponents
 
             themeData.viewStyle = viewStyle;
 
-            if (viewStyle.DirtyProperties == null || viewStyle.DirtyProperties.Count == 0)
-            {
-                // Nothing to apply
-                return;
-            }
+            viewStyle.ApplyTo(this);
 
-            BindableProperty.GetBindablePropertysOfType(GetType(), out var bindablePropertyOfView);
-
-            if (bindablePropertyOfView == null)
-            {
-                return;
-            }
-
-            var dirtyStyleProperties = new BindableProperty[viewStyle.DirtyProperties.Count];
-            viewStyle.DirtyProperties.CopyTo(dirtyStyleProperties);
-
-            foreach (var sourceProperty in dirtyStyleProperties)
-            {
-                var sourceValue = viewStyle.GetValue(sourceProperty);
-
-                if (sourceValue == null)
-                {
-                    continue;
-                }
-
-                bindablePropertyOfView.TryGetValue(sourceProperty.PropertyName, out var destinationProperty);
-
-                // Do not set value again when theme is changed and the value has been set already.
-                if (isThemeChanged && ChangedPropertiesSetExcludingStyle.Contains(destinationProperty))
-                {
-                    continue;
-                }
-
-                if (destinationProperty != null)
-                {
-                    InternalSetValue(destinationProperty, sourceValue);
-                }
-            }
+            // NOTE Support backward compatibility.
+            ApplyStyleUsingBindableProperty(viewStyle);
         }
 
         /// <summary>
@@ -5987,6 +5953,49 @@ namespace Tizen.NUI.BaseComponents
             get
             {
                 return AutomationId;
+            }
+        }
+
+        private void ApplyStyleUsingBindableProperty(ViewStyle viewStyle)
+        {
+            // NOTE Support backward compatibility.
+            if (viewStyle.DirtyProperties == null || viewStyle.DirtyProperties.Count == 0)
+            {
+                // Nothing to apply
+                return;
+            }
+
+            BindableProperty.GetBindablePropertysOfType(GetType(), out var bindablePropertyOfView);
+
+            if (bindablePropertyOfView == null)
+            {
+                return;
+            }
+
+            var dirtyStyleProperties = new BindableProperty[viewStyle.DirtyProperties.Count];
+            viewStyle.DirtyProperties.CopyTo(dirtyStyleProperties);
+
+            foreach (var sourceProperty in dirtyStyleProperties)
+            {
+                var sourceValue = viewStyle.GetValue(sourceProperty);
+
+                if (sourceValue == null)
+                {
+                    continue;
+                }
+
+                bindablePropertyOfView.TryGetValue(sourceProperty.PropertyName, out var destinationProperty);
+
+                // Do not set value again when theme is changed and the value has been set already.
+                if (isThemeChanged && ChangedPropertiesSetExcludingStyle.Contains(destinationProperty.PropertyName))
+                {
+                    continue;
+                }
+
+                if (destinationProperty != null)
+                {
+                    InternalSetValue(destinationProperty, sourceValue);
+                }
             }
         }
     }
