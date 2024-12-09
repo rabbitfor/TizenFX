@@ -35,18 +35,7 @@ namespace Tizen.NUI.BaseComponents
         private static bool defaultAllowOnlyOwnTouch = false;
 
         internal BackgroundExtraData backgroundExtraData;
-
-        private bool layoutSet = false;
-        private LayoutItem layout; // Exclusive layout assigned to this View.
-
-        // List of transitions paired with the condition that uses the transition.
-        private Dictionary<TransitionCondition, TransitionList> layoutTransitions;
-        private int widthPolicy = LayoutParamPolicies.WrapContent; // Layout width policy
-        private int heightPolicy = LayoutParamPolicies.WrapContent; // Layout height policy
-        private float weight = 0.0f; // Weighting of child View in a Layout
-        private bool excludeLayouting = false;
-        private LayoutTransition layoutTransition;
-        private TransitionOptions transitionOptions = null;
+        private LayoutExtraData layoutExtraData;
         private ThemeData themeData;
         private Dictionary<Type, object> attached;
         private bool isThemeChanged = false;
@@ -575,13 +564,7 @@ namespace Tizen.NUI.BaseComponents
         /// </summary>
         /// This will be public opened after ACR done. Before ACR, need to be hidden as inhouse API.
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool LayoutSet
-        {
-            get
-            {
-                return layoutSet;
-            }
-        }
+        public bool LayoutSet => layoutExtraData?.LayoutSet ?? false;
 
         /// <summary>
         /// Flag to allow Layouting to be disabled for Views.
@@ -808,13 +791,10 @@ namespace Tizen.NUI.BaseComponents
 
         private bool InternalExcludeLayouting
         {
-            get
-            {
-                return excludeLayouting;
-            }
+            get => layoutExtraData?.ExcludeLayouting ?? false;
             set
             {
-                excludeLayouting = value;
+                EnsureLayoutExtraData().ExcludeLayouting = value;
                 if (Layout != null && Layout.SetPositionByLayout == value)
                 {
                     Layout.SetPositionByLayout = !value;
@@ -2904,12 +2884,9 @@ namespace Tizen.NUI.BaseComponents
             userSizeWidth = width;
 
             // To avoid duplicated size setup, change internal policy directly.
-            // change temporary value's name as widthPolicyCeiling
-            int widthPolicyCeiling = (int)System.Math.Ceiling(width);
-            if (widthPolicy != widthPolicyCeiling)
+            if (UpdateLayoutWidthPolicy(width))
             {
-                widthPolicy = widthPolicyCeiling;
-                layout?.RequestLayout();
+                RequestLayout();
             }
 
             Object.InternalSetPropertyFloat(SwigCPtr, Property.SizeWidth, width);
@@ -2969,11 +2946,9 @@ namespace Tizen.NUI.BaseComponents
 
             // To avoid duplicated size setup, change internal policy directly.
             // change temporary value's name as heightPolicyCeiling
-            int heightPolicyCeiling = (int)System.Math.Ceiling(height);
-            if (heightPolicy != heightPolicyCeiling)
+            if (UpdateLayoutHeightPolicy(height))
             {
-                heightPolicy = heightPolicyCeiling;
-                layout?.RequestLayout();
+                RequestLayout();
             }
 
             Object.InternalSetPropertyFloat(SwigCPtr, Property.SizeHeight, height);
@@ -3897,25 +3872,9 @@ namespace Tizen.NUI.BaseComponents
             }
             // Match ResizePolicy to new Layouting.
             // Parent relative policies can not be mapped at this point as parent size unknown.
-            switch (value)
+            if (UpdateLayoutWidthPolicy(value))
             {
-                case ResizePolicyType.UseNaturalSize:
-                    {
-                        WidthSpecification = LayoutParamPolicies.WrapContent;
-                        break;
-                    }
-                case ResizePolicyType.FillToParent:
-                    {
-                        WidthSpecification = LayoutParamPolicies.MatchParent;
-                        break;
-                    }
-                case ResizePolicyType.FitToChildren:
-                    {
-                        WidthSpecification = LayoutParamPolicies.WrapContent;
-                        break;
-                    }
-                default:
-                    break;
+                RequestLayout();
             }
         }
         internal ResizePolicyType GetInternalWidthResizePolicy()
@@ -3976,25 +3935,9 @@ namespace Tizen.NUI.BaseComponents
             }
             // Match ResizePolicy to new Layouting.
             // Parent relative policies can not be mapped at this point as parent size unknown.
-            switch (value)
+            if (UpdateLayoutHeightPolicy(value))
             {
-                case ResizePolicyType.UseNaturalSize:
-                    {
-                        HeightSpecification = LayoutParamPolicies.WrapContent;
-                        break;
-                    }
-                case ResizePolicyType.FillToParent:
-                    {
-                        HeightSpecification = LayoutParamPolicies.MatchParent;
-                        break;
-                    }
-                case ResizePolicyType.FitToChildren:
-                    {
-                        HeightSpecification = LayoutParamPolicies.WrapContent;
-                        break;
-                    }
-                default:
-                    break;
+                RequestLayout();
             }
         }
         internal ResizePolicyType GetInternalHeightResizePolicy()
@@ -4206,7 +4149,7 @@ namespace Tizen.NUI.BaseComponents
                 {
                     throw new ArgumentNullException(nameof(value));
                 }
-                if (layout != null)
+                if (layoutExtraData?.Layout is LayoutItem layout)
                 {
                     // Note: it only works if minimum size is >= than natural size.
                     // To force the size it should be done through the width&height spec or Size2D.
@@ -4258,10 +4201,7 @@ namespace Tizen.NUI.BaseComponents
             {
                 // We don't have Layout.Maximum(Width|Height) so we cannot apply it to layout.
                 // MATCH_PARENT spec + parent container size can be used to limit
-                if (layout != null)
-                {
-                    layout.RequestLayout();
-                }
+                RequestLayout();
 
                 if (NUIApplication.IsUsingXaml)
                 {
@@ -4576,7 +4516,7 @@ namespace Tizen.NUI.BaseComponents
                     SetInternalLayoutDirection(value);
                 }
                 NotifyPropertyChanged();
-                layout?.RequestLayout();
+                RequestLayout();
             }
         }
 
@@ -4695,21 +4635,20 @@ namespace Tizen.NUI.BaseComponents
 
         private int InternalWidthSpecification
         {
-            get
-            {
-                return widthPolicy;
-            }
+            get => EnsureLayoutExtraData().WidthPolicy;
             set
             {
-                if (value == widthPolicy)
+                var layoutExtraData = EnsureLayoutExtraData();
+
+                if (value == layoutExtraData.WidthPolicy)
                     return;
 
-                widthPolicy = value;
-                if (widthPolicy >= 0)
+                layoutExtraData.WidthPolicy = value;
+                if (layoutExtraData.WidthPolicy >= 0)
                 {
-                    SizeWidth = widthPolicy;
+                    SizeWidth = layoutExtraData.WidthPolicy;
                 }
-                layout?.RequestLayout();
+                layoutExtraData.Layout?.RequestLayout();
             }
         }
 
@@ -4770,21 +4709,20 @@ namespace Tizen.NUI.BaseComponents
 
         private int InternalHeightSpecification
         {
-            get
-            {
-                return heightPolicy;
-            }
+            get => EnsureLayoutExtraData().HeightPolicy;
             set
             {
-                if (value == heightPolicy)
+                var layoutExtraData = EnsureLayoutExtraData();
+
+                if (value == layoutExtraData.HeightPolicy)
                     return;
 
-                heightPolicy = value;
-                if (heightPolicy >= 0)
+                layoutExtraData.HeightPolicy = value;
+                if (layoutExtraData.HeightPolicy >= 0)
                 {
-                    SizeHeight = heightPolicy;
+                    SizeHeight = layoutExtraData.HeightPolicy;
                 }
-                layout?.RequestLayout();
+                layoutExtraData.Layout?.RequestLayout();
             }
         }
 
@@ -4796,11 +4734,13 @@ namespace Tizen.NUI.BaseComponents
         {
             get
             {
-                if (layoutTransitions == null)
+                var layoutExtraData = EnsureLayoutExtraData();
+
+                if (layoutExtraData.LayoutTransitions == null)
                 {
-                    layoutTransitions = new Dictionary<TransitionCondition, TransitionList>();
+                    layoutExtraData.LayoutTransitions = new Dictionary<TransitionCondition, TransitionList>();
                 }
-                return layoutTransitions;
+                return layoutExtraData.LayoutTransitions;
             }
         }
 
@@ -4841,26 +4781,26 @@ namespace Tizen.NUI.BaseComponents
 
         private LayoutTransition InternalLayoutTransition
         {
-            get
-            {
-                return layoutTransition;
-            }
+            get => EnsureLayoutExtraData().LayoutTransition;
             set
             {
                 if (value == null)
                 {
                     throw new global::System.ArgumentNullException(nameof(value));
                 }
-                if (layoutTransitions == null)
+
+                var layoutExtraData = EnsureLayoutExtraData();
+
+                if (layoutExtraData.LayoutTransitions == null)
                 {
-                    layoutTransitions = new Dictionary<TransitionCondition, TransitionList>();
+                    layoutExtraData.LayoutTransitions = new Dictionary<TransitionCondition, TransitionList>();
                 }
 
-                LayoutTransitionsHelper.AddTransitionForCondition(layoutTransitions, value.Condition, value, true);
+                LayoutTransitionsHelper.AddTransitionForCondition(layoutExtraData.LayoutTransitions, value.Condition, value, true);
 
                 AttachTransitionsToChildren(value);
 
-                layoutTransition = value;
+                layoutExtraData.LayoutTransition = value;
             }
         }
 
@@ -4917,7 +4857,7 @@ namespace Tizen.NUI.BaseComponents
                 SetProperty(View.Property.PADDING, temp);
                 temp.Dispose();
                 NotifyPropertyChanged();
-                layout?.RequestLayout();
+                RequestLayout();
             }
         }
 
@@ -5144,20 +5084,19 @@ namespace Tizen.NUI.BaseComponents
 
         private LayoutItem InternalLayout
         {
-            get
-            {
-                return layout;
-            }
+            get => layoutExtraData?.Layout;
             set
             {
+                var layoutExtraData = EnsureLayoutExtraData();
+
                 // Do nothing if layout provided is already set on this View.
-                if (value == layout)
+                if (value == layoutExtraData.Layout)
                 {
                     return;
                 }
 
                 LayoutingDisabled = false;
-                layoutSet = true;
+                layoutExtraData.LayoutSet = true;
 
                 // If new layout being set already has a owner then that owner receives a replacement default layout.
                 // First check if the layout to be set already has a owner.
@@ -5175,20 +5114,20 @@ namespace Tizen.NUI.BaseComponents
                 // Copy Margin and Padding to new layout being set or restore padding and margin back to
                 // View if no replacement. Previously margin and padding values would have been moved from
                 // the View to the layout.
-                if (layout != null) // Existing layout
+                if (layoutExtraData.Layout != null) // Existing layout
                 {
                     if (value != null)
                     {
                         // Existing layout being replaced so copy over margin and padding values.
-                        value.Margin = layout.Margin;
-                        value.Padding = layout.Padding;
-                        value.SetPositionByLayout = !excludeLayouting;
+                        value.Margin = layoutExtraData.Layout.Margin;
+                        value.Padding = layoutExtraData.Layout.Padding;
+                        value.SetPositionByLayout = !layoutExtraData.ExcludeLayouting;
                     }
                     else
                     {
                         // Layout not being replaced so restore margin and padding to View.
-                        SetValue(MarginProperty, layout.Margin);
-                        SetValue(PaddingProperty, layout.Padding);
+                        SetValue(MarginProperty, layoutExtraData.Layout.Margin);
+                        SetValue(PaddingProperty, layoutExtraData.Layout.Padding);
                         NotifyPropertyChanged();
                     }
                 }
@@ -5231,12 +5170,12 @@ namespace Tizen.NUI.BaseComponents
                             NotifyPropertyChanged();
                         }
 
-                        value.SetPositionByLayout = !excludeLayouting;
+                        value.SetPositionByLayout = !layoutExtraData.ExcludeLayouting;
                     }
                 }
 
                 // Remove existing layout from it's parent layout group.
-                layout?.Unparent();
+                layoutExtraData.Layout?.Unparent();
 
                 // Set layout to this view
                 SetLayout(value);
@@ -5249,14 +5188,12 @@ namespace Tizen.NUI.BaseComponents
         /// <since_tizen> 6 </since_tizen>
         public float Weight
         {
-            get
-            {
-                return weight;
-            }
+            get => layoutExtraData?.Weight ?? 0;
             set
             {
-                weight = value;
-                layout?.RequestLayout();
+                var layoutExtraData = EnsureLayoutExtraData();
+                layoutExtraData.Weight = value;
+                layoutExtraData.Layout?.RequestLayout();
             }
         }
 
@@ -5920,14 +5857,8 @@ namespace Tizen.NUI.BaseComponents
 
         private TransitionOptions InternalTransitionOptions
         {
-            set
-            {
-                transitionOptions = value;
-            }
-            get
-            {
-                return transitionOptions;
-            }
+            get => layoutExtraData?.TransitionOptions;
+            set => EnsureLayoutExtraData().TransitionOptions = value;
         }
 
         /// <summary>
@@ -5990,5 +5921,119 @@ namespace Tizen.NUI.BaseComponents
                 return AutomationId;
             }
         }
+
+        private LayoutExtraData EnsureLayoutExtraData()
+        {
+            if (layoutExtraData == null)
+            {
+                layoutExtraData = new LayoutExtraData();
+
+                if (!UpdateLayoutWidthPolicy(GetInternalWidthResizePolicy()))
+                {
+                    UpdateLayoutWidthPolicy(GetInternalSizeWidth());
+                }
+
+                if (!UpdateLayoutHeightPolicy(GetInternalHeightResizePolicy()))
+                {
+                    UpdateLayoutHeightPolicy(GetInternalSizeHeight());
+                }
+            }
+
+            return layoutExtraData;
+        }
+
+        private bool UpdateLayoutWidthPolicy(float width) => UpdateLayoutWidthPolicy((int)Math.Ceiling(width));
+
+        private bool UpdateLayoutWidthPolicy(int width)
+        {
+            if (layoutExtraData == null)
+            {
+                return false;
+            }
+
+            if (layoutExtraData.WidthPolicy != width)
+            {
+                layoutExtraData.WidthPolicy = width;
+                return true;
+            }
+
+            return false;
+        }
+
+        private bool UpdateLayoutWidthPolicy(ResizePolicyType widthResizePolicy)
+        {
+            if (layoutExtraData == null)
+            {
+                return false;
+            }
+
+            switch (widthResizePolicy)
+            {
+                case ResizePolicyType.UseNaturalSize:
+                case ResizePolicyType.FitToChildren:
+                {
+                    layoutExtraData.WidthPolicy = LayoutParamPolicies.WrapContent;
+                    return true;
+                }
+                case ResizePolicyType.FillToParent:
+                {
+                    layoutExtraData.WidthPolicy = LayoutParamPolicies.MatchParent;
+                    return true;
+                }
+                default:
+                {
+                    break;
+                }
+            }
+            return false;
+        }
+
+        private bool UpdateLayoutHeightPolicy(float height) => UpdateLayoutHeightPolicy((int)Math.Ceiling(height));
+
+        private bool UpdateLayoutHeightPolicy(int height)
+        {
+            if (layoutExtraData == null)
+            {
+                return false;
+            }
+
+            if (layoutExtraData.HeightPolicy != height)
+            {
+                layoutExtraData.HeightPolicy = height;
+                return true;
+            }
+
+            return false;
+        }
+
+        private bool UpdateLayoutHeightPolicy(ResizePolicyType heightResizePolicy)
+        {
+            if (layoutExtraData == null)
+            {
+                return false;
+            }
+
+            switch (heightResizePolicy)
+            {
+                case ResizePolicyType.UseNaturalSize:
+                case ResizePolicyType.FitToChildren:
+                {
+                    layoutExtraData.HeightPolicy = LayoutParamPolicies.WrapContent;
+                    return true;
+                }
+                case ResizePolicyType.FillToParent:
+                {
+                    layoutExtraData.HeightPolicy = LayoutParamPolicies.MatchParent;
+                    return true;
+                }
+                default:
+                {
+                    break;
+                }
+            }
+            return false;
+        }
+
+        private void RequestLayout() => layoutExtraData?.Layout?.RequestLayout();
     }
 }

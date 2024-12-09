@@ -221,8 +221,8 @@ namespace Tizen.NUI.BaseComponents
             return view.GetInternalColorBlue();
         }
 
-        /// <summary> 
-        /// BackgroundImageProperty 
+        /// <summary>
+        /// BackgroundImageProperty
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
         public static readonly BindableProperty BackgroundImageProperty = null;
@@ -783,26 +783,15 @@ namespace Tizen.NUI.BaseComponents
                 view.userSizeWidth = (float)width;
                 view.userSizeHeight = (float)height;
 
-                bool relayoutRequired = false;
-                // To avoid duplicated size setup, change internal policy directly.
-                if (view.widthPolicy != width)
+                if (view.UpdateLayoutWidthPolicy(width) | view.UpdateLayoutHeightPolicy(height))
                 {
-                    view.widthPolicy = width;
-                    relayoutRequired = true;
-                }
-                if (view.heightPolicy != height)
-                {
-                    view.heightPolicy = height;
-                    relayoutRequired = true;
-                }
-                if (relayoutRequired)
-                {
-                    view.layout?.RequestLayout();
+                    view.RequestLayout();
                 }
 
                 Object.InternalSetPropertyVector2ActualVector3(view.SwigCPtr, View.Property.SIZE, ((Size2D)newValue).SwigCPtr);
             }
         }
+
         internal static object GetInternalSize2DProperty(BindableObject bindable)
         {
             var view = (View)bindable;
@@ -1559,24 +1548,9 @@ namespace Tizen.NUI.BaseComponents
 
                 // Set Specification so when layouts measure this View it matches the value set here.
                 // All Views are currently Layouts.
-                int widthPolicy = (int)System.Math.Ceiling(width);
-                int heightPolicy = (int)System.Math.Ceiling(height);
-
-                bool relayoutRequired = false;
-                // To avoid duplicated size setup, change internal policy directly.
-                if (view.widthPolicy != widthPolicy)
+                if (view.UpdateLayoutWidthPolicy(width) | view.UpdateLayoutHeightPolicy(height))
                 {
-                    view.widthPolicy = widthPolicy;
-                    relayoutRequired = true;
-                }
-                if (view.heightPolicy != heightPolicy)
-                {
-                    view.heightPolicy = heightPolicy;
-                    relayoutRequired = true;
-                }
-                if (relayoutRequired)
-                {
-                    view.layout?.RequestLayout();
+                    view.RequestLayout();
                 }
 
                 view.SetSize(width, height, depth);
