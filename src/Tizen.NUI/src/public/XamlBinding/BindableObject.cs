@@ -40,7 +40,7 @@ namespace Tizen.NUI.Binding
             BindableProperty.Create(nameof(BindingContext), typeof(object), typeof(BindableObject),  default(object), BindingMode.OneWay, null, BindingContextPropertyChanged,
             null, null, BindingContextPropertyBindingChanging);
 
-        readonly Dictionary<BindableProperty, BindablePropertyContext> properties = new Dictionary<BindableProperty, BindablePropertyContext>(4);
+        Dictionary<BindableProperty, BindablePropertyContext> properties;
 
         bool applying;
         object inheritedContext;
@@ -105,7 +105,7 @@ namespace Tizen.NUI.Binding
         [EditorBrowsable(EditorBrowsableState.Never)]
         public void CopyBindingRelationShip(BindableObject other)
         {
-            if (null == other)
+            if (null == other || properties == null)
             {
                 return;
             }
@@ -113,6 +113,11 @@ namespace Tizen.NUI.Binding
             foreach (var property in properties)
             {
                 RemoveBinding(property.Key);
+            }
+
+            if (other.properties == null)
+            {
+                return;
             }
 
             foreach (var property in other.properties)
@@ -446,6 +451,11 @@ namespace Tizen.NUI.Binding
         [EditorBrowsable(EditorBrowsableState.Never)]
         protected void UnapplyBindings()
         {
+            if (properties == null)
+            {
+                return;
+            }
+
             foreach (var context in properties.Values)
             {
                 if (context.Binding == null)
@@ -473,6 +483,11 @@ namespace Tizen.NUI.Binding
         internal object[] GetValues(BindableProperty property0, BindableProperty property1)
         {
             var values = new object[2];
+
+            if (properties == null)
+            {
+                return values;
+            }
 
             foreach (var context in properties.Values)
             {
@@ -509,6 +524,11 @@ namespace Tizen.NUI.Binding
         internal object[] GetValues(BindableProperty property0, BindableProperty property1, BindableProperty property2)
         {
             var values = new object[3];
+
+            if (properties == null)
+            {
+                return values;
+            }
 
             foreach (var context in properties.Values)
             {
@@ -743,6 +763,11 @@ namespace Tizen.NUI.Binding
 
         internal void ApplyBindings(bool skipBindingContext, bool fromBindingContextChanged)
         {
+            if (properties == null)
+            {
+                return;
+            }
+
             var prop = properties.Values.ToArray();
             for (int i = 0, propLength = prop.Length; i < propLength; i++)
             {
@@ -863,12 +888,19 @@ namespace Tizen.NUI.Binding
             else
                 context.Attributes = BindableContextAttributes.IsDefaultValueCreated;
 
-            properties.Add(property, context);
+            (properties ??= new Dictionary<BindableProperty, BindablePropertyContext>(4)).Add(property, context);
             return context;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        BindablePropertyContext GetContext(BindableProperty property) => properties.TryGetValue(property, out var result) ? result : null;
+        BindablePropertyContext GetContext(BindableProperty property)
+        {
+            if (properties != null && properties.TryGetValue(property, out var result))
+            {
+                return result;
+            }
+            return null;
+        }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         BindablePropertyContext GetOrCreateContext(BindableProperty property)
@@ -1053,19 +1085,22 @@ namespace Tizen.NUI.Binding
                 xElementToNameOfOld.Add(pair.Value, pair.Key);
             }
 
-            foreach (var property in properties)
+            if (properties != null)
             {
-                if (property.Value.Binding is Binding binding && null != binding.Source)
+                foreach (var property in properties)
                 {
-                    string xName;
-                    xElementToNameOfOld.TryGetValue(binding.Source, out xName);
-
-                    if (null != xName)
+                    if (property.Value.Binding is Binding binding && null != binding.Source)
                     {
-                        var newObject = newNameScope[xName];
-                        binding.Unapply();
-                        binding.Source = newObject;
-                        SetBinding(property.Key, binding);
+                        string xName;
+                        xElementToNameOfOld.TryGetValue(binding.Source, out xName);
+
+                        if (null != xName)
+                        {
+                            var newObject = newNameScope[xName];
+                            binding.Unapply();
+                            binding.Source = newObject;
+                            SetBinding(property.Key, binding);
+                        }
                     }
                 }
             }
@@ -1089,6 +1124,11 @@ namespace Tizen.NUI.Binding
         [EditorBrowsable(EditorBrowsableState.Never)]
         public void ClearBinding()
         {
+            if (properties == null)
+            {
+                return;
+            }
+
             foreach (var property in properties)
             {
                 if (null != property.Value.Binding)
