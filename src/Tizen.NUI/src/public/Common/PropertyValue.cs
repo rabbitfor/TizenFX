@@ -62,7 +62,7 @@ namespace Tizen.NUI
         /// </summary>
         /// <param name="vectorValue">Color values.</param>
         /// <since_tizen> 3 </since_tizen>
-        public PropertyValue(Color vectorValue) : this(Interop.PropertyValue.NewPropertyValueVector4(Color.getCPtr(vectorValue)), true)
+        public PropertyValue(Color vectorValue) : this(Interop.PropertyValue.NewPropertyValueColor(vectorValue.ToUint()), true)
         {
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
         }
@@ -279,7 +279,7 @@ namespace Tizen.NUI
 
         /// <summary>
         /// Hidden API (Inhouse API).
-        /// Dispose. 
+        /// Dispose.
         /// </summary>
         /// <remarks>
         /// Following the guide of https://docs.microsoft.com/en-us/dotnet/standard/garbage-collection/implementing-dispose.

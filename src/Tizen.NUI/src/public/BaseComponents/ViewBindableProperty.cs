@@ -221,8 +221,8 @@ namespace Tizen.NUI.BaseComponents
             return view.GetInternalColorBlue();
         }
 
-        /// <summary> 
-        /// BackgroundImageProperty 
+        /// <summary>
+        /// BackgroundImageProperty
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
         public static readonly BindableProperty BackgroundImageProperty = null;
@@ -2743,7 +2743,7 @@ namespace Tizen.NUI.BaseComponents
 
             if (backgroundExtraData == null)
             {
-                Object.InternalSetPropertyVector4(SwigCPtr, View.Property.BACKGROUND, ((Color)value).SwigCPtr);
+                Object.InternalSetPropertyColor(SwigCPtr, View.Property.BACKGROUND, value);
                 return;
             }
 

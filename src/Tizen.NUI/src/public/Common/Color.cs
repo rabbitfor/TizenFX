@@ -34,900 +34,917 @@ namespace Tizen.NUI
         /// Gets the alice_blue colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color AliceBlue = NDalic.ALICE_BLUE;
+        public static readonly Color AliceBlue = new Color(0, 0, 0, 0);
 
         /// <summary>
         /// Gets the antique_white colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color AntiqueWhite = NDalic.ANTIQUE_WHITE;
+        public static readonly Color AntiqueWhite = AliceBlue;
 
         /// <summary>
         /// Gets the aqua colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color Aqua = NDalic.AQUA;
+        public static readonly Color Aqua = AliceBlue;
 
         /// <summary>
         /// Gets the aqua_marine colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color AquaMarine = NDalic.AQUA_MARINE;
+        public static readonly Color AquaMarine = AliceBlue;
 
         /// <summary>
         /// Gets the azure colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color Azure = NDalic.AZURE;
+        public static readonly Color Azure = AliceBlue;
 
         /// <summary>
         /// Gets the beige colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color Beige = NDalic.BEIGE;
+        public static readonly Color Beige = AliceBlue;
 
         /// <summary>
         /// Gets the bisque colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color Bisque = NDalic.BISQUE;
+        public static readonly Color Bisque = AliceBlue;
 
         /// <summary>
         /// Gets the black colored Color class.
         /// </summary>
         /// <since_tizen> 3 </since_tizen>
-        public static readonly Color Black = NDalic.BLACK;
+        public static readonly Color Black = AliceBlue;
 
         /// <summary>
         /// Gets the blanche_dalmond colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color BlancheDalmond = NDalic.BLANCHE_DALMOND;
+        public static readonly Color BlancheDalmond = AliceBlue;
 
         /// <summary>
         /// Gets the blue colored Color class.
         /// </summary>
         /// <since_tizen> 3 </since_tizen>
-        public static readonly Color Blue = NDalic.BLUE;
+        public static readonly Color Blue = AliceBlue;
 
         /// <summary>
         /// Gets the blue_violet colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color BlueViolet = NDalic.BLUE_VIOLET;
+        public static readonly Color BlueViolet = AliceBlue;
 
         /// <summary>
         /// Gets the brown colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color Brown = NDalic.BROWN;
+        public static readonly Color Brown = AliceBlue;
 
         /// <summary>
         /// Gets the burly_wood colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color BurlyWood = NDalic.BURLY_WOOD;
+        public static readonly Color BurlyWood = AliceBlue;
 
         /// <summary>
         /// Gets the cadet_blue colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color CadetBlue = NDalic.CADET_BLUE;
+        public static readonly Color CadetBlue = AliceBlue;
 
         /// <summary>
         /// Gets the chartreuse colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color Chartreuse = NDalic.CHARTREUSE;
+        public static readonly Color Chartreuse = AliceBlue;
 
         /// <summary>
         /// Gets the chocolate colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color Chocolate = NDalic.CHOCOLATE;
+        public static readonly Color Chocolate = AliceBlue;
 
         /// <summary>
         /// Gets the coral colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color Coral = NDalic.CORAL;
+        public static readonly Color Coral = AliceBlue;
 
         /// <summary>
         /// Gets the cornflower_blue colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color CornflowerBlue = NDalic.CORNFLOWER_BLUE;
+        public static readonly Color CornflowerBlue = AliceBlue;
 
         /// <summary>
         /// Gets the cornsilk colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color Cornsilk = NDalic.CORNSILK;
+        public static readonly Color Cornsilk = AliceBlue;
 
         /// <summary>
         /// Gets the crimson colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color Crimson = NDalic.CRIMSON;
+        public static readonly Color Crimson = AliceBlue;
 
         /// <summary>
         /// Gets the cyan colored Color class.
         /// </summary>
         /// <since_tizen> 3 </since_tizen>
-        public static readonly Color Cyan = NDalic.CYAN;
+        public static readonly Color Cyan = AliceBlue;
 
         /// <summary>
         /// Gets the dark_blue colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color DarkBlue = NDalic.DARK_BLUE;
+        public static readonly Color DarkBlue = AliceBlue;
 
         /// <summary>
         /// Gets the dark_cyan colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color DarkCyan = NDalic.DARK_CYAN;
+        public static readonly Color DarkCyan = AliceBlue;
 
         /// <summary>
         /// Gets the dark_goldenrod colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color DarkGoldenrod = NDalic.DARK_GOLDENROD;
+        public static readonly Color DarkGoldenrod = AliceBlue;
 
         /// <summary>
         /// Gets the dark_gray colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color DarkGray = NDalic.DARK_GRAY;
+        public static readonly Color DarkGray = AliceBlue;
 
         /// <summary>
         /// Gets the dark_green colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color DarkGreen = NDalic.DARK_GREEN;
+        public static readonly Color DarkGreen = AliceBlue;
 
         /// <summary>
         /// Gets the dark_grey colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color DarkGrey = NDalic.DARK_GREY;
+        public static readonly Color DarkGrey = AliceBlue;
 
         /// <summary>
         /// Gets the dark_khaki colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color DarkKhaki = NDalic.DARK_KHAKI;
+        public static readonly Color DarkKhaki = AliceBlue;
 
         /// <summary>
         /// Gets the dark_magenta colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color DarkMagenta = NDalic.DARK_MAGENTA;
+        public static readonly Color DarkMagenta = AliceBlue;
 
         /// <summary>
         /// Gets the dark_olive_green colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color DarkOliveGreen = NDalic.DARK_OLIVE_GREEN;
+        public static readonly Color DarkOliveGreen = AliceBlue;
 
         /// <summary>
         /// Gets the dark_orange colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color DarkOrange = NDalic.DARK_ORANGE;
+        public static readonly Color DarkOrange = AliceBlue;
 
         /// <summary>
         /// Gets the dark_orchid colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color DarkOrchid = NDalic.DARK_ORCHID;
+        public static readonly Color DarkOrchid = AliceBlue;
 
         /// <summary>
         /// Gets the dark_red colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color DarkRed = NDalic.DARK_RED;
+        public static readonly Color DarkRed = AliceBlue;
 
         /// <summary>
         /// Gets the dark_salmon colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color DarkSalmon = NDalic.DARK_SALMON;
+        public static readonly Color DarkSalmon = AliceBlue;
 
         /// <summary>
         /// Gets the dark_sea_green colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color DarkSeaGreen = NDalic.DARK_SEA_GREEN;
+        public static readonly Color DarkSeaGreen = AliceBlue;
 
         /// <summary>
         /// Gets the dark_slate_blue colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color DarkSlateBlue = NDalic.DARK_SLATE_BLUE;
+        public static readonly Color DarkSlateBlue = AliceBlue;
 
         /// <summary>
         /// Gets the dark_slate_gray colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color DarkSlateGray = NDalic.DARK_SLATE_GRAY;
+        public static readonly Color DarkSlateGray = AliceBlue;
 
         /// <summary>
         /// Gets the dark_slate_grey colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color DarkSlateGrey = NDalic.DARK_SLATE_GREY;
+        public static readonly Color DarkSlateGrey = AliceBlue;
 
         /// <summary>
         /// Gets the dark_turquoise colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color DarkTurquoise = NDalic.DARK_TURQUOISE;
+        public static readonly Color DarkTurquoise = AliceBlue;
 
         /// <summary>
         /// Gets the dark_violet colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color DarkViolet = NDalic.DARK_VIOLET;
+        public static readonly Color DarkViolet = AliceBlue;
 
         /// <summary>
         /// Gets the deep_pink colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color DeepPink = NDalic.DEEP_PINK;
+        public static readonly Color DeepPink = AliceBlue;
 
         /// <summary>
         /// Gets the deep_sky_blue colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color DeepSkyBlue = NDalic.DEEP_SKY_BLUE;
+        public static readonly Color DeepSkyBlue = AliceBlue;
 
         /// <summary>
         /// Gets the dim_gray colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color DimGray = NDalic.DIM_GRAY;
+        public static readonly Color DimGray = AliceBlue;
 
         /// <summary>
         /// Gets the dim_grey colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color DimGrey = NDalic.DIM_GREY;
+        public static readonly Color DimGrey = AliceBlue;
 
         /// <summary>
         /// Gets the dodger_blue colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color DodgerBlue = NDalic.DODGER_BLUE;
+        public static readonly Color DodgerBlue = AliceBlue;
 
         /// <summary>
         /// Gets the fire_brick colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color FireBrick = NDalic.FIRE_BRICK;
+        public static readonly Color FireBrick = AliceBlue;
 
         /// <summary>
         /// Gets the floral_white colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color FloralWhite = NDalic.FLORAL_WHITE;
+        public static readonly Color FloralWhite = AliceBlue;
 
         /// <summary>
         /// Gets the forest_green colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color ForestGreen = NDalic.FOREST_GREEN;
+        public static readonly Color ForestGreen = AliceBlue;
 
         /// <summary>
         /// Gets the fuchsia colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color Fuchsia = NDalic.FUCHSIA;
+        public static readonly Color Fuchsia = AliceBlue;
 
         /// <summary>
         /// Gets the gainsboro colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color Gainsboro = NDalic.GAINSBORO;
+        public static readonly Color Gainsboro = AliceBlue;
 
         /// <summary>
         /// Gets the ghost_white colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color GhostWhite = NDalic.GHOST_WHITE;
+        public static readonly Color GhostWhite = AliceBlue;
 
         /// <summary>
         /// Gets the gold colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color Gold = NDalic.GOLD;
+        public static readonly Color Gold = AliceBlue;
 
         /// <summary>
         /// Gets the golden_rod colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color GoldenRod = NDalic.GOLDEN_ROD;
+        public static readonly Color GoldenRod = AliceBlue;
 
         /// <summary>
         /// Gets the gray colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color Gray = NDalic.GRAY;
+        public static readonly Color Gray = AliceBlue;
 
         /// <summary>
         /// Gets the green colored Color class.
         /// </summary>
         /// <since_tizen> 3 </since_tizen>
-        public static readonly Color Green = NDalic.GREEN;
+        public static readonly Color Green = AliceBlue;
 
         /// <summary>
         /// Gets the green_yellow colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color GreenYellow = NDalic.GREEN_YELLOW;
+        public static readonly Color GreenYellow = AliceBlue;
 
         /// <summary>
         /// Gets the grey colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color Grey = NDalic.GREY;
+        public static readonly Color Grey = AliceBlue;
 
         /// <summary>
         /// Gets the honeydew colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color Honeydew = NDalic.HONEYDEW;
+        public static readonly Color Honeydew = AliceBlue;
 
         /// <summary>
         /// Gets the hot_pink colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color HotPink = NDalic.HOT_PINK;
+        public static readonly Color HotPink = AliceBlue;
 
         /// <summary>
         /// Gets the indianred colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color Indianred = NDalic.INDIANRED;
+        public static readonly Color Indianred = AliceBlue;
 
         /// <summary>
         /// Gets the indigo colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color Indigo = NDalic.INDIGO;
+        public static readonly Color Indigo = AliceBlue;
 
         /// <summary>
         /// Gets the ivory colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color Ivory = NDalic.IVORY;
+        public static readonly Color Ivory = AliceBlue;
 
         /// <summary>
         /// Gets the khaki colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color Khaki = NDalic.KHAKI;
+        public static readonly Color Khaki = AliceBlue;
 
         /// <summary>
         /// Gets the lavender colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color Lavender = NDalic.LAVENDER;
+        public static readonly Color Lavender = AliceBlue;
 
         /// <summary>
         /// Gets the lavender_blush colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color LavenderBlush = NDalic.LAVENDER_BLUSH;
+        public static readonly Color LavenderBlush = AliceBlue;
 
         /// <summary>
         /// Gets the lawn_green colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color LawnGreen = NDalic.LAWN_GREEN;
+        public static readonly Color LawnGreen = AliceBlue;
 
         /// <summary>
         /// Gets the lemon_chiffon colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color LemonChiffon = NDalic.LEMON_CHIFFON;
+        public static readonly Color LemonChiffon = AliceBlue;
 
         /// <summary>
         /// Gets the light_blue colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color LightBlue = NDalic.LIGHT_BLUE;
+        public static readonly Color LightBlue = AliceBlue;
 
         /// <summary>
         /// Gets the light_coral colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color LightCoral = NDalic.LIGHT_CORAL;
+        public static readonly Color LightCoral = AliceBlue;
 
         /// <summary>
         /// Gets the light_cyan colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color LightCyan = NDalic.LIGHT_CYAN;
+        public static readonly Color LightCyan = AliceBlue;
 
         /// <summary>
         /// Gets the light_golden_rod_yellow colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color LightGoldenRodYellow = NDalic.LIGHT_GOLDEN_ROD_YELLOW;
+        public static readonly Color LightGoldenRodYellow = AliceBlue;
 
         /// <summary>
         /// Gets the light_gray colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color LightGray = NDalic.LIGHT_GRAY;
+        public static readonly Color LightGray = AliceBlue;
 
         /// <summary>
         /// Gets the light_green colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color LightGreen = NDalic.LIGHT_GREEN;
+        public static readonly Color LightGreen = AliceBlue;
 
         /// <summary>
         /// Gets the light_grey colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color LightGrey = NDalic.LIGHT_GREY;
+        public static readonly Color LightGrey = AliceBlue;
 
         /// <summary>
         /// Gets the light_pink colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color LightPink = NDalic.LIGHT_PINK;
+        public static readonly Color LightPink = AliceBlue;
 
         /// <summary>
         /// Gets the light_salmon colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color LightSalmon = NDalic.LIGHT_SALMON;
+        public static readonly Color LightSalmon = AliceBlue;
 
         /// <summary>
         /// Gets the light_sea_green colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color LightSeaGreen = NDalic.LIGHT_SEA_GREEN;
+        public static readonly Color LightSeaGreen = AliceBlue;
 
         /// <summary>
         /// Gets the light_sky_blue colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color LightSkyBlue = NDalic.LIGHT_SKY_BLUE;
+        public static readonly Color LightSkyBlue = AliceBlue;
 
         /// <summary>
         /// Gets the light_slate_gray colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color LightSlateGray = NDalic.LIGHT_SLATE_GRAY;
+        public static readonly Color LightSlateGray = AliceBlue;
 
         /// <summary>
         /// Gets the light_slate_grey colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color LightSlateGrey = NDalic.LIGHT_SLATE_GREY;
+        public static readonly Color LightSlateGrey = AliceBlue;
 
         /// <summary>
         /// Gets the light_steel_blue colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color LightSteelBlue = NDalic.LIGHT_STEEL_BLUE;
+        public static readonly Color LightSteelBlue = AliceBlue;
 
         /// <summary>
         /// Gets the light_yellow colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color LightYellow = NDalic.LIGHT_YELLOW;
+        public static readonly Color LightYellow = AliceBlue;
 
         /// <summary>
         /// Gets the lime colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color Lime = NDalic.LIME;
+        public static readonly Color Lime = AliceBlue;
 
         /// <summary>
         /// Gets the lime_green colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color LimeGreen = NDalic.LIME_GREEN;
+        public static readonly Color LimeGreen = AliceBlue;
 
         /// <summary>
         /// Gets the linen colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color Linen = NDalic.LINEN;
+        public static readonly Color Linen = AliceBlue;
 
         /// <summary>
         /// Gets the magenta colored Color class.
         /// </summary>
         /// <since_tizen> 3 </since_tizen>
-        public static readonly Color Magenta = NDalic.MAGENTA;
+        public static readonly Color Magenta = AliceBlue;
 
         /// <summary>
         /// Gets the maroon colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color Maroon = NDalic.MAROON;
+        public static readonly Color Maroon = AliceBlue;
 
         /// <summary>
         /// Gets the medium_aqua_marine colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color MediumAquaMarine = NDalic.MEDIUM_AQUA_MARINE;
+        public static readonly Color MediumAquaMarine = AliceBlue;
 
         /// <summary>
         /// Gets the medium_blue colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color MediumBlue = NDalic.MEDIUM_BLUE;
+        public static readonly Color MediumBlue = AliceBlue;
 
         /// <summary>
         /// Gets the medium_orchid colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color MediumOrchid = NDalic.MEDIUM_ORCHID;
+        public static readonly Color MediumOrchid = AliceBlue;
 
         /// <summary>
         /// Gets the medium_purple colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color MediumPurple = NDalic.MEDIUM_PURPLE;
+        public static readonly Color MediumPurple = AliceBlue;
 
         /// <summary>
         /// Gets the medium_sea_green colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color MediumSeaGreen = NDalic.MEDIUM_SEA_GREEN;
+        public static readonly Color MediumSeaGreen = AliceBlue;
 
         /// <summary>
         /// Gets the medium_slate_blue colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color MediumSlateBlue = NDalic.MEDIUM_SLATE_BLUE;
+        public static readonly Color MediumSlateBlue = AliceBlue;
 
         /// <summary>
         /// Gets the medium_spring_green colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color MediumSpringGreen = NDalic.MEDIUM_SPRING_GREEN;
+        public static readonly Color MediumSpringGreen = AliceBlue;
 
         /// <summary>
         /// Gets the medium_turquoise colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color MediumTurquoise = NDalic.MEDIUM_TURQUOISE;
+        public static readonly Color MediumTurquoise = AliceBlue;
 
         /// <summary>
         /// Gets the medium_violetred colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color MediumVioletred = NDalic.MEDIUM_VIOLETRED;
+        public static readonly Color MediumVioletred = AliceBlue;
 
         /// <summary>
         /// Gets the midnight_blue colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color MidnightBlue = NDalic.MIDNIGHT_BLUE;
+        public static readonly Color MidnightBlue = AliceBlue;
 
         /// <summary>
         /// Gets the mint_cream colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color MintCream = NDalic.MINT_CREAM;
+        public static readonly Color MintCream = AliceBlue;
 
         /// <summary>
         /// Gets the misty_rose colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color MistyRose = NDalic.MISTY_ROSE;
+        public static readonly Color MistyRose = AliceBlue;
 
         /// <summary>
         /// Gets the moccasin colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color Moccasin = NDalic.MOCCASIN;
+        public static readonly Color Moccasin = AliceBlue;
 
         /// <summary>
         /// Gets the navajo_white colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color NavajoWhite = NDalic.NAVAJO_WHITE;
+        public static readonly Color NavajoWhite = AliceBlue;
 
         /// <summary>
         /// Gets the navy colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color Navy = NDalic.NAVY;
+        public static readonly Color Navy = AliceBlue;
 
         /// <summary>
         /// Gets the old_lace colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color OldLace = NDalic.OLD_LACE;
+        public static readonly Color OldLace = AliceBlue;
 
         /// <summary>
         /// Gets the olive colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color Olive = NDalic.OLIVE;
+        public static readonly Color Olive = AliceBlue;
 
         /// <summary>
         /// Gets the olive_drab colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color OliveDrab = NDalic.OLIVE_DRAB;
+        public static readonly Color OliveDrab = AliceBlue;
 
         /// <summary>
         /// Gets the orange colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color Orange = NDalic.ORANGE;
+        public static readonly Color Orange = AliceBlue;
 
         /// <summary>
         /// Gets the orange_red colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color OrangeRed = NDalic.ORANGE_RED;
+        public static readonly Color OrangeRed = AliceBlue;
 
         /// <summary>
         /// Gets the orchid colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color Orchid = NDalic.ORCHID;
+        public static readonly Color Orchid = AliceBlue;
 
         /// <summary>
         /// Gets the pale_golden_rod colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color PaleGoldenRod = NDalic.PALE_GOLDEN_ROD;
+        public static readonly Color PaleGoldenRod = AliceBlue;
 
         /// <summary>
         /// Gets the pale_green colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color PaleGreen = NDalic.PALE_GREEN;
+        public static readonly Color PaleGreen = AliceBlue;
 
         /// <summary>
         /// Gets the  Pale_Turquoise colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color PaleTurquoise = NDalic.PALE_TURQUOISE;
+        public static readonly Color PaleTurquoise = AliceBlue;
 
         /// <summary>
         /// Gets the Pale_Violet_Red colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color PaleVioletRed = NDalic.PALE_VIOLET_RED;
+        public static readonly Color PaleVioletRed = AliceBlue;
 
         /// <summary>
         /// Gets the Papaya_whip  colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color PapayaWhip = NDalic.PAPAYA_WHIP;
+        public static readonly Color PapayaWhip = AliceBlue;
 
         /// <summary>
         /// Gets the Peach_puff colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color PeachPuff = NDalic.PEACH_PUFF;
+        public static readonly Color PeachPuff = AliceBlue;
 
         /// <summary>
         /// Gets the peru colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color Peru = NDalic.PERU;
+        public static readonly Color Peru = AliceBlue;
 
         /// <summary>
         /// Gets the pink colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color Pink = NDalic.PINK;
+        public static readonly Color Pink = AliceBlue;
 
         /// <summary>
         /// Gets the plum colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color Plum = NDalic.PLUM;
+        public static readonly Color Plum = AliceBlue;
 
         /// <summary>
         /// Gets the powder_blue colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color PowderBlue = NDalic.POWDER_BLUE;
+        public static readonly Color PowderBlue = AliceBlue;
 
         /// <summary>
         /// Gets the purple colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color Purple = NDalic.PURPLE;
+        public static readonly Color Purple = AliceBlue;
 
         /// <summary>
         /// Gets the red colored Color class.
         /// </summary>
         /// <since_tizen> 3 </since_tizen>
-        public static readonly Color Red = NDalic.RED;
+        public static readonly Color Red = AliceBlue;
 
         /// <summary>
         /// Gets the rosy_brown colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color RosyBrown = NDalic.ROSY_BROWN;
+        public static readonly Color RosyBrown = AliceBlue;
 
         /// <summary>
         /// Gets the royal_blue colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color RoyalBlue = NDalic.ROYAL_BLUE;
+        public static readonly Color RoyalBlue = AliceBlue;
 
         /// <summary>
         /// Gets the saddle_brown colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color SaddleBrown = NDalic.SADDLE_BROWN;
+        public static readonly Color SaddleBrown = AliceBlue;
 
         /// <summary>
         /// Gets the salmon colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color Salmon = NDalic.SALMON;
+        public static readonly Color Salmon = AliceBlue;
 
         /// <summary>
         /// Gets the sandy_brown colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color SandyBrown = NDalic.SANDY_BROWN;
+        public static readonly Color SandyBrown = AliceBlue;
 
         /// <summary>
         /// Gets the sea_green colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color SeaGreen = NDalic.SEA_GREEN;
+        public static readonly Color SeaGreen = AliceBlue;
 
         /// <summary>
         /// Gets the sea_shell colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color SeaShell = NDalic.SEA_SHELL;
+        public static readonly Color SeaShell = AliceBlue;
 
         /// <summary>
         /// Gets the sienna colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color Sienna = NDalic.SIENNA;
+        public static readonly Color Sienna = AliceBlue;
 
         /// <summary>
         /// Gets the silver colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color Silver = NDalic.SILVER;
+        public static readonly Color Silver = AliceBlue;
 
         /// <summary>
         /// Gets the sky_blue colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color SkyBlue = NDalic.SKY_BLUE;
+        public static readonly Color SkyBlue = AliceBlue;
 
         /// <summary>
         /// Gets the slate_blue colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color SlateBlue = NDalic.SLATE_BLUE;
+        public static readonly Color SlateBlue = AliceBlue;
 
         /// <summary>
         /// Gets the slate_gray colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color SlateGray = NDalic.SLATE_GRAY;
+        public static readonly Color SlateGray = AliceBlue;
 
         /// <summary>
         /// Gets the slate_grey colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color SlateGrey = NDalic.SLATE_GREY;
+        public static readonly Color SlateGrey = AliceBlue;
 
         /// <summary>
         /// Gets the snow colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color Snow = NDalic.SNOW;
+        public static readonly Color Snow = AliceBlue;
 
         /// <summary>
         /// Gets the spring_green colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color SpringGreen = NDalic.SPRING_GREEN;
+        public static readonly Color SpringGreen = AliceBlue;
 
         /// <summary>
         /// Gets the steel_blue colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color SteelBlue = NDalic.STEEL_BLUE;
+        public static readonly Color SteelBlue = AliceBlue;
 
         /// <summary>
         /// Gets the tan colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color Tan = NDalic.TAN;
+        public static readonly Color Tan = AliceBlue;
 
         /// <summary>
         /// Gets the teal colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color Teal = NDalic.TEAL;
+        public static readonly Color Teal = AliceBlue;
 
         /// <summary>
         /// Gets the thistle colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color Thistle = NDalic.THISTLE;
+        public static readonly Color Thistle = AliceBlue;
 
         /// <summary>
         /// Gets the tomato colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color Tomato = NDalic.TOMATO;
+        public static readonly Color Tomato = AliceBlue;
 
         /// <summary>
         /// Gets the  transparent colored Color class.
         /// </summary>
         /// <since_tizen> 3 </since_tizen>
-        public static readonly Color Transparent = NDalic.TRANSPARENT;
+        public static readonly Color Transparent = AliceBlue;
 
         /// <summary>
         /// Gets the turquoise colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color Turquoise = NDalic.TURQUOISE;
+        public static readonly Color Turquoise = AliceBlue;
 
         /// <summary>
         /// Gets the violet colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color Violet = NDalic.VIOLET;
+        public static readonly Color Violet = AliceBlue;
 
         /// <summary>
         /// Gets the wheat colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color Wheat = NDalic.WHEAT;
+        public static readonly Color Wheat = AliceBlue;
 
         /// <summary>
         /// Gets the white colored Color class.
         /// </summary>
         /// <since_tizen> 3 </since_tizen>
-        public static readonly Color White = NDalic.WHITE;
+        public static readonly Color White = AliceBlue;
 
         /// <summary>
         /// Gets the white_smoke colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color WhiteSmoke = NDalic.WHITE_SMOKE;
+        public static readonly Color WhiteSmoke = AliceBlue;
 
         /// <summary>
         /// Gets the yellow colored Color class.
         /// </summary>
         /// <since_tizen> 3 </since_tizen>
-        public static readonly Color Yellow = NDalic.YELLOW;
+        public static readonly Color Yellow = AliceBlue;
 
         /// <summary>
         /// Gets the yellow_green colored Color class.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static readonly Color YellowGreen = NDalic.YELLOW_GREEN;
+        public static readonly Color YellowGreen = AliceBlue;
 
 
         /// <summary>
         /// Default constructor
         /// </summary>
         /// <since_tizen> 3 </since_tizen>
-        public Color() : this(Interop.Vector4.NewVector4(), true)
+        public Color() : this(0, 0, 0, 0)
         {
-            if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
         }
 
+        /// <summary>
+        /// The conversion constructor from an System.Drawing.Color instance.
+        /// </summary>
+        /// <param name="color">System.Drawing.Color instance</param>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public Color(System.Drawing.Color color) : base(GenerateData(color.R, color.G, color.B, color.A))
+        {
+        }
+
+        /// <summary>
+        /// The copy constructor.
+        /// </summary>
+        /// <param name="other">The copy target.</param>
+        /// <exception cref="ArgumentNullException"> Thrown when other is null. </exception>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public Color(Color other) : base(other == null ? throw new ArgumentNullException(nameof(other)) : other.GetCPtrAsData())
+        {
+        }
 
         /// <summary>
         /// The constructor.
@@ -937,9 +954,8 @@ namespace Tizen.NUI
         /// <param name="b">The blue component.</param>
         /// <param name="a">The alpha component.</param>
         /// <since_tizen> 3 </since_tizen>
-        public Color(float r, float g, float b, float a) : this(Interop.Vector4.NewVector4(ValueCheck(r), ValueCheck(g), ValueCheck(b), ValueCheck(a)), true)
+        public Color(float r, float g, float b, float a) : base(GenerateData(ValueCheck(r), ValueCheck(g), ValueCheck(b), ValueCheck(a)))
         {
-            if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
         }
 
         /// <summary>
@@ -947,9 +963,22 @@ namespace Tizen.NUI
         /// </summary>
         /// <param name="array">array Array of R,G,B,A.</param>
         /// <since_tizen> 3 </since_tizen>
-        public Color(float[] array) : this(Interop.Vector4.NewVector4(ValueCheck(array)), true)
+        public Color(float[] array) : this(array[0], array[1], array[2], array[3])
         {
-            if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
+            ValueCheck(array);
+        }
+
+        // internal Color(IntPtr cPtr, bool cMemoryOwn) : base(cPtr, cMemoryOwn)
+        // {
+        // }
+
+        internal Color(ColorChangedCallback cb, float r, float g, float b, float a) : this(ValueCheck(r), ValueCheck(g), ValueCheck(b), ValueCheck(a))
+        {
+            callback = cb;
+        }
+
+        internal Color(ColorChangedCallback cb, Color other) : this(cb, other.R, other.G, other.B, other.A)
+        {
         }
 
         /// <summary>
@@ -962,123 +991,16 @@ namespace Tizen.NUI
         /// <since_tizen> 6 </since_tizen>
         /// This will be public opened in tizen_6.0 after ACR done. Before ACR, need to be hidden as inhouse API.
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public Color(string textColor) : this(Interop.Vector4.NewVector4(), true)
-        {
-            try
-            {
-                if (null == textColor)
-                {
-                    throw new ArgumentNullException(nameof(textColor));
-                }
-
-                textColor = textColor.ToUpperInvariant();
-                textColor = textColor.Replace(" ", "");
-
-                if (textColor.Length > 0 && textColor[0] == '#')
-                {
-                    textColor = textColor.Replace("#", "");
-                    int textColorLength = textColor.Length;
-
-                    if (textColorLength == 6 || textColorLength == 8) /* #RRGGBB or #RRGGBBAA */
-                    {
-                        R = ((float)Convert.ToInt32(textColor.Substring(0, 2), 16)) / 255.0f;
-                        G = ((float)Convert.ToInt32(textColor.Substring(2, 2), 16)) / 255.0f;
-                        B = ((float)Convert.ToInt32(textColor.Substring(4, 2), 16)) / 255.0f;
-                        A = textColor.Length > 6 ? ((float)Convert.ToInt32(textColor.Substring(6, 2), 16)) / 255.0f : 1.0f;
-                    }
-                    else if (textColorLength == 3 || textColorLength == 4) /* #RGB */
-                    {
-                        R = ((float)Convert.ToInt32(textColor.Substring(0, 1), 16)) / 15.0f;
-                        G = ((float)Convert.ToInt32(textColor.Substring(1, 1), 16)) / 15.0f;
-                        B = ((float)Convert.ToInt32(textColor.Substring(2, 1), 16)) / 15.0f;
-                        A = textColor.Length > 3 ? ((float)Convert.ToInt32(textColor.Substring(3, 1), 16)) / 15.0f : 1.0f;
-                    }
-                    else
-                    {
-                        throw new global::System.ArgumentException("Please check your color text code");
-                    }
-                }
-                else // example rgb(255,255,255) or rgb(255,255,255,1.0)
-                {
-                    bool isRGBA = textColor.StartsWith("RGBA(");
-                    bool isRGB = textColor.StartsWith("RGB(");
-
-                    if (!isRGBA && !isRGB)
-                    {
-                        throw new global::System.ArgumentException("Please check your color text code");
-                    }
-
-                    if (isRGBA)
-                        textColor = textColor.Substring(4);
-                    if (isRGB)
-                        textColor = textColor.Substring(3);
-
-                    textColor = textColor.Replace(")", "");
-                    textColor = textColor.Replace("(", "");
-
-                    string[] components = textColor.Split(',');
-
-                    if (components.Length == 3 && isRGB)
-                    {
-                        R = Math.Min(1.0f, ((float)Convert.ToInt32(components[0], 10)) / 255.0f);
-                        G = Math.Min(1.0f, ((float)Convert.ToInt32(components[1], 10)) / 255.0f);
-                        B = Math.Min(1.0f, ((float)Convert.ToInt32(components[2], 10)) / 255.0f);
-                        A = 1.0f;
-                    }
-                    else if (components.Length == 4 && isRGBA)
-                    {
-                        R = Math.Min(1.0f, ((float)Convert.ToInt32(components[0], 10)) / 255.0f);
-                        G = Math.Min(1.0f, ((float)Convert.ToInt32(components[1], 10)) / 255.0f);
-                        B = Math.Min(1.0f, ((float)Convert.ToInt32(components[2], 10)) / 255.0f);
-                        A = Math.Min(1.0f, float.Parse(components[3], CultureInfo.InvariantCulture));
-                    }
-                }
-            }
-            catch
-            {
-                throw new global::System.ArgumentException("Please check your color text code");
-            }
-        }
-
-        /// <summary>
-        /// The conversion constructor from an System.Drawing.Color instance.
-        /// </summary>
-        /// <param name="color">System.Drawing.Color instance</param>
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public Color(global::System.Drawing.Color color) : this(Interop.Vector4.NewVector4(), true)
-        {
-            R = color.R / 255.0f;
-            G = color.G / 255.0f;
-            B = color.B / 255.0f;
-            A = color.A / 255.0f;
-        }
-
-        /// <summary>
-        /// The copy constructor.
-        /// </summary>
-        /// <param name="other">The copy target.</param>
-        /// <exception cref="ArgumentNullException"> Thrown when other is null. </exception>
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public Color(Color other) : this(other == null ? throw new ArgumentNullException(nameof(other)) : other.R, other.G, other.B, other.A)
-        {
-        }
-
-        internal Color(global::System.IntPtr cPtr, bool cMemoryOwn) : base(cPtr, cMemoryOwn)
-        {
-        }
-
-        internal Color(ColorChangedCallback cb, float r, float g, float b, float a) : this(Interop.Vector4.NewVector4(ValueCheck(r), ValueCheck(g), ValueCheck(b), ValueCheck(a)), true)
-        {
-            callback = cb;
-            if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
-        }
-
-        internal Color(ColorChangedCallback cb, Color other) : this(cb, other.R, other.G, other.B, other.A)
+        public Color(string textColor) : base(GenerateData(textColor ?? throw new ArgumentNullException(nameof(textColor))))
         {
         }
 
         internal delegate void ColorChangedCallback(float r, float g, float b, float a);
         private ColorChangedCallback callback = null;
+        private const int rMask = unchecked(0x00FFFFFF);
+        private const int gMask = unchecked((int)0xFF00FFFF);
+        private const int bMask = unchecked((int)0xFFFF00FF);
+        private const int aMask = unchecked((int)0xFFFFFF00);
 
         /// <summary>
         /// The red component.
@@ -1089,7 +1011,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use as follows:
         /// Color color = new Color();
-        /// color.R = 0.1f; 
+        /// color.R = 0.1f;
         /// // USE like this
         /// float r = 0.1f, g = 0.5f, b = 0.9f, a = 1.0f;
         /// Color color = new Color(r, g, b, a);
@@ -1100,17 +1022,10 @@ namespace Tizen.NUI
             [Obsolete("Do not use this setter, that is deprecated in API8 and will be removed in API10. Use the new Color(...) constructor")]
             set
             {
-                Interop.Vector4.RSet(SwigCPtr, ValueCheck(value));
-                if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
-
+                ResetCPtrAsData(((byte)(ValueCheck(value) * 255) << 24) | (GetCPtrAsData() & rMask));
                 callback?.Invoke(value, G, B, A);
             }
-            get
-            {
-                float ret = Interop.Vector4.RGet(SwigCPtr);
-                if (NDalicPINVOKE.SWIGPendingException.Pending) throw new InvalidOperationException("FATAL: get Exception", NDalicPINVOKE.SWIGPendingException.Retrieve());
-                return ret;
-            }
+            get => GetRData() / 255f;
         }
 
         /// <summary>
@@ -1122,7 +1037,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use as follows:
         /// Color color = new Color();
-        /// color.G = 0.5f; 
+        /// color.G = 0.5f;
         /// // USE like this
         /// float r = 0.1f, g = 0.5f, b = 0.9f, a = 1.0f;
         /// Color color = new Color(r, g, b, a);
@@ -1133,17 +1048,10 @@ namespace Tizen.NUI
             [Obsolete("Do not use this setter, that is deprecated in API8 and will be removed in API10. Use the new Color(...) constructor")]
             set
             {
-                Interop.Vector4.GSet(SwigCPtr, ValueCheck(value));
-                if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
-
+                ResetCPtrAsData(((byte)(ValueCheck(value) * 255) << 16) | (GetCPtrAsData() & gMask));
                 callback?.Invoke(R, value, B, A);
             }
-            get
-            {
-                float ret = Interop.Vector4.GGet(SwigCPtr);
-                if (NDalicPINVOKE.SWIGPendingException.Pending) throw new InvalidOperationException("FATAL: get Exception", NDalicPINVOKE.SWIGPendingException.Retrieve());
-                return ret;
-            }
+            get => GetGData() / 255f;
         }
 
         /// <summary>
@@ -1155,7 +1063,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use as follows:
         /// Color color = new Color();
-        /// color.B = 0.9f; 
+        /// color.B = 0.9f;
         /// // USE like this
         /// float r = 0.1f, g = 0.5f, b = 0.9f, a = 1.0f;
         /// Color color = new Color(r, g, b, a);
@@ -1166,17 +1074,10 @@ namespace Tizen.NUI
             [Obsolete("Do not use this setter, that is deprecated in API8 and will be removed in API10. Use the new Color(...) constructor")]
             set
             {
-                Interop.Vector4.BSet(SwigCPtr, ValueCheck(value));
-                if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
-
+                ResetCPtrAsData(((byte)(ValueCheck(value) * 255) << 8) | (GetCPtrAsData() & bMask));
                 callback?.Invoke(R, G, value, A);
             }
-            get
-            {
-                float ret = Interop.Vector4.BGet(SwigCPtr);
-                if (NDalicPINVOKE.SWIGPendingException.Pending) throw new InvalidOperationException("FATAL: get Exception", NDalicPINVOKE.SWIGPendingException.Retrieve());
-                return ret;
-            }
+            get => GetBData() / 255f;
         }
 
         /// <summary>
@@ -1188,7 +1089,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use as follows:
         /// Color color = new Color();
-        /// color.A = 1.0f; 
+        /// color.A = 1.0f;
         /// // USE like this
         /// float r = 0.1f, g = 0.5f, b = 0.9f, a = 1.0f;
         /// Color color = new Color(r, g, b, a);
@@ -1199,17 +1100,10 @@ namespace Tizen.NUI
             [Obsolete("Do not use this setter, that is deprecated in API8 and will be removed in API10. Use the new Color(...) constructor")]
             set
             {
-                Interop.Vector4.ASet(SwigCPtr, ValueCheck(value));
-                if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
-
-                callback?.Invoke(R, G, B, value);
+                ResetCPtrAsData((byte)(ValueCheck(value) * 255) | (GetCPtrAsData() & aMask));
+                callback?.Invoke(R, G, value, A);
             }
-            get
-            {
-                float ret = Interop.Vector4.AGet(SwigCPtr);
-                if (NDalicPINVOKE.SWIGPendingException.Pending) throw new InvalidOperationException("FATAL: get Exception", NDalicPINVOKE.SWIGPendingException.Retrieve());
-                return ret;
-            }
+            get => GetAData() / 255f;
         }
 
         /// <summary>
@@ -1222,7 +1116,23 @@ namespace Tizen.NUI
         {
             get
             {
-                return ValueOfIndex(index);
+                if (index == 0)
+                {
+                    return GetRData();
+                }
+                if (index == 1)
+                {
+                    return GetGData();
+                }
+                if (index == 2)
+                {
+                    return GetBData();
+                }
+                if (index == 3)
+                {
+                    return GetAData();
+                }
+                return 0;
             }
         }
 
@@ -1387,12 +1297,12 @@ namespace Tizen.NUI
         /// <since_tizen> 3 </since_tizen>
         public bool EqualTo(Color rhs)
         {
-            bool ret = Interop.Vector4.EqualTo(SwigCPtr, Color.getCPtr(rhs));
+            if (ReferenceEquals(this, rhs))
+            {
+                return true;
+            }
 
-            if (rhs == null) return false;
-
-            if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
-            return ret;
+            return GetRData() == rhs.GetRData() && GetGData() == rhs.GetGData() && GetBData() == rhs.GetBData() && GetAData() == rhs.GetAData();
         }
 
         /// <summary>
@@ -1401,23 +1311,11 @@ namespace Tizen.NUI
         /// <param name="rhs">A color to be compared.</param>
         /// <returns>If two colors are are different, then true.</returns>
         /// <since_tizen> 3 </since_tizen>
-        public bool NotEqualTo(Color rhs)
-        {
-            bool ret = Interop.Vector4.NotEqualTo(SwigCPtr, Color.getCPtr(rhs));
-            if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
-            return ret;
-        }
+        public bool NotEqualTo(Color rhs) => !EqualTo(rhs);
 
         /// <inheritdoc/>
         [EditorBrowsable(EditorBrowsableState.Never)]
         public object Clone() => new Color(this);
-
-        internal static Color GetColorFromPtr(global::System.IntPtr cPtr)
-        {
-            Color ret = new Color(cPtr, false);
-            if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
-            return ret;
-        }
 
         internal static Color ValueCheck(Color color)
         {
@@ -1485,96 +1383,20 @@ namespace Tizen.NUI
             Interop.Vector4.DeleteVector4(swigCPtr);
         }
 
-        private Color Add(Color rhs)
-        {
-            Color ret = new Color(Interop.Vector4.Add(SwigCPtr, Color.getCPtr(rhs)), true);
-            if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
-            return ret;
-        }
+        private Color Add(Color rhs) => new Color(Math.Min(R + rhs.R, 1), Math.Min(G + rhs.G, 1), Math.Min(B + rhs.B, 1), Math.Min(A + rhs.A, 1));
 
-        private Color AddAssign(Vector4 rhs)
-        {
-            Color ret = new Color(Interop.Vector4.AddAssign(SwigCPtr, Color.getCPtr(rhs)), false);
-            if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
-            return ret;
-        }
+        private Color Subtract(Color rhs) => new Color(Math.Max(R - rhs.R, 0), Math.Max(G - rhs.G, 0), Math.Max(B - rhs.B, 0), Math.Max(A - rhs.A, 0));
 
-        private Color Subtract(Color rhs)
-        {
-            Color ret = new Color(Interop.Vector4.Subtract(SwigCPtr, Color.getCPtr(rhs)), true);
-            if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
-            return ret;
-        }
+        private Color Multiply(Color rhs) => new Color(Math.Min(R * rhs.R, 1), Math.Min(G * rhs.G, 1), Math.Min(B * rhs.B, 1), Math.Min(A * rhs.A, 1));
 
-        private Color SubtractAssign(Color rhs)
-        {
-            Color ret = new Color(Interop.Vector4.SubtractAssign(SwigCPtr, Color.getCPtr(rhs)), false);
-            if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
-            return ret;
-        }
+        private Color Multiply(float rhs) => new Color(Math.Min(R * rhs, 1), Math.Min(G * rhs, 1), Math.Min(B * rhs, 1), Math.Min(A * rhs, 1));
 
-        private Color Multiply(Color rhs)
-        {
-            Color ret = new Color(Interop.Vector4.Multiply(SwigCPtr, Color.getCPtr(rhs)), true);
-            if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
-            return ret;
-        }
+        private Color Divide(Vector4 rhs) => new Color(Math.Min(R / rhs.R, 1), Math.Min(G / rhs.G, 1), Math.Min(B / rhs.B, 1), Math.Min(A / rhs.A, 1));
 
-        private Color Multiply(float rhs)
-        {
-            Color ret = new Color(Interop.Vector4.Multiply(SwigCPtr, rhs), true);
-            if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
-            return ret;
-        }
+        private Color Divide(float rhs) => new Color(Math.Min(R / rhs, 1), Math.Min(G / rhs, 1), Math.Min(B / rhs, 1), Math.Min(A / rhs, 1));
 
-        private Color MultiplyAssign(Color rhs)
-        {
-            Color ret = new Color(Interop.Vector4.MultiplyAssign(SwigCPtr, Color.getCPtr(rhs)), false);
-            if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
-            return ret;
-        }
 
-        private Color MultiplyAssign(float rhs)
-        {
-            Color ret = new Color(Interop.Vector4.MultiplyAssign(SwigCPtr, rhs), false);
-            if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
-            return ret;
-        }
-
-        private Color Divide(Vector4 rhs)
-        {
-            Color ret = new Color(Interop.Vector4.Divide(SwigCPtr, Color.getCPtr(rhs)), true);
-            if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
-            return ret;
-        }
-
-        private Color Divide(float rhs)
-        {
-            Color ret = new Color(Interop.Vector4.Divide(SwigCPtr, rhs), true);
-            if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
-            return ret;
-        }
-
-        private Color DivideAssign(Color rhs)
-        {
-            Color ret = new Color(Interop.Vector4.DivideAssign(SwigCPtr, Color.getCPtr(rhs)), false);
-            if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
-            return ret;
-        }
-
-        private Color DivideAssign(float rhs)
-        {
-            Color ret = new Color(Interop.Vector4.DivideAssign(SwigCPtr, rhs), false);
-            if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
-            return ret;
-        }
-
-        private Color Subtract()
-        {
-            Color ret = new Color(Interop.Vector4.Subtract(SwigCPtr), true);
-            if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
-            return ret;
-        }
+        private Color Subtract() =>  new Color(0, 0, 0, 0);
 
         private static bool EqualsColorValue(float f1, float f2)
         {
@@ -1631,7 +1453,7 @@ namespace Tizen.NUI
             {
                 if (arg2 is null)
                     return true;
-                
+
                 return false;
             }
 
@@ -1654,11 +1476,106 @@ namespace Tizen.NUI
             return base.GetHashCode();
         }
 
-        private float ValueOfIndex(uint index)
+        internal uint ToUint() => (uint)GetCPtrAsData();
+
+        private byte GetRData() => (byte)((((uint)GetCPtrAsData()) & (~rMask)) >> 24);
+        private byte GetGData() => (byte)((((uint)GetCPtrAsData()) & (~gMask)) >> 16);
+        private byte GetBData() => (byte)((((uint)GetCPtrAsData()) & (~bMask)) >> 8);
+        private byte GetAData() => (byte)(((uint)GetCPtrAsData()) & (~aMask));
+
+        private static int GenerateData(int r, int g, int b, int a) => GenerateData((byte)r, (byte)g, (byte)b, (byte)a);
+
+        private static int GenerateData(float r, float g, float b, float a) => GenerateData((byte)(r * 255f), (byte)(g * 255f), (byte)(b * 255f), (byte)(a * 255f));
+
+        private static int GenerateData(byte r, byte g, byte b, byte a)
         {
-            float ret = Interop.Vector4.ValueOfIndex(SwigCPtr, index);
-            if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
-            return ret;
+            return unchecked(r << 24 | g << 16 | b << 8 | a);
+        }
+
+        /// <summary>
+        /// The conversion constructor from text color representation.
+        /// hexcode representation : #RGB #RGBA #RRGGBB #RRGGBBAA
+        /// rgb representation : rgb(0-255,0-255,0-255) rgba(0-255,0-255,0-255,0.0-1.0)
+        /// </summary>
+        /// <param name="hexColor">color text representation as Hexcode, rgb() or rgba()</param>
+        /// <exception cref="ArgumentNullException">This exception is thrown when hexColor is null.</exception>
+        private static int GenerateData(string hexColor)
+        {
+            try
+            {
+                byte r = 0;
+                byte g = 0;
+                byte b = 0;
+                byte a = 0;
+
+                hexColor = hexColor.ToUpperInvariant();
+                hexColor = hexColor.Replace(" ", "");
+
+                if (hexColor.Length > 0 && hexColor[0] == '#')
+                {
+                    hexColor = hexColor.Replace("#", "");
+                    int textColorLength = hexColor.Length;
+
+                    if (textColorLength == 6 || textColorLength == 8) /* #RRGGBB or #RRGGBBAA */
+                    {
+                        r = Convert.ToByte(hexColor.Substring(0, 2), 16);
+                        g = Convert.ToByte(hexColor.Substring(2, 2), 16);
+                        b = Convert.ToByte(hexColor.Substring(4, 2), 16);
+                        a = hexColor.Length > 6 ? Convert.ToByte(hexColor.Substring(6, 2), 16) : (byte)255;
+                    }
+                    else if (textColorLength == 3 || textColorLength == 4) /* #RGB */
+                    {
+                        r = Convert.ToByte(hexColor.Substring(0, 1), 16);
+                        g = Convert.ToByte(hexColor.Substring(1, 1), 16);
+                        b = Convert.ToByte(hexColor.Substring(2, 1), 16);
+                        a = hexColor.Length > 3 ? Convert.ToByte(hexColor.Substring(3, 1), 16) : (byte)255;
+                    }
+                    else
+                    {
+                        throw new global::System.ArgumentException("Please check your color text code");
+                    }
+                }
+                else // example rgb(255,255,255) or rgb(255,255,255,1.0)
+                {
+                    bool isRGBA = hexColor.StartsWith("RGBA(");
+                    bool isRGB = hexColor.StartsWith("RGB(");
+
+                    if (!isRGBA && !isRGB)
+                    {
+                        throw new global::System.ArgumentException("Please check your color text code");
+                    }
+
+                    if (isRGBA)
+                        hexColor = hexColor.Substring(4);
+                    if (isRGB)
+                        hexColor = hexColor.Substring(3);
+
+                    hexColor = hexColor.Replace(")", "");
+                    hexColor = hexColor.Replace("(", "");
+
+                    string[] components = hexColor.Split(',');
+
+                    if (components.Length == 3 && isRGB)
+                    {
+                        r = Math.Min((byte)255, Convert.ToByte(components[0], 10));
+                        g = Math.Min((byte)255, Convert.ToByte(components[1], 10));
+                        b = Math.Min((byte)255, Convert.ToByte(components[2], 10));
+                        a = 255;
+                    }
+                    else if (components.Length == 4 && isRGBA)
+                    {
+                        r = Math.Min((byte)255, Convert.ToByte(components[0], 10));
+                        g = Math.Min((byte)255, Convert.ToByte(components[1], 10));
+                        b = Math.Min((byte)255, Convert.ToByte(components[2], 10));
+                        a = Math.Min((byte)255, (byte)(float.Parse(components[3], CultureInfo.InvariantCulture) * 255));
+                    }
+                }
+                return GenerateData(r, g, b, a);
+            }
+            catch
+            {
+                throw new ArgumentException("Please check your color text code");
+            }
         }
 
     }
