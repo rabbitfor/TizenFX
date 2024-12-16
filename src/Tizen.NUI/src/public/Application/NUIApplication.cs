@@ -713,6 +713,9 @@ namespace Tizen.NUI
             base.OnAppControlReceived(e);
         }
 
+        static System.Diagnostics.Stopwatch stopWatch;
+        static Color color;
+
         /// <summary>
         /// The OnCreate method of NUIApplication class.
         /// This method is called when the application is created.
@@ -723,6 +726,13 @@ namespace Tizen.NUI
         {
             Tizen.Tracer.Begin("[NUI] OnCreate()");
             currentState = States.Created;
+
+            stopWatch = new System.Diagnostics.Stopwatch();
+            Log.Debug("JYJY", $"Start measuring");
+            stopWatch.Start();
+            color = new Color(1, 1, 1, 1);
+            stopWatch.Stop();
+            Log.Debug("JYJY", $"Time taken : {stopWatch.ElapsedMilliseconds} ms");
 
             base.OnCreate();
 
@@ -736,6 +746,10 @@ namespace Tizen.NUI
         static public void Preload()
         {
             Interop.Application.PreInitialize();
+
+            stopWatch = new System.Diagnostics.Stopwatch();
+            Log.Debug("JYJY", $"Start preload measuring");
+            stopWatch.Start();
 
             // Initialize some static utility
             var disposalbeQueue = DisposeQueue.Instance;
@@ -751,6 +765,15 @@ namespace Tizen.NUI
 
             // Initialize exception tasks. It must be called end of Preload()
             NDalicPINVOKE.Preload();
+
+            stopWatch.Stop();
+            Log.Debug("JYJY", $"Time taken for preload : {stopWatch.ElapsedMilliseconds} ms");
+
+            stopWatch.Restart();
+            color = new Color(1, 1, 1, 1);
+
+            stopWatch.Stop();
+            Log.Debug("JYJY", $"Time taken for color after preload : {stopWatch.ElapsedMilliseconds} ms");
 
             IsPreload = true;
         }

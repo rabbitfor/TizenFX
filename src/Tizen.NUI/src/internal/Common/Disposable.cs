@@ -16,6 +16,7 @@
  */
 using System;
 using System.ComponentModel;
+using System.Diagnostics;
 
 namespace Tizen.NUI
 {
@@ -60,6 +61,12 @@ namespace Tizen.NUI
             swigCPtr = new global::System.Runtime.InteropServices.HandleRef(this, cPtr);
         }
 
+        internal Disposable(int data)
+        {
+            swigCMemOwn = false;
+            swigCPtr = new System.Runtime.InteropServices.HandleRef(null, new IntPtr(data));
+        }
+
         /// <summary>
         /// Dispose.
         /// </summary>
@@ -88,9 +95,24 @@ namespace Tizen.NUI
             return (obj == null) ? new global::System.Runtime.InteropServices.HandleRef(null, global::System.IntPtr.Zero) : obj.SwigCPtr;
         }
 
+        internal void ResetCPtrAsData(int data)
+        {
+            if (!swigCMemOwn)
+            {
+                swigCPtr = new System.Runtime.InteropServices.HandleRef(null, new IntPtr(data));
+            }
+        }
+
+        internal int GetCPtrAsData()
+        {
+            Debug.Assert(!swigCMemOwn);
+            return swigCPtr.Handle.ToInt32();
+        }
+
+
         /// <summary>
         /// Hidden API (Inhouse API).
-        /// Dispose. 
+        /// Dispose.
         /// </summary>
         /// <remarks>
         /// Following the guide of https://docs.microsoft.com/en-us/dotnet/standard/garbage-collection/implementing-dispose.

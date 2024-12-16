@@ -286,7 +286,7 @@ namespace Tizen.NUI.BaseComponents
             if (newValue != null)
             {
 
-                Object.InternalSetPropertyVector4(textField.SwigCPtr, TextField.Property.TextColor, ((Color)newValue).SwigCPtr);
+                Object.InternalSetPropertyColor(textField.SwigCPtr, TextField.Property.TextColor, (Color)newValue);
             }
         }
         internal static object GetInternalTextColorProperty(BindableObject bindable)
@@ -297,7 +297,7 @@ namespace Tizen.NUI.BaseComponents
             {
                 textField.internalTextColor = new Color(0, 0, 0, 0);
             }
-            Object.InternalRetrievingPropertyVector4(textField.SwigCPtr, TextField.Property.TextColor, textField.internalTextColor.SwigCPtr);
+            textField.internalTextColor.ResetCPtrAsData((int)Object.InternalRetrievingPropertyColor(textField.SwigCPtr, TextField.Property.TextColor));
             return textField.internalTextColor;
         }
 
@@ -448,7 +448,7 @@ namespace Tizen.NUI.BaseComponents
 
             return Object.InternalGetPropertyFloat(textField.SwigCPtr, TextField.Property.CursorBlinkInterval);
         }
-        
+
         /// This will be public opened after ACR done. Before ACR, need to be hidden as inhouse API.
         [EditorBrowsable(EditorBrowsableState.Never)]
         public static readonly BindableProperty CursorBlinkDurationProperty = null;
@@ -1204,7 +1204,7 @@ namespace Tizen.NUI.BaseComponents
             if (newValue != null)
             {
 
-                Object.InternalSetPropertyVector4(textField.SwigCPtr, TextField.Property.GrabHandleColor, ((Color)newValue).SwigCPtr);
+                Object.InternalSetPropertyColor(textField.SwigCPtr, TextField.Property.GrabHandleColor, (Color)newValue);
             }
         }
         internal static object GetInternalGrabHandleColorProperty(BindableObject bindable)
@@ -1215,7 +1215,7 @@ namespace Tizen.NUI.BaseComponents
             {
                 textField.internalGrabHandleColor = new Color(0, 0, 0, 0);
             }
-            Object.InternalRetrievingPropertyVector4(textField.SwigCPtr, TextField.Property.GrabHandleColor, textField.internalGrabHandleColor.SwigCPtr);
+            textField.internalGrabHandleColor.ResetCPtrAsData((int)Object.InternalRetrievingPropertyColor(textField.SwigCPtr, TextField.Property.GrabHandleColor));
             return textField.internalGrabHandleColor;
         }
 

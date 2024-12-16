@@ -264,7 +264,7 @@ namespace Tizen.NUI.BaseComponents
             {
                 textLabel.internalTextColor = new Color(0, 0, 0, 0);
             }
-            Object.InternalRetrievingPropertyVector4(textLabel.SwigCPtr, TextLabel.Property.TextColor, textLabel.internalTextColor.SwigCPtr);
+            textLabel.internalTextColor.ResetCPtrAsData((int)Object.InternalRetrievingPropertyColor(textLabel.SwigCPtr, TextLabel.Property.TextColor));
             return textLabel.internalTextColor;
         }
 
@@ -275,7 +275,7 @@ namespace Tizen.NUI.BaseComponents
             var textLabel = (TextLabel)bindable;
             if (newValue != null)
             {
-                Object.InternalSetPropertyVector4(textLabel.SwigCPtr, TextLabel.Property.AnchorColor, ((Color)newValue).SwigCPtr);
+                Object.InternalSetPropertyColor(textLabel.SwigCPtr, TextLabel.Property.AnchorColor, (Color)newValue);
             }
         }
         internal static object GetInternalAnchorColorProperty(BindableObject bindable)
@@ -286,7 +286,7 @@ namespace Tizen.NUI.BaseComponents
             {
                 textLabel.internalAnchorColor = new Color(0, 0, 0, 0);
             }
-            Object.InternalRetrievingPropertyVector4(textLabel.SwigCPtr, TextLabel.Property.TextColor, textLabel.internalAnchorColor.SwigCPtr);
+            textLabel.internalAnchorColor.ResetCPtrAsData((int)Object.InternalRetrievingPropertyColor(textLabel.SwigCPtr, TextLabel.Property.TextColor));
             return textLabel.internalAnchorColor;
         }
 
@@ -297,7 +297,7 @@ namespace Tizen.NUI.BaseComponents
             var textLabel = (TextLabel)bindable;
             if (newValue != null)
             {
-                Object.InternalSetPropertyVector4(textLabel.SwigCPtr, TextLabel.Property.AnchorClickedColor, ((Color)newValue).SwigCPtr);
+                Object.InternalSetPropertyColor(textLabel.SwigCPtr, TextLabel.Property.AnchorClickedColor, (Color)newValue);
             }
         }
         internal static object GetInternalAnchorClickedColorProperty(BindableObject bindable)
@@ -308,7 +308,7 @@ namespace Tizen.NUI.BaseComponents
             {
                 textLabel.internalAnchorClickedColor = new Color(0, 0, 0, 0);
             }
-            Object.InternalRetrievingPropertyVector4(textLabel.SwigCPtr, TextLabel.Property.TextColor, textLabel.internalAnchorClickedColor.SwigCPtr);
+            textLabel.internalAnchorClickedColor.ResetCPtrAsData((int)Object.InternalRetrievingPropertyColor(textLabel.SwigCPtr, TextLabel.Property.TextColor));
             return textLabel.internalAnchorClickedColor;
         }
 
@@ -1090,7 +1090,7 @@ namespace Tizen.NUI.BaseComponents
             if (value != null)
             {
 
-                Object.InternalSetPropertyVector4(SwigCPtr, TextLabel.Property.TextColor, value.SwigCPtr);
+                Object.InternalSetPropertyColor(SwigCPtr, TextLabel.Property.TextColor, value);
             }
         }
 

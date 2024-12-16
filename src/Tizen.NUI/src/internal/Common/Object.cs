@@ -135,6 +135,21 @@ namespace Tizen.NUI
             return ret;
         }
 
+        internal static int InternalSetPropertyColor(HandleRef actor, int propertyType, Color color)
+        {
+            if (actor.Handle == System.IntPtr.Zero)
+            {
+                throw new System.InvalidOperationException("Error! NUI's native dali object is already disposed. OR the native dali object handle of NUI becomes null!");
+            }
+            var ret = Interop.Actor.InternalSetPropertyColor(actor, propertyType, color.ToUint());
+
+            if (NDalicPINVOKE.SWIGPendingException.Pending)
+            {
+                throw NDalicPINVOKE.SWIGPendingException.Retrieve();
+            }
+            return ret;
+        }
+
         internal static int InternalRetrievingPropertyVector4(HandleRef actor, int propertyType, HandleRef retrievingVector4)
         {
             if (actor.Handle == System.IntPtr.Zero)
@@ -148,6 +163,17 @@ namespace Tizen.NUI
                 throw NDalicPINVOKE.SWIGPendingException.Retrieve();
             }
             return ret;
+        }
+
+        internal static uint InternalRetrievingPropertyColor(HandleRef actor, int propertyType)
+        {
+            if (actor.Handle == System.IntPtr.Zero)
+            {
+                throw new System.InvalidOperationException("Error! NUI's native dali object is already disposed. OR the native dali object handle of NUI becomes null!");
+            }
+            uint color = Interop.Actor.InternalRetrievingPropertyColor(actor, propertyType);
+            NDalicPINVOKE.ThrowExceptionIfExists();
+            return color;
         }
 
         internal static int InternalGetPropertyInt(HandleRef actor, int propertyType)

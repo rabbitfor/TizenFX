@@ -129,7 +129,9 @@ namespace Tizen.NUI.BaseComponents
             Interop.View.InternalRetrievingVisualPropertyInt(view.SwigCPtr, Property.BACKGROUND, Visual.Property.Type, out visualType);
             if (visualType == (int)Visual.Type.Color)
             {
-                Interop.View.InternalRetrievingVisualPropertyVector4(view.SwigCPtr, Property.BACKGROUND, ColorVisualProperty.MixColor, Color.getCPtr(view.internalBackgroundColor));
+                uint color = Interop.View.InternalRetrievingVisualPropertyColor(view.SwigCPtr, Property.BACKGROUND, ColorVisualProperty.MixColor);
+                view.internalBackgroundColor.ResetCPtrAsData((int)color);
+                NDalicPINVOKE.ThrowExceptionIfExists();
             }
             return view.internalBackgroundColor;
         }
@@ -164,7 +166,7 @@ namespace Tizen.NUI.BaseComponents
             {
                 view.internalColor = new Color(view.OnColorChanged, 0, 0, 0, 0);
             }
-            Object.InternalRetrievingPropertyVector4(view.SwigCPtr, View.Property.COLOR, view.internalColor.SwigCPtr);
+            view.internalColor.ResetCPtrAsData((int)Object.InternalRetrievingPropertyColor(view.SwigCPtr, View.Property.COLOR));
             return view.internalColor;
         }
 
@@ -221,8 +223,8 @@ namespace Tizen.NUI.BaseComponents
             return view.GetInternalColorBlue();
         }
 
-        /// <summary> 
-        /// BackgroundImageProperty 
+        /// <summary>
+        /// BackgroundImageProperty
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
         public static readonly BindableProperty BackgroundImageProperty = null;
@@ -2740,7 +2742,7 @@ namespace Tizen.NUI.BaseComponents
 
             if (backgroundExtraData == null)
             {
-                Object.InternalSetPropertyVector4(SwigCPtr, View.Property.BACKGROUND, ((Color)value).SwigCPtr);
+                Object.InternalSetPropertyColor(SwigCPtr, View.Property.BACKGROUND, value);
                 return;
             }
 
@@ -2788,7 +2790,7 @@ namespace Tizen.NUI.BaseComponents
                 return;
             }
 
-            Interop.ActorInternal.SetColor(SwigCPtr, value.SwigCPtr);
+            Interop.ActorInternal.SetIntColor(SwigCPtr, value.ToUint());
             if (NDalicPINVOKE.SWIGPendingException.Pending)
                 throw NDalicPINVOKE.SWIGPendingException.Retrieve();
         }
