@@ -57,7 +57,7 @@ namespace Tizen.NUI
         [EditorBrowsable(EditorBrowsableState.Never)]
         public static implicit operator Extents(ushort value)
         {
-            return new Extents(value, value, value, value);
+            return GetReusable(value, value, value, value);
         }
 
         /// <summary>
@@ -122,7 +122,7 @@ namespace Tizen.NUI
         /// <since_tizen> Only used by Tizen.NUI.Components, will not be opened </since_tizen>
 		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public delegate void ExtentsChangedCallback(ushort start, ushort end, ushort top, ushort bottom);
-        private ExtentsChangedCallback callback = null;
+        internal ExtentsChangedCallback callback = null;
 
         /// <summary>
         /// The Start extent.
@@ -133,7 +133,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Extents extents = new Extents();
-        /// extents.Start = 1; 
+        /// extents.Start = 1;
         /// // USE like this
         /// ushort start = 1, end = 2, top = 3, bottom = 4;
         /// Extents extents = new Extents(start, end, top, bottom);
@@ -166,7 +166,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Extents extents = new Extents();
-        /// extents.End = 2; 
+        /// extents.End = 2;
         /// // USE like this
         /// ushort start = 1, end = 2, top = 3, bottom = 4;
         /// Extents extents = new Extents(start, end, top, bottom);
@@ -199,7 +199,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Extents extents = new Extents();
-        /// extents.Top = 3; 
+        /// extents.Top = 3;
         /// // USE like this
         /// ushort start = 1, end = 2, top = 3, bottom = 4;
         /// Extents extents = new Extents(start, end, top, bottom);
@@ -232,7 +232,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Extents extents = new Extents();
-        /// extents.Bottom = 4; 
+        /// extents.Bottom = 4;
         /// // USE like this
         /// ushort start = 1, end = 2, top = 3, bottom = 4;
         /// Extents extents = new Extents(start, end, top, bottom);
@@ -284,7 +284,7 @@ namespace Tizen.NUI
 
         /// <inheritdoc/>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public object Clone() => new Extents(this);
+        public object Clone() => GetReusable(this);
 
         internal Extents Assign(SWIGTYPE_p_uint16_t array)
         {
@@ -305,6 +305,50 @@ namespace Tizen.NUI
         protected override void ReleaseSwigCPtr(System.Runtime.InteropServices.HandleRef swigCPtr)
         {
             Interop.Extents.DeleteExtents(swigCPtr);
+        }
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        protected override bool IsReusable => true;
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        protected override void Dispose(bool disposing)
+        {
+            if (disposed)
+            {
+                return;
+            }
+
+            callback = null;
+
+            base.Dispose(disposing);
+        }
+
+        internal static Extents GetReusable() => GetReusable(0, 0, 0, 0);
+
+        internal static Extents GetReusable(Extents other) => GetReusable(other.Start, other.End, other.Top, other.Bottom);
+
+        internal static Extents GetReusable(ushort uniValue) => GetReusable(uniValue, uniValue, uniValue, uniValue);
+
+        internal static Extents GetReusable(ushort start, ushort end, ushort top, ushort bottom) => GetReusable(null, start, end, top, bottom);
+
+        internal static Extents GetReusable(ExtentsChangedCallback cb) => GetReusable(cb, 0, 0, 0, 0);
+
+        internal static Extents GetReusable(ExtentsChangedCallback cb, ushort start, ushort end, ushort top, ushort bottom)
+        {
+            if (DisposablePool.Get<Extents>() is Extents reusable)
+            {
+                reusable.InternalSetAll(start, end, top, bottom);
+                reusable.callback = cb;
+                return reusable;
+            }
+
+            return new Extents(cb, start, end, top, bottom);
+        }
+
+        private void InternalSetAll(ushort start, ushort end, ushort top, ushort bottom)
+        {
+            Interop.Extents.SetAll(SwigCPtr, start, end, top, bottom);
+            NDalicPINVOKE.ThrowExceptionIfExists();
         }
     }
 }

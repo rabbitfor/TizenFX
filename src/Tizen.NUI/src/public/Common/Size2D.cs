@@ -68,9 +68,12 @@ namespace Tizen.NUI
 
         internal delegate void Size2DChangedCallback(int width, int height);
 
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        protected override bool IsReusable => true;
+
         /// <summary>
         /// Hidden API (Inhouse API).
-        /// Dispose. 
+        /// Dispose.
         /// </summary>
         /// <remarks>
         /// Following the guide of https://docs.microsoft.com/en-us/dotnet/standard/garbage-collection/implementing-dispose.
@@ -88,19 +91,6 @@ namespace Tizen.NUI
 
             callback = null;
 
-            //perform dipose here without being added to DisposeQueue.
-            if (SwigCMemOwn && SwigCPtr.Handle != IntPtr.Zero)
-            {
-                if (disposing)
-                {
-                    base.Dispose(DisposeTypes.Explicit);
-                }
-                else
-                {
-                    base.Dispose(DisposeTypes.Implicit);
-                }
-            }
-
             base.Dispose(disposing);
         }
 
@@ -113,7 +103,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Size2D size2d = new Size2D();
-        /// size2d.Width = 1; 
+        /// size2d.Width = 1;
         /// // USE like this
         /// int width = 1, height = 2;
         /// Size2D size2d = new Size2D(width, height);
@@ -146,7 +136,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Size2D size2d = new Size2D();
-        /// size2d.Height = 2; 
+        /// size2d.Height = 2;
         /// // USE like this
         /// int width = 1, height = 2;
         /// Size2D size2d = new Size2D(width, height);
@@ -266,7 +256,7 @@ namespace Tizen.NUI
             {
                 return null;
             }
-            return new Vector2(size.Width, size.Height);
+            return Vector2.GetReusable(size.Width, size.Height);
         }
 
         /// <summary>
@@ -462,5 +452,31 @@ namespace Tizen.NUI
             v > int.MaxValue ? int.MaxValue
             : v < int.MinValue ? int.MinValue
             : (int)v;
+
+        internal static Size2D GetReusable() => GetReusable(0, 0);
+
+        internal static Size2D GetReusable(Size2D other) => GetReusable(other.Width, other.Height);
+
+        internal static Size2D GetReusable(int w, int h) => GetReusable(null, w, h);
+
+        internal static Size2D GetReusable(Size2DChangedCallback cb) => GetReusable(cb, 0, 0);
+
+        internal static Size2D GetReusable(Size2DChangedCallback cb, int w, int h)
+        {
+            if (DisposablePool.Get<Size2D>() is Size2D reusable)
+            {
+                reusable.InternalSetAll(w, h);
+                reusable.callback = cb;
+                return reusable;
+            }
+
+            return new Size2D(cb, w, h);
+        }
+
+        private void InternalSetAll(int w, int h)
+        {
+            Interop.Vector2.SetAll(SwigCPtr, w, h);
+            NDalicPINVOKE.ThrowExceptionIfExists();
+        }
     }
 }

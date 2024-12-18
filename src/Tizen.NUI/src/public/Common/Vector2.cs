@@ -207,7 +207,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Vector2 vector2 = new Vector2();
-        /// vector2.X = 0.1f; 
+        /// vector2.X = 0.1f;
         /// // USE like this
         /// float x = 0.1f, y = 0.5f;
         /// Vector2 vector2 = new Vector2(x, y);
@@ -240,7 +240,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Vector2 vector2 = new Vector2();
-        /// vector2.Width = 1.0f; 
+        /// vector2.Width = 1.0f;
         /// // USE like this
         /// float width = 1.0f, height = 2.0f;
         /// Vector2 vector2 = new Vector2(x, y);
@@ -273,7 +273,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Vector2 vector2 = new Vector2();
-        /// vector2.Y = 0.5f; 
+        /// vector2.Y = 0.5f;
         /// // USE like this
         /// float x = 0.1f, y = 0.5f;
         /// Vector2 vector2 = new Vector2(x, y);
@@ -306,7 +306,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Vector2 vector2 = new Vector2();
-        /// vector2.Height = 2.0f; 
+        /// vector2.Height = 2.0f;
         /// // USE like this
         /// float width = 1.0f, height = 2.0f;
         /// Vector2 vector2 = new Vector2(x, y);
@@ -637,6 +637,48 @@ namespace Tizen.NUI
             float ret = Interop.Vector2.ValueOfIndex(SwigCPtr, index);
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
             return ret;
+        }
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        protected override bool IsReusable => true;
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        protected override void Dispose(bool disposing)
+        {
+            if (disposed)
+            {
+                return;
+            }
+
+            callback = null;
+
+            base.Dispose(disposing);
+        }
+
+        internal static Vector2 GetReusable() => GetReusable(0, 0);
+
+        internal static Vector2 GetReusable(Vector2 other) => GetReusable(other.X, other.Y);
+
+        internal static Vector2 GetReusable(float x, float y) => GetReusable(null, x, y);
+
+        internal static Vector2 GetReusable(Vector2ChangedCallback cb) => GetReusable(cb, 0, 0);
+
+        internal static Vector2 GetReusable(Vector2ChangedCallback cb, float x, float y)
+        {
+            if (DisposablePool.Get<Vector2>() is Vector2 reusable)
+            {
+                reusable.InternalSetAll(x, y);
+                reusable.callback = cb;
+                return reusable;
+            }
+
+            return new Vector2(cb, x, y);
+        }
+
+        private void InternalSetAll(float x, float y)
+        {
+            Interop.Vector2.SetAll(SwigCPtr, x, y);
+            NDalicPINVOKE.ThrowExceptionIfExists();
         }
 
     }

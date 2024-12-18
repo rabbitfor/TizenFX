@@ -91,7 +91,7 @@ namespace Tizen.NUI
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
         }
         internal delegate void Vector4ChangedCallback(float x, float y, float z, float w);
-        private Vector4ChangedCallback callback = null;
+        internal Vector4ChangedCallback callback = null;
 
         /// <summary>
         /// Returns a Vector2 instance where both the x and y components are set to 1.0f.
@@ -182,7 +182,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Vector4 vector4 = new Vector4();
-        /// vector4.X = 0.1f; 
+        /// vector4.X = 0.1f;
         /// // USE like this
         /// float x = 0.1f, y = 0.5f, z = 0.9f, w = 1.0f;
         /// Vector4 vector4 = new Vector4(x, y, z, w);
@@ -215,7 +215,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Vector4 vector4 = new Vector4();
-        /// vector4.R = 0.1f; 
+        /// vector4.R = 0.1f;
         /// // USE like this
         /// float r = 0.1f, g = 0.5f, b = 0.9f, a = 1.0f;
         /// Vector4 vector4 = new Vector4(r, g, b, a);
@@ -248,7 +248,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Vector4 vector4 = new Vector4();
-        /// vector4.S = 0.1f; 
+        /// vector4.S = 0.1f;
         /// // USE like this
         /// float s = 0.1f, t = 0.5f, p = 0.9f, q = 1.0f;
         /// Vector4 vector4 = new Vector4(s, t, p, q);
@@ -281,7 +281,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Vector4 vector4 = new Vector4();
-        /// vector4.Y = 0.5f; 
+        /// vector4.Y = 0.5f;
         /// // USE like this
         /// float x = 0.1f, y = 0.5f, z = 0.9f, w = 1.0f;
         /// Vector4 vector4 = new Vector4(x, y, z, w);
@@ -314,7 +314,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Vector4 vector4 = new Vector4();
-        /// vector4.G = 0.5f; 
+        /// vector4.G = 0.5f;
         /// // USE like this
         /// float r = 0.1f, g = 0.5f, b = 0.9f, a = 1.0f;
         /// Vector4 vector4 = new Vector4(r, g, b, a);
@@ -347,7 +347,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Vector4 vector4 = new Vector4();
-        /// vector4.T = 0.5f; 
+        /// vector4.T = 0.5f;
         /// // USE like this
         /// float s = 0.1f, t = 0.5f, p = 0.9f, q = 1.0f;
         /// Vector4 vector4 = new Vector4(s, t, p, q);
@@ -380,7 +380,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Vector4 vector4 = new Vector4();
-        /// vector4.Z = 0.9f; 
+        /// vector4.Z = 0.9f;
         /// // USE like this
         /// float x = 0.1f, y = 0.5f, z = 0.9f, w = 1.0f;
         /// Vector4 vector4 = new Vector4(x, y, z, w);
@@ -413,7 +413,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Vector4 vector4 = new Vector4();
-        /// vector4.B = 0.9f; 
+        /// vector4.B = 0.9f;
         /// // USE like this
         /// float r = 0.1f, g = 0.5f, b = 0.9f, a = 1.0f;
         /// Vector4 vector4 = new Vector4(r, g, b, a);
@@ -446,7 +446,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Vector4 vector4 = new Vector4();
-        /// vector4.P = 0.9f; 
+        /// vector4.P = 0.9f;
         /// // USE like this
         /// float s = 0.1f, t = 0.5f, p = 0.9f, q = 1.0f;
         /// Vector4 vector4 = new Vector4(s, t, p, q);
@@ -479,7 +479,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Vector4 vector4 = new Vector4();
-        /// vector4.W = 1.0f; 
+        /// vector4.W = 1.0f;
         /// // USE like this
         /// float x = 0.1f, y = 0.5f, z = 0.9f, w = 1.0f;
         /// Vector4 vector4 = new Vector4(x, y, z, w);
@@ -512,7 +512,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Vector4 vector4 = new Vector4();
-        /// vector4.A = 1.0f; 
+        /// vector4.A = 1.0f;
         /// // USE like this
         /// float r = 0.1f, g = 0.5f, b = 0.9f, a = 1.0f;
         /// Vector4 vector4 = new Vector4(r, g, b, a);
@@ -545,7 +545,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Vector4 vector4 = new Vector4();
-        /// vector4.Q = 1.0f; 
+        /// vector4.Q = 1.0f;
         /// // USE like this
         /// float s = 0.1f, t = 0.5f, p = 0.9f, q = 1.0f;
         /// Vector4 vector4 = new Vector4(s, t, p, q);
@@ -754,7 +754,7 @@ namespace Tizen.NUI
 
         /// <inheritdoc/>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public object Clone() => new Vector4(X, Y, Z, W);
+        public object Clone() => Vector4.GetReusable(X, Y, Z, W);
 
         internal static Vector4 GetVector4FromPtr(global::System.IntPtr cPtr)
         {
@@ -918,6 +918,49 @@ namespace Tizen.NUI
             return ret;
         }
 
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        protected override bool IsReusable => true;
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        protected override void Dispose(bool disposing)
+        {
+            if (disposed)
+            {
+                return;
+            }
+
+            callback = null;
+
+            base.Dispose(disposing);
+        }
+
+        internal static Vector4 GetReusable() => GetReusable(0, 0, 0, 0);
+
+        internal static Vector4 GetReusable(Vector4 other) => GetReusable(other.X, other.Y, other.Z, other.W);
+
+        internal static Vector4 GetReusable(float x, float y, float z) => GetReusable(x, y, z, 0);
+
+        internal static Vector4 GetReusable(float x, float y, float z, float w) => GetReusable(null, x, y, z, w);
+
+        internal static Vector4 GetReusable(Vector4ChangedCallback cb) => GetReusable(cb, 0, 0, 0, 0);
+
+        internal static Vector4 GetReusable(Vector4ChangedCallback cb, float x, float y, float z, float w)
+        {
+            if (DisposablePool.Get<Vector4>() is Vector4 reusable)
+            {
+                reusable.InternalSetAll(x, y, z, w);
+                reusable.callback = cb;
+                return reusable;
+            }
+
+            return new Vector4(cb, x, y, z, w);
+        }
+
+        private void InternalSetAll(float x, float y, float z, float w)
+        {
+            Interop.Vector4.SetAll(SwigCPtr, x, y, z, w);
+            NDalicPINVOKE.ThrowExceptionIfExists();
+        }
     }
 
 }

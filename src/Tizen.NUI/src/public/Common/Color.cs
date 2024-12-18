@@ -1078,7 +1078,7 @@ namespace Tizen.NUI
         }
 
         internal delegate void ColorChangedCallback(float r, float g, float b, float a);
-        private ColorChangedCallback callback = null;
+        internal ColorChangedCallback callback = null;
 
         /// <summary>
         /// The red component.
@@ -1089,7 +1089,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use as follows:
         /// Color color = new Color();
-        /// color.R = 0.1f; 
+        /// color.R = 0.1f;
         /// // USE like this
         /// float r = 0.1f, g = 0.5f, b = 0.9f, a = 1.0f;
         /// Color color = new Color(r, g, b, a);
@@ -1122,7 +1122,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use as follows:
         /// Color color = new Color();
-        /// color.G = 0.5f; 
+        /// color.G = 0.5f;
         /// // USE like this
         /// float r = 0.1f, g = 0.5f, b = 0.9f, a = 1.0f;
         /// Color color = new Color(r, g, b, a);
@@ -1155,7 +1155,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use as follows:
         /// Color color = new Color();
-        /// color.B = 0.9f; 
+        /// color.B = 0.9f;
         /// // USE like this
         /// float r = 0.1f, g = 0.5f, b = 0.9f, a = 1.0f;
         /// Color color = new Color(r, g, b, a);
@@ -1188,7 +1188,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use as follows:
         /// Color color = new Color();
-        /// color.A = 1.0f; 
+        /// color.A = 1.0f;
         /// // USE like this
         /// float r = 0.1f, g = 0.5f, b = 0.9f, a = 1.0f;
         /// Color color = new Color(r, g, b, a);
@@ -1237,7 +1237,7 @@ namespace Tizen.NUI
             {
                 return null;
             }
-            return new Vector4(color.R, color.G, color.B, color.A);
+            return Vector4.GetReusable(color.R, color.G, color.B, color.A);
         }
 
         /// <summary>
@@ -1251,7 +1251,7 @@ namespace Tizen.NUI
             {
                 return null;
             }
-            return new Color(vec.R, vec.G, vec.B, vec.A);
+            return Color.GetReusable(vec.R, vec.G, vec.B, vec.A);
         }
 
         /// <summary>
@@ -1410,7 +1410,7 @@ namespace Tizen.NUI
 
         /// <inheritdoc/>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public object Clone() => new Color(this);
+        public object Clone() => GetReusable(this);
 
         internal static Color GetColorFromPtr(global::System.IntPtr cPtr)
         {
@@ -1430,7 +1430,7 @@ namespace Tizen.NUI
             {
                 NUILog.Error($"The value of Result is invalid! Should be between [0, 1]. Color is {color.R}, {color.G}, {color.B}, {color.A}");
             }
-            color = new Color(r, g, b, a);
+            color.InternalSetAll(r, g, b, a);
             return color;
         }
 
@@ -1631,7 +1631,7 @@ namespace Tizen.NUI
             {
                 if (arg2 is null)
                     return true;
-                
+
                 return false;
             }
 
@@ -1661,6 +1661,47 @@ namespace Tizen.NUI
             return ret;
         }
 
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        protected override bool IsReusable => true;
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        protected override void Dispose(bool disposing)
+        {
+            if (disposed)
+            {
+                return;
+            }
+
+            callback = null;
+
+            base.Dispose(disposing);
+        }
+
+        internal static Color GetReusable() => GetReusable(0, 0, 0, 0);
+
+        internal static Color GetReusable(Color color) => GetReusable(color.R, color.G, color.B, color.A);
+
+        internal static Color GetReusable(float r, float g, float b, float a) => GetReusable(null, r, g, b, a);
+
+        internal static Color GetReusable(ColorChangedCallback cb) => GetReusable(cb, 0, 0, 0, 0);
+
+        internal static Color GetReusable(ColorChangedCallback cb, float r, float g, float b, float a)
+        {
+            if (DisposablePool.Get<Color>() is Color reusable)
+            {
+                reusable.InternalSetAll(r, g, b, a);
+                reusable.callback = cb;
+                return reusable;
+            }
+
+            return new Color(cb, r, g, b, a);
+        }
+
+        private void InternalSetAll(float r, float g, float b, float a)
+        {
+            Interop.Vector4.SetAll(SwigCPtr, r, g, b, a);
+            NDalicPINVOKE.ThrowExceptionIfExists();
+        }
     }
 
 }

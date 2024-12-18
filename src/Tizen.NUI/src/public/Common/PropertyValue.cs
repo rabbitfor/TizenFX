@@ -243,6 +243,86 @@ namespace Tizen.NUI
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
         }
 
+        internal static PropertyValue GetReusableVector2(float x, float y)
+        {
+            return GetReusable(Interop.PropertyValue.NewPropertyValueNVector2(x, y), true);
+        }
+
+        internal static PropertyValue GetReusableVector2(Vector2 value)
+        {
+            return GetReusable(Interop.PropertyValue.NewPropertyValueVector2(value.SwigCPtr), true);
+        }
+
+        internal static PropertyValue GetReusableSize2D(int x, int y)
+        {
+            return GetReusableVector2(x, y);
+        }
+
+        internal static PropertyValue GetReusableSize2D(Size2D value)
+        {
+            return GetReusable(Interop.PropertyValue.NewPropertyValueVector2(value.SwigCPtr), true);
+        }
+
+        internal static PropertyValue GetReusablePosition2D(int x, int y)
+        {
+            return GetReusableVector2(x, y);
+        }
+
+        internal static PropertyValue GetReusablePosition2D(Position2D value)
+        {
+            return GetReusable(Interop.PropertyValue.NewPropertyValueVector2(value.SwigCPtr), true);
+        }
+
+        internal static PropertyValue GetReusableVector3(float x, float y, float z)
+        {
+            return GetReusable(Interop.PropertyValue.NewPropertyValueNVector3(x, y, z), true);
+        }
+
+        internal static PropertyValue GetReusableVector3(Vector3 value)
+        {
+            return GetReusable(Interop.PropertyValue.NewPropertyValueVector3(value.SwigCPtr), true);
+        }
+
+        internal static PropertyValue GetReusablePosition(float x, float y, float z)
+        {
+            return GetReusableVector3(x, y, z);
+        }
+
+        internal static PropertyValue GetReusablePosition(Position value)
+        {
+            return GetReusable(Interop.PropertyValue.NewPropertyValueVector3(value.SwigCPtr), true);
+        }
+
+        internal static PropertyValue GetReusableVector4(float x, float y, float z, float w)
+        {
+            return GetReusable(Interop.PropertyValue.NewPropertyValueNVector4(x, y, z, w), true);
+        }
+
+        internal static PropertyValue GetReusableVector4(Vector4 value)
+        {
+            return GetReusable(Interop.PropertyValue.NewPropertyValueVector4(value.SwigCPtr), true);
+        }
+
+        internal static PropertyValue GetReusableColor(float r, float g, float b, float a)
+        {
+            return GetReusableVector4(r, g, b, a);
+        }
+
+        internal static PropertyValue GetReusableColor(Color value)
+        {
+            return GetReusable(Interop.PropertyValue.NewPropertyValueVector4(value.SwigCPtr), true);
+        }
+
+        internal static PropertyValue GetReusableExtents(ushort start, ushort end, ushort top, ushort bottom)
+        {
+            return GetReusable(Interop.PropertyValue.NewPropertyValueNExtents(start, end, top, bottom), true);
+        }
+
+        internal static PropertyValue GetReusableExtents(Extents value)
+        {
+            return GetReusable(Interop.PropertyValue.NewPropertyValueExtents(value.SwigCPtr), true);
+        }
+
         /// <summary>
         /// Determines whether the ProperyValue has equal value with the current ProperyValue.
         /// </summary>
@@ -279,7 +359,7 @@ namespace Tizen.NUI
 
         /// <summary>
         /// Hidden API (Inhouse API).
-        /// Dispose. 
+        /// Dispose.
         /// </summary>
         /// <remarks>
         /// Following the guide of https://docs.microsoft.com/en-us/dotnet/standard/garbage-collection/implementing-dispose.
@@ -293,19 +373,6 @@ namespace Tizen.NUI
             if (disposed)
             {
                 return;
-            }
-
-            //perform dipose here without being added to DisposeQueue.
-            if (SwigCMemOwn && SwigCPtr.Handle != IntPtr.Zero)
-            {
-                if (disposing)
-                {
-                    base.Dispose(DisposeTypes.Explicit);
-                }
-                else
-                {
-                    base.Dispose(DisposeTypes.Implicit);
-                }
             }
 
             base.Dispose(disposing);
@@ -859,6 +926,30 @@ namespace Tizen.NUI
         internal static PropertyValue CreateWithGuard(Color value)
         {
             return value == null ? new PropertyValue() : new PropertyValue(value);
+        }
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        protected override bool IsReusable => true;
+
+        internal static PropertyValue GetReusable(IntPtr cPtr, bool ownPtr)
+        {
+            var reusable = DisposablePool.Get<PropertyValue>();
+
+            if (reusable != null)
+            {
+                reusable.ReleaseSwigCPtrIfExist();
+                reusable.Reset(cPtr, ownPtr);
+                return reusable;
+            }
+            return new PropertyValue(cPtr, ownPtr);
+        }
+
+        void ReleaseSwigCPtrIfExist()
+        {
+            if (SwigCMemOwn && SwigCPtr.Handle != System.IntPtr.Zero)
+            {
+                ReleaseSwigCPtr(SwigCPtr);
+            }
         }
     }
 }

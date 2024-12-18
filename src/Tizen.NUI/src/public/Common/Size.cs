@@ -100,7 +100,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Size size = new Size();
-        /// size.Width = 0.1f; 
+        /// size.Width = 0.1f;
         /// // USE like this
         /// float width = 0.1f, height = 0.5f, depth = 0.9f;
         /// Size size = new Size(width, height, depth);
@@ -133,7 +133,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Size size = new Size();
-        /// size.Height = 0.5f; 
+        /// size.Height = 0.5f;
         /// // USE like this
         /// float width = 0.1f, height = 0.5f, depth = 0.9f;
         /// Size size = new Size(width, height, depth);
@@ -166,7 +166,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Size size = new Size();
-        /// size.Depth = 0.9f; 
+        /// size.Depth = 0.9f;
         /// // USE like this
         /// float width = 0.1f, height = 0.5f, depth = 0.9f;
         /// Size size = new Size(width, height, depth);
@@ -343,7 +343,7 @@ namespace Tizen.NUI
 
         /// <inheritdoc/>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public object Clone() => new Size(Width, Height, Depth);
+        public object Clone() => GetReusable(Width, Height, Depth);
 
         /// <summary>
         /// The type cast operator, Size to Vector3.
@@ -356,7 +356,7 @@ namespace Tizen.NUI
             {
                 return null;
             }
-            return new Vector3(size.Width, size.Height, size.Depth);
+            return Vector3.GetReusable(size.Width, size.Height, size.Depth);
         }
 
         /// <summary>
@@ -370,7 +370,7 @@ namespace Tizen.NUI
             {
                 return null;
             }
-            return new Size(vec.Width, vec.Height, vec.Depth);
+            return GetReusable(vec.Width, vec.Height, vec.Depth);
         }
 
         /// <summary>
@@ -386,7 +386,7 @@ namespace Tizen.NUI
             {
                 return null;
             }
-            return new Size(size2d.Width, size2d.Height);
+            return GetReusable(size2d.Width, size2d.Height);
         }
 
 
@@ -477,5 +477,51 @@ namespace Tizen.NUI
         }
 
         private SizeChangedCallback callback = null;
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        protected override bool IsReusable => true;
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        protected override void Dispose(bool disposing)
+        {
+            if (disposed)
+            {
+                return;
+            }
+
+            callback = null;
+
+            base.Dispose(disposing);
+        }
+
+        internal static Size GetReusable() => GetReusable(0, 0, 0);
+
+        internal static Size GetReusable(Size other) => GetReusable(other.Width, other.Height, other.Depth);
+
+        internal static Size GetReusable(Size2D other) => GetReusable(other.Width, other.Height);
+
+        internal static Size GetReusable(float w, float h) => GetReusable(w, h, 0);
+
+        internal static Size GetReusable(float w, float h, float d) => GetReusable(null, w, h, d);
+
+        internal static Size GetReusable(SizeChangedCallback cb) => GetReusable(cb, 0, 0, 0);
+
+        internal static Size GetReusable(SizeChangedCallback cb, float w, float h, float d)
+        {
+            if (DisposablePool.Get<Size>() is Size reusable)
+            {
+                reusable.InternalSetAll(w, h, d);
+                reusable.callback = cb;
+                return reusable;
+            }
+
+            return new Size(cb, w, h, d);
+        }
+
+        private void InternalSetAll(float w, float h, float d)
+        {
+            Interop.Vector3.SetAll(SwigCPtr, w, h, d);
+            NDalicPINVOKE.ThrowExceptionIfExists();
+        }
     }
 }

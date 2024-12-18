@@ -16,6 +16,7 @@
  */
 using System;
 using System.ComponentModel;
+using System.Numerics;
 using Tizen.NUI.Binding;
 
 namespace Tizen.NUI
@@ -222,7 +223,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Vector3 vector3 = new Vector3();
-        /// vector3.X = 0.1f; 
+        /// vector3.X = 0.1f;
         /// // USE like this
         /// float x = 0.1f, y = 0.5f, z = 0.9f;
         /// Vector3 vector3 = new Vector3(x, y, z);
@@ -255,7 +256,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Vector3 vector3 = new Vector3();
-        /// vector3.Width = 1.0f; 
+        /// vector3.Width = 1.0f;
         /// // USE like this
         /// float width = 1.0f, height = 2.0f, depth = 3.0f;
         /// Vector3 vector3 = new Vector3(width, height, depth);
@@ -288,7 +289,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Vector3 vector3 = new Vector3();
-        /// vector3.R = 0.1f; 
+        /// vector3.R = 0.1f;
         /// // USE like this
         /// float r = 0.1f, g = 0.5f, b = 0.9f;
         /// Vector3 vector3 = new Vector3(r, g, b);
@@ -321,7 +322,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Vector3 vector3 = new Vector3();
-        /// vector3.Y = 0.5f; 
+        /// vector3.Y = 0.5f;
         /// // USE like this
         /// float x = 0.1f, y = 0.5f, z = 0.9f;
         /// Vector3 vector3 = new Vector3(x, y, z);
@@ -354,7 +355,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Vector3 vector3 = new Vector3();
-        /// vector3.Height = 2.0f; 
+        /// vector3.Height = 2.0f;
         /// // USE like this
         /// float width = 1.0f, height = 2.0f, depth = 3.0f;
         /// Vector3 vector3 = new Vector3(width, height, depth);
@@ -387,7 +388,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Vector3 vector3 = new Vector3();
-        /// vector3.G = 0.5f; 
+        /// vector3.G = 0.5f;
         /// // USE like this
         /// float r = 0.1f, g = 0.5f, b = 0.9f;
         /// Vector3 vector3 = new Vector3(r, g, b);
@@ -420,7 +421,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Vector3 vector3 = new Vector3();
-        /// vector3.Z = 0.9f; 
+        /// vector3.Z = 0.9f;
         /// // USE like this
         /// float x = 0.1f, y = 0.5f, z = 0.9f;
         /// Vector3 vector3 = new Vector3(x, y, z);
@@ -453,7 +454,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Vector3 vector3 = new Vector3();
-        /// vector3.Depth = 3.0f; 
+        /// vector3.Depth = 3.0f;
         /// // USE like this
         /// float width = 1.0f, height = 2.0f, depth = 3.0f;
         /// Vector3 vector3 = new Vector3(width, height, depth);
@@ -486,7 +487,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Vector3 vector3 = new Vector3();
-        /// vector3.B = 0.9f; 
+        /// vector3.B = 0.9f;
         /// // USE like this
         /// float r = 0.1f, g = 0.5f, b = 0.9f;
         /// Vector3 vector3 = new Vector3(r, g, b);
@@ -862,6 +863,48 @@ namespace Tizen.NUI
             Vector3 ret = new Vector3(Interop.Vector3.Cross(SwigCPtr, Vector3.getCPtr(other)), true);
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
             return ret;
+        }
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        protected override bool IsReusable => true;
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        protected override void Dispose(bool disposing)
+        {
+            if (disposed)
+            {
+                return;
+            }
+
+            callback = null;
+
+            base.Dispose(disposing);
+        }
+
+        internal static Vector3 GetReusable() => GetReusable(0, 0, 0);
+
+        internal static Vector3 GetReusable(Vector3 other) => GetReusable(other.X, other.Y, other.Z);
+
+        internal static Vector3 GetReusable(float x, float y, float z) => GetReusable(null, x, y, z);
+
+        internal static Vector3 GetReusable(Vector3ChangedCallback cb) => GetReusable(cb, 0, 0, 0);
+
+        internal static Vector3 GetReusable(Vector3ChangedCallback cb, float x, float y, float z)
+        {
+            if (DisposablePool.Get<Vector3>() is Vector3 reusable)
+            {
+                reusable.InternalSetAll(x, y, z);
+                reusable.callback = cb;
+                return reusable;
+            }
+
+            return new Vector3(cb, x, y, z);
+        }
+
+        private void InternalSetAll(float x, float y, float z)
+        {
+            Interop.Vector3.SetAll(SwigCPtr, x, y, z);
+            NDalicPINVOKE.ThrowExceptionIfExists();
         }
 
     }

@@ -92,7 +92,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Position2D position2d = new Position2D();
-        /// position2d.X = 1; 
+        /// position2d.X = 1;
         /// // USE like this
         /// int x = 1, y = 2;
         /// Position2D position2d = new Position2D(x, y);
@@ -125,7 +125,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Position2D position2d = new Position2D();
-        /// position2d.Y = 2; 
+        /// position2d.Y = 2;
         /// // USE like this
         /// int x = 1, y = 2;
         /// Position2D position2d = new Position2D(x, y);
@@ -339,7 +339,7 @@ namespace Tizen.NUI
             {
                 return null;
             }
-            return new Vector2(position2d.X, position2d.Y);
+            return Vector2.GetReusable(position2d.X, position2d.Y);
         }
 
         /// <summary>
@@ -445,6 +445,46 @@ namespace Tizen.NUI
             int ret = (int)Interop.Vector2.ValueOfIndex(SwigCPtr, index);
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
             return ret;
+        }
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        protected override bool IsReusable => true;
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        protected override void Dispose(bool disposing)
+        {
+            if (disposed)
+            {
+                return;
+            }
+
+            callback = null;
+
+            base.Dispose(disposing);
+        }
+
+        internal static Position2D GetReusable() => GetReusable(0, 0);
+
+        internal static Position2D GetReusable(Position2D other) => GetReusable(other.X, other.Y);
+
+        internal static Position2D GetReusable(int x, int y) => GetReusable(x, y);
+
+        internal static Position2D GetReusable(Position2DChangedCallback cb, int x, int y)
+        {
+            if (DisposablePool.Get<Position2D>() is Position2D reusable)
+            {
+                reusable.InternalSetAll(x, y);
+                reusable.callback = cb;
+                return reusable;
+            }
+
+            return new Position2D(cb, x, y);
+        }
+
+        private void InternalSetAll(int x, int y)
+        {
+            Interop.Vector2.SetAll(SwigCPtr, x, y);
+            NDalicPINVOKE.ThrowExceptionIfExists();
         }
     }
 }
