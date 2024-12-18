@@ -788,7 +788,7 @@ namespace Tizen.NUI.Components
             int dx = offsetStart != 0 ? offsetStart : Math.Min(childLeft - parentLeft, offsetEnd);
             int dy = offsetTop != 0 ? offsetTop : Math.Min(childTop - parentTop, offsetBottom);
 
-            return new Vector2(-dx, -dy);
+            return Vector2.GetReusable(-dx, -dy);
         }
 
         private void OnScrollAnimationFinished(object sender, EventArgs e)

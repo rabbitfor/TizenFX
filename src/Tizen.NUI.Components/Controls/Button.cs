@@ -863,7 +863,7 @@ namespace Tizen.NUI.Components
         /// <since_tizen> 6 </since_tizen>
         public Extents IconPadding
         {
-            get => (Extents)GetValue(IconPaddingProperty) ?? new Extents();
+            get => (Extents)GetValue(IconPaddingProperty) ?? Extents.GetReusable();
             set => SetValue(IconPaddingProperty, value);
         }
 
@@ -873,7 +873,7 @@ namespace Tizen.NUI.Components
         /// <since_tizen> 6 </since_tizen>
         public Extents TextPadding
         {
-            get => (Extents)GetValue(TextPaddingProperty) ?? new Extents();
+            get => (Extents)GetValue(TextPaddingProperty) ?? Extents.GetReusable();
             set => SetValue(TextPaddingProperty, value);
         }
 

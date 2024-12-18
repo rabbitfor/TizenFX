@@ -354,7 +354,7 @@ namespace Tizen.NUI.Components
             int buttonHeight = (int)Math.Max(btStyle?.Size?.Height ?? 0.0f, itemheight);
             foreach (Button btnTemp in itemGroup)
             {
-                btnTemp.Size = new Size(buttonWidth, buttonHeight);
+                btnTemp.Size = Size.GetReusable(buttonWidth, buttonHeight);
             }
 
             int pos = 0;

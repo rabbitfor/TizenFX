@@ -876,8 +876,8 @@ namespace Tizen.NUI.Components
             {
                 buttonH = ButtonHeight;
             }
-            ContentView.Size = new Size(Size.Width - titleX * 2, Size.Height - titleY - titleH - buttonH);
-            ContentView.Position = new Position(titleX, titleY + titleH);
+            ContentView.Size = Size.GetReusable(Size.Width - titleX * 2, Size.Height - titleY - titleH - buttonH);
+            ContentView.Position = Position.GetReusable(titleX, titleY + titleH);
             ContentView.RaiseToTop();
         }
 

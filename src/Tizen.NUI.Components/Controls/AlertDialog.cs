@@ -124,7 +124,7 @@ namespace Tizen.NUI.Components
             // Apply ItemSpacing.
             if ((alertDialogStyle.ItemSpacing != null) && (Layout is LinearLayout linearLayout))
             {
-                linearLayout.CellPadding = new Size2D(alertDialogStyle.ItemSpacing.Width, alertDialogStyle.ItemSpacing.Height);
+                linearLayout.CellPadding = Size2D.GetReusable(alertDialogStyle.ItemSpacing.Width, alertDialogStyle.ItemSpacing.Height);
             }
 
             // Apply Title style.
@@ -588,7 +588,7 @@ namespace Tizen.NUI.Components
 
             if (styleApplied && (alertDialogStyle != null) && (alertDialogStyle.ItemSpacing != null) && (Layout is LinearLayout linearLayout))
             {
-                linearLayout.CellPadding = new Size2D(alertDialogStyle.ItemSpacing.Width, alertDialogStyle.ItemSpacing.Height);
+                linearLayout.CellPadding = Size2D.GetReusable(alertDialogStyle.ItemSpacing.Width, alertDialogStyle.ItemSpacing.Height);
             }
 
             Relayout += OnRelayout;
@@ -735,7 +735,7 @@ namespace Tizen.NUI.Components
                 parentSize = NUIApplication.GetDefaultWindow().Size;
             }
 
-            Position2D = new Position2D((parentSize.Width - size.Width) / 2, (parentSize.Height - size.Height) / 2);
+            Position2D = Position2D.GetReusable((parentSize.Width - size.Width) / 2, (parentSize.Height - size.Height) / 2);
         }
     }
 }

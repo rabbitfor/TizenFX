@@ -630,7 +630,7 @@ namespace Tizen.NUI.Components
                 return;
             }
 
-            this.size = new Vector2(size);
+            this.size = Vector2.GetReusable(size);
             UpdateValue();
 
             if (state == ProgressStatusType.Indeterminate) UpdateIndeterminateAnimation();
@@ -657,7 +657,7 @@ namespace Tizen.NUI.Components
             float height = this.SizeHeight;
             float progressRatio = (float)(currentValue - minValue) / (float)(maxValue - minValue);
             float progressWidth = width * progressRatio;
-            progressImage.Size2D = new Size2D((int)(progressWidth + round), (int)height); //Add const round to reach Math.Round function.
+            progressImage.Size2D = Size2D.GetReusable((int)(progressWidth + round), (int)height); //Add const round to reach Math.Round function.
             if (null != bufferImage)
             {
                 if (bufferValue < minValue || bufferValue > maxValue)
@@ -667,7 +667,7 @@ namespace Tizen.NUI.Components
 
                 float bufferRatio = (float)(bufferValue - minValue) / (float)(maxValue - minValue);
                 float bufferWidth = width * bufferRatio;
-                bufferImage.Size2D = new Size2D((int)(bufferWidth + round), (int)height); //Add const round to reach Math.Round function.
+                bufferImage.Size2D = Size2D.GetReusable((int)(bufferWidth + round), (int)height); //Add const round to reach Math.Round function.
             }
         }
 
@@ -696,10 +696,10 @@ namespace Tizen.NUI.Components
             float destination = (this.SizeWidth - indeterminateImage.SizeWidth);
 
             KeyFrames keyFrames = new KeyFrames();
-            keyFrames.Add(0.0f /*  0%*/, new Position(0, 0));
+            keyFrames.Add(0.0f /*  0%*/, Position.GetReusable(0, 0));
             AlphaFunction ease = new AlphaFunction(AlphaFunction.BuiltinFunctions.EaseInOut);
-            keyFrames.Add(0.5f /* 50%*/, new Position(destination, 0), ease);
-            keyFrames.Add(1.0f /*100%*/, new Position(0, 0), ease);
+            keyFrames.Add(0.5f /* 50%*/, Position.GetReusable(destination, 0), ease);
+            keyFrames.Add(1.0f /*100%*/, Position.GetReusable(0, 0), ease);
             ease.Dispose();
 
             indeterminateAnimation.AnimateBetween(indeterminateImage, "Position", keyFrames);
@@ -848,7 +848,7 @@ namespace Tizen.NUI.Components
         {
             indeterminateImage = new ImageView
             {
-                Size = new Size(16, 16),
+                Size = Size.GetReusable(16, 16),
                 PositionUsesPivotPoint = true,
                 ParentOrigin = Tizen.NUI.ParentOrigin.CenterLeft,
                 PivotPoint = Tizen.NUI.PivotPoint.CenterLeft,

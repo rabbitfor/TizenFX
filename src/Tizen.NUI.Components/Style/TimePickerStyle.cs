@@ -64,7 +64,7 @@ namespace Tizen.NUI.Components
             {
                 Pickers.CopyFrom(timePickerStyle.Pickers);
                 CellPadding = (timePickerStyle.CellPadding == null) ?
-                               new Size2D() : new Size2D(timePickerStyle.CellPadding.Width, timePickerStyle.CellPadding.Height);
+                               Size2D.GetReusable() : Size2D.GetReusable(timePickerStyle.CellPadding.Width, timePickerStyle.CellPadding.Height);
             }
         }
     }

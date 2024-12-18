@@ -460,7 +460,7 @@ namespace Tizen.NUI.Components
                 return;
             }
 
-            containerSize = new Size(size.Width, size.Height);
+            containerSize = Size.GetReusable(size.Width, size.Height);
 
             if (calculator == null)
             {
@@ -715,34 +715,34 @@ namespace Tizen.NUI.Components
 
             public override Size CalculateTrackSize(float thickness, Size containerSize, PaddingType trackPadding)
             {
-                return new Size(containerSize.Width - trackPadding.Item1 - trackPadding.Item2, thickness);
+                return Size.GetReusable(containerSize.Width - trackPadding.Item1 - trackPadding.Item2, thickness);
             }
 
             public override Position CalculateTrackPosition(PaddingType trackPadding)
             {
-                return new Position(trackPadding.Item1, -trackPadding.Item4);
+                return Position.GetReusable(trackPadding.Item1, -trackPadding.Item4);
             }
 
             public override Size CalculateThumbSize(float thickness, Size trackSize)
             {
-                return new Size(trackSize.Width * (IsScrollable() ? (visibleLength / contentLength) : 0.0f), thickness);
+                return Size.GetReusable(trackSize.Width * (IsScrollable() ? (visibleLength / contentLength) : 0.0f), thickness);
             }
 
             public override Position CalculateThumbPosition(Size trackSize, Size thumbSize, PaddingType trackPadding)
             {
                 float padding = ((trackSize.Height - thumbSize.Height) / 2.0f) + trackPadding.Item4;
-                return new Position(trackPadding.Item1 + (IsScrollable() ? (trackSize.Width * (Math.Min(Math.Max(currentPosition, 0.0f), contentLength - visibleLength)) / contentLength) : 0.0f), -padding);
+                return Position.GetReusable(trackPadding.Item1 + (IsScrollable() ? (trackSize.Width * (Math.Min(Math.Max(currentPosition, 0.0f), contentLength - visibleLength)) / contentLength) : 0.0f), -padding);
             }
 
             public override Position CalculateThumbPaddingPosition(Size trackSize, Size thumbSize, Position thumbCurrentPosition, PaddingType trackPadding)
             {
                 float padding = ((trackSize.Height - thumbSize.Height) / 2.0f) + trackPadding.Item4;
-                return new Position(thumbCurrentPosition.X, -padding);
+                return Position.GetReusable(thumbCurrentPosition.X, -padding);
             }
 
             public override Position CalculateThumbScrollPosition(Size trackSize, Position thumbCurrentPosition, PaddingType trackPadding)
             {
-                return new Position(trackPadding.Item1 + (IsScrollable() ? (trackSize.Width * (Math.Min(Math.Max(currentPosition, 0.0f), contentLength - visibleLength)) / contentLength) : 0.0f), thumbCurrentPosition.Y);
+                return Position.GetReusable(trackPadding.Item1 + (IsScrollable() ? (trackSize.Width * (Math.Min(Math.Max(currentPosition, 0.0f), contentLength - visibleLength)) / contentLength) : 0.0f), thumbCurrentPosition.Y);
             }
         }
 
@@ -764,34 +764,34 @@ namespace Tizen.NUI.Components
 
             public override Size CalculateTrackSize(float thickness, Size containerSize, PaddingType trackPadding)
             {
-                return new Size(thickness, containerSize.Height - trackPadding.Item3 - trackPadding.Item4);
+                return Size.GetReusable(thickness, containerSize.Height - trackPadding.Item3 - trackPadding.Item4);
             }
 
             public override Position CalculateTrackPosition(PaddingType trackPadding)
             {
-                return new Position(-trackPadding.Item2, trackPadding.Item3);
+                return Position.GetReusable(-trackPadding.Item2, trackPadding.Item3);
             }
 
             public override Size CalculateThumbSize(float thickness, Size trackSize)
             {
-                return new Size(thickness, trackSize.Height * (IsScrollable() ? (visibleLength / contentLength) : 0.0f));
+                return Size.GetReusable(thickness, trackSize.Height * (IsScrollable() ? (visibleLength / contentLength) : 0.0f));
             }
 
             public override Position CalculateThumbPosition(Size trackSize, Size thumbSize, PaddingType trackPadding)
             {
                 float padding = ((trackSize.Width - thumbSize.Width) / 2.0f) + trackPadding.Item2;
-                return new Position(-padding, trackPadding.Item3 + (IsScrollable() ? (trackSize.Height * Math.Min(Math.Max(currentPosition, 0.0f), contentLength - visibleLength) / contentLength) : 0.0f));
+                return Position.GetReusable(-padding, trackPadding.Item3 + (IsScrollable() ? (trackSize.Height * Math.Min(Math.Max(currentPosition, 0.0f), contentLength - visibleLength) / contentLength) : 0.0f));
             }
 
             public override Position CalculateThumbPaddingPosition(Size trackSize, Size thumbSize, Position thumbCurrentPosition, PaddingType trackPadding)
             {
                 float padding = ((trackSize.Width - thumbSize.Width) / 2.0f) + trackPadding.Item2;
-                return new Position(-padding, thumbCurrentPosition.Y);
+                return Position.GetReusable(-padding, thumbCurrentPosition.Y);
             }
 
             public override Position CalculateThumbScrollPosition(Size trackSize, Position thumbPosition, PaddingType trackPadding)
             {
-                return new Position(thumbPosition.X, trackPadding.Item3 + (IsScrollable() ? (trackSize.Height * Math.Min(Math.Max(currentPosition, 0.0f), contentLength - visibleLength) / contentLength) : 0.0f));
+                return Position.GetReusable(thumbPosition.X, trackPadding.Item3 + (IsScrollable() ? (trackSize.Height * Math.Min(Math.Max(currentPosition, 0.0f), contentLength - visibleLength) / contentLength) : 0.0f));
             }
         }
 

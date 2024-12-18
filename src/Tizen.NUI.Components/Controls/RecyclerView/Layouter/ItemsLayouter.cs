@@ -178,7 +178,7 @@ namespace Tizen.NUI.Components
             if (Container)
             {
                 if (ItemsView != null) Container.Size = ItemsView.Size;
-                Container.Position = new Position(0.0f, 0.0f);
+                Container.Position = Position.GetReusable(0.0f, 0.0f);
             }
             ItemsView = null;
         }

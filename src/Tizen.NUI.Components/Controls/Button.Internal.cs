@@ -29,7 +29,8 @@ namespace Tizen.NUI.Components
         private ImageView overlayImage;
         private TextLabel buttonText;
         private ImageView buttonIcon;
-        private Vector2 size;
+        private float currentWidth = -1;
+        private float currentHeight = -1;
 
         private EventHandler<StateChangedEventArgs> stateChangeHandler;
 
@@ -292,13 +293,16 @@ namespace Tizen.NUI.Components
         public override void OnRelayout(Vector2 size, RelayoutContainer container)
         {
             if (size == null) return;
+            var w = size.Width;
+            var h = size.Height;
 
-            if (size.Equals(this.size))
+            if (w == currentWidth && h == currentHeight)
             {
                 return;
             }
 
-            this.size = new Vector2(size);
+            currentWidth = w;
+            currentHeight = h;
 
             UpdateSizeAndSpacing();
         }
@@ -350,7 +354,7 @@ namespace Tizen.NUI.Components
             overlayImage?.Unparent();
 
 #pragma warning disable CA2000
-            Size2D cellPadding = String.IsNullOrEmpty(buttonText.Text) ? new Size2D(0, 0) : itemSpacing;
+            Size2D cellPadding = String.IsNullOrEmpty(buttonText.Text) ? Size2D.GetReusable(0, 0) : itemSpacing;
 #pragma warning restore CA2000
 
             var linearLayout = Layout as LinearLayout;
@@ -406,7 +410,7 @@ namespace Tizen.NUI.Components
 
         private void UpdateSizeAndSpacing()
         {
-            if (size == null || buttonIcon == null || buttonText == null)
+            if (currentWidth == -1 || currentHeight == -1 || buttonIcon == null || buttonText == null)
             {
                 return;
             }
@@ -427,8 +431,8 @@ namespace Tizen.NUI.Components
                 {
                     cellPadding = itemSpacing;
 
-                    Extents iconMargin = buttonIcon.Margin ?? new Extents(0);
-                    Extents textMargin = buttonText.Margin ?? new Extents(0);
+                    Extents iconMargin = buttonIcon.Margin ?? Extents.GetReusable();
+                    Extents textMargin = buttonText.Margin ?? Extents.GetReusable();
 
                     if (iconRelativeOrientation == IconOrientation.Left || iconRelativeOrientation == IconOrientation.Right)
                     {
@@ -442,12 +446,12 @@ namespace Tizen.NUI.Components
                 }
             }
 
-            layout.CellPadding = cellPadding ?? new Size2D(0, 0);
+            layout.CellPadding = cellPadding ?? Size2D.GetReusable(0, 0);
 
             // If the button has fixed width and the text is not empty, the text should not exceed button boundary.
             if (WidthSpecification != LayoutParamPolicies.WrapContent && !string.IsNullOrEmpty(buttonText.Text))
             {
-                buttonText.MaximumSize = new Size2D((int)Math.Max(size.Width - lengthWithoutText, Math.Max(buttonText.MinimumSize.Width, 1)), (int)size.Height);
+                buttonText.MaximumSize = Size2D.GetReusable((int)Math.Max(currentWidth - lengthWithoutText, Math.Max(buttonText.MinimumSize.Width, 1)), (int)currentHeight);
             }
         }
 

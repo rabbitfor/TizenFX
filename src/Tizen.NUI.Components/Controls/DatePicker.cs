@@ -238,7 +238,7 @@ namespace Tizen.NUI.Components
 
             if (viewStyle is DatePickerStyle datePickerStyle && Layout is LinearLayout linearLayout)
             {
-                linearLayout.CellPadding = new Size(datePickerStyle.CellPadding.Width, datePickerStyle.CellPadding.Height);
+                linearLayout.CellPadding = Size.GetReusable(datePickerStyle.CellPadding.Width, datePickerStyle.CellPadding.Height);
 
                 yearPicker.ApplyStyle(datePickerStyle.Pickers);
                 monthPicker.ApplyStyle(datePickerStyle.Pickers);

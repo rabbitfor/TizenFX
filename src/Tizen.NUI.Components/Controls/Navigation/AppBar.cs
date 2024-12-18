@@ -576,12 +576,12 @@ namespace Tizen.NUI.Components
 
             if (appBarStyle.NavigationPadding != null)
             {
-                navigationPadding = new Extents(appBarStyle.NavigationPadding);
+                navigationPadding = Extents.GetReusable(appBarStyle.NavigationPadding);
             }
 
             if (appBarStyle.ActionPadding != null)
             {
-                actionPadding = new Extents(appBarStyle.ActionPadding);
+                actionPadding = Extents.GetReusable(appBarStyle.ActionPadding);
             }
 
             // Apply Back Button style.

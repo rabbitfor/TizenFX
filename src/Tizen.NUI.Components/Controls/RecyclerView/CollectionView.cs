@@ -396,7 +396,7 @@ namespace Tizen.NUI.Components
                 ViewStyle layouterStyle = ThemeManager.GetStyle(styleName);
                 if (layouterStyle != null)
                 {
-                    itemsLayouter.Padding = new Extents(layouterStyle.Padding);
+                    itemsLayouter.Padding = Extents.GetReusable(layouterStyle.Padding);
                 }
                 ReinitializeLayout();
             }
@@ -925,7 +925,7 @@ namespace Tizen.NUI.Components
                 ViewStyle layouterStyle = ThemeManager.GetStyle(styleName);
                 if (layouterStyle != null)
                 {
-                    itemsLayouter.Padding = new Extents(layouterStyle.Padding);
+                    itemsLayouter.Padding = Extents.GetReusable(layouterStyle.Padding);
                 }
             }
         }

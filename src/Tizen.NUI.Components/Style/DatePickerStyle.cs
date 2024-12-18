@@ -64,7 +64,7 @@ namespace Tizen.NUI.Components
             {
                 Pickers.CopyFrom(DatePickerStyle.Pickers);
                 CellPadding = (DatePickerStyle.CellPadding == null) ?
-                               new Size2D() : new Size2D(DatePickerStyle.CellPadding.Width, DatePickerStyle.CellPadding.Height);
+                               Size2D.GetReusable() : Size2D.GetReusable(DatePickerStyle.CellPadding.Width, DatePickerStyle.CellPadding.Height);
             }
         }
     }

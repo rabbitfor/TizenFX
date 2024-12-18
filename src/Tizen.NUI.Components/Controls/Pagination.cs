@@ -38,7 +38,7 @@ namespace Tizen.NUI.Components
             if (newValue != null)
             {
                 var pagination = (Pagination)bindable;
-                pagination.indicatorSize = new Size((Size)newValue);
+                pagination.indicatorSize = Size.GetReusable((Size)newValue);
                 pagination.UpdateVisual();
                 pagination.UpdateContainer();
             }
@@ -272,7 +272,7 @@ namespace Tizen.NUI.Components
 
         private void OnIndicatorColorChanged(float r, float g, float b, float a)
         {
-            IndicatorColor = new Color(r, g, b, a);
+            IndicatorColor = Color.GetReusable(r, g, b, a);
         }
 
         /// <summary>
@@ -449,7 +449,7 @@ namespace Tizen.NUI.Components
             {
                 return null;
             }
-            return new Position(indicatorList[index].Position.X + container.PositionX, indicatorList[index].Position.Y + container.PositionY);
+            return Position.GetReusable(indicatorList[index].Position.X + container.PositionX, indicatorList[index].Position.Y + container.PositionY);
         }
 
         /// <summary>
@@ -532,9 +532,9 @@ namespace Tizen.NUI.Components
                 Layout = new LinearLayout()
                 {
                     LinearOrientation = LinearLayout.Orientation.Horizontal,
-                    CellPadding = new Size2D(indicatorSpacing, 0),
+                    CellPadding = Size2D.GetReusable(indicatorSpacing, 0),
                 },
-                Padding = new Extents(8, 8, 0, 0),
+                Padding = Extents.GetReusable(8, 8, 0, 0),
             };
             this.Add(container);
 
@@ -672,7 +672,7 @@ namespace Tizen.NUI.Components
             else
             {
                 indicator.Color = indicatorColor;
-            }            
+            }
         }
 
         private void CreateIndicator(int index)
@@ -721,7 +721,7 @@ namespace Tizen.NUI.Components
 
             if (container != null && (container.Layout is LinearLayout linearLayout))
             {
-                linearLayout.CellPadding = new Size2D(indicatorSpacing, 0);
+                linearLayout.CellPadding = Size2D.GetReusable(indicatorSpacing, 0);
             }
 
             for (int i = 0; i < indicatorList.Count; i++)

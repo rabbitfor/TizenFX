@@ -272,7 +272,7 @@ namespace Tizen.NUI.Components
 
                     if (null == space)
                     {
-                        space = new Extents((ushort start, ushort end, ushort top, ushort bottom) =>
+                        space = Extents.GetReusable((ushort start, ushort end, ushort top, ushort bottom) =>
                         {
                             tabStyle.ItemPadding.Start = start;
                             tabStyle.ItemPadding.End = end;
@@ -777,7 +777,7 @@ namespace Tizen.NUI.Components
 
             Underline.SizeWidth = itemList[curIndex].Size2D.Width;
 
-            underline.Size2D = new Size2D(itemList[curIndex].Size2D.Width, (int)Underline.Size.Height);
+            underline.Size2D = Size2D.GetReusable(itemList[curIndex].Size2D.Width, (int)Underline.Size.Height);
             underline.BackgroundColor = tabStyle.UnderLine.BackgroundColor.All;
             if (isNeedAnimation)
             {

@@ -98,7 +98,7 @@ namespace Tizen.NUI.Components
                 headerSize = IsHorizontal?
                                 width + itemMargin.Start + itemMargin.End:
                                 height + itemMargin.Top + itemMargin.Bottom;
-                headerMargin = new Extents(itemMargin);
+                headerMargin = Extents.GetReusable(itemMargin);
                 hasHeader = true;
 
                 collectionView.UnrealizeItem(header);
@@ -116,7 +116,7 @@ namespace Tizen.NUI.Components
                 footerSize = IsHorizontal?
                                 width + itemMargin.Start + itemMargin.End:
                                 height + itemMargin.Top + itemMargin.Bottom;
-                footerMargin = new Extents(itemMargin);
+                footerMargin = Extents.GetReusable(itemMargin);
                 footer.Index = count - 1;
                 hasFooter = true;
 
@@ -168,7 +168,7 @@ namespace Tizen.NUI.Components
                         groupHeaderSize = IsHorizontal?
                                             width + itemMargin.Start + itemMargin.End:
                                             height + itemMargin.Top + itemMargin.Bottom;
-                        groupHeaderMargin = new Extents(itemMargin);
+                        groupHeaderMargin = Extents.GetReusable(itemMargin);
                         collectionView.UnrealizeItem(groupHeader);
                     }
                 }
@@ -205,7 +205,7 @@ namespace Tizen.NUI.Components
                         groupFooterSize = IsHorizontal?
                                             width + itemMargin.Start + itemMargin.End:
                                             height + itemMargin.Top + itemMargin.Bottom;
-                        groupFooterMargin = new Extents(itemMargin);
+                        groupFooterMargin = Extents.GetReusable(itemMargin);
                         collectionView.UnrealizeItem(groupFooter);
                     }
                 }
@@ -270,7 +270,7 @@ namespace Tizen.NUI.Components
                 StepCandidate = IsHorizontal?
                                 width + itemMargin.Start + itemMargin.End:
                                 height + itemMargin.Top + itemMargin.Bottom;
-                CandidateMargin = new Extents(itemMargin);
+                CandidateMargin = Extents.GetReusable(itemMargin);
                 if (StepCandidate == 0) StepCandidate = 1; //????
 
                 collectionView.UnrealizeItem(sizeDeligate, false);
@@ -450,7 +450,7 @@ namespace Tizen.NUI.Components
                 }
                 // 5. Placing item.
                 (float posX, float posY) = GetItemPosition(i);
-                item.Position = new Position(posX, posY);
+                item.Position = Position.GetReusable(posX, posY);
 
                 var size = (IsHorizontal? item.SizeWidth: item.SizeHeight);
 
@@ -467,11 +467,11 @@ namespace Tizen.NUI.Components
                 }
                 if (IsHorizontal && item.HeightSpecification == LayoutParamPolicies.MatchParent)
                 {
-                    item.Size = new Size(size, Container.Size.Height - Padding.Top - Padding.Bottom - item.Margin.Top - item.Margin.Bottom);
+                    item.Size = Size.GetReusable(size, Container.Size.Height - Padding.Top - Padding.Bottom - item.Margin.Top - item.Margin.Bottom);
                 }
                 else if (!IsHorizontal && item.WidthSpecification == LayoutParamPolicies.MatchParent)
                 {
-                    item.Size = new Size(Container.Size.Width - Padding.Start - Padding.End - item.Margin.Start - item.Margin.End, size);
+                    item.Size = Size.GetReusable(Container.Size.Width - Padding.Start - Padding.End - item.Margin.Start - item.Margin.End, size);
                 }
             }
             return;

@@ -1283,9 +1283,9 @@ namespace Tizen.NUI.Components
             {
                 if (null == spaceTrackIndicator)
                 {
-                    spaceTrackIndicator = new Extents((ushort start, ushort end, ushort top, ushort bottom) =>
+                    spaceTrackIndicator = Extents.GetReusable((ushort start, ushort end, ushort top, ushort bottom) =>
                     {
-                        Extents extents = new Extents(start, end, top, bottom);
+                        Extents extents = Extents.GetReusable(start, end, top, bottom);
                         spaceTrackIndicator.CopyFrom(extents);
                     }, 0, 0, 0, 0);
                 }
@@ -1378,8 +1378,7 @@ namespace Tizen.NUI.Components
             }
             set
             {
-                ushort val = (ushort)value;
-                privateTrackPadding = new Extents(val, val, val, val);
+                privateTrackPadding = Extents.GetReusable((ushort)value);
             }
         }
 
@@ -1448,13 +1447,13 @@ namespace Tizen.NUI.Components
                     editModeIndicator = new View()
                     {
                         PositionUsesPivotPoint = true,
-                        PivotPoint = new Position(0, 0, 0),
+                        PivotPoint = Position.GetReusable(0, 0, 0),
                         WidthResizePolicy = ResizePolicyType.FillToParent,
                         HeightResizePolicy = ResizePolicyType.FillToParent,
                         BorderlineColor = Color.Red,
                         BorderlineWidth = 6.0f,
                         BorderlineOffset = -1f,
-                        BackgroundColor = new Color(0.2f, 0.2f, 0.2f, 0.4f),
+                        BackgroundColor = Color.GetReusable(0.2f, 0.2f, 0.2f, 0.4f),
                         AccessibilityHidden = true,
                     };
                 }

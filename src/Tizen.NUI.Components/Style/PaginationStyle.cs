@@ -30,7 +30,7 @@ namespace Tizen.NUI.Components
         [EditorBrowsable(EditorBrowsableState.Never)]
         public static readonly BindableProperty IndicatorSizeProperty = BindableProperty.Create(nameof(IndicatorSize), typeof(Size), typeof(PaginationStyle), null, propertyChanged: (bindable, oldValue, newValue) =>
         {
-            ((PaginationStyle)bindable).indicatorSize = newValue == null ? null : new Size((Size)newValue);
+            ((PaginationStyle)bindable).indicatorSize = newValue == null ? null : Size.GetReusable((Size)newValue);
         },
         defaultValueCreator: (bindable) =>
         {

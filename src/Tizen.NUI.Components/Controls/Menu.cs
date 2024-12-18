@@ -528,7 +528,7 @@ namespace Tizen.NUI.Components
                 // not to enlarge Menu size.
                 ExcludeLayouting = true,
                 BackgroundColor = Color.Transparent,
-                Size = new Size(NUIApplication.GetDefaultWindow().Size),
+                Size = Size.GetReusable(NUIApplication.GetDefaultWindow().Size),
                 DispatchParentGestureEvents = false,
             };
 
@@ -675,8 +675,8 @@ namespace Tizen.NUI.Components
 
             if (!PositionX.Equals(menuPosX) || !PositionY.Equals(menuPosY) || !SizeWidth.Equals(menuSizeW) || !SizeHeight.Equals(menuSizeH))
             {
-                Position = new Position(menuPosX, menuPosY);
-                Size = new Size(menuSizeW, menuSizeH);
+                Position = Position.GetReusable(menuPosX, menuPosY);
+                Size = Size.GetReusable(menuSizeW, menuSizeH);
             }
         }
 
@@ -691,7 +691,7 @@ namespace Tizen.NUI.Components
             // Menu's Position should be updated before doing this calculation.
             if (!Scrim.PositionX.Equals(-PositionX) || !Scrim.PositionY.Equals(-PositionY))
             {
-                Scrim.Position = new Position(-PositionX, -PositionY);
+                Scrim.Position = Position.GetReusable(-PositionX, -PositionY);
             }
         }
 

@@ -109,7 +109,7 @@ namespace Tizen.NUI.Components
                 ActionButton.CopyFrom(appBarStyle.ActionButton);
                 NavigationPadding = (appBarStyle.NavigationPadding == null) ? new Extents() : new Extents(appBarStyle.NavigationPadding);
                 ActionPadding = (appBarStyle.ActionPadding == null) ? new Extents() : new Extents(appBarStyle.ActionPadding);
-                ActionCellPadding = (appBarStyle.ActionCellPadding == null) ? new Size2D() : new Size2D(appBarStyle.ActionCellPadding.Width, appBarStyle.ActionCellPadding.Height);
+                ActionCellPadding = (appBarStyle.ActionCellPadding == null) ? Size2D.GetReusable() : Size2D.GetReusable(appBarStyle.ActionCellPadding.Width, appBarStyle.ActionCellPadding.Height);
             }
         }
     }

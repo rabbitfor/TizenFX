@@ -112,7 +112,7 @@ namespace Tizen.NUI.Components
                 headerSize = IsHorizontal?
                                 width + itemMargin.Start + itemMargin.End:
                                 height + itemMargin.Top + itemMargin.Bottom;
-                headerMargin = new Extents(itemMargin);
+                headerMargin = Extents.GetReusable(itemMargin);
                 hasHeader = true;
 
                 collectionView.UnrealizeItem(header);
@@ -129,7 +129,7 @@ namespace Tizen.NUI.Components
                 footerSize = IsHorizontal?
                                 width + itemMargin.Start + itemMargin.End:
                                 height + itemMargin.Top + itemMargin.Bottom;
-                footerMargin = new Extents(itemMargin);
+                footerMargin = Extents.GetReusable(itemMargin);
                 footer.Index = count - 1;
                 hasFooter = true;
 
@@ -180,7 +180,7 @@ namespace Tizen.NUI.Components
                         groupHeaderSize = IsHorizontal?
                                             width + itemMargin.Start + itemMargin.End:
                                             height + itemMargin.Top + itemMargin.Bottom;
-                        groupHeaderMargin = new Extents(itemMargin);
+                        groupHeaderMargin = Extents.GetReusable(itemMargin);
                         collectionView.UnrealizeItem(groupHeader);
                     }
                 }
@@ -217,7 +217,7 @@ namespace Tizen.NUI.Components
                         groupFooterSize = IsHorizontal?
                                             width + itemMargin.Start + itemMargin.End:
                                             height + itemMargin.Top + itemMargin.Bottom;
-                        groupFooterMargin = new Extents(itemMargin);
+                        groupFooterMargin = Extents.GetReusable(itemMargin);
 
                         collectionView.UnrealizeItem(groupFooter);
                     }
@@ -284,7 +284,7 @@ namespace Tizen.NUI.Components
                 width = width + itemMargin.Start + itemMargin.End;
                 height = height + itemMargin.Top + itemMargin.Bottom;
                 StepCandidate = IsHorizontal? width : height;
-                CandidateMargin = new Extents(itemMargin);
+                CandidateMargin = Extents.GetReusable(itemMargin);
 
                 // Prevent zero division.
                 if (width == 0) width = 1;
@@ -450,7 +450,7 @@ namespace Tizen.NUI.Components
                 //item Position without Padding and Margin.
                 (float x, float y) = GetItemPosition(i);
                 // 5. Placing item with Padding and Margin.
-                item.Position = new Position(x, y);
+                item.Position = Position.GetReusable(x, y);
 
                 //Linear Item need to be resized!
                 if (item.IsHeader || item.IsFooter || item.IsGroupHeader || item.IsGroupFooter)
@@ -465,11 +465,11 @@ namespace Tizen.NUI.Components
                     }
                     if (IsHorizontal && item.HeightSpecification == LayoutParamPolicies.MatchParent)
                     {
-                        item.Size = new Size(size, Container.Size.Height - Padding.Top - Padding.Bottom - item.Margin.Top - item.Margin.Bottom);
+                        item.Size = Size.GetReusable(size, Container.Size.Height - Padding.Top - Padding.Bottom - item.Margin.Top - item.Margin.Bottom);
                     }
                     else if (!IsHorizontal && item.WidthSpecification == LayoutParamPolicies.MatchParent)
                     {
-                        item.Size = new Size(Container.Size.Width - Padding.Start - Padding.End - item.Margin.Start - item.Margin.End, size);
+                        item.Size = Size.GetReusable(Container.Size.Width - Padding.Start - Padding.End - item.Margin.Start - item.Margin.End, size);
                     }
                 }
                 //Console.WriteLine("[NUI] ["+item.Index+"] ["+item.Position.X+", "+item.Position.Y+" ==== \n");

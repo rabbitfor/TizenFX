@@ -191,7 +191,7 @@ namespace Tizen.NUI.Components
             Vertical
         }
 
-        #region public property 
+        #region public property
         /// <summary>
         /// The property to get/set the direction of the ScrollBar.
         /// </summary>
@@ -522,7 +522,7 @@ namespace Tizen.NUI.Components
             //Release your own unmanaged resources here.
             //You should not access any managed member here except static instance.
             //because the execution order of Finalizes is non-deterministic.
-            //Unreference this from if a static instance refer to this. 
+            //Unreference this from if a static instance refer to this.
 
             //You must call base.Dispose(type) just before exit.
             base.Dispose(type);
@@ -556,7 +556,7 @@ namespace Tizen.NUI.Components
                 PivotPoint = Tizen.NUI.PivotPoint.CenterLeft
             };
             this.Add(trackImage);
-            
+
 
             thumbImage = new ImageView
             {
@@ -568,7 +568,7 @@ namespace Tizen.NUI.Components
                 PivotPoint = Tizen.NUI.PivotPoint.CenterLeft
             };
             this.Add(thumbImage);
-            
+
 
             scrollAniPlayer = new Animation(334);
             scrollAniPlayer.DefaultAlphaFunction = new AlphaFunction(AlphaFunction.BuiltinFunctions.Linear);
@@ -634,7 +634,7 @@ namespace Tizen.NUI.Components
 
                 if (!enableAni)
                 {
-                    thumbImage.Position = new Position(posX, posY, 0);
+                    thumbImage.Position = Position.GetReusable(posX, posY, 0);
                 }
                 else
                 {
@@ -659,7 +659,7 @@ namespace Tizen.NUI.Components
 
                 if (!enableAni)
                 {
-                    thumbImage.Position = new Position(posX, posY, 0);
+                    thumbImage.Position = Position.GetReusable(posX, posY, 0);
                 }
                 else
                 {

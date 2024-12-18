@@ -337,7 +337,7 @@ namespace Tizen.NUI.Components
 
             //Apply CellPadding.
             if (timePickerStyle?.CellPadding != null && Layout != null)
-                ((LinearLayout)Layout).CellPadding = new Size2D(timePickerStyle.CellPadding.Width, timePickerStyle.CellPadding.Height);
+                ((LinearLayout)Layout).CellPadding = Size2D.GetReusable(timePickerStyle.CellPadding.Width, timePickerStyle.CellPadding.Height);
 
             //Apply Internal Pickers style.
             if (timePickerStyle?.Pickers != null && hourPicker != null && minutePicker != null && ampmPicker != null)

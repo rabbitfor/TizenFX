@@ -78,9 +78,9 @@ namespace Tizen.NUI.Components
 
             if (bindableObject is TabButtonStyle tabButtonStyle)
             {
-                SizeWithIcon = new Size(tabButtonStyle.SizeWithIcon);
-                SizeWithIconOnly = new Size(tabButtonStyle.SizeWithIconOnly);
-                IconSizeWithIconOnly = new Size(tabButtonStyle.IconSizeWithIconOnly);
+                SizeWithIcon = Size.GetReusable(tabButtonStyle.SizeWithIcon);
+                SizeWithIconOnly = Size.GetReusable(tabButtonStyle.SizeWithIconOnly);
+                IconSizeWithIconOnly = Size.GetReusable(tabButtonStyle.IconSizeWithIconOnly);
                 TextSizeWithIcon = tabButtonStyle.TextSizeWithIcon;
             }
         }

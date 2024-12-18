@@ -67,7 +67,7 @@ namespace Tizen.NUI.Components
         [EditorBrowsable(EditorBrowsableState.Never)]
         public static readonly BindableProperty IconPaddingProperty = BindableProperty.Create(nameof(IconPadding), typeof(Extents), typeof(ButtonStyle), null, propertyChanged: (bindable, oldValue, newValue) =>
         {
-            ((ButtonStyle)bindable).iconPadding = null == newValue ? null : new Extents((Extents)newValue);
+            ((ButtonStyle)bindable).iconPadding = null == newValue ? null : Extents.GetReusable((Extents)newValue);
         },
         defaultValueCreator: (bindable) =>
         {
@@ -78,7 +78,7 @@ namespace Tizen.NUI.Components
         [EditorBrowsable(EditorBrowsableState.Never)]
         public static readonly BindableProperty TextPaddingProperty = BindableProperty.Create(nameof(TextPadding), typeof(Extents), typeof(ButtonStyle), null, propertyChanged: (bindable, oldValue, newValue) =>
         {
-            ((ButtonStyle)bindable).textPadding = null == newValue ? null : new Extents((Extents)newValue);
+            ((ButtonStyle)bindable).textPadding = null == newValue ? null : Extents.GetReusable((Extents)newValue);
         },
         defaultValueCreator: (bindable) =>
         {
@@ -244,7 +244,7 @@ namespace Tizen.NUI.Components
         {
             // TODO Fixme
             // When there are icon and text, the linear layout does not count padding.
-            get => ((Extents)GetValue(IconPaddingProperty)) ?? (iconPadding = new Extents());
+            get => ((Extents)GetValue(IconPaddingProperty)) ?? (iconPadding = Extents.GetReusable());
             set => SetValue(IconPaddingProperty, value);
         }
 
@@ -254,7 +254,7 @@ namespace Tizen.NUI.Components
         /// <since_tizen> 8 </since_tizen>
         public Extents TextPadding
         {
-            get => ((Extents)GetValue(TextPaddingProperty)) ?? (textPadding = new Extents());
+            get => ((Extents)GetValue(TextPaddingProperty)) ?? (textPadding = Extents.GetReusable());
             set => SetValue(TextPaddingProperty, value);
         }
 

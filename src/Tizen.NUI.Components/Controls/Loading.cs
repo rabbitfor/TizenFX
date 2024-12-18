@@ -420,11 +420,11 @@ namespace Tizen.NUI.Components
                     URLS = new List<string>(),
                     FrameDelay = defaultFrameDelay,
                     LoopCount = -1,
-                    Position = new Vector2(0, 0),
+                    Position = Vector2.GetReusable(0, 0),
                     Origin = Visual.AlignType.Center,
                     AnchorPoint = Visual.AlignType.Center,
                     SizePolicy = VisualTransformPolicyType.Relative,
-                    Size = new Size2D(1, 1)
+                    Size = Size2D.GetReusable(1, 1)
                 };
 
                 AddVisual(ImageVisualName, imageVisual);

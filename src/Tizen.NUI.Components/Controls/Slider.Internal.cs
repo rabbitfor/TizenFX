@@ -739,11 +739,11 @@ namespace Tizen.NUI.Components
             int bgTrackLength = GetBgTrackLength();
             if (direction == DirectionType.Horizontal)
             {
-                bgTrackImage.Size2D = new Size2D(bgTrackLength, curTrackThickness);
+                bgTrackImage.Size2D = Size2D.GetReusable(bgTrackLength, curTrackThickness);
             }
             else if (direction == DirectionType.Vertical)
             {
-                bgTrackImage.Size2D = new Size2D(curTrackThickness, bgTrackLength);
+                bgTrackImage.Size2D = Size2D.GetReusable(curTrackThickness, bgTrackLength);
             }
         }
 
@@ -759,11 +759,11 @@ namespace Tizen.NUI.Components
 
             if (direction == DirectionType.Horizontal)
             {
-                bgTrackImage.Position2D = new Position2D((lowIndicatorOffset - highIndicatorOffet) / 2, 0);
+                bgTrackImage.Position2D = Position2D.GetReusable((lowIndicatorOffset - highIndicatorOffet) / 2, 0);
             }
             else if (direction == DirectionType.Vertical)
             {
-                bgTrackImage.Position2D = new Position2D(0, (highIndicatorOffet - lowIndicatorOffset) / 2);
+                bgTrackImage.Position2D = Position2D.GetReusable(0, (highIndicatorOffet - lowIndicatorOffset) / 2);
             }
         }
 
@@ -790,15 +790,15 @@ namespace Tizen.NUI.Components
                     ratio = 1.0f - ratio;
                 }
                 float slidedTrackLength = (float)GetBgTrackLength() * ratio;
-                slidedTrackImage.Size2D = new Size2D((int)(slidedTrackLength + round), (int)curTrackThickness); //Add const round to reach Math.Round function.
-                thumbImage.Position = new Position(slidedTrackImage.Size2D.Width, 0);
+                slidedTrackImage.Size2D = Size2D.GetReusable((int)(slidedTrackLength + round), (int)curTrackThickness); //Add const round to reach Math.Round function.
+                thumbImage.Position = Position.GetReusable(slidedTrackImage.Size2D.Width, 0);
                 thumbImage.RaiseToTop();
             }
             else if (direction == DirectionType.Vertical)
             {
                 float slidedTrackLength = (float)GetBgTrackLength() * ratio;
-                slidedTrackImage.Size2D = new Size2D((int)curTrackThickness, (int)(slidedTrackLength + round)); //Add const round to reach Math.Round function.
-                thumbImage.Position = new Position(0, -slidedTrackImage.Size2D.Height);
+                slidedTrackImage.Size2D = Size2D.GetReusable((int)curTrackThickness, (int)(slidedTrackLength + round)); //Add const round to reach Math.Round function.
+                thumbImage.Position = Position.GetReusable(0, -slidedTrackImage.Size2D.Height);
                 thumbImage.RaiseToTop();
             }
 
@@ -807,11 +807,11 @@ namespace Tizen.NUI.Components
             {
                 if (direction == DirectionType.Horizontal)
                 {
-                    warningSlidedTrackImage.Size2D = new Size2D((int)(((curValue - warningStartValue) / 100) * this.Size2D.Width), (int)curTrackThickness);
+                    warningSlidedTrackImage.Size2D = Size2D.GetReusable((int)(((curValue - warningStartValue) / 100) * this.Size2D.Width), (int)curTrackThickness);
                 }
                 else if (direction == DirectionType.Vertical)
                 {
-                    warningSlidedTrackImage.Size2D = new Size2D((int)curTrackThickness, (int)(((curValue - warningStartValue) / 100) * this.Size2D.Height));
+                    warningSlidedTrackImage.Size2D = Size2D.GetReusable((int)curTrackThickness, (int)(((curValue - warningStartValue) / 100) * this.Size2D.Height));
                 }
 
                 if (warningThumbColor != null && thumbImage.Color.NotEqualTo(warningThumbColor))
@@ -825,7 +825,7 @@ namespace Tizen.NUI.Components
             }
             else
             {
-                warningSlidedTrackImage.Size2D = new Size2D(0, 0);
+                warningSlidedTrackImage.Size2D = Size2D.GetReusable(0, 0);
                 if (warningThumbColor != null && thumbImage.Color.EqualTo(warningThumbColor))
                 {
                     thumbImage.Color = thumbColor;
@@ -883,12 +883,12 @@ namespace Tizen.NUI.Components
             if (direction == DirectionType.Horizontal)
             {
                 warningTrackLength = (warningTrackLength / 100) * this.Size2D.Width;
-                warningTrackImage.Size2D = new Size2D((int)warningTrackLength, curTrackThickness);
+                warningTrackImage.Size2D = Size2D.GetReusable((int)warningTrackLength, curTrackThickness);
             }
             else if (direction == DirectionType.Vertical)
             {
                 warningTrackLength = (warningTrackLength / 100) * this.Size2D.Height;
-                warningTrackImage.Size2D = new Size2D(curTrackThickness, (int)warningTrackLength);
+                warningTrackImage.Size2D = Size2D.GetReusable(curTrackThickness, (int)warningTrackLength);
             }
         }
 
@@ -904,7 +904,7 @@ namespace Tizen.NUI.Components
 
         private Size LowIndicatorImageSize()
         {
-            Size size = new Size(0, 0);
+            Size size = Size.GetReusable(0, 0);
             if (lowIndicatorSize != null)
             {
                 size = lowIndicatorSize;
@@ -921,7 +921,7 @@ namespace Tizen.NUI.Components
 
         private Size HighIndicatorImageSize()
         {
-            Size size = new Size(0, 0);
+            Size size = Size.GetReusable(0, 0);
             if (highIndicatorSize != null)
             {
                 size = highIndicatorSize;
@@ -938,7 +938,7 @@ namespace Tizen.NUI.Components
 
         private Size LowIndicatorTextSize()
         {
-            Size size = new Size(0, 0);
+            Size size = Size.GetReusable(0, 0);
             if (lowIndicatorSize != null)
             {
                 size = lowIndicatorSize;
@@ -955,7 +955,7 @@ namespace Tizen.NUI.Components
 
         private Size HighIndicatorTextSize()
         {
-            Size size = new Size(0, 0);
+            Size size = Size.GetReusable(0, 0);
             if (highIndicatorSize != null)
             {
                 size = highIndicatorSize;

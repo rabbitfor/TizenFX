@@ -1056,8 +1056,8 @@ namespace Tizen.NUI.Components
                 }
             }
 
-            previousContainerSize = new Size(ContentContainer.Size);
-            previousSize = new Size(Size);
+            previousContainerSize = Size.GetReusable(ContentContainer.Size);
+            previousSize = Size.GetReusable(Size);
         }
 
         private bool ReviseContainerPositionIfNeed()
@@ -1497,11 +1497,11 @@ namespace Tizen.NUI.Components
                 base.Add(leftOverShootingShadowView);
                 base.Add(rightOverShootingShadowView);
 
-                leftOverShootingShadowView.Size = new Size(0.0f, SizeHeight);
+                leftOverShootingShadowView.Size = Size.GetReusable(0.0f, SizeHeight);
                 leftOverShootingShadowView.Opacity = 1.0f;
                 leftOverShootingShadowView.RaiseToTop();
 
-                rightOverShootingShadowView.Size = new Size(0.0f, SizeHeight);
+                rightOverShootingShadowView.Size = Size.GetReusable(0.0f, SizeHeight);
                 rightOverShootingShadowView.Opacity = 1.0f;
                 rightOverShootingShadowView.RaiseToTop();
             }
@@ -1510,11 +1510,11 @@ namespace Tizen.NUI.Components
                 base.Add(topOverShootingShadowView);
                 base.Add(bottomOverShootingShadowView);
 
-                topOverShootingShadowView.Size = new Size(SizeWidth, 0.0f);
+                topOverShootingShadowView.Size = Size.GetReusable(SizeWidth, 0.0f);
                 topOverShootingShadowView.Opacity = 1.0f;
                 topOverShootingShadowView.RaiseToTop();
 
-                bottomOverShootingShadowView.Size = new Size(SizeWidth, 0.0f);
+                bottomOverShootingShadowView.Size = Size.GetReusable(SizeWidth, 0.0f);
                 bottomOverShootingShadowView.Opacity = 1.0f;
                 bottomOverShootingShadowView.RaiseToTop();
             }
@@ -1677,16 +1677,16 @@ namespace Tizen.NUI.Components
                 base.Remove(leftOverShootingShadowView);
                 base.Remove(rightOverShootingShadowView);
 
-                leftOverShootingShadowView.Size = new Size(0.0f, SizeHeight);
-                rightOverShootingShadowView.Size = new Size(0.0f, SizeHeight);
+                leftOverShootingShadowView.Size = Size.GetReusable(0.0f, SizeHeight);
+                rightOverShootingShadowView.Size = Size.GetReusable(0.0f, SizeHeight);
             }
             else
             {
                 base.Remove(topOverShootingShadowView);
                 base.Remove(bottomOverShootingShadowView);
 
-                topOverShootingShadowView.Size = new Size(SizeWidth, 0.0f);
-                bottomOverShootingShadowView.Size = new Size(SizeWidth, 0.0f);
+                topOverShootingShadowView.Size = Size.GetReusable(SizeWidth, 0.0f);
+                bottomOverShootingShadowView.Size = Size.GetReusable(SizeWidth, 0.0f);
             }
 
             // after animation finished, height/width & opacity of vertical shadow both are 0, so it is invisible.
@@ -1965,7 +1965,7 @@ namespace Tizen.NUI.Components
         {
             get
             {
-                return new Position(-ContentContainer.Position);
+                return Position.GetReusable(-ContentContainer.Position);
             }
         }
 
@@ -1978,7 +1978,7 @@ namespace Tizen.NUI.Components
         {
             get
             {
-                return new Position(-ContentContainer.CurrentPosition);
+                return Position.GetReusable(-ContentContainer.CurrentPosition);
             }
         }
 

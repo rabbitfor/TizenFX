@@ -380,11 +380,11 @@ namespace Tizen.NUI.Components
                 return;
             }
 
-            this.size = new Vector2(size);
+            this.size = Vector2.GetReusable(size);
 
             if (pickerScroller != null && itemList != null)
             {
-                pickerScroller.ScrollAvailableArea = new Vector2(0, (itemList.Count * itemHeight) - (itemHeight * scrollVisibleItems));
+                pickerScroller.ScrollAvailableArea = Vector2.GetReusable(0, (itemList.Count * itemHeight) - (itemHeight * scrollVisibleItems));
             }
         }
 
@@ -415,7 +415,7 @@ namespace Tizen.NUI.Components
                 },
                 //FIXME: Need to expand as many as possible;
                 //       When user want to start list middle of the list item. currently confused how to create list before render.
-                ScrollAvailableArea = new Vector2(0, 30000),
+                ScrollAvailableArea = Vector2.GetReusable(0, 30000),
                 Name = "pickerScroller",
             };
 
@@ -735,7 +735,7 @@ namespace Tizen.NUI.Components
             //Give a correct scroll area.
             if (size != null)
             {
-                pickerScroller.ScrollAvailableArea = new Vector2(0, (itemList.Count * itemHeight) - (itemHeight * scrollVisibleItems));
+                pickerScroller.ScrollAvailableArea = Vector2.GetReusable(0, (itemList.Count * itemHeight) - (itemHeight * scrollVisibleItems));
             }
 
             needItemUpdate = false;
@@ -763,13 +763,13 @@ namespace Tizen.NUI.Components
                             keyEditModeIndicator = new View()
                             {
                                 PositionUsesPivotPoint = true,
-                                PivotPoint = new Position(0, 0, 0),
+                                PivotPoint = Position.GetReusable(0, 0, 0),
                                 WidthResizePolicy = ResizePolicyType.FillToParent,
                                 HeightResizePolicy = ResizePolicyType.FillToParent,
                                 BorderlineColor = Color.Red,
                                 BorderlineWidth = 6.0f,
                                 BorderlineOffset = -1f,
-                                BackgroundColor = new Color(0.2f, 0.2f, 0.2f, 0.4f),
+                                BackgroundColor = Color.GetReusable(0.2f, 0.2f, 0.2f, 0.4f),
                             };
                         }
                         recoverIndicator = FocusManager.Instance.FocusIndicator;
@@ -857,7 +857,7 @@ namespace Tizen.NUI.Components
 
                 if (pickerStyle.Size is var pSize && pSize != null)
                 {
-                    Size = new Size(-1, pSize.Height);
+                    Size = Size.GetReusable(-1, pSize.Height);
                 }
             }
 

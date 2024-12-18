@@ -237,7 +237,7 @@ namespace Tizen.NUI.Components
             {
                 if (null == padding)
                 {
-                    padding = new Extents((ushort start, ushort end, ushort top, ushort bottom) =>
+                    padding = Extents.GetReusable((ushort start, ushort end, ushort top, ushort bottom) =>
                     {
                         padding.Start = start;
                         padding.End = end;
@@ -252,7 +252,7 @@ namespace Tizen.NUI.Components
             {
                 if (null == padding)
                 {
-                    padding = new Extents((ushort start, ushort end, ushort top, ushort bottom) =>
+                    padding = Extents.GetReusable((ushort start, ushort end, ushort top, ushort bottom) =>
                     {
                         padding.Start = start;
                         padding.End = end;
@@ -720,11 +720,11 @@ namespace Tizen.NUI.Components
             }
             if (scrollBar.Direction == ScrollBar.DirectionType.Vertical)
             {
-                scrollBar.ThumbSize = new Size(thickness, length);
+                scrollBar.ThumbSize = Size.GetReusable(thickness, length);
             }
             else
             {
-                scrollBar.ThumbSize = new Size(length, thickness);
+                scrollBar.ThumbSize = Size.GetReusable(length, thickness);
             }
             scrollBar.MinValue = 0;
             scrollBar.MaxValue = (int)(range - extent);

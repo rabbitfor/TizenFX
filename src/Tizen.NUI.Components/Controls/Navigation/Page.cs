@@ -349,8 +349,8 @@ namespace Tizen.NUI.Components
                 {
                     var temp = new Tizen.NUI.BaseComponents.View()
                     {
-                        Size = new Size(0.1f, 0.1f, 0.0f),
-                        Position = new Position(0, 0, 0),
+                        Size = Size.GetReusable(0.1f, 0.1f, 0.0f),
+                        Position = Position.GetReusable(0, 0, 0),
                         Focusable = true,
                     };
                     this.Add(temp);

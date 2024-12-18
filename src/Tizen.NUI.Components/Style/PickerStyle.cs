@@ -49,7 +49,7 @@ namespace Tizen.NUI.Components
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
         public TextLabelStyle ItemTextLabel { get; set; } = new TextLabelStyle();
-        
+
         /// <summary>
         /// Gets or sets the PickerStyle Item list start offset value.
         /// </summary>
@@ -66,7 +66,7 @@ namespace Tizen.NUI.Components
             {
                 ItemTextLabel.CopyFrom(pickerStyle.ItemTextLabel);
                 StartScrollOffset = (pickerStyle.StartScrollOffset == null) ?
-                                    new Size() : new Size(pickerStyle.StartScrollOffset.Width, pickerStyle.StartScrollOffset.Height);
+                                    Size.GetReusable() : Size.GetReusable(pickerStyle.StartScrollOffset.Width, pickerStyle.StartScrollOffset.Height);
             }
         }
     }

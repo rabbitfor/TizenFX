@@ -343,7 +343,7 @@ namespace Tizen.NUI.Components
                 {
                     itemSeperator.ApplyStyle(defaultStyle.Seperator);
                     //FIXME : currently padding and margin are not applied by ApplyStyle automatically as missing binding features.
-                    itemSeperator.Margin = new Extents(defaultStyle.Seperator.Margin);
+                    itemSeperator.Margin = Extents.GetReusable(defaultStyle.Seperator.Margin);
                 }
             }
         }
@@ -364,7 +364,7 @@ namespace Tizen.NUI.Components
                     var margin = itemSeperator.Margin;
                     itemSeperator.SizeWidth = SizeWidth - margin.Start - margin.End;
                     itemSeperator.SizeHeight = itemSeperator.HeightSpecification;
-                    itemSeperator.Position = new Position(margin.Start, SizeHeight - margin.Bottom - itemSeperator.SizeHeight);
+                    itemSeperator.Position = Position.GetReusable(margin.Start, SizeHeight - margin.Bottom - itemSeperator.SizeHeight);
                 }
             }
         }
@@ -482,7 +482,7 @@ namespace Tizen.NUI.Components
                     var margin = itemSeperator.Margin;
                     itemSeperator.SizeWidth = SizeWidth - margin.Start - margin.End;
                     itemSeperator.SizeHeight = itemSeperator.HeightSpecification;
-                    itemSeperator.Position = new Position(margin.Start, SizeHeight - margin.Bottom - itemSeperator.SizeHeight);
+                    itemSeperator.Position = Position.GetReusable(margin.Start, SizeHeight - margin.Bottom - itemSeperator.SizeHeight);
                 }
             }
         }

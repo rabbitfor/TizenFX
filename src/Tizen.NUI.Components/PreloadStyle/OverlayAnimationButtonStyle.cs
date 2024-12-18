@@ -53,7 +53,7 @@ namespace Tizen.NUI.Components
             {
                 WidthResizePolicy = ResizePolicyType.SizeRelativeToParent,
                 HeightResizePolicy = ResizePolicyType.SizeRelativeToParent,
-                SizeModeFactor = new Vector3(0.35f, 0.35f, 0.35f),
+                SizeModeFactor = Vector3.GetReusable(0.35f, 0.35f, 0.35f),
                 Opacity = new Selector<float?>
                 {
                     Normal = 0.7f,
@@ -131,7 +131,7 @@ namespace Tizen.NUI.Components
                 PressAnimation.EndAction = Animation.EndActions.StopFinal;
                 PressAnimation.AnimateBetween(overlayImage, "Opacity", keyFrames);
                 keyFrames.Dispose();
-                Vector3 vec = new Vector3(1, 1, 1);
+                Vector3 vec = Vector3.GetReusable(1, 1, 1);
                 AlphaFunction easeout = new AlphaFunction(AlphaFunction.BuiltinFunctions.EaseOut);
                 PressAnimation.AnimateTo(overlayImage, "Scale", vec, 0, 600, easeout);
                 vec.Dispose();
@@ -148,7 +148,7 @@ namespace Tizen.NUI.Components
             overlayImage.CornerRadius = button.CornerRadius;
             overlayImage.Background = button.Background;
             overlayImage.Size = button.Size;
-            overlayImage.Scale = new Vector3(0.80f, 0.80f, 1);
+            overlayImage.Scale = Vector3.GetReusable(0.80f, 0.80f, 1);
             overlayImage.Show();
 
             PressAnimation.Play();
