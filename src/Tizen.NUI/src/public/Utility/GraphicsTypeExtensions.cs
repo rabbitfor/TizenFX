@@ -137,7 +137,7 @@ namespace Tizen.NUI
         public static Size PxToDp(this Size pixel)
         {
             if (pixel == null) return null;
-            return new Size(GraphicsTypeManager.Instance.Dp.ConvertFromPixel(pixel.Width),
+            return Size.GetReusable(GraphicsTypeManager.Instance.Dp.ConvertFromPixel(pixel.Width),
                             GraphicsTypeManager.Instance.Dp.ConvertFromPixel(pixel.Height));
         }
 
@@ -151,7 +151,7 @@ namespace Tizen.NUI
         public static Size PxToSp(this Size pixel)
         {
             if (pixel == null) return null;
-            return new Size(GraphicsTypeManager.Instance.Sp.ConvertFromPixel(pixel.Width),
+            return Size.GetReusable(GraphicsTypeManager.Instance.Sp.ConvertFromPixel(pixel.Width),
                             GraphicsTypeManager.Instance.Sp.ConvertFromPixel(pixel.Height));
         }
 
@@ -165,7 +165,7 @@ namespace Tizen.NUI
         public static Size DpToPx(this Size dp)
         {
             if (dp == null) return null;
-            return new Size(GraphicsTypeManager.Instance.Dp.ConvertToPixel(dp.Width),
+            return Size.GetReusable(GraphicsTypeManager.Instance.Dp.ConvertToPixel(dp.Width),
                             GraphicsTypeManager.Instance.Dp.ConvertToPixel(dp.Height));
         }
 
@@ -179,7 +179,7 @@ namespace Tizen.NUI
         public static Size SpToPx(this Size sp)
         {
             if (sp == null) return null;
-            return new Size(GraphicsTypeManager.Instance.Sp.ConvertToPixel(sp.Width),
+            return Size.GetReusable(GraphicsTypeManager.Instance.Sp.ConvertToPixel(sp.Width),
                             GraphicsTypeManager.Instance.Sp.ConvertToPixel(sp.Height));
         }
 
@@ -193,7 +193,7 @@ namespace Tizen.NUI
         public static Size2D PxToDp(this Size2D pixel)
         {
             if (pixel == null) return null;
-            return new Size2D((int)GraphicsTypeManager.Instance.Dp.ConvertFromPixel(pixel.Width),
+            return Size2D.GetReusable((int)GraphicsTypeManager.Instance.Dp.ConvertFromPixel(pixel.Width),
                               (int)GraphicsTypeManager.Instance.Dp.ConvertFromPixel(pixel.Height));
         }
 
@@ -207,7 +207,7 @@ namespace Tizen.NUI
         public static Size2D PxToSp(this Size2D pixel)
         {
             if (pixel == null) return null;
-            return new Size2D((int)GraphicsTypeManager.Instance.Sp.ConvertFromPixel(pixel.Width),
+            return Size2D.GetReusable((int)GraphicsTypeManager.Instance.Sp.ConvertFromPixel(pixel.Width),
                               (int)GraphicsTypeManager.Instance.Sp.ConvertFromPixel(pixel.Height));
         }
 
@@ -221,7 +221,7 @@ namespace Tizen.NUI
         public static Size2D DpToPx(this Size2D dp)
         {
             if (dp == null) return null;
-            return new Size2D((int)GraphicsTypeManager.Instance.Dp.ConvertToPixel(dp.Width),
+            return Size2D.GetReusable((int)GraphicsTypeManager.Instance.Dp.ConvertToPixel(dp.Width),
                               (int)GraphicsTypeManager.Instance.Dp.ConvertToPixel(dp.Height));
         }
 
@@ -235,7 +235,7 @@ namespace Tizen.NUI
         public static Size2D SpToPx(this Size2D sp)
         {
             if (sp == null) return null;
-            return new Size2D((int)GraphicsTypeManager.Instance.Sp.ConvertToPixel(sp.Width),
+            return Size2D.GetReusable((int)GraphicsTypeManager.Instance.Sp.ConvertToPixel(sp.Width),
                               (int)GraphicsTypeManager.Instance.Sp.ConvertToPixel(sp.Height));
         }
 
@@ -249,7 +249,7 @@ namespace Tizen.NUI
         public static Position PxToDp(this Position pixel)
         {
             if (pixel == null) return null;
-            return new Position(GraphicsTypeManager.Instance.Dp.ConvertFromPixel(pixel.X),
+            return Position.GetReusable(GraphicsTypeManager.Instance.Dp.ConvertFromPixel(pixel.X),
                                 GraphicsTypeManager.Instance.Dp.ConvertFromPixel(pixel.Y));
         }
 
@@ -263,7 +263,7 @@ namespace Tizen.NUI
         public static Position PxToSp(this Position pixel)
         {
             if (pixel == null) return null;
-            return new Position(GraphicsTypeManager.Instance.Sp.ConvertFromPixel(pixel.X),
+            return Position.GetReusable(GraphicsTypeManager.Instance.Sp.ConvertFromPixel(pixel.X),
                                 GraphicsTypeManager.Instance.Sp.ConvertFromPixel(pixel.Y));
         }
 
@@ -277,7 +277,7 @@ namespace Tizen.NUI
         public static Position DpToPx(this Position dp)
         {
             if (dp == null) return null;
-            return new Position(GraphicsTypeManager.Instance.Dp.ConvertToPixel(dp.X),
+            return Position.GetReusable(GraphicsTypeManager.Instance.Dp.ConvertToPixel(dp.X),
                                 GraphicsTypeManager.Instance.Dp.ConvertToPixel(dp.Y));
         }
 
@@ -291,7 +291,7 @@ namespace Tizen.NUI
         public static Position SpToPx(this Position sp)
         {
             if (sp == null) return null;
-            return new Position(GraphicsTypeManager.Instance.Sp.ConvertToPixel(sp.X),
+            return Position.GetReusable(GraphicsTypeManager.Instance.Sp.ConvertToPixel(sp.X),
                                 GraphicsTypeManager.Instance.Sp.ConvertToPixel(sp.Y));
         }
 
@@ -305,7 +305,7 @@ namespace Tizen.NUI
         public static Position2D PxToDp(this Position2D pixel)
         {
             if (pixel == null) return null;
-            return new Position2D((int)GraphicsTypeManager.Instance.Dp.ConvertFromPixel(pixel.X),
+            return Position2D.GetReusable((int)GraphicsTypeManager.Instance.Dp.ConvertFromPixel(pixel.X),
                                   (int)GraphicsTypeManager.Instance.Dp.ConvertFromPixel(pixel.Y));
         }
 
@@ -319,7 +319,7 @@ namespace Tizen.NUI
         public static Position2D PxToSp(this Position2D pixel)
         {
             if (pixel == null) return null;
-            return new Position2D((int)GraphicsTypeManager.Instance.Sp.ConvertFromPixel(pixel.X),
+            return Position2D.GetReusable((int)GraphicsTypeManager.Instance.Sp.ConvertFromPixel(pixel.X),
                                   (int)GraphicsTypeManager.Instance.Sp.ConvertFromPixel(pixel.Y));
         }
 
@@ -333,7 +333,7 @@ namespace Tizen.NUI
         public static Position2D DpToPx(this Position2D dp)
         {
             if (dp == null) return null;
-            return new Position2D((int)GraphicsTypeManager.Instance.Dp.ConvertToPixel(dp.X),
+            return Position2D.GetReusable((int)GraphicsTypeManager.Instance.Dp.ConvertToPixel(dp.X),
                                   (int)GraphicsTypeManager.Instance.Dp.ConvertToPixel(dp.Y));
         }
 
@@ -347,7 +347,7 @@ namespace Tizen.NUI
         public static Position2D SpToPx(this Position2D sp)
         {
             if (sp == null) return null;
-            return new Position2D((int)GraphicsTypeManager.Instance.Sp.ConvertToPixel(sp.X),
+            return Position2D.GetReusable((int)GraphicsTypeManager.Instance.Sp.ConvertToPixel(sp.X),
                                   (int)GraphicsTypeManager.Instance.Sp.ConvertToPixel(sp.Y));
         }
 
@@ -425,7 +425,7 @@ namespace Tizen.NUI
         public static Extents PxToDp(this Extents pixel)
         {
             if (pixel == null) return null;
-            return new Extents((ushort)GraphicsTypeManager.Instance.Dp.ConvertFromPixel(pixel.Start),
+            return Extents.GetReusable((ushort)GraphicsTypeManager.Instance.Dp.ConvertFromPixel(pixel.Start),
                                (ushort)GraphicsTypeManager.Instance.Dp.ConvertFromPixel(pixel.End),
                                (ushort)GraphicsTypeManager.Instance.Dp.ConvertFromPixel(pixel.Top),
                                (ushort)GraphicsTypeManager.Instance.Dp.ConvertFromPixel(pixel.Bottom));
@@ -441,7 +441,7 @@ namespace Tizen.NUI
         public static Extents PxToSp(this Extents pixel)
         {
             if (pixel == null) return null;
-            return new Extents((ushort)GraphicsTypeManager.Instance.Sp.ConvertFromPixel(pixel.Start),
+            return Extents.GetReusable((ushort)GraphicsTypeManager.Instance.Sp.ConvertFromPixel(pixel.Start),
                                (ushort)GraphicsTypeManager.Instance.Sp.ConvertFromPixel(pixel.End),
                                (ushort)GraphicsTypeManager.Instance.Sp.ConvertFromPixel(pixel.Top),
                                (ushort)GraphicsTypeManager.Instance.Sp.ConvertFromPixel(pixel.Bottom));
@@ -457,7 +457,7 @@ namespace Tizen.NUI
         public static Extents DpToPx(this Extents dp)
         {
             if (dp == null) return null;
-            return new Extents((ushort)GraphicsTypeManager.Instance.Dp.ConvertToPixel(dp.Start),
+            return Extents.GetReusable((ushort)GraphicsTypeManager.Instance.Dp.ConvertToPixel(dp.Start),
                                (ushort)GraphicsTypeManager.Instance.Dp.ConvertToPixel(dp.End),
                                (ushort)GraphicsTypeManager.Instance.Dp.ConvertToPixel(dp.Top),
                                (ushort)GraphicsTypeManager.Instance.Dp.ConvertToPixel(dp.Bottom));
@@ -473,7 +473,7 @@ namespace Tizen.NUI
         public static Extents SpToPx(this Extents sp)
         {
             if (sp == null) return null;
-            return new Extents((ushort)GraphicsTypeManager.Instance.Sp.ConvertToPixel(sp.Start),
+            return Extents.GetReusable((ushort)GraphicsTypeManager.Instance.Sp.ConvertToPixel(sp.Start),
                                (ushort)GraphicsTypeManager.Instance.Sp.ConvertToPixel(sp.End),
                                (ushort)GraphicsTypeManager.Instance.Sp.ConvertToPixel(sp.Top),
                                (ushort)GraphicsTypeManager.Instance.Sp.ConvertToPixel(sp.Bottom));

@@ -73,7 +73,7 @@ namespace Tizen.NUI.Visuals
             public PropertyMap cachedVisualTransformPropertyMap;
 
             internal bool changed;
-            
+
             public void Clear()
             {
                 width = 1.0f;
@@ -105,13 +105,13 @@ namespace Tizen.NUI.Visuals
                 }
 
                 cachedVisualTransformPropertyMap.Clear();
-                cachedVisualTransformPropertyMap.Add((int)VisualTransformPropertyType.Size, new PropertyValue(new Vector2(width, height)))
-                                                .Add((int)VisualTransformPropertyType.Offset, new PropertyValue(new Vector2(offsetX, offsetY)))
-                                                .Add((int)VisualTransformPropertyType.SizePolicy, new PropertyValue(new Vector2((float)widthPolicy, (float)heightPolicy)))
-                                                .Add((int)VisualTransformPropertyType.OffsetPolicy, new PropertyValue(new Vector2((float)offsetXPolicy, (float)offsetYPolicy)))
+                cachedVisualTransformPropertyMap.Add((int)VisualTransformPropertyType.Size, new PropertyValue(Vector2.GetReusable(width, height)))
+                                                .Add((int)VisualTransformPropertyType.Offset, new PropertyValue(Vector2.GetReusable(offsetX, offsetY)))
+                                                .Add((int)VisualTransformPropertyType.SizePolicy, new PropertyValue(Vector2.GetReusable((float)widthPolicy, (float)heightPolicy)))
+                                                .Add((int)VisualTransformPropertyType.OffsetPolicy, new PropertyValue(Vector2.GetReusable((float)offsetXPolicy, (float)offsetYPolicy)))
                                                 .Add((int)VisualTransformPropertyType.Origin, new PropertyValue((int)origin))
                                                 .Add((int)VisualTransformPropertyType.AnchorPoint, new PropertyValue((int)pivotPoint))
-                                                .Add((int)VisualTransformPropertyType.ExtraSize, new PropertyValue(new Vector2(extraWidth, extraHeight)));
+                                                .Add((int)VisualTransformPropertyType.ExtraSize, new PropertyValue(Vector2.GetReusable(extraWidth, extraHeight)));
             }
 
             internal void ConvertFromPropertyMap(PropertyMap inputMap)
@@ -120,7 +120,7 @@ namespace Tizen.NUI.Visuals
 
                 if ((value = inputMap?.Find((int)VisualTransformPropertyType.Size)) != null)
                 {
-                    using var size = new Size();
+                    using var size = Size.GetReusable();
                     if (value.Get(size))
                     {
                         width = size.Width;
@@ -129,7 +129,7 @@ namespace Tizen.NUI.Visuals
                 }
                 if ((value = inputMap?.Find((int)VisualTransformPropertyType.Offset)) != null)
                 {
-                    using var offset = new Position();
+                    using var offset = Position.GetReusable();
                     if (value.Get(offset))
                     {
                         offsetX = offset.X;
@@ -138,7 +138,7 @@ namespace Tizen.NUI.Visuals
                 }
                 if ((value = inputMap?.Find((int)VisualTransformPropertyType.SizePolicy)) != null)
                 {
-                    using var policyValue = new Vector2();
+                    using var policyValue = Vector2.GetReusable();
                     if (value.Get(policyValue))
                     {
                         widthPolicy = (VisualTransformPolicyType)policyValue.X;
@@ -147,7 +147,7 @@ namespace Tizen.NUI.Visuals
                 }
                 if ((value = inputMap?.Find((int)VisualTransformPropertyType.OffsetPolicy)) != null)
                 {
-                    using var policyValue = new Vector2();
+                    using var policyValue = Vector2.GetReusable();
                     if (value.Get(policyValue))
                     {
                         offsetXPolicy = (VisualTransformPolicyType)policyValue.X;
@@ -172,7 +172,7 @@ namespace Tizen.NUI.Visuals
                 }
                 if ((value = inputMap?.Find((int)VisualTransformPropertyType.ExtraSize)) != null)
                 {
-                    using var extraValue = new Vector2();
+                    using var extraValue = Vector2.GetReusable();
                     if (value.Get(extraValue))
                     {
                         extraWidth = extraValue.Width;
@@ -1029,7 +1029,7 @@ namespace Tizen.NUI.Visuals
             {
                 // If we cannot find result from cached map, Get value from native engine.
                 ret = GetCurrentVisualProperty(key);
-                
+
                 // Update cached value here
                 if (ret != null)
                 {

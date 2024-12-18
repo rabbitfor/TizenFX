@@ -502,7 +502,7 @@ namespace Tizen.NUI
             /// <since_tizen> 9 </since_tizen>
             public Color GetRgb()
             {
-                return new Color((float)red / 255, (float)green / 255, (float)blue / 255, 1.0f);
+                return Color.GetReusable((float)red / 255, (float)green / 255, (float)blue / 255, 1.0f);
             }
 
             /// <summary>
@@ -535,7 +535,7 @@ namespace Tizen.NUI
             {
                 EnsureTextColorsGenerated();
 
-                return new Color((float)(((titleTextColor >> 16) & 0xff) / 255.0f), (float)(((titleTextColor >> 8) & 0xff) / 255.0f), (float)((titleTextColor & 0xff) / 255.0f), (float)(((titleTextColor >> 24) & 0xff) / 255.0f));
+                return Color.GetReusable((float)(((titleTextColor >> 16) & 0xff) / 255.0f), (float)(((titleTextColor >> 8) & 0xff) / 255.0f), (float)((titleTextColor & 0xff) / 255.0f), (float)(((titleTextColor >> 24) & 0xff) / 255.0f));
             }
 
             /// <summary>
@@ -548,8 +548,8 @@ namespace Tizen.NUI
             {
                 EnsureTextColorsGenerated();
 
-                return new Color((float)(((bodyTextColor >> 16) & 0xff) / 255.0f), (float)(((bodyTextColor >> 8) & 0xff) / 255.0f), (float)((bodyTextColor & 0xff) / 255.0f), (float)(((bodyTextColor >> 24) & 0xff) / 255.0f));
-    
+                return Color.GetReusable((float)(((bodyTextColor >> 16) & 0xff) / 255.0f), (float)(((bodyTextColor >> 8) & 0xff) / 255.0f), (float)((bodyTextColor & 0xff) / 255.0f), (float)(((bodyTextColor >> 24) & 0xff) / 255.0f));
+
             }
 
             /// <summary>

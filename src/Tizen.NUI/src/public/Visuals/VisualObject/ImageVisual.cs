@@ -108,7 +108,7 @@ namespace Tizen.NUI.Visuals
             }
             get
             {
-                Vector4 ret = new Vector4(0.0f, 0.0f, 1.0f, 1.0f);
+                Vector4 ret = Vector4.GetReusable(0.0f, 0.0f, 1.0f, 1.0f);
                 var propertyValue = GetCachedVisualProperty((int)Tizen.NUI.ImageVisualProperty.PixelArea);
                 propertyValue?.Get(ret);
                 return ret;
@@ -480,7 +480,7 @@ namespace Tizen.NUI.Visuals
             }
             get
             {
-                Vector4 ret = new Vector4();
+                Vector4 ret = Vector4.GetReusable();
                 var propertyValue = GetCachedVisualProperty((int)Tizen.NUI.Visual.Property.CornerRadius);
                 propertyValue?.Get(ret);
                 return ret;
@@ -540,8 +540,8 @@ namespace Tizen.NUI.Visuals
             }
             get
             {
-                Color ret = new Color(0.0f, 0.0f, 0.0f, 1.0f);
-                var propertyValue = GetCachedVisualProperty((int)Tizen.NUI.Visual.Property.BorderlineColor);
+                Color ret = Color.GetReusable(0.0f, 0.0f, 0.0f, 1.0f);
+                using var propertyValue = GetCachedVisualProperty((int)Tizen.NUI.Visual.Property.BorderlineColor);
                 propertyValue?.Get(ret);
                 return ret;
             }

@@ -74,7 +74,7 @@ namespace Tizen.NUI
         {
             get
             {
-                return _mixColorForPrimitiveVisual ?? (new Color(0.5f, 0.5f, 0.5f, 1.0f));
+                return _mixColorForPrimitiveVisual ?? (Color.GetReusable(0.5f, 0.5f, 0.5f, 1.0f));
             }
             set
             {

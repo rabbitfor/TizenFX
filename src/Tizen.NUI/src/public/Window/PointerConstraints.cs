@@ -92,7 +92,7 @@ namespace Tizen.NUI
         {
             get
             {
-                Position2D ret = new Position2D(Interop.PointerConstraints.XGet(SwigCPtr), Interop.PointerConstraints.YGet(SwigCPtr));
+                Position2D ret = Position2D.GetReusable(Interop.PointerConstraints.XGet(SwigCPtr), Interop.PointerConstraints.YGet(SwigCPtr));
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }

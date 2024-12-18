@@ -1625,7 +1625,7 @@ namespace Tizen.NUI
 
             convertRealWindowSizeToBorderWindowSize(val);
 
-            Vector2 ret = new Vector2(val.GetWidth(), val.GetHeight());
+            Vector2 ret = Vector2.GetReusable(val.GetWidth(), val.GetHeight());
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
             val.Dispose();
             return ret;
@@ -1749,7 +1749,7 @@ namespace Tizen.NUI
 
             convertRealWindowSizeToBorderWindowSize(val);
 
-            Size2D ret = new Size2D(val.GetWidth(), val.GetHeight());
+            Size2D ret = Size2D.GetReusable(val.GetWidth(), val.GetHeight());
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
             val.Dispose();
             return ret;
@@ -1771,7 +1771,7 @@ namespace Tizen.NUI
         internal Position2D GetPosition()
         {
             var val = new Int32Pair(Interop.Window.GetPosition(SwigCPtr), true);
-            Position2D ret = new Position2D((int)val.GetX(), (int)val.GetY());
+            Position2D ret = Position2D.GetReusable((int)val.GetX(), (int)val.GetY());
             val.Dispose();
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
             return ret;
@@ -2649,8 +2649,8 @@ namespace Tizen.NUI
 
         /// <summary>
         /// Sets or gets the window blur using window blur information.
-        /// 
-        /// It is designed to apply a blur effect to a window based on specified parameters. 
+        ///
+        /// It is designed to apply a blur effect to a window based on specified parameters.
         /// This supports different types of blurring effects, including blurring the window's background only.
         /// Or blurring the area surrounding the window while keeping the window itself clear.
         /// The more information is written WindowBlurInfo struct.
@@ -2684,7 +2684,7 @@ namespace Tizen.NUI
                 finally {
                     Interop.WindowBlurInfo.DeleteWindowBlurInfo(internalBlurInfo);
                 }
-            }            
+            }
         }
 
         IntPtr IWindowProvider.WindowHandle => GetNativeWindowHandler();

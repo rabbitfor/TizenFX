@@ -456,7 +456,7 @@ namespace Tizen.NUI
                     // because the grand children's Measure() is called with the mode type AtMost.
                     int widthSpecification = child.LayoutItem.Owner.WidthSpecification;
                     int heightSpecification = child.LayoutItem.Owner.HeightSpecification;
-                    Size2D origSize = new Size2D(child.LayoutItem.Owner.Size2D.Width, child.LayoutItem.Owner.Size2D.Height);
+                    Size2D origSize = Size2D.GetReusable(child.LayoutItem.Owner.Size2D.Width, child.LayoutItem.Owner.Size2D.Height);
 
                     if (needMeasuredWidth)
                     {

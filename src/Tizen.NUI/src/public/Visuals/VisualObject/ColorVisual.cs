@@ -104,7 +104,7 @@ namespace Tizen.NUI.Visuals
             }
             get
             {
-                Vector4 ret = new Vector4();
+                Vector4 ret = Vector4.GetReusable();
                 var propertyValue = GetCachedVisualProperty((int)Tizen.NUI.Visual.Property.CornerRadius);
                 propertyValue?.Get(ret);
                 return ret;
@@ -164,7 +164,7 @@ namespace Tizen.NUI.Visuals
             }
             get
             {
-                Color ret = new Color(0.0f, 0.0f, 0.0f, 1.0f);
+                Color ret = Color.GetReusable(0.0f, 0.0f, 0.0f, 1.0f);
                 var propertyValue = GetCachedVisualProperty((int)Tizen.NUI.Visual.Property.BorderlineColor);
                 propertyValue?.Get(ret);
                 return ret;

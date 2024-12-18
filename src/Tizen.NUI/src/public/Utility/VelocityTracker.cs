@@ -164,7 +164,7 @@ namespace Tizen.NUI.Utility
                 ComputeVelocity(1000, 100);
             float velocityX = GetVelocity(Axis.X, mPointerCount);
             float velocityY = GetVelocity(Axis.Y, mPointerCount);
-            return new Vector2(velocityX, velocityY);
+            return Vector2.GetReusable(velocityX, velocityY);
         }
 
         /// <summary>

@@ -155,7 +155,7 @@ namespace Tizen.NUI
                         ushort end = (extents.End + diffBorderLine) > 0 ? (ushort)(extents.End + diffBorderLine) : (ushort)0;
                         ushort top = (extents.Top + diffBorderLine) > 0 ? (ushort)(extents.Top + diffBorderLine) : (ushort)0;
                         ushort bottom = (extents.Bottom + diffBorderLine) > 0 ? (ushort)(extents.Bottom + diffBorderLine) : (ushort)0;
-                        borderView.Padding = new Extents(start, end, top, bottom);
+                        borderView.Padding = Extents.GetReusable(start, end, top, bottom);
                         if (IsMaximized() == true)
                         {
                             borderView.OnMaximize(true);
@@ -184,14 +184,14 @@ namespace Tizen.NUI
 
                 if (minSize != borderInterface.MinSize || (borderInterface.MinSize != null && isNeedResizeByLine == true))
                 {
-                    using Size2D mimimumSize = new Size2D((borderInterface.MinSize?.Width + (int)borderLineThickness * 2 ?? 0), (borderInterface.MinSize?.Height ?? 0) + (int)(borderHeight + borderLineThickness * 2));
+                    using Size2D mimimumSize = Size2D.GetReusable((borderInterface.MinSize?.Width + (int)borderLineThickness * 2 ?? 0), (borderInterface.MinSize?.Height ?? 0) + (int)(borderHeight + borderLineThickness * 2));
                     SetMimimumSize(mimimumSize);
                     minSize = borderInterface.MinSize;
                 }
 
                 if (maxSize != borderInterface.MaxSize || (borderInterface.MaxSize != null && isNeedResizeByLine == true))
                 {
-                    using Size2D maximumSize = new Size2D((borderInterface.MaxSize?.Width + (int)borderLineThickness * 2 ?? 0), (borderInterface.MaxSize?.Height ?? 0) + (int)(borderHeight + borderLineThickness * 2));
+                    using Size2D maximumSize = Size2D.GetReusable((borderInterface.MaxSize?.Width + (int)borderLineThickness * 2 ?? 0), (borderInterface.MaxSize?.Height ?? 0) + (int)(borderHeight + borderLineThickness * 2));
                     SetMaximumSize(maximumSize);
                     maxSize = borderInterface.MaxSize;
                 }
@@ -267,7 +267,7 @@ namespace Tizen.NUI
                 currentOrientation = GetCurrentOrientation();
                 currentOrientation = (currentOrientation == WindowOrientation.Portrait || currentOrientation == WindowOrientation.PortraitInverse) ? WindowOrientation.Portrait : WindowOrientation.Landscape;
 
-                using var realWindowSize = new Size2D(WindowSize.Width, WindowSize.Height);
+                using var realWindowSize = Size2D.GetReusable(WindowSize.Width, WindowSize.Height);
 
                 isBorderWindow = true;
 
@@ -292,13 +292,13 @@ namespace Tizen.NUI
                 var minSize = borderInterface.MinSize;
                 if (null != minSize)
                 {
-                    using Size2D mimimumSize = new Size2D(minSize.Width + (int)borderInterface.BorderLineThickness * 2, minSize.Height + (int)(borderHeight + borderInterface.BorderLineThickness * 2));
+                    using Size2D mimimumSize = Size2D.GetReusable(minSize.Width + (int)borderInterface.BorderLineThickness * 2, minSize.Height + (int)(borderHeight + borderInterface.BorderLineThickness * 2));
                     SetMimimumSize(mimimumSize);
                 }
                 var maxSize = borderInterface.MaxSize;
                 if (null != maxSize)
                 {
-                    using Size2D maximumSize = new Size2D(maxSize.Width + (int)borderInterface.BorderLineThickness * 2, maxSize.Height + (int)(borderHeight + borderInterface.BorderLineThickness * 2));
+                    using Size2D maximumSize = Size2D.GetReusable(maxSize.Width + (int)borderInterface.BorderLineThickness * 2, maxSize.Height + (int)(borderHeight + borderInterface.BorderLineThickness * 2));
                     SetMaximumSize(maximumSize);
                 }
 
@@ -319,7 +319,7 @@ namespace Tizen.NUI
                     if (borderHeight > 0)
                     {
                         borderLineThickness = borderInterface.BorderLineThickness;
-                        WindowSize += new Size2D((int)borderLineThickness * 2, (int)(borderHeight + borderLineThickness * 2));
+                        WindowSize += Size2D.GetReusable((int)borderLineThickness * 2, (int)(borderHeight + borderLineThickness * 2));
                     }
                 }
 
@@ -373,7 +373,7 @@ namespace Tizen.NUI
                     LinearOrientation = LinearLayout.Orientation.Vertical,
                     LinearAlignment = LinearLayout.Alignment.Top
                 },
-                Padding = new Extents(padding, padding, padding, padding),
+                Padding = Extents.GetReusable(padding, padding, padding, padding),
             };
             borderInterface.CreateBorderView(borderView);
 
@@ -506,7 +506,7 @@ namespace Tizen.NUI
         private Size2D GetWindowSizeWithBorder()
         {
             var val = new Uint16Pair(Interop.Window.GetSize(SwigCPtr), true);
-            Size2D size = new Size2D(val.GetWidth(), val.GetHeight());
+            Size2D size = Size2D.GetReusable(val.GetWidth(), val.GetHeight());
             val.Dispose();
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
             return size;
@@ -573,7 +573,7 @@ namespace Tizen.NUI
                     using var val = new Uint16Pair(Interop.Window.GetSize(SwigCPtr), true);
                     Tizen.Log.Info("NUI", $"OnBorderWindowOrientationChanged {e.WindowOrientation} {val.GetWidth()},{val.GetHeight()}\n");
                     uint borderLine = borderLineThickness * 2;
-                    WindowSize = new Size2D((int)(val.GetWidth() - borderHeight - borderLine), (int)(val.GetHeight() - borderLine));
+                    WindowSize = Size2D.GetReusable((int)(val.GetWidth() - borderHeight - borderLine), (int)(val.GetHeight() - borderLine));
                 }
             }
             currentOrientation = orientation;
@@ -628,7 +628,7 @@ namespace Tizen.NUI
             {
                 borderWindowBottomLayer = new Layer();
                 borderWindowBottomLayer.Name = "BorderWindowBottomLayer";
-                using Vector3 topCentor = new Vector3(0.5f, 0.0f, 0.5f);
+                using Vector3 topCentor = Vector3.GetReusable(0.5f, 0.0f, 0.5f);
                 Interop.ActorInternal.SetParentOrigin(borderWindowBottomLayer.SwigCPtr, topCentor.SwigCPtr);
                 Interop.Actor.SetAnchorPoint(borderWindowBottomLayer.SwigCPtr, topCentor.SwigCPtr);
                 Interop.Actor.Add(rootLayer.SwigCPtr, borderWindowBottomLayer.SwigCPtr);
@@ -647,7 +647,7 @@ namespace Tizen.NUI
             {
                 borderWindowRootLayer = new Layer();
                 borderWindowRootLayer.Name = "RootLayer";
-                using Vector3 topCentor = new Vector3(0.5f, 0.0f, 0.5f);
+                using Vector3 topCentor = Vector3.GetReusable(0.5f, 0.0f, 0.5f);
                 Interop.ActorInternal.SetParentOrigin(borderWindowRootLayer.SwigCPtr, topCentor.SwigCPtr);
                 Interop.Actor.SetAnchorPoint(borderWindowRootLayer.SwigCPtr, topCentor.SwigCPtr);
                 Interop.Actor.Add(rootLayer.SwigCPtr, borderWindowRootLayer.SwigCPtr);
@@ -738,7 +738,7 @@ namespace Tizen.NUI
                 if (isMaximized == true)
                 {
                     prePadding = Padding;
-                    Padding = new Extents(0, 0, 0, 0);
+                    Padding = Extents.GetReusable();
                 }
                 else
                 {

@@ -320,7 +320,7 @@ namespace Tizen.NUI
         {
             get
             {
-                Vector4 temp = new Vector4(0.0f, 0.0f, 0.0f, 0.0f);
+                Vector4 temp = Vector4.GetReusable();
                 var pValue = Tizen.NUI.Object.GetProperty(SwigCPtr, Renderer.Property.BlendColor);
                 pValue.Get(temp);
                 pValue.Dispose();

@@ -290,7 +290,7 @@ namespace Tizen.NUI
 
         /// <summary>
         /// Hidden API (Inhouse API).
-        /// Dispose. 
+        /// Dispose.
         /// </summary>
         /// <remarks>
         /// Following the guide of https://docs.microsoft.com/en-us/dotnet/standard/garbage-collection/implementing-dispose.
@@ -737,7 +737,7 @@ namespace Tizen.NUI
             parentMeasureSpecificationWidth = widthMeasureSpec;
             parentMeasureSpecificationHeight = heightMeasureSpec;
 
-            Extents zeroMargin = new Extents();
+            using Extents zeroMargin = Extents.GetReusable();
 
             // Assign child properties
             for (int i = 0; i < LayoutChildren.Count; i++)
@@ -766,7 +766,6 @@ namespace Tizen.NUI
             }
 
             Interop.FlexLayout.CalculateLayout(swigCPtr, width, height, isLayoutRtl);
-            zeroMargin.Dispose();
 
             LayoutLength flexLayoutWidth = new LayoutLength(Interop.FlexLayout.GetWidth(swigCPtr));
             LayoutLength flexLayoutHeight = new LayoutLength(Interop.FlexLayout.GetHeight(swigCPtr));

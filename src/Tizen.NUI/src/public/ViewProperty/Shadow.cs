@@ -68,7 +68,7 @@ namespace Tizen.NUI
         {
             BlurRadius = blurRadius;
             CutoutPolicy = cutoutPolicy;
-            Color = color == null ? new Color(defaultColor) : new Color(color);
+            Color = color == null ? Color.GetReusable(defaultColor) : Color.GetReusable(color);
         }
 
         /// <summary>
@@ -85,7 +85,7 @@ namespace Tizen.NUI
         /// </summary>
         internal Shadow(PropertyMap propertyMap) : base(propertyMap)
         {
-            Color = new Color(noColor);
+            Color = Color.GetReusable(noColor);
             using (PropertyValue mixColorValue = propertyMap.Find(ColorVisualProperty.MixColor))
             {
                 mixColorValue?.Get(Color);

@@ -30,7 +30,7 @@ namespace Tizen.NUI
         /// The default constructor.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public MouseRelative() : this(Interop.MouseRelative.NewMouseRelative((int)MouseRelative.StateType.None, 0, 0, Vector2.getCPtr(new Vector2(0, 0)), Vector2.getCPtr(new Vector2(0, 0))), true)
+        public MouseRelative() : this(Interop.MouseRelative.NewMouseRelative((int)MouseRelative.StateType.None, 0, 0, Vector2.getCPtr(Vector2.GetReusable(0, 0)), Vector2.getCPtr(Vector2.GetReusable(0, 0))), true)
         {
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
         }

@@ -267,7 +267,7 @@ namespace Tizen.NUI
         {
             get
             {
-                Vector2 retrivedValue = new Vector2(0, 0);
+                Vector2 retrivedValue = Vector2.GetReusable(0, 0);
                 if (TrueValue.Get(retrivedValue))
                 {
                     return retrivedValue;
@@ -288,7 +288,7 @@ namespace Tizen.NUI
         {
             get
             {
-                Vector3 retrivedValue = new Vector3(0, 0, 0);
+                Vector3 retrivedValue = Vector3.GetReusable(0, 0, 0);
                 if (TrueValue.Get(retrivedValue))
                 {
                     return retrivedValue;
@@ -309,7 +309,7 @@ namespace Tizen.NUI
         {
             get
             {
-                Vector4 retrivedValue = new Vector4(0, 0, 0, 0);
+                Vector4 retrivedValue = Vector4.GetReusable();
                 if (TrueValue.Get(retrivedValue))
                 {
                     return retrivedValue;
@@ -330,7 +330,7 @@ namespace Tizen.NUI
         {
             get
             {
-                Position retrivedValue = new Position(0, 0, 0);
+                Position retrivedValue = Position.GetReusable();
                 if (TrueValue.Get(retrivedValue))
                 {
                     return retrivedValue;
@@ -351,7 +351,7 @@ namespace Tizen.NUI
         {
             get
             {
-                Position2D retrivedValue = new Position2D(0, 0);
+                Position2D retrivedValue = Position2D.GetReusable(0, 0);
                 if (TrueValue.Get(retrivedValue))
                 {
                     return retrivedValue;
@@ -372,7 +372,7 @@ namespace Tizen.NUI
         {
             get
             {
-                Size retrivedValue = new Size(0, 0, 0);
+                Size retrivedValue = Size.GetReusable(0, 0, 0);
                 if (TrueValue.Get(retrivedValue))
                 {
                     return retrivedValue;
@@ -393,7 +393,7 @@ namespace Tizen.NUI
         {
             get
             {
-                Size2D retrivedValue = new Size2D(0, 0);
+                Size2D retrivedValue = Size2D.GetReusable(0, 0);
                 if (TrueValue.Get(retrivedValue))
                 {
                     return retrivedValue;
@@ -414,7 +414,7 @@ namespace Tizen.NUI
         {
             get
             {
-                Color retrivedValue = new Color(0, 0, 0, 0);
+                Color retrivedValue = Color.GetReusable();
                 if (TrueValue.Get(retrivedValue))
                 {
                     return retrivedValue;
@@ -540,7 +540,7 @@ namespace Tizen.NUI
         {
             get
             {
-                Extents retrivedValue = new Extents(0, 0, 0, 0);
+                Extents retrivedValue = Extents.GetReusable();
                 if (TrueValue.Get(retrivedValue))
                 {
                     return retrivedValue;

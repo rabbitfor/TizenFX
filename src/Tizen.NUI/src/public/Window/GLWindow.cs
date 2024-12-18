@@ -113,7 +113,7 @@ namespace Tizen.NUI
             {
                 global::System.IntPtr intPtr = Interop.GLWindow.GlWindowGetPositionSize(SwigCPtr);
                 var val = new Rectangle(intPtr, true);
-                Size2D ret = new Size2D(val.Width, val.Height);
+                Size2D ret = Size2D.GetReusable(val.Width, val.Height);
                 val.Dispose();
 
                 return ret;

@@ -596,7 +596,7 @@ namespace Tizen.NUI
                 PositionUsesAnchorPoint = true,
                 ParentOrigin = ParentOrigin.Center,
                 PivotPoint = ParentOrigin.Center,
-                Position2D = new Position2D(0, 0),
+                Position2D = Position2D.GetReusable(),
             };
             ret.SetResizePolicy(ResizePolicyType.FillToParent, DimensionType.AllDimensions);
             return ret;

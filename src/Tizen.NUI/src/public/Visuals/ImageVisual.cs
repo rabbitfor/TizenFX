@@ -239,7 +239,7 @@ namespace Tizen.NUI
         {
             get
             {
-                return pixelArea ?? (new Vector4(0.0f, 0.0f, 1.0f, 1.0f));
+                return pixelArea ?? (Vector4.GetReusable(0.0f, 0.0f, 1.0f, 1.0f));
             }
             set
             {

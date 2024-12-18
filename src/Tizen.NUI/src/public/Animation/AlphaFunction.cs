@@ -212,11 +212,11 @@ namespace Tizen.NUI
         /// <since_tizen> 3 </since_tizen>
         public void GetBezierControlPoints(out Vector2 controlPoint0, out Vector2 controlPoint1)
         {
-            Vector4 ret = new Vector4(Interop.AlphaFunction.GetBezierControlPoints(SwigCPtr), true);
+            using Vector4 ret = new Vector4(Interop.AlphaFunction.GetBezierControlPoints(SwigCPtr), true);
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
 
-            controlPoint0 = new Vector2(ret.X, ret.Y);
-            controlPoint1 = new Vector2(ret.Z, ret.W);
+            controlPoint0 = Vector2.GetReusable(ret.X, ret.Y);
+            controlPoint1 = Vector2.GetReusable(ret.Z, ret.W);
         }
 
         /// <summary>

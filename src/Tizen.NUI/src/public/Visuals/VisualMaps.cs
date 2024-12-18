@@ -120,14 +120,14 @@ namespace Tizen.NUI
         {
             get
             {
-                return visualSize ?? (new Size2D(1, 1));
+                return visualSize ?? (Size2D.GetReusable(1, 1));
             }
             set
             {
                 visualSize = value;
                 if (visualSizePolicy == null)
                 {
-                    visualSizePolicy = new Vector2(1.0f, 1.0f);
+                    visualSizePolicy = Vector2.GetReusable(1.0f, 1.0f);
                 }
                 UpdateVisual();
             }
@@ -144,14 +144,14 @@ namespace Tizen.NUI
         {
             get
             {
-                return visualOffset ?? (new Vector2(0.0f, 0.0f));
+                return visualOffset ?? (Vector2.GetReusable(0.0f, 0.0f));
             }
             set
             {
                 visualOffset = value;
                 if (visualOffsetPolicy == null)
                 {
-                    visualOffsetPolicy = new Vector2(1.0f, 1.0f);
+                    visualOffsetPolicy = Vector2.GetReusable(1.0f, 1.0f);
                 }
                 UpdateVisual();
             }
@@ -172,7 +172,7 @@ namespace Tizen.NUI
             set
             {
                 visualSize = value;
-                visualSizePolicy = new Vector2(0.0f, 0.0f);
+                visualSizePolicy = Vector2.GetReusable(0.0f, 0.0f);
                 UpdateVisual();
             }
         }
@@ -192,7 +192,7 @@ namespace Tizen.NUI
             set
             {
                 visualOffset = value;
-                visualOffsetPolicy = new Vector2(0.0f, 0.0f);
+                visualOffsetPolicy = Vector2.GetReusable(0.0f, 0.0f);
                 UpdateVisual();
             }
         }
@@ -220,13 +220,13 @@ namespace Tizen.NUI
                 switch (value)
                 {
                     case VisualTransformPolicyType.Relative:
-                        visualOffsetPolicy = new Vector2(0.0f, 0.0f);
+                        visualOffsetPolicy = Vector2.GetReusable(0.0f, 0.0f);
                         break;
                     case VisualTransformPolicyType.Absolute:
-                        visualOffsetPolicy = new Vector2(1.0f, 1.0f);
+                        visualOffsetPolicy = Vector2.GetReusable(1.0f, 1.0f);
                         break;
                     default:
-                        visualOffsetPolicy = new Vector2(0.0f, 0.0f);
+                        visualOffsetPolicy = Vector2.GetReusable(0.0f, 0.0f);
                         break;
                 }
                 UpdateVisual();
@@ -266,7 +266,7 @@ namespace Tizen.NUI
                         x = 0.0f;
                         break;
                 }
-                visualOffsetPolicy = new Vector2(x, visualOffsetPolicy?.Y ?? 0);
+                visualOffsetPolicy = Vector2.GetReusable(x, visualOffsetPolicy?.Y ?? 0);
 
                 UpdateVisual();
             }
@@ -305,7 +305,7 @@ namespace Tizen.NUI
                         y = 0.0f;
                         break;
                 }
-                visualOffsetPolicy = new Vector2(visualOffsetPolicy?.X ?? 0, y);
+                visualOffsetPolicy = Vector2.GetReusable(visualOffsetPolicy?.X ?? 0, y);
                 UpdateVisual();
             }
         }
@@ -333,13 +333,13 @@ namespace Tizen.NUI
                 switch (value)
                 {
                     case VisualTransformPolicyType.Relative:
-                        visualSizePolicy = new Vector2(0.0f, 0.0f);
+                        visualSizePolicy = Vector2.GetReusable(0.0f, 0.0f);
                         break;
                     case VisualTransformPolicyType.Absolute:
-                        visualSizePolicy = new Vector2(1.0f, 1.0f);
+                        visualSizePolicy = Vector2.GetReusable(1.0f, 1.0f);
                         break;
                     default:
-                        visualSizePolicy = new Vector2(0.0f, 0.0f);
+                        visualSizePolicy = Vector2.GetReusable(0.0f, 0.0f);
                         break;
                 }
                 UpdateVisual();
@@ -379,7 +379,7 @@ namespace Tizen.NUI
                         break;
                 }
 
-                visualSizePolicy = new Vector2(width, visualSizePolicy?.Height ?? 0);
+                visualSizePolicy = Vector2.GetReusable(width, visualSizePolicy?.Height ?? 0);
                 UpdateVisual();
             }
         }
@@ -417,7 +417,7 @@ namespace Tizen.NUI
                         height = 0.0f;
                         break;
                 }
-                visualSizePolicy = new Vector2(visualSizePolicy?.Width ?? 0, height);
+                visualSizePolicy = Vector2.GetReusable(visualSizePolicy?.Width ?? 0, height);
                 UpdateVisual();
             }
         }

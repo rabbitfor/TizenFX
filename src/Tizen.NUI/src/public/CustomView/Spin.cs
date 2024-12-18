@@ -789,7 +789,7 @@ namespace Tizen.NUI
         {
             // Initialize the propertiesControl
             arrowImage = Tizen.Applications.Application.Current.DirectoryInfo.Resource + "picture.png";
-            textBackgroundColor = new Color(0.6f, 0.6f, 0.6f, 1.0f);
+            textBackgroundColor = Color.GetReusable(0.6f, 0.6f, 0.6f, 1.0f);
             currentValue = 0;
             minValue = 0;
             maxValue = 0;
@@ -827,14 +827,14 @@ namespace Tizen.NUI
             textField.PivotPoint = Tizen.NUI.PivotPoint.Center;
             textField.WidthResizePolicy = ResizePolicyType.SizeRelativeToParent;
             textField.HeightResizePolicy = ResizePolicyType.SizeRelativeToParent;
-            textField.SizeModeFactor = new Vector3(1.0f, 0.45f, 1.0f);
+            textField.SizeModeFactor = Vector3.GetReusable(1.0f, 0.45f, 1.0f);
             textField.PlaceholderText = "----";
             textField.BackgroundColor = textBackgroundColor;
             textField.HorizontalAlignment = HorizontalAlignment.Center;
             textField.VerticalAlignment = VerticalAlignment.Center;
             textField.Focusable = (true);
             textField.Name = "_textField";
-            textField.Position2D = new Position2D(0, 40);
+            textField.Position2D = Position2D.GetReusable(0, 40);
 
             this.Add(textField);
 
@@ -850,7 +850,7 @@ namespace Tizen.NUI
         /// <since_tizen> 3 </since_tizen>
         public override Size2D GetNaturalSize()
         {
-            return new Size2D(150, 150);
+            return Size2D.GetReusable(150, 150);
         }
 
         /// <summary>

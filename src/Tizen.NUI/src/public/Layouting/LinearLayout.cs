@@ -121,7 +121,7 @@ namespace Tizen.NUI
             {
                 if (cellPadding == null)
                 {
-                    cellPadding = new Size2D(0, 0);
+                    cellPadding = Size2D.GetReusable();
                 }
 
                 return cellPadding;
