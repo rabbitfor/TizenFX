@@ -245,7 +245,7 @@ namespace Tizen.NUI
                 PixelData pixelData = new PixelData(bufferIntPtr, true);
                 ImageUrl url = pixelData.GenerateUrl();
                 ImageView image = new ImageView(url.ToString());
-                image.Size = new Size(pixelData.GetWidth(), pixelData.GetHeight());
+                image.Size = Size.GetReusable(pixelData.GetWidth(), pixelData.GetHeight());
                 pixelData.Dispose();
                 url.Dispose();
                 return image;

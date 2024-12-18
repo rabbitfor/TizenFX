@@ -90,7 +90,7 @@ namespace Tizen.NUI
 
         /// <summary>
         /// Hidden API (Inhouse API).
-        /// Dispose. 
+        /// Dispose.
         /// </summary>
         /// <remarks>
         /// Following the guide of https://docs.microsoft.com/en-us/dotnet/standard/garbage-collection/implementing-dispose.
@@ -156,6 +156,11 @@ namespace Tizen.NUI
                 //You should release all of your own disposable objects here.
             }
 
+            if (SwigCMemOwn && SwigCPtr.Handle != IntPtr.Zero && IsReusable && DisposablePool.Push(this))
+            {
+                return;
+            }
+
             //Release your own unmanaged resources here.
             //You should not access any managed member here except static instance.
             //because the execution order of Finalizes is non-deterministic.
@@ -205,6 +210,15 @@ namespace Tizen.NUI
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
         protected internal bool IsDisposeQueued => isDisposeQueued;
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        protected virtual bool IsReusable => false;
+
+        internal void Reset(IntPtr swigCPtr, bool swigCMemOwn)
+        {
+            this.swigCMemOwn = swigCMemOwn;
+            this.swigCPtr = new global::System.Runtime.InteropServices.HandleRef(this, swigCPtr);
+        }
     }
 
     internal static class DisposableExtension

@@ -60,7 +60,7 @@ namespace Tizen.NUI
 
         public void InitializeWindow(int width, int height)
         {
-            window.WindowSize = new Size(width, height);
+            window.WindowSize = Size.GetReusable(width, height);
         }
 
         /// <summary>

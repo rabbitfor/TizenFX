@@ -395,7 +395,7 @@ namespace Tizen.NUI
             }
             var uSize = new Uint16Pair((uint)size.Width, (uint)size.Height);
             var val = new Uint16Pair(Interop.ImageLoading.GetClosestImageSize(filename, Uint16Pair.getCPtr(uSize), (int)fittingMode, (int)samplingMode, orientationCorrection), true);
-            Size2D ret = new Size2D(val.GetWidth(), val.GetHeight());
+            Size2D ret = Size2D.GetReusable(val.GetWidth(), val.GetHeight());
             val.Dispose();
             uSize.Dispose();
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
@@ -421,7 +421,7 @@ namespace Tizen.NUI
             }
             var uSize = new Uint16Pair((uint)size.Width, (uint)size.Height);
             var val = new Uint16Pair(Interop.ImageLoading.GetClosestImageSize(filename, Uint16Pair.getCPtr(uSize), (int)fittingMode, (int)samplingMode), true);
-            Size2D ret = new Size2D(val.GetWidth(), val.GetHeight());
+            Size2D ret = Size2D.GetReusable(val.GetWidth(), val.GetHeight());
             val.Dispose();
             uSize.Dispose();
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
@@ -446,7 +446,7 @@ namespace Tizen.NUI
             }
             var uSize = new Uint16Pair((uint)size.Width, (uint)size.Height);
             var val = new Uint16Pair(Interop.ImageLoading.GetClosestImageSize(filename, Uint16Pair.getCPtr(uSize), (int)fittingMode), true);
-            Size2D ret = new Size2D(val.GetWidth(), val.GetHeight());
+            Size2D ret = Size2D.GetReusable(val.GetWidth(), val.GetHeight());
             val.Dispose();
             uSize.Dispose();
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
@@ -470,7 +470,7 @@ namespace Tizen.NUI
             }
             var uSize = new Uint16Pair((uint)size.Width, (uint)size.Height);
             var val = new Uint16Pair(Interop.ImageLoading.GetClosestImageSize(filename, Uint16Pair.getCPtr(uSize)), true);
-            Size2D ret = new Size2D(val.GetWidth(), val.GetHeight());
+            Size2D ret = Size2D.GetReusable(val.GetWidth(), val.GetHeight());
             val.Dispose();
             uSize.Dispose();
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
@@ -487,7 +487,7 @@ namespace Tizen.NUI
         public static Size2D GetClosestImageSize(string filename)
         {
             var val = new Uint16Pair(Interop.ImageLoading.GetClosestImageSize(filename), true);
-            Size2D ret = new Size2D(val.GetWidth(), val.GetHeight());
+            Size2D ret = Size2D.GetReusable(val.GetWidth(), val.GetHeight());
             val.Dispose();
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
             return ret;
@@ -516,7 +516,7 @@ namespace Tizen.NUI
         public static Size2D GetOriginalImageSize(string filename, bool orientationCorrection)
         {
             var val = new Uint16Pair(Interop.ImageLoading.GetOriginalImageSize(filename, orientationCorrection), true);
-            Size2D ret = new Size2D(val.GetWidth(), val.GetHeight());
+            Size2D ret = Size2D.GetReusable(val.GetWidth(), val.GetHeight());
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
             return ret;
         }

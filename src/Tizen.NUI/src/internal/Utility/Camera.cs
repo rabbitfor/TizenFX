@@ -743,7 +743,7 @@ namespace Tizen.NUI
         {
             get
             {
-                Vector3 returnValue = new Vector3(0.0f, 0.0f, 0.0f);
+                Vector3 returnValue = Vector3.GetReusable();
                 PropertyValue targetPosition = GetProperty(Camera.Property.TargetPosition);
                 targetPosition?.Get(returnValue);
                 targetPosition?.Dispose();

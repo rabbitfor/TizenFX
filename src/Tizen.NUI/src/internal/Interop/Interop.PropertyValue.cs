@@ -152,6 +152,18 @@ namespace Tizen.NUI
             [global::System.Runtime.InteropServices.DllImport(NDalicPINVOKE.Lib, EntryPoint = "CSharp_Dali_Property_Value_Get__SWIG_15")]
             [return: global::System.Runtime.InteropServices.MarshalAs(global::System.Runtime.InteropServices.UnmanagedType.U1)]
             public static extern bool GetExtents(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
+
+            [global::System.Runtime.InteropServices.DllImport(NDalicPINVOKE.Lib, EntryPoint = "CSharp_Dali_new_Property_Value_NVector2")]
+            public static extern global::System.IntPtr NewPropertyValueNVector2(float x, float y);
+
+            [global::System.Runtime.InteropServices.DllImport(NDalicPINVOKE.Lib, EntryPoint = "CSharp_Dali_new_Property_Value_NVector3")]
+            public static extern global::System.IntPtr NewPropertyValueNVector3(float x, float y, float z);
+
+            [global::System.Runtime.InteropServices.DllImport(NDalicPINVOKE.Lib, EntryPoint = "CSharp_Dali_new_Property_Value_NVector4")]
+            public static extern global::System.IntPtr NewPropertyValueNVector4(float x, float y, float z, float w);
+
+            [global::System.Runtime.InteropServices.DllImport(NDalicPINVOKE.Lib, EntryPoint = "CSharp_Dali_new_Property_Value_NExtents")]
+            public static extern global::System.IntPtr NewPropertyValueNExtents(ushort start, ushort end, ushort top, ushort bottom);
         }
     }
 }

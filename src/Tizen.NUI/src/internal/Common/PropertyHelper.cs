@@ -144,13 +144,13 @@ namespace Tizen.NUI
             if (value is Vector4)
             {
                 var colorValue = value as Vector4;
-                return new Vector4(colorValue.R, colorValue.G, colorValue.B, colorValue.A);
+                return Vector4.GetReusable(colorValue.R, colorValue.G, colorValue.B, colorValue.A);
             }
 
             if (value is Color)
             {
                 var colorValue = value as Color;
-                return new Vector4(colorValue.R, colorValue.G, colorValue.B, colorValue.A);
+                return Vector4.GetReusable(colorValue.R, colorValue.G, colorValue.B, colorValue.A);
             }
 
             return null;
@@ -165,9 +165,9 @@ namespace Tizen.NUI
                 return null;
             }
 
-            var colorValue = new Vector4();
+            var colorValue = Vector4.GetReusable();
             value.Get(colorValue);
-            using (var v4 = new Vector4(colorValue.R, colorValue.G, colorValue.B, colorValue.A))
+            using (var v4 = Vector4.GetReusable(colorValue.R, colorValue.G, colorValue.B, colorValue.A))
             {
                 colorValue.Dispose();
                 return new PropertyValue(v4);

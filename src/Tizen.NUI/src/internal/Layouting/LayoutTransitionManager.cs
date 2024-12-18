@@ -307,7 +307,7 @@ namespace Tizen.NUI
             // A removed item does not have a valid target position within the layout so don't try to position.
             if (layoutPositionData.ConditionForAnimation != TransitionCondition.Remove)
             {
-                var vector = new Vector3(layoutPositionData.Left,
+                var vector = Vector3.GetReusable(layoutPositionData.Left,
                                         layoutPositionData.Top,
                                         layoutPositionData.Item.Owner.Position.Z);
                 coreAnimation.AnimateTo(layoutPositionData.Item.Owner, "Position",
@@ -335,11 +335,11 @@ namespace Tizen.NUI
                 float itemWidth = layoutPositionData.Right - layoutPositionData.Left;
                 float itemHeight = layoutPositionData.Bottom - layoutPositionData.Top;
                 // Set size directly.
-                layoutPositionData.Item.Owner.Size2D = new Size2D((int)itemWidth, (int)itemHeight);
+                layoutPositionData.Item.Owner.Size2D = Size2D.GetReusable((int)itemWidth, (int)itemHeight);
             }
             else
             {
-                var vector = new Vector3(layoutPositionData.Right - layoutPositionData.Left,
+                var vector = Vector3.GetReusable(layoutPositionData.Right - layoutPositionData.Left,
                                                          layoutPositionData.Bottom - layoutPositionData.Top,
                                                          layoutPositionData.Item.Owner.Position.Z);
                 coreAnimation.AnimateTo(layoutPositionData.Item.Owner, "Size",

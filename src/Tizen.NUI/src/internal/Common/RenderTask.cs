@@ -418,7 +418,7 @@ namespace Tizen.NUI
         {
             get
             {
-                Vector2 retVal = new Vector2(0.0f, 0.0f);
+                Vector2 retVal = Vector2.GetReusable(0.0f, 0.0f);
                 PropertyValue viewportPos = GetProperty(RenderTask.Property.ViewportPosition);
                 viewportPos?.Get(retVal);
                 viewportPos?.Dispose();
@@ -435,7 +435,7 @@ namespace Tizen.NUI
         {
             get
             {
-                Vector2 retVal = new Vector2(0.0f, 0.0f);
+                Vector2 retVal = Vector2.GetReusable(0.0f, 0.0f);
                 PropertyValue viewportSize = GetProperty(RenderTask.Property.ViewportSize);
                 viewportSize?.Get(retVal);
                 viewportSize?.Dispose();
@@ -452,7 +452,7 @@ namespace Tizen.NUI
         {
             get
             {
-                Vector4 retVal = new Vector4(0.0f, 0.0f, 0.0f, 0.0f);
+                Vector4 retVal = Vector4.GetReusable();
                 PropertyValue clearColor = GetProperty(RenderTask.Property.ClearColor);
                 clearColor?.Get(retVal);
                 clearColor?.Dispose();

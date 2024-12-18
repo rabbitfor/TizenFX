@@ -89,7 +89,7 @@ namespace Tizen.NUI
         private void CreateProviderImage(FrameData frame)
         {
             providerImage = new ImageView();
-            providerImage.Size = new Size(window.WindowSize);
+            providerImage.Size = Size.GetReusable(window.WindowSize);
             providerImage.ParentOrigin = ParentOrigin.Center;
             providerImage.PivotPoint = PivotPoint.Center;
             providerImage.PositionUsesPivotPoint = true;

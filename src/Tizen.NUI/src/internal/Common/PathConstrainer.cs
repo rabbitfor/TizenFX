@@ -76,7 +76,7 @@ namespace Tizen.NUI
         {
             get
             {
-                Vector3 temp = new Vector3(0.0f, 0.0f, 0.0f);
+                Vector3 temp = Vector3.GetReusable(0.0f, 0.0f, 0.0f);
                 Tizen.NUI.Object.GetProperty(SwigCPtr, PathConstrainer.Property.FORWARD).Get(temp);
                 return temp;
             }
