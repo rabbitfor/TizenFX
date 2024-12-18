@@ -34,7 +34,7 @@ namespace Tizen.NUI
     public class NUIApplication : CoreApplication
     {
         /// <summary>
-        /// Set to true if XAML is used. 
+        /// Set to true if XAML is used.
         /// This must be called before or immediately after the NUIApplication constructor is called.
         /// The default value is true.
         /// </summary>
@@ -715,6 +715,7 @@ namespace Tizen.NUI
 
         static System.Diagnostics.Stopwatch stopWatch;
         static Color color;
+        static Timer timer;
 
         /// <summary>
         /// The OnCreate method of NUIApplication class.
@@ -727,17 +728,56 @@ namespace Tizen.NUI
             Tizen.Tracer.Begin("[NUI] OnCreate()");
             currentState = States.Created;
 
-            stopWatch = new System.Diagnostics.Stopwatch();
-            Log.Debug("JYJY", $"Start measuring");
-            stopWatch.Start();
-            color = new Color(1, 1, 1, 1);
-            stopWatch.Stop();
-            Log.Debug("JYJY", $"Time taken : {stopWatch.ElapsedMilliseconds} ms");
-
             base.OnCreate();
 
             Tizen.Tracer.End();
+
+            timer = new Timer(5000);
+            timer.Tick += (s, e) =>
+            {
+                Log.Debug("JYJY", $"Count: {ControlStateCount}");
+                Log.Debug("JYJY", $"Count: {SizeCount}");
+                Log.Debug("JYJY", $"Count: {ColorCount}");
+                Log.Debug("JYJY", $"Count: {Vector4Count}");
+                Log.Debug("JYJY", $"Count: {Vector3Count}");
+                Log.Debug("JYJY", $"Count: {Vector2Count}");
+                Log.Debug("JYJY", $"Count: {PositionCount}");
+                Log.Debug("JYJY", $"Count: {RectangleCount}");
+                Log.Debug("JYJY", $"Count: {ExtentsCount}");
+                Log.Debug("JYJY", $"Count: {ShadowCount}");
+                Log.Debug("JYJY", $"Count: {Size2DCount}");
+                Log.Debug("JYJY", $"Count: {Position2DCount}");
+                Log.Debug("JYJY", $"Count: {RotationCount}");
+                return true;
+            };
+            // internal static int ControlStateCount = 0;
+            // internal static int SizeCount = 0;
+            // internal static int ColorCount = 0;
+            // internal static int Vector4Count = 0;
+            // internal static int Vector3Count = 0;
+            // internal static int Vector2Count = 0;
+            // internal static int PositionCount = 0;
+            // internal static int RectangleCount = 0;
+            // internal static int ExtentsCount = 0;
+            // internal static int ShadowCount = 0;
+            // internal static int Size2DCount = 0;
+            // internal static int Position2DCount = 0;
+            // internal static int RotationCount = 0;
         }
+
+        internal static int ControlStateCount = 0;
+        internal static int SizeCount = 0;
+        internal static int ColorCount = 0;
+        internal static int Vector4Count = 0;
+        internal static int Vector3Count = 0;
+        internal static int Vector2Count = 0;
+        internal static int PositionCount = 0;
+        internal static int RectangleCount = 0;
+        internal static int ExtentsCount = 0;
+        internal static int ShadowCount = 0;
+        internal static int Size2DCount = 0;
+        internal static int Position2DCount = 0;
+        internal static int RotationCount = 0;
 
         /// <summary>
         /// This is used to improve application launch performance.

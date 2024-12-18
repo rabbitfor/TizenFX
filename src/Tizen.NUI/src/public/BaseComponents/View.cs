@@ -645,6 +645,7 @@ namespace Tizen.NUI.BaseComponents
         {
             get
             {
+                NUIApplication.ControlStateCount++;
                 return themeData == null ? ControlState.Normal : themeData.controlStates;
             }
             protected set
@@ -924,6 +925,7 @@ namespace Tizen.NUI.BaseComponents
         {
             get
             {
+                NUIApplication.ColorCount++;
                 if (NUIApplication.IsUsingXaml)
                 {
                     return (Color)GetValue(BackgroundColorProperty);
@@ -987,6 +989,7 @@ namespace Tizen.NUI.BaseComponents
         {
             get
             {
+                NUIApplication.RectangleCount++;
                 if (NUIApplication.IsUsingXaml)
                 {
                     return (Rectangle)GetValue(BackgroundImageBorderProperty);
@@ -1067,6 +1070,7 @@ namespace Tizen.NUI.BaseComponents
         {
             get
             {
+                NUIApplication.ShadowCount++;
                 if (NUIApplication.IsUsingXaml)
                 {
                     return (ImageShadow)GetValue(ImageShadowProperty);
@@ -1112,6 +1116,7 @@ namespace Tizen.NUI.BaseComponents
         {
             get
             {
+                NUIApplication.ShadowCount++;
                 if (NUIApplication.IsUsingXaml)
                 {
                     return (Shadow)GetValue(BoxShadowProperty);
@@ -1155,6 +1160,7 @@ namespace Tizen.NUI.BaseComponents
         {
             get
             {
+                NUIApplication.Vector4Count++;
                 if (NUIApplication.IsUsingXaml)
                 {
                     return (Vector4)GetValue(CornerRadiusProperty);
@@ -1188,7 +1194,6 @@ namespace Tizen.NUI.BaseComponents
         {
             get
             {
-
                 if (NUIApplication.IsUsingXaml)
                 {
                     return (VisualTransformPolicyType)GetValue(CornerRadiusPolicyProperty);
@@ -1290,6 +1295,7 @@ namespace Tizen.NUI.BaseComponents
         {
             get
             {
+                NUIApplication.ColorCount++;
                 if (NUIApplication.IsUsingXaml)
                 {
                     return (Color)GetValue(BorderlineColorProperty);
@@ -1684,6 +1690,7 @@ namespace Tizen.NUI.BaseComponents
         {
             get
             {
+                NUIApplication.Vector4Count++;
                 if (NUIApplication.IsUsingXaml)
                 {
                     Vector4 temp = (Vector4)GetValue(FlexMarginProperty);
@@ -1732,6 +1739,7 @@ namespace Tizen.NUI.BaseComponents
         {
             get
             {
+                NUIApplication.Vector2Count++;
                 if (NUIApplication.IsUsingXaml)
                 {
                     return (Vector2)GetValue(CellIndexProperty);
@@ -2274,6 +2282,7 @@ namespace Tizen.NUI.BaseComponents
         {
             get
             {
+                NUIApplication.PositionCount++;
                 return GetCurrentPosition();
             }
         }
@@ -2303,6 +2312,7 @@ namespace Tizen.NUI.BaseComponents
         {
             get
             {
+                NUIApplication.Size2DCount++;
                 if (NUIApplication.IsUsingXaml)
                 {
                     var temp = (Size2D)GetValue(Size2DProperty);
@@ -2353,6 +2363,7 @@ namespace Tizen.NUI.BaseComponents
         {
             get
             {
+                NUIApplication.Size2DCount++;
                 return GetCurrentSize();
             }
         }
@@ -2430,6 +2441,7 @@ namespace Tizen.NUI.BaseComponents
         {
             get
             {
+                NUIApplication.Position2DCount++;
                 if (NUIApplication.IsUsingXaml)
                 {
                     return (Position2D)GetValue(Position2DProperty);
@@ -2462,6 +2474,7 @@ namespace Tizen.NUI.BaseComponents
         {
             get
             {
+                NUIApplication.Vector2Count++;
                 return GetCurrentScreenPosition();
             }
         }
@@ -2479,6 +2492,7 @@ namespace Tizen.NUI.BaseComponents
         {
             get
             {
+                NUIApplication.Vector4Count++;
                 return GetCurrentScreenPositionSize();
             }
         }
@@ -2695,6 +2709,7 @@ namespace Tizen.NUI.BaseComponents
         {
             get
             {
+                NUIApplication.Vector3Count++;
                 Vector3 ret = GetNaturalSize();
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw new InvalidOperationException("FATAL: get Exception", NDalicPINVOKE.SWIGPendingException.Retrieve());
                 return ret;
@@ -2712,6 +2727,7 @@ namespace Tizen.NUI.BaseComponents
         {
             get
             {
+                NUIApplication.Size2DCount++;
                 Vector3 temp = GetNaturalSize();
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw new InvalidOperationException("FATAL: get Exception", NDalicPINVOKE.SWIGPendingException.Retrieve());
                 Size2D sz = null;
@@ -2970,6 +2986,7 @@ namespace Tizen.NUI.BaseComponents
         {
             get
             {
+                NUIApplication.PositionCount++;
                 if (NUIApplication.IsUsingXaml)
                 {
                     return (Position)GetValue(PositionProperty);
@@ -3145,6 +3162,7 @@ namespace Tizen.NUI.BaseComponents
         {
             get
             {
+                NUIApplication.Vector3Count++;
                 return GetCurrentWorldPosition();
             }
         }
@@ -3169,6 +3187,7 @@ namespace Tizen.NUI.BaseComponents
         {
             get
             {
+                NUIApplication.RotationCount++;
                 if (NUIApplication.IsUsingXaml)
                 {
                     return (Rotation)GetValue(OrientationProperty);
@@ -3200,6 +3219,7 @@ namespace Tizen.NUI.BaseComponents
         {
             get
             {
+                NUIApplication.RotationCount++;
                 Rotation temp = new Rotation();
                 var pValue = GetProperty(View.Property.WorldOrientation);
                 pValue.Get(temp);
@@ -3236,6 +3256,7 @@ namespace Tizen.NUI.BaseComponents
         {
             get
             {
+                NUIApplication.Vector3Count++;
                 if (NUIApplication.IsUsingXaml)
                 {
                     return (Vector3)GetValue(ScaleProperty);
@@ -3411,6 +3432,7 @@ namespace Tizen.NUI.BaseComponents
         {
             get
             {
+                NUIApplication.Vector3Count++;
                 return GetCurrentWorldScale();
             }
         }
@@ -3447,6 +3469,7 @@ namespace Tizen.NUI.BaseComponents
         {
             get
             {
+                NUIApplication.Vector4Count++;
                 return GetCurrentWorldColor();
             }
         }
@@ -3779,6 +3802,7 @@ namespace Tizen.NUI.BaseComponents
         {
             get
             {
+                NUIApplication.Vector3Count++;
                 if (NUIApplication.IsUsingXaml)
                 {
                     return (Vector3)GetValue(SizeModeFactorProperty);
@@ -4101,6 +4125,7 @@ namespace Tizen.NUI.BaseComponents
         {
             get
             {
+                NUIApplication.ExtentsCount++;
                 if (NUIApplication.IsUsingXaml)
                 {
                     return (Extents)GetValue(PaddingProperty);
@@ -4147,6 +4172,7 @@ namespace Tizen.NUI.BaseComponents
         {
             get
             {
+                NUIApplication.Size2DCount++;
                 if (NUIApplication.IsUsingXaml)
                 {
                     return (Size2D)GetValue(MinimumSizeProperty);
@@ -4201,6 +4227,7 @@ namespace Tizen.NUI.BaseComponents
         {
             get
             {
+                NUIApplication.Size2DCount++;
                 if (NUIApplication.IsUsingXaml)
                 {
                     return (Size2D)GetValue(MaximumSizeProperty);
@@ -4340,6 +4367,7 @@ namespace Tizen.NUI.BaseComponents
         {
             get
             {
+                NUIApplication.PositionCount++;
                 if (NUIApplication.IsUsingXaml)
                 {
                     return (Position)GetValue(AnchorPointProperty);
@@ -4406,6 +4434,7 @@ namespace Tizen.NUI.BaseComponents
         {
             get
             {
+                NUIApplication.SizeCount++;
                 if (NUIApplication.IsUsingXaml)
                 {
                     return (Size)GetValue(SizeProperty);
@@ -4569,6 +4598,7 @@ namespace Tizen.NUI.BaseComponents
         {
             get
             {
+                NUIApplication.ExtentsCount++;
                 if (NUIApplication.IsUsingXaml)
                 {
                     return (Extents)GetValue(MarginProperty);
@@ -4833,6 +4863,7 @@ namespace Tizen.NUI.BaseComponents
         {
             get
             {
+                NUIApplication.ExtentsCount++;
                 if (NUIApplication.IsUsingXaml)
                 {
                     return GetValue(PaddingEXProperty) as Extents;
@@ -4906,6 +4937,7 @@ namespace Tizen.NUI.BaseComponents
         {
             get
             {
+                NUIApplication.ColorCount++;
                 if (NUIApplication.IsUsingXaml)
                 {
                     return (Color)GetValue(ColorProperty);
@@ -5344,6 +5376,7 @@ namespace Tizen.NUI.BaseComponents
         {
             get
             {
+                NUIApplication.Vector4Count++;
                 if (NUIApplication.IsUsingXaml)
                 {
                     return (Vector4)GetValue(UpdateAreaHintProperty);
