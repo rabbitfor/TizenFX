@@ -291,7 +291,7 @@ namespace Tizen.NUI.BaseComponents
 
             if (underline.Height != null)
                 map.Add("height", (float)underline.Height);
-            
+
             if (underline.DashWidth != null)
                 map.Add("dashWidth", (float)underline.DashWidth);
 
@@ -707,7 +707,7 @@ namespace Tizen.NUI.BaseComponents
 
         internal static Color GetColorFromMap(PropertyMap map, string key)
         {
-            Color value = new Color();
+            Color value = Color.GetReusable();
             using (var propertyValue = map.Find(0, key))
             {
                 if (null != propertyValue) propertyValue.Get(value);
@@ -717,7 +717,7 @@ namespace Tizen.NUI.BaseComponents
 
         internal static Color GetColorFromMap(PropertyMap map, int key)
         {
-            Color value = new Color();
+            Color value = Color.GetReusable();
             using (var propertyValue = map.Find(key))
             {
                 if (null != propertyValue) propertyValue.Get(value);
@@ -727,7 +727,7 @@ namespace Tizen.NUI.BaseComponents
 
         internal static Vector2 GetVector2FromMap(PropertyMap map, string key)
         {
-            Vector2 value = new Vector2();
+            Vector2 value = Vector2.GetReusable();
             using (var propertyValue = map.Find(0, key))
             {
                 if (null != propertyValue) propertyValue.Get(value);

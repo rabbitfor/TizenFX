@@ -119,19 +119,16 @@ namespace Tizen.NUI.BaseComponents
         internal static object GetInternalBackgroundColorProperty(BindableObject bindable)
         {
             var view = (View)bindable;
-
-            if (view.internalBackgroundColor == null)
-            {
-                view.internalBackgroundColor = new Color(view.OnBackgroundColorChanged, 0, 0, 0, 0);
-            }
-
             int visualType = (int)Visual.Type.Invalid;
             Interop.View.InternalRetrievingVisualPropertyInt(view.SwigCPtr, Property.BACKGROUND, Visual.Property.Type, out visualType);
+
+            var color = Color.GetReusable(view.OnBackgroundColorChanged);
+
             if (visualType == (int)Visual.Type.Color)
             {
-                Interop.View.InternalRetrievingVisualPropertyVector4(view.SwigCPtr, Property.BACKGROUND, ColorVisualProperty.MixColor, Color.getCPtr(view.internalBackgroundColor));
+                Interop.View.InternalRetrievingVisualPropertyVector4(view.SwigCPtr, Property.BACKGROUND, ColorVisualProperty.MixColor, Color.getCPtr(color));
             }
-            return view.internalBackgroundColor;
+            return color;
         }
 
         /// <summary>
@@ -159,13 +156,9 @@ namespace Tizen.NUI.BaseComponents
         internal static object GetInternalColorProperty(BindableObject bindable)
         {
             var view = (View)bindable;
-
-            if (view.internalColor == null)
-            {
-                view.internalColor = new Color(view.OnColorChanged, 0, 0, 0, 0);
-            }
-            Object.InternalRetrievingPropertyVector4(view.SwigCPtr, View.Property.COLOR, view.internalColor.SwigCPtr);
-            return view.internalColor;
+            var color = Color.GetReusable(view.OnColorChanged);
+            Object.InternalRetrievingPropertyVector4(view.SwigCPtr, View.Property.COLOR, color.SwigCPtr);
+            return color;
         }
 
         /// <summary>
@@ -221,8 +214,8 @@ namespace Tizen.NUI.BaseComponents
             return view.GetInternalColorBlue();
         }
 
-        /// <summary> 
-        /// BackgroundImageProperty 
+        /// <summary>
+        /// BackgroundImageProperty
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
         public static readonly BindableProperty BackgroundImageProperty = null;
@@ -465,7 +458,7 @@ namespace Tizen.NUI.BaseComponents
         internal static object GetInternalFlexMarginProperty(BindableObject bindable)
         {
             var view = (View)bindable;
-            Vector4 temp = new Vector4(0.0f, 0.0f, 0.0f, 0.0f);
+            Vector4 temp = Vector4.GetReusable();
             Object.InternalRetrievingPropertyVector4(view.SwigCPtr, FlexContainer.ChildProperty.FlexMargin, temp.SwigCPtr);
             return temp;
         }
@@ -488,12 +481,10 @@ namespace Tizen.NUI.BaseComponents
         internal static object GetInternalCellIndexProperty(BindableObject bindable)
         {
             var view = (View)bindable;
-            if (view.internalCellIndex == null)
-            {
-                view.internalCellIndex = new Vector2(view.OnCellIndexChanged, 0, 0);
-            }
-            Object.InternalRetrievingPropertyVector2(view.SwigCPtr, TableView.ChildProperty.CellIndex, view.internalCellIndex.SwigCPtr);
-            return view.internalCellIndex;
+            var vector2 = DisposablePool.GetOrCreate<Vector2>();
+            Object.InternalRetrievingPropertyVector2(view.SwigCPtr, TableView.ChildProperty.CellIndex, vector2.SwigCPtr);
+            vector2.Reset(view.OnCellIndexChanged);
+            return vector2;
 
         }
 
@@ -806,13 +797,10 @@ namespace Tizen.NUI.BaseComponents
         internal static object GetInternalSize2DProperty(BindableObject bindable)
         {
             var view = (View)bindable;
-            if (view.internalSize2D == null)
-            {
-                view.internalSize2D = new Size2D(view.OnSize2DChanged, 0, 0);
-            }
-            Object.InternalRetrievingPropertyVector2ActualVector3(view.SwigCPtr, View.Property.SIZE, view.internalSize2D.SwigCPtr);
-
-            return view.internalSize2D;
+            var size2D = DisposablePool.GetOrCreate<Size2D>();
+            Object.InternalRetrievingPropertyVector2ActualVector3(view.SwigCPtr, View.Property.SIZE, size2D.SwigCPtr);
+            size2D.Reset(view.OnSize2DChanged);
+            return size2D;
         }
 
         /// <summary>
@@ -860,12 +848,10 @@ namespace Tizen.NUI.BaseComponents
         internal static object GetInternalPosition2DProperty(BindableObject bindable)
         {
             var view = (View)bindable;
-            if (view.internalPosition2D == null)
-            {
-                view.internalPosition2D = new Position2D(view.OnPosition2DChanged, 0, 0);
-            }
-            Object.InternalRetrievingPropertyVector2ActualVector3(view.SwigCPtr, View.Property.POSITION, view.internalPosition2D.SwigCPtr);
-            return view.internalPosition2D;
+            var position2D = DisposablePool.GetOrCreate<Position2D>();
+            Object.InternalRetrievingPropertyVector2ActualVector3(view.SwigCPtr, View.Property.POSITION, position2D.SwigCPtr);
+            position2D.Reset(view.OnPosition2DChanged);
+            return position2D;
         }
 
         /// <summary>
@@ -925,7 +911,7 @@ namespace Tizen.NUI.BaseComponents
         internal static object GetInternalParentOriginProperty(BindableObject bindable)
         {
             var view = (View)bindable;
-            Position temp = new Position(0.0f, 0.0f, 0.0f);
+            Position temp = Position.GetReusable();
             Object.InternalRetrievingPropertyVector3(view.SwigCPtr, View.Property.ParentOrigin, temp.SwigCPtr);
             return temp;
         }
@@ -948,12 +934,10 @@ namespace Tizen.NUI.BaseComponents
         internal static object GetInternalPivotPointProperty(BindableObject bindable)
         {
             var view = (View)bindable;
-            if (view.internalPivotPoint == null)
-            {
-                view.internalPivotPoint = new Position(view.OnPivotPointChanged, 0, 0, 0);
-            }
-            Object.InternalRetrievingPropertyVector3(view.SwigCPtr, View.Property.AnchorPoint, view.internalPivotPoint.SwigCPtr);
-            return view.internalPivotPoint;
+            var vector3 = DisposablePool.GetOrCreate<Vector3>();
+            Object.InternalRetrievingPropertyVector3(view.SwigCPtr, View.Property.AnchorPoint, vector3.SwigCPtr);
+            vector3.Reset(view.OnPivotPointChanged);
+            return vector3;
         }
 
         /// <summary>
@@ -1013,12 +997,10 @@ namespace Tizen.NUI.BaseComponents
         internal static object GetInternalPositionProperty(BindableObject bindable)
         {
             var view = (View)bindable;
-            if (view.internalPosition == null)
-            {
-                view.internalPosition = new Position(view.OnPositionChanged, 0, 0, 0);
-            }
-            Object.InternalRetrievingPropertyVector3(view.SwigCPtr, View.Property.POSITION, view.internalPosition.SwigCPtr);
-            return view.internalPosition;
+            var position = DisposablePool.GetOrCreate<Position>();
+            Object.InternalRetrievingPropertyVector3(view.SwigCPtr, View.Property.POSITION, position.SwigCPtr);
+            position.Reset(view.OnPositionChanged);
+            return position;
         }
 
         /// <summary>
@@ -1121,12 +1103,10 @@ namespace Tizen.NUI.BaseComponents
         internal static object GetInternalScaleProperty(BindableObject bindable)
         {
             var view = (View)bindable;
-            if (view.internalScale == null)
-            {
-                view.internalScale = new Vector3(view.OnScaleChanged, 0, 0, 0);
-            }
-            Object.InternalRetrievingPropertyVector3(view.SwigCPtr, View.Property.SCALE, view.internalScale.SwigCPtr);
-            return view.internalScale;
+            var vector3 = DisposablePool.GetOrCreate<Vector3>();
+            Object.InternalRetrievingPropertyVector3(view.SwigCPtr, Property.SCALE, vector3.SwigCPtr);
+            vector3.Reset(view.OnScaleChanged);
+            return vector3;
         }
 
         /// <summary>
@@ -1368,12 +1348,11 @@ namespace Tizen.NUI.BaseComponents
         internal static object GetInternalSizeModeFactorProperty(BindableObject bindable)
         {
             var view = (View)bindable;
-            if (view.internalSizeModeFactor == null)
-            {
-                view.internalSizeModeFactor = new Vector3(view.OnSizeModeFactorChanged, 0, 0, 0);
-            }
-            Object.InternalRetrievingPropertyVector3(view.SwigCPtr, View.Property.SizeModeFactor, view.internalSizeModeFactor.SwigCPtr);
-            return view.internalSizeModeFactor;
+            var vector3 = DisposablePool.GetOrCreate<Vector3>();
+
+            Object.InternalRetrievingPropertyVector3(view.SwigCPtr, View.Property.SizeModeFactor, vector3.SwigCPtr);
+            vector3.Reset(view.OnSizeModeFactorChanged);
+            return vector3;
         }
 
         /// <summary>
@@ -1489,27 +1468,34 @@ namespace Tizen.NUI.BaseComponents
             {
                 if (view.Layout != null)
                 {
-                    view.Layout.Padding = new Extents((Extents)newValue);
-                    if ((view.Padding.Start != 0) || (view.Padding.End != 0) || (view.Padding.Top != 0) || (view.Padding.Bottom != 0))
+                    var newExtents = (Extents)newValue;
+                    var extents = DisposablePool.GetOrCreate<Extents>();
+
+                    if ((newExtents.Start != 0) || (newExtents.End != 0) || (newExtents.Top != 0) || (newExtents.Bottom != 0))
                     {
-                        var tmp = new PropertyValue(new Extents(0, 0, 0, 0));
-                        Object.SetProperty(view.SwigCPtr, Property.PADDING, tmp);
-                        tmp?.Dispose();
+                        extents.Reset(null, 0, 0, 0, 0);
+                        using var propertyValue = PropertyValue.GetReusable(extents);
+                        Object.SetProperty(view.SwigCPtr, Property.PADDING, propertyValue);
                     }
+
+                    extents.Reset(extents);
+                    view.Layout.Padding = extents;
                     view.Layout.RequestLayout();
                 }
                 else
                 {
-                    var tmp = new PropertyValue((Extents)newValue);
+                    using var tmp = PropertyValue.GetReusable((Extents)newValue);
                     Object.SetProperty(view.SwigCPtr, Property.PADDING, tmp);
-                    tmp?.Dispose();
                 }
             }
         }
         internal static object GetInternalPaddingProperty(BindableObject bindable)
         {
             var view = (View)bindable;
-            if ((view.internalPadding == null) || (view.Layout != null))
+
+            var padding = DisposablePool.GetOrCreate<Extents>();
+
+            if (view.Layout != null)
             {
                 ushort start = 0, end = 0, top = 0, bottom = 0;
                 if (view.Layout != null)
@@ -1522,17 +1508,17 @@ namespace Tizen.NUI.BaseComponents
                         bottom = view.Layout.Padding.Bottom;
                     }
                 }
-                view.internalPadding = new Extents(view.OnPaddingChanged, start, end, top, bottom);
+                padding.Reset(view.OnPaddingChanged, start, end, top, bottom);
             }
-
-            if (view.Layout == null)
+            else
             {
                 var tmp = Object.GetProperty(view.SwigCPtr, Property.PADDING);
-                tmp?.Get(view.internalPadding);
+                tmp?.Get(padding);
                 tmp?.Dispose();
+                padding.Reset(view.OnPaddingChanged);
             }
 
-            return view.internalPadding;
+            return padding;
         }
 
         /// <summary>
@@ -1585,14 +1571,10 @@ namespace Tizen.NUI.BaseComponents
         internal static object GetInternalSizeProperty(BindableObject bindable)
         {
             var view = (View)bindable;
-
-            if (view.internalSize == null)
-            {
-                view.internalSize = new Size(view.OnSizeChanged, 0, 0, 0);
-            }
-            Object.InternalRetrievingPropertyVector3(view.SwigCPtr, View.Property.SIZE, view.internalSize.SwigCPtr);
-
-            return view.internalSize;
+            var size = DisposablePool.GetOrCreate<Size>();
+            Object.InternalRetrievingPropertyVector3(view.SwigCPtr, View.Property.SIZE, size.SwigCPtr);
+            size.Reset(view.OnSizeChanged);
+            return size;
         }
 
         /// <summary>
@@ -1614,12 +1596,10 @@ namespace Tizen.NUI.BaseComponents
         {
 
             var view = (View)bindable;
-            if (view.internalMinimumSize == null)
-            {
-                view.internalMinimumSize = new Size2D(view.OnMinimumSizeChanged, 0, 0);
-            }
-            Object.InternalRetrievingPropertyVector2(view.SwigCPtr, View.Property.MinimumSize, view.internalMinimumSize.SwigCPtr);
-            return view.internalMinimumSize;
+            var size2D = DisposablePool.GetOrCreate<Size2D>();
+            Object.InternalRetrievingPropertyVector2(view.SwigCPtr, View.Property.MinimumSize, size2D.SwigCPtr);
+            size2D.Reset(view.OnMinimumSizeChanged);
+            return size2D;
         }
 
         /// <summary>
@@ -1640,13 +1620,10 @@ namespace Tizen.NUI.BaseComponents
         internal static object GetInternalMaximumSizeProperty(BindableObject bindable)
         {
             var view = (View)bindable;
-
-            if (view.internalMaximumSize == null)
-            {
-                view.internalMaximumSize = new Size2D(view.OnMaximumSizeChanged, 0, 0);
-            }
-            Object.InternalRetrievingPropertyVector2(view.SwigCPtr, View.Property.MaximumSize, view.internalMaximumSize.SwigCPtr);
-            return view.internalMaximumSize;
+            var maximumSize = DisposablePool.GetOrCreate<Size2D>();
+            Object.InternalRetrievingPropertyVector2(view.SwigCPtr, View.Property.MaximumSize, maximumSize.SwigCPtr);
+            maximumSize.Reset(view.OnMaximumSizeChanged);
+            return maximumSize;
         }
 
         /// <summary>
@@ -1742,12 +1719,11 @@ namespace Tizen.NUI.BaseComponents
             {
                 if (view.Layout != null)
                 {
-                    view.Layout.Margin = new Extents((Extents)newValue);
+                    view.Layout.Margin = Extents.GetReusable((Extents)newValue);
                     if ((view.Margin.Start != 0) || (view.Margin.End != 0) || (view.Margin.Top != 0) || (view.Margin.Bottom != 0))
                     {
-                        var tmp = new PropertyValue(new Extents(0, 0, 0, 0));
+                        using var tmp = new PropertyValue(Extents.GetReusable());
                         Object.SetProperty(view.SwigCPtr, Property.MARGIN, tmp);
-                        tmp?.Dispose();
                     }
                     view.Layout.RequestLayout();
                 }
@@ -1762,7 +1738,9 @@ namespace Tizen.NUI.BaseComponents
         internal static object GetInternalMarginProperty(BindableObject bindable)
         {
             var view = (View)bindable;
-            if ((view.internalMargin == null) || (view.Layout != null))
+            var extents = DisposablePool.GetOrCreate<Extents>();
+
+            if (view.Layout != null)
             {
                 ushort start = 0, end = 0, top = 0, bottom = 0;
                 if (view.Layout != null)
@@ -1775,18 +1753,18 @@ namespace Tizen.NUI.BaseComponents
                         bottom = view.Layout.Margin.Bottom;
                     }
                 }
-                view.internalMargin = new Extents(view.OnMarginChanged, start, end, top, bottom);
+                extents.Reset(view.OnMarginChanged, start, end, top, bottom);
             }
-
-            if (view.Layout == null)
+            else
             {
 
                 var tmp = Object.GetProperty(view.SwigCPtr, Property.MARGIN);
-                tmp?.Get(view.internalMargin);
+                tmp?.Get(extents);
                 tmp?.Dispose();
+                extents.Reset(view.OnMarginChanged);
             }
 
-            return view.internalMargin;
+            return extents;
         }
 
         /// <summary>
@@ -1807,8 +1785,7 @@ namespace Tizen.NUI.BaseComponents
         internal static object GetInternalUpdateAreaHintProperty(BindableObject bindable)
         {
             var view = (View)bindable;
-            Vector4 temp = new Vector4(0.0f, 0.0f, 0.0f, 0.0f);
-
+            Vector4 temp = Vector4.GetReusable();
             Object.InternalRetrievingPropertyVector4(view.SwigCPtr, Interop.ActorProperty.UpdateAreaHintGet(), temp.SwigCPtr);
             return temp;
         }
@@ -2603,7 +2580,7 @@ namespace Tizen.NUI.BaseComponents
         /// </summary>
         internal Size2D GetUserSize2D()
         {
-            return new Size2D((int)userSizeWidth, (int)userSizeHeight);
+            return Size2D.GetReusable((int)userSizeWidth, (int)userSizeHeight);
         }
 
         private void SetBackgroundImage(string value)

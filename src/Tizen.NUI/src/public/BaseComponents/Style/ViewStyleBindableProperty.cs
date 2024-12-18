@@ -69,7 +69,7 @@ namespace Tizen.NUI.BaseComponents
         public static readonly BindableProperty Size2DProperty = BindableProperty.Create(nameof(Size2D), typeof(Size2D), typeof(ViewStyle), null, propertyChanged: (bindable, oldValue, newValue) =>
         {
             var viewStyle = (ViewStyle)bindable;
-            viewStyle.size = newValue == null ? null : new Size((Size2D)newValue);
+            viewStyle.size = newValue == null ? null : Size.GetReusable((Size2D)newValue);
         },
         defaultValueCreator: (bindable) =>
         {
@@ -89,12 +89,12 @@ namespace Tizen.NUI.BaseComponents
         public static readonly BindableProperty Position2DProperty = BindableProperty.Create(nameof(Position2D), typeof(Position2D), typeof(ViewStyle), null, propertyChanged: (bindable, oldValue, newValue) =>
         {
             var viewStyle = (ViewStyle)bindable;
-            viewStyle.position = newValue == null ? null : new Position((Position2D)newValue);
+            viewStyle.position = newValue == null ? null : Position.GetReusable((Position2D)newValue);
         },
         defaultValueCreator: (bindable) =>
         {
             var viewStyle = (ViewStyle)bindable;
-            return viewStyle.position == null ? null : new Position2D(viewStyle.position);
+            return viewStyle.position == null ? null : Position2D.GetReusable(viewStyle.position);
         });
 
         /// <summary> Bindable property of PositionUsesPivotPoint. Do not open it. </summary>
@@ -129,7 +129,7 @@ namespace Tizen.NUI.BaseComponents
                 {
                     if ((float)newValue == 0) return;
                 }
-                viewStyle.size = new Size((float)newValue, viewStyle.size?.Height ?? 0);
+                viewStyle.size = Size.GetReusable((float)newValue, viewStyle.size?.Height ?? 0);
             }
         },
         defaultValueCreator: (bindable) =>
@@ -148,7 +148,7 @@ namespace Tizen.NUI.BaseComponents
                 {
                     if ((float)newValue == 0) return;
                 }
-                viewStyle.size = new Size(viewStyle.size?.Width ?? 0, (float)newValue);
+                viewStyle.size = Size.GetReusable(viewStyle.size?.Width ?? 0, (float)newValue);
             }
         },
         defaultValueCreator: (bindable) =>
@@ -184,7 +184,7 @@ namespace Tizen.NUI.BaseComponents
                 {
                     if ((float)newValue == 0) return;
                 }
-                viewStyle.position = new Position((float)newValue, viewStyle.position?.Y ?? 0);
+                viewStyle.position = Position.GetReusable((float)newValue, viewStyle.position?.Y ?? 0);
             }
         },
         defaultValueCreator: (bindable) =>
@@ -203,7 +203,7 @@ namespace Tizen.NUI.BaseComponents
                 {
                     if ((float)newValue == 0) return;
                 }
-                viewStyle.position = new Position(viewStyle.position?.X ?? 0, (float)newValue);
+                viewStyle.position = Position.GetReusable(viewStyle.position?.X ?? 0, (float)newValue);
             }
         },
         defaultValueCreator: (bindable) =>

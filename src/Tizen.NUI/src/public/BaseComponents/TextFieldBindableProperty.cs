@@ -292,13 +292,9 @@ namespace Tizen.NUI.BaseComponents
         internal static object GetInternalTextColorProperty(BindableObject bindable)
         {
             var textField = (TextField)bindable;
-
-            if (textField.internalTextColor == null)
-            {
-                textField.internalTextColor = new Color(0, 0, 0, 0);
-            }
-            Object.InternalRetrievingPropertyVector4(textField.SwigCPtr, TextField.Property.TextColor, textField.internalTextColor.SwigCPtr);
-            return textField.internalTextColor;
+            var color = Color.GetReusable(0, 0, 0, 0);
+            Object.InternalRetrievingPropertyVector4(textField.SwigCPtr, TextField.Property.TextColor, color.SwigCPtr);
+            return color;
         }
 
         /// This will be public opened after ACR done. Before ACR, need to be hidden as inhouse API.
@@ -316,13 +312,9 @@ namespace Tizen.NUI.BaseComponents
         internal static object GetInternalPlaceholderTextColorProperty(BindableObject bindable)
         {
             var textField = (TextField)bindable;
-
-            if (textField.internalPlaceholderTextColor == null)
-            {
-                textField.internalPlaceholderTextColor = new Vector4(0, 0, 0, 0);
-            }
-            Object.InternalRetrievingPropertyVector4(textField.SwigCPtr, TextField.Property.PlaceholderTextColor, textField.internalPlaceholderTextColor.SwigCPtr);
-            return textField.internalPlaceholderTextColor;
+            var vector4 = Vector4.GetReusable();
+            Object.InternalRetrievingPropertyVector4(textField.SwigCPtr, TextField.Property.PlaceholderTextColor, vector4.SwigCPtr);
+            return vector4;
         }
 
         /// This will be public opened in tizen_5.5 after ACR done. Before ACR, need to be hidden as inhouse API.
@@ -378,13 +370,9 @@ namespace Tizen.NUI.BaseComponents
         internal static object GetInternalPrimaryCursorColorProperty(BindableObject bindable)
         {
             var textField = (TextField)bindable;
-
-            if (textField.internalPrimaryCursorColor == null)
-            {
-                textField.internalPrimaryCursorColor = new Vector4(0, 0, 0, 0);
-            }
-            Object.InternalRetrievingPropertyVector4(textField.SwigCPtr, TextField.Property.PrimaryCursorColor, textField.internalPrimaryCursorColor.SwigCPtr);
-            return textField.internalPrimaryCursorColor;
+            var vector4 = Vector4.GetReusable();
+            Object.InternalRetrievingPropertyVector4(textField.SwigCPtr, TextField.Property.PrimaryCursorColor, vector4.SwigCPtr);
+            return vector4;
         }
 
         /// This will be public opened after ACR done. Before ACR, need to be hidden as inhouse API.
@@ -402,13 +390,9 @@ namespace Tizen.NUI.BaseComponents
         internal static object GetInternalSecondaryCursorColorProperty(BindableObject bindable)
         {
             var textField = (TextField)bindable;
-
-            if (textField.internalSecondaryCursorColor == null)
-            {
-                textField.internalSecondaryCursorColor = new Vector4(0, 0, 0, 0);
-            }
-            Object.InternalRetrievingPropertyVector4(textField.SwigCPtr, TextField.Property.SecondaryCursorColor, textField.internalSecondaryCursorColor.SwigCPtr);
-            return textField.internalSecondaryCursorColor;
+            var vector4 = Vector4.GetReusable();
+            Object.InternalRetrievingPropertyVector4(textField.SwigCPtr, TextField.Property.SecondaryCursorColor, vector4.SwigCPtr);
+            return vector4;
         }
 
         /// This will be public opened after ACR done. Before ACR, need to be hidden as inhouse API.
@@ -448,7 +432,7 @@ namespace Tizen.NUI.BaseComponents
 
             return Object.InternalGetPropertyFloat(textField.SwigCPtr, TextField.Property.CursorBlinkInterval);
         }
-        
+
         /// This will be public opened after ACR done. Before ACR, need to be hidden as inhouse API.
         [EditorBrowsable(EditorBrowsableState.Never)]
         public static readonly BindableProperty CursorBlinkDurationProperty = null;
@@ -710,13 +694,9 @@ namespace Tizen.NUI.BaseComponents
         internal static object GetInternalSelectionHighlightColorProperty(BindableObject bindable)
         {
             var textField = (TextField)bindable;
-
-            if (textField.internalSelectionHighlightColor == null)
-            {
-                textField.internalSelectionHighlightColor = new Vector4(0, 0, 0, 0);
-            }
-            Object.InternalRetrievingPropertyVector4(textField.SwigCPtr, TextField.Property.SelectionHighlightColor, textField.internalSelectionHighlightColor.SwigCPtr);
-            return textField.internalSelectionHighlightColor;
+            var vector4 = Vector4.GetReusable();
+            Object.InternalRetrievingPropertyVector4(textField.SwigCPtr, TextField.Property.SelectionHighlightColor, vector4.SwigCPtr);
+            return vector4;
         }
 
         /// This will be public opened after ACR done. Before ACR, need to be hidden as inhouse API.
@@ -772,13 +752,9 @@ namespace Tizen.NUI.BaseComponents
         internal static object GetInternalInputColorProperty(BindableObject bindable)
         {
             var textField = (TextField)bindable;
-
-            if (textField.internalInputColor == null)
-            {
-                textField.internalInputColor = new Vector4(0, 0, 0, 0);
-            }
-            Object.InternalRetrievingPropertyVector4(textField.SwigCPtr, TextField.Property.InputColor, textField.internalInputColor.SwigCPtr);
-            return textField.internalInputColor;
+            var vector4 = Vector4.GetReusable();
+            Object.InternalRetrievingPropertyVector4(textField.SwigCPtr, TextField.Property.InputColor, vector4.SwigCPtr);
+            return vector4;
         }
 
         /// This will be public opened after ACR done. Before ACR, need to be hidden as inhouse API.
@@ -1210,13 +1186,9 @@ namespace Tizen.NUI.BaseComponents
         internal static object GetInternalGrabHandleColorProperty(BindableObject bindable)
         {
             var textField = (TextField)bindable;
-
-            if (textField.internalGrabHandleColor == null)
-            {
-                textField.internalGrabHandleColor = new Color(0, 0, 0, 0);
-            }
-            Object.InternalRetrievingPropertyVector4(textField.SwigCPtr, TextField.Property.GrabHandleColor, textField.internalGrabHandleColor.SwigCPtr);
-            return textField.internalGrabHandleColor;
+            var color = Color.GetReusable();
+            Object.InternalRetrievingPropertyVector4(textField.SwigCPtr, TextField.Property.GrabHandleColor, color.SwigCPtr);
+            return color;
         }
 
         /// <summary>

@@ -46,13 +46,13 @@ namespace Tizen.NUI.BaseComponents
         private bool hasSystemFontTypeChanged = false;
         private bool isSettingTextInCSharp = false;
 
-        private Color internalPlaceholderTextColor = null;
-        private Vector4 internalPrimaryCursorColor = null;
-        private Vector4 internalSecondaryCursorColor = null;
-        private Vector4 internalSelectionHighlightColor = null;
-        private Vector4 internalInputColor = null;
-        private Vector4 internalTextColor = null;
-        private Color internalGrabHandleColor = null;
+        // private Color internalPlaceholderTextColor = null;
+        // private Vector4 internalPrimaryCursorColor = null;
+        // private Vector4 internalSecondaryCursorColor = null;
+        // private Vector4 internalSelectionHighlightColor = null;
+        // private Vector4 internalInputColor = null;
+        // private Vector4 internalTextColor = null;
+        // private Color internalGrabHandleColor = null;
 
 
         static TextEditor()
@@ -418,7 +418,8 @@ namespace Tizen.NUI.BaseComponents
                 {
                     temp = (Vector4)GetInternalTextColorProperty(this);
                 }
-                return new Vector4(OnTextColorChanged, temp.X, temp.Y, temp.Z, temp.W);
+                temp.callback = OnTextColorChanged;
+                return temp;
             }
             set
             {
@@ -782,7 +783,8 @@ namespace Tizen.NUI.BaseComponents
                 {
                     temp = (Vector4)GetInternalPrimaryCursorColorProperty(this);
                 }
-                return new Vector4(OnPrimaryCursorColorChanged, temp.X, temp.Y, temp.Z, temp.W);
+                temp.callback = OnPrimaryCursorColorChanged;
+                return temp;
             }
             set
             {
@@ -819,7 +821,8 @@ namespace Tizen.NUI.BaseComponents
                 {
                     temp = (Vector4)GetInternalSecondaryCursorColorProperty(this);
                 }
-                return new Vector4(OnSecondaryCursorColorChanged, temp.X, temp.Y, temp.Z, temp.W);
+                temp.callback = OnSecondaryCursorColorChanged;
+                return temp;
             }
             set
             {
@@ -1504,7 +1507,9 @@ namespace Tizen.NUI.BaseComponents
                 {
                     temp = (Vector4)GetInternalSelectionHighlightColorProperty(this);
                 }
-                return new Vector4(OnSelectionHighlightColorChanged, temp.X, temp.Y, temp.Z, temp.W);
+
+                temp.callback = OnSelectionHighlightColorChanged;
+                return temp;
             }
             set
             {
@@ -1610,7 +1615,8 @@ namespace Tizen.NUI.BaseComponents
                 {
                     temp = (Vector4)GetInternalInputColorProperty(this);
                 }
-                return new Vector4(OnInputColorChanged, temp.X, temp.Y, temp.Z, temp.W);
+                temp.callback = OnInputColorChanged;
+                return temp;
             }
             set
             {
@@ -2585,7 +2591,8 @@ namespace Tizen.NUI.BaseComponents
                 {
                     temp = (Color)GetInternalPlaceholderTextColorProperty(this);
                 }
-                return new Color(OnPlaceholderTextColorChanged, temp.R, temp.G, temp.B, temp.A);
+                temp.callback = OnPlaceholderTextColorChanged;
+                return temp;
             }
             set
             {
@@ -2902,7 +2909,8 @@ namespace Tizen.NUI.BaseComponents
                 {
                     temp = (Color)GetInternalGrabHandleColorProperty(this);
                 }
-                return new Color(OnGrabHandleColorChanged, temp.R, temp.G, temp.B, temp.A);
+                temp.callback = OnGrabHandleColorChanged;
+                return temp;
             }
             set
             {
@@ -4134,31 +4142,31 @@ namespace Tizen.NUI.BaseComponents
         }
         private void OnInputColorChanged(float x, float y, float z, float w)
         {
-            InputColor = new Vector4(x, y, z, w);
+            InputColor = Vector4.GetReusable(x, y, z, w);
         }
         private void OnPlaceholderTextColorChanged(float r, float g, float b, float a)
         {
-            PlaceholderTextColor = new Color(r, g, b, a);
+            PlaceholderTextColor = Color.GetReusable(r, g, b, a);
         }
         private void OnPrimaryCursorColorChanged(float x, float y, float z, float w)
         {
-            PrimaryCursorColor = new Vector4(x, y, z, w);
+            PrimaryCursorColor = Vector4.GetReusable(x, y, z, w);
         }
         private void OnSecondaryCursorColorChanged(float x, float y, float z, float w)
         {
-            SecondaryCursorColor = new Vector4(x, y, z, w);
+            SecondaryCursorColor = Vector4.GetReusable(x, y, z, w);
         }
         private void OnSelectionHighlightColorChanged(float x, float y, float z, float w)
         {
-            SelectionHighlightColor = new Vector4(x, y, z, w);
+            SelectionHighlightColor = Vector4.GetReusable(x, y, z, w);
         }
         private void OnTextColorChanged(float x, float y, float z, float w)
         {
-            TextColor = new Vector4(x, y, z, w);
+            TextColor = Vector4.GetReusable(x, y, z, w);
         }
         private void OnGrabHandleColorChanged(float r, float g, float b, float a)
         {
-            GrabHandleColor = new Color(r, g, b, a);
+            GrabHandleColor = Color.GetReusable(r, g, b, a);
         }
 
         internal class TextEditorLayout : LayoutItem

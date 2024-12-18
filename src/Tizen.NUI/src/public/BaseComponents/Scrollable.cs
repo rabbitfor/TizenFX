@@ -74,7 +74,7 @@ namespace Tizen.NUI.BaseComponents
         internal static object GetInternalOvershootEffectColorProperty(BindableObject bindable)
         {
             var scrollable = (Scrollable)bindable;
-            Vector4 temp = new Vector4(0.0f, 0.0f, 0.0f, 0.0f);
+            Vector4 temp = Vector4.GetReusable();
             Tizen.NUI.Object.GetProperty((HandleRef)scrollable.SwigCPtr, Scrollable.Property.OvershootEffectColor).Get(temp);
             return temp;
         }
@@ -114,7 +114,7 @@ namespace Tizen.NUI.BaseComponents
                 Tizen.NUI.Object.SetProperty((HandleRef)scrollable.SwigCPtr, Scrollable.Property.OvershootEnabled, new Tizen.NUI.PropertyValue((bool)newValue));
             }
         }
-        
+
         internal static object GetInternalOvershootEnabledProperty(BindableObject bindable)
         {
             var scrollable = (Scrollable)bindable;
@@ -136,11 +136,11 @@ namespace Tizen.NUI.BaseComponents
                 Tizen.NUI.Object.SetProperty((HandleRef)scrollable.SwigCPtr, Scrollable.Property.OvershootSize, new Tizen.NUI.PropertyValue((Vector2)newValue));
             }
         }
-        
+
         internal static object GetInternalOvershootSizeProperty(BindableObject bindable)
         {
             var scrollable = (Scrollable)bindable;
-            Vector2 temp = new Vector2(0.0f, 0.0f);
+            Vector2 temp = Vector2.GetReusable(0.0f, 0.0f);
             Tizen.NUI.Object.GetProperty((HandleRef)scrollable.SwigCPtr, Scrollable.Property.OvershootSize).Get(temp);
             return temp;
         }
@@ -150,7 +150,7 @@ namespace Tizen.NUI.BaseComponents
         [Obsolete("This has been deprecated in API12")]
         public static readonly BindableProperty ScrollToAlphaFunctionProperty = null;
 
-        internal static void SetInternalScrollToAlphaFunctionProperty(BindableObject bindable, object oldValue, object newValue) 
+        internal static void SetInternalScrollToAlphaFunctionProperty(BindableObject bindable, object oldValue, object newValue)
         {
             var scrollable = (Scrollable)bindable;
             if (newValue != null)
@@ -158,7 +158,7 @@ namespace Tizen.NUI.BaseComponents
                 Tizen.NUI.Object.SetProperty((HandleRef)scrollable.SwigCPtr, Scrollable.Property.ScrollToAlphaFunction, new Tizen.NUI.PropertyValue((int)newValue));
             }
         }
-        
+
         internal static object GetInternalScrollToAlphaFunctionProperty(BindableObject bindable)
         {
             var scrollable = (Scrollable)bindable;
@@ -180,11 +180,11 @@ namespace Tizen.NUI.BaseComponents
                 Tizen.NUI.Object.SetProperty((HandleRef)scrollable.SwigCPtr, Scrollable.Property.ScrollRelativePosition, new Tizen.NUI.PropertyValue((Vector2)newValue));
             }
         }
-        
+
         internal static object GetInternalScrollRelativePositionProperty(BindableObject bindable)
         {
             var scrollable = (Scrollable)bindable;
-            Vector2 temp = new Vector2(0.0f, 0.0f);
+            Vector2 temp = Vector2.GetReusable(0.0f, 0.0f);
             Tizen.NUI.Object.GetProperty((HandleRef)scrollable.SwigCPtr, Scrollable.Property.ScrollRelativePosition).Get(temp);
             return temp;
         }
@@ -202,11 +202,11 @@ namespace Tizen.NUI.BaseComponents
                 Tizen.NUI.Object.SetProperty((HandleRef)scrollable.SwigCPtr, Scrollable.Property.ScrollPositionMin, new Tizen.NUI.PropertyValue((Vector2)newValue));
             }
         }
-        
+
         internal static object GetInternalScrollPositionMinProperty(BindableObject bindable)
         {
             var scrollable = (Scrollable)bindable;
-            Vector2 temp = new Vector2(0.0f, 0.0f);
+            Vector2 temp = Vector2.GetReusable(0.0f, 0.0f);
             Tizen.NUI.Object.GetProperty((HandleRef)scrollable.SwigCPtr, Scrollable.Property.ScrollPositionMin).Get(temp);
             return temp;
         }
@@ -224,11 +224,11 @@ namespace Tizen.NUI.BaseComponents
                 Tizen.NUI.Object.SetProperty((HandleRef)scrollable.SwigCPtr, Scrollable.Property.ScrollPositionMax, new Tizen.NUI.PropertyValue((Vector2)newValue));
             }
         }
-        
+
         internal static object GetInternalScrollPositionMaxProperty(BindableObject bindable)
         {
             var scrollable = (Scrollable)bindable;
-            Vector2 temp = new Vector2(0.0f, 0.0f);
+            Vector2 temp = Vector2.GetReusable(0.0f, 0.0f);
             Tizen.NUI.Object.GetProperty((HandleRef)scrollable.SwigCPtr, Scrollable.Property.ScrollPositionMax).Get(temp);
             return temp;
         }
@@ -268,7 +268,7 @@ namespace Tizen.NUI.BaseComponents
                 Tizen.NUI.Object.SetProperty((HandleRef)scrollable.SwigCPtr, Scrollable.Property.CanScrollHorizontal, new Tizen.NUI.PropertyValue((bool)newValue));
             }
         }
-        
+
         internal static object GetInternalCanScrollHorizontalProperty(BindableObject bindable)
         {
             var scrollable = (Scrollable)bindable;

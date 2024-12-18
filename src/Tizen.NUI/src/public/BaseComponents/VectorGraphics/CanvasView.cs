@@ -196,7 +196,7 @@ namespace Tizen.NUI.BaseComponents.VectorGraphics
         {
             get
             {
-                Size2D retVal = new Size2D(0, 0);
+                Size2D retVal = Size2D.GetReusable(0, 0);
                 PropertyValue viewBoxPropertyValue = GetProperty(Interop.CanvasView.PropertyViewBoxGet());
                 viewBoxPropertyValue?.Get(retVal);
                 viewBoxPropertyValue?.Dispose();

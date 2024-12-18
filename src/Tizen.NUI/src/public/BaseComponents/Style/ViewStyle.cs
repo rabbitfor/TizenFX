@@ -322,7 +322,7 @@ namespace Tizen.NUI.BaseComponents
         /// <since_tizen> 9 </since_tizen>
         public Extents Padding
         {
-            get => (Extents)GetValue(PaddingProperty) ?? (padding = new Extents());
+            get => (Extents)GetValue(PaddingProperty) ?? (padding = Extents.GetReusable());
             set => SetValue(PaddingProperty, value);
         }
 
@@ -370,7 +370,7 @@ namespace Tizen.NUI.BaseComponents
         /// <since_tizen> 9 </since_tizen>
         public Extents Margin
         {
-            get => (Extents)GetValue(MarginProperty) ?? (margin = new Extents());
+            get => (Extents)GetValue(MarginProperty) ?? (margin = Extents.GetReusable());
             set => SetValue(MarginProperty, value);
         }
 

@@ -691,7 +691,7 @@ namespace Tizen.NUI.BaseComponents
         internal static object GetInternalImageColorProperty(BindableObject bindable)
         {
             var imageView = (ImageView)bindable;
-            Color ret = new Color();
+            Color ret = Color.GetReusable();
 
             imageView.GetCachedImageVisualProperty(Visual.Property.MixColor)?.Get(ret);
 

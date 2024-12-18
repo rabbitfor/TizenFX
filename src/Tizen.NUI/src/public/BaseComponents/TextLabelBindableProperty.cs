@@ -259,13 +259,9 @@ namespace Tizen.NUI.BaseComponents
         internal static object GetInternalTextColorProperty(BindableObject bindable)
         {
             var textLabel = (TextLabel)bindable;
-
-            if (textLabel.internalTextColor == null)
-            {
-                textLabel.internalTextColor = new Color(0, 0, 0, 0);
-            }
-            Object.InternalRetrievingPropertyVector4(textLabel.SwigCPtr, TextLabel.Property.TextColor, textLabel.internalTextColor.SwigCPtr);
-            return textLabel.internalTextColor;
+            var color = Color.GetReusable();
+            Object.InternalRetrievingPropertyVector4(textLabel.SwigCPtr, TextLabel.Property.TextColor, color.SwigCPtr);
+            return color;
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
@@ -281,13 +277,9 @@ namespace Tizen.NUI.BaseComponents
         internal static object GetInternalAnchorColorProperty(BindableObject bindable)
         {
             var textLabel = (TextLabel)bindable;
-
-            if (textLabel.internalAnchorColor == null)
-            {
-                textLabel.internalAnchorColor = new Color(0, 0, 0, 0);
-            }
-            Object.InternalRetrievingPropertyVector4(textLabel.SwigCPtr, TextLabel.Property.TextColor, textLabel.internalAnchorColor.SwigCPtr);
-            return textLabel.internalAnchorColor;
+            var color = Color.GetReusable();
+            Object.InternalRetrievingPropertyVector4(textLabel.SwigCPtr, TextLabel.Property.TextColor, color.SwigCPtr);
+            return color;
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
@@ -303,13 +295,9 @@ namespace Tizen.NUI.BaseComponents
         internal static object GetInternalAnchorClickedColorProperty(BindableObject bindable)
         {
             var textLabel = (TextLabel)bindable;
-
-            if (textLabel.internalAnchorClickedColor == null)
-            {
-                textLabel.internalAnchorClickedColor = new Color(0, 0, 0, 0);
-            }
-            Object.InternalRetrievingPropertyVector4(textLabel.SwigCPtr, TextLabel.Property.TextColor, textLabel.internalAnchorClickedColor.SwigCPtr);
-            return textLabel.internalAnchorClickedColor;
+            var color = Color.GetReusable();
+            Object.InternalRetrievingPropertyVector4(textLabel.SwigCPtr, TextLabel.Property.TextColor, color.SwigCPtr);
+            return color;
         }
 
         /// <summary>
@@ -1015,7 +1003,7 @@ namespace Tizen.NUI.BaseComponents
                     return selector;
                 }
 
-                Color color = new Color();
+                Color color = Color.GetReusable();
                 if (!GetProperty(TextLabel.Property.TextColor).Get(color))
                 {
                     return null;

@@ -691,17 +691,17 @@ namespace Tizen.NUI.BaseComponents
 
         private void OnColorChanged(float r, float g, float b, float a)
         {
-            Color = new Color(r, g, b, a);
+            Color = Color.GetReusable(r, g, b, a);
         }
 
         private void OnMinimumSizeChanged(int width, int height)
         {
-            MinimumSize = new Size2D(width, height);
+            MinimumSize = Size2D.GetReusable(width, height);
         }
 
         private void OnMaximumSizeChanged(int width, int height)
         {
-            MaximumSize = new Size2D(width, height);
+            MaximumSize = Size2D.GetReusable(width, height);
         }
 
         private void OnPosition2DChanged(int x, int y)
@@ -726,12 +726,12 @@ namespace Tizen.NUI.BaseComponents
 
         private void OnParentOriginChanged(float x, float y, float z)
         {
-            ParentOrigin = new Position(x, y, z);
+            ParentOrigin = Position.GetReusable(x, y, z);
         }
 
         private void OnPivotPointChanged(float x, float y, float z)
         {
-            PivotPoint = new Position(x, y, z);
+            PivotPoint = Position.GetReusable(x, y, z);
         }
 
         private void OnImageShadowChanged(ShadowBase instance)

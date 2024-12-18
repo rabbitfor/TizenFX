@@ -23,6 +23,7 @@ using System.Globalization;
 using System.ComponentModel;
 using Tizen.NUI.Text;
 using Tizen.NUI.Binding;
+using System.Numerics;
 
 namespace Tizen.NUI.BaseComponents
 {
@@ -82,137 +83,137 @@ namespace Tizen.NUI.BaseComponents
             }
         }
 
-        static TextLabel() 
-        { 
+        static TextLabel()
+        {
             if (NUIApplication.IsUsingXaml)
             {
-                TranslatableTextProperty = BindableProperty.Create(nameof(TranslatableText), typeof(string), typeof(TextLabel), string.Empty, 
+                TranslatableTextProperty = BindableProperty.Create(nameof(TranslatableText), typeof(string), typeof(TextLabel), string.Empty,
                     propertyChanged: SetInternalTranslatableTextProperty, defaultValueCreator: GetInternalTranslatableTextProperty);
 
-                TextProperty = BindableProperty.Create(nameof(Text), typeof(string), typeof(TextLabel), string.Empty, 
+                TextProperty = BindableProperty.Create(nameof(Text), typeof(string), typeof(TextLabel), string.Empty,
                     propertyChanged: SetInternalTextProperty, defaultValueCreator: GetInternalTextProperty);
 
-                FontFamilyProperty = BindableProperty.Create(nameof(FontFamily), typeof(string), typeof(TextLabel), string.Empty, 
+                FontFamilyProperty = BindableProperty.Create(nameof(FontFamily), typeof(string), typeof(TextLabel), string.Empty,
                     propertyChanged: SetInternalFontFamilyProperty, defaultValueCreator: GetInternalFontFamilyProperty);
 
-                FontStyleProperty = BindableProperty.Create(nameof(FontStyle), typeof(PropertyMap), typeof(TextLabel), null, 
+                FontStyleProperty = BindableProperty.Create(nameof(FontStyle), typeof(PropertyMap), typeof(TextLabel), null,
                     propertyChanged: SetInternalFontStyleProperty, defaultValueCreator: GetInternalFontStyleProperty);
 
-                PointSizeProperty = BindableProperty.Create(nameof(PointSize), typeof(float), typeof(TextLabel), default(float), 
+                PointSizeProperty = BindableProperty.Create(nameof(PointSize), typeof(float), typeof(TextLabel), default(float),
                     propertyChanged: SetInternalPointSizeProperty, defaultValueCreator: GetInternalPointSizeProperty);
 
-                MultiLineProperty = BindableProperty.Create(nameof(MultiLine), typeof(bool), typeof(TextLabel), false, 
+                MultiLineProperty = BindableProperty.Create(nameof(MultiLine), typeof(bool), typeof(TextLabel), false,
                     propertyChanged: SetInternalMultiLineProperty, defaultValueCreator: GetInternalMultiLineProperty);
 
-                HorizontalAlignmentProperty = BindableProperty.Create(nameof(HorizontalAlignment), typeof(HorizontalAlignment), typeof(TextLabel), HorizontalAlignment.Begin, 
+                HorizontalAlignmentProperty = BindableProperty.Create(nameof(HorizontalAlignment), typeof(HorizontalAlignment), typeof(TextLabel), HorizontalAlignment.Begin,
                     propertyChanged: SetInternalHorizontalAlignmentProperty, defaultValueCreator: GetInternalHorizontalAlignmentProperty);
 
-                VerticalAlignmentProperty = BindableProperty.Create(nameof(VerticalAlignment), typeof(VerticalAlignment), typeof(TextLabel), VerticalAlignment.Bottom, 
+                VerticalAlignmentProperty = BindableProperty.Create(nameof(VerticalAlignment), typeof(VerticalAlignment), typeof(TextLabel), VerticalAlignment.Bottom,
                     propertyChanged: SetInternalVerticalAlignmentProperty, defaultValueCreator: GetInternalVerticalAlignmentProperty);
 
-                TextColorProperty = BindableProperty.Create(nameof(TextColor), typeof(Color), typeof(TextLabel), null, 
+                TextColorProperty = BindableProperty.Create(nameof(TextColor), typeof(Color), typeof(TextLabel), null,
                     propertyChanged: SetInternalTextColorProperty, defaultValueCreator: GetInternalTextColorProperty);
 
-                AnchorColorProperty = BindableProperty.Create(nameof(TextLabel.AnchorColor), typeof(Color), typeof(TextLabel), null, 
+                AnchorColorProperty = BindableProperty.Create(nameof(TextLabel.AnchorColor), typeof(Color), typeof(TextLabel), null,
                     propertyChanged: SetInternalAnchorColorProperty, defaultValueCreator: GetInternalAnchorColorProperty);
 
-                AnchorClickedColorProperty = BindableProperty.Create(nameof(TextLabel.AnchorClickedColor), typeof(Color), typeof(TextLabel), null, 
+                AnchorClickedColorProperty = BindableProperty.Create(nameof(TextLabel.AnchorClickedColor), typeof(Color), typeof(TextLabel), null,
                     propertyChanged: SetInternalAnchorClickedColorProperty, defaultValueCreator: GetInternalAnchorClickedColorProperty);
 
-                RemoveFrontInsetProperty = BindableProperty.Create(nameof(RemoveFrontInset), typeof(bool), typeof(TextLabel), false, 
+                RemoveFrontInsetProperty = BindableProperty.Create(nameof(RemoveFrontInset), typeof(bool), typeof(TextLabel), false,
                     propertyChanged: SetInternalRemoveFrontInsetProperty, defaultValueCreator: GetInternalRemoveFrontInsetProperty);
 
-                RemoveBackInsetProperty = BindableProperty.Create(nameof(RemoveBackInset), typeof(bool), typeof(TextLabel), false, 
+                RemoveBackInsetProperty = BindableProperty.Create(nameof(RemoveBackInset), typeof(bool), typeof(TextLabel), false,
                     propertyChanged: SetInternalRemoveBackInsetProperty, defaultValueCreator: GetInternalRemoveBackInsetProperty);
 
-                EnableMarkupProperty = BindableProperty.Create(nameof(EnableMarkup), typeof(bool), typeof(TextLabel), false, 
+                EnableMarkupProperty = BindableProperty.Create(nameof(EnableMarkup), typeof(bool), typeof(TextLabel), false,
                     propertyChanged: SetInternalEnableMarkupProperty, defaultValueCreator: GetInternalEnableMarkupProperty);
 
-                EnableAutoScrollProperty = BindableProperty.Create(nameof(EnableAutoScroll), typeof(bool), typeof(TextLabel), false, 
+                EnableAutoScrollProperty = BindableProperty.Create(nameof(EnableAutoScroll), typeof(bool), typeof(TextLabel), false,
                     propertyChanged: SetInternalEnableAutoScrollProperty, defaultValueCreator: GetInternalEnableAutoScrollProperty);
 
-                AutoScrollSpeedProperty = BindableProperty.Create(nameof(AutoScrollSpeed), typeof(int), typeof(TextLabel), default(int), 
+                AutoScrollSpeedProperty = BindableProperty.Create(nameof(AutoScrollSpeed), typeof(int), typeof(TextLabel), default(int),
                     propertyChanged: SetInternalAutoScrollSpeedProperty, defaultValueCreator: GetInternalAutoScrollSpeedProperty);
 
-                AutoScrollLoopCountProperty = BindableProperty.Create(nameof(AutoScrollLoopCount), typeof(int), typeof(TextLabel), default(int), 
+                AutoScrollLoopCountProperty = BindableProperty.Create(nameof(AutoScrollLoopCount), typeof(int), typeof(TextLabel), default(int),
                     propertyChanged: SetInternalAutoScrollLoopCountProperty, defaultValueCreator: GetInternalAutoScrollLoopCountProperty);
 
-                AutoScrollGapProperty = BindableProperty.Create(nameof(AutoScrollGap), typeof(float), typeof(TextLabel), default(float), 
+                AutoScrollGapProperty = BindableProperty.Create(nameof(AutoScrollGap), typeof(float), typeof(TextLabel), default(float),
                     propertyChanged: SetInternalAutoScrollGapProperty, defaultValueCreator: GetInternalAutoScrollGapProperty);
 
-                LineSpacingProperty = BindableProperty.Create(nameof(LineSpacing), typeof(float), typeof(TextLabel), default(float), 
+                LineSpacingProperty = BindableProperty.Create(nameof(LineSpacing), typeof(float), typeof(TextLabel), default(float),
                     propertyChanged: SetInternalLineSpacingProperty, defaultValueCreator: GetInternalLineSpacingProperty);
 
-                RelativeLineHeightProperty = BindableProperty.Create(nameof(RelativeLineHeight), typeof(float), typeof(TextLabel), default(float), 
+                RelativeLineHeightProperty = BindableProperty.Create(nameof(RelativeLineHeight), typeof(float), typeof(TextLabel), default(float),
                     propertyChanged: SetInternalRelativeLineHeightProperty, defaultValueCreator: GetInternalRelativeLineHeightProperty);
 
-                UnderlineProperty = BindableProperty.Create(nameof(Underline), typeof(PropertyMap), typeof(TextLabel), null, 
+                UnderlineProperty = BindableProperty.Create(nameof(Underline), typeof(PropertyMap), typeof(TextLabel), null,
                     propertyChanged: SetInternalUnderlineProperty, defaultValueCreator: GetInternalUnderlineProperty);
 
-                ShadowProperty = BindableProperty.Create(nameof(Shadow), typeof(PropertyMap), typeof(TextLabel), null, 
+                ShadowProperty = BindableProperty.Create(nameof(Shadow), typeof(PropertyMap), typeof(TextLabel), null,
                     propertyChanged: SetInternalShadowProperty, defaultValueCreator: GetInternalShadowProperty);
 
-                TextShadowProperty = BindableProperty.Create(nameof(TextShadow), typeof(TextShadow), typeof(TextLabel), null, 
+                TextShadowProperty = BindableProperty.Create(nameof(TextShadow), typeof(TextShadow), typeof(TextLabel), null,
                     propertyChanged: SetInternalTextShadowProperty, defaultValueCreator: GetInternalTextShadowProperty);
 
-                EmbossProperty = BindableProperty.Create(nameof(Emboss), typeof(string), typeof(TextLabel), string.Empty, 
+                EmbossProperty = BindableProperty.Create(nameof(Emboss), typeof(string), typeof(TextLabel), string.Empty,
                     propertyChanged: SetInternalEmbossProperty, defaultValueCreator: GetInternalEmbossProperty);
 
-                OutlineProperty = BindableProperty.Create(nameof(Outline), typeof(PropertyMap), typeof(TextLabel), null, 
+                OutlineProperty = BindableProperty.Create(nameof(Outline), typeof(PropertyMap), typeof(TextLabel), null,
                     propertyChanged: SetInternalOutlineProperty, defaultValueCreator: GetInternalOutlineProperty);
 
-                PixelSizeProperty = BindableProperty.Create(nameof(PixelSize), typeof(float), typeof(TextLabel), default(float), 
+                PixelSizeProperty = BindableProperty.Create(nameof(PixelSize), typeof(float), typeof(TextLabel), default(float),
                     propertyChanged: SetInternalPixelSizeProperty, defaultValueCreator: GetInternalPixelSizeProperty);
 
-                EllipsisProperty = BindableProperty.Create(nameof(Ellipsis), typeof(bool), typeof(TextLabel), false, 
+                EllipsisProperty = BindableProperty.Create(nameof(Ellipsis), typeof(bool), typeof(TextLabel), false,
                     propertyChanged: SetInternalEllipsisProperty, defaultValueCreator: GetInternalEllipsisProperty);
 
-                EllipsisPositionProperty = BindableProperty.Create(nameof(EllipsisPosition), typeof(EllipsisPosition), typeof(TextLabel), EllipsisPosition.End, 
+                EllipsisPositionProperty = BindableProperty.Create(nameof(EllipsisPosition), typeof(EllipsisPosition), typeof(TextLabel), EllipsisPosition.End,
                     propertyChanged: SetInternalEllipsisPositionProperty, defaultValueCreator: GetInternalEllipsisPositionProperty);
 
-                AutoScrollLoopDelayProperty = BindableProperty.Create(nameof(AutoScrollLoopDelay), typeof(float), typeof(TextLabel), default(float), 
+                AutoScrollLoopDelayProperty = BindableProperty.Create(nameof(AutoScrollLoopDelay), typeof(float), typeof(TextLabel), default(float),
                     propertyChanged: SetInternalAutoScrollLoopDelayProperty, defaultValueCreator: GetInternalAutoScrollLoopDelayProperty);
 
-                AutoScrollStopModeProperty = BindableProperty.Create(nameof(AutoScrollStopMode), typeof(AutoScrollStopMode), typeof(TextLabel), AutoScrollStopMode.FinishLoop, 
+                AutoScrollStopModeProperty = BindableProperty.Create(nameof(AutoScrollStopMode), typeof(AutoScrollStopMode), typeof(TextLabel), AutoScrollStopMode.FinishLoop,
                     propertyChanged: SetInternalAutoScrollStopModeProperty, defaultValueCreator: GetInternalAutoScrollStopModeProperty);
 
-                LineWrapModeProperty = BindableProperty.Create(nameof(LineWrapMode), typeof(LineWrapMode), typeof(TextLabel), LineWrapMode.Word, 
+                LineWrapModeProperty = BindableProperty.Create(nameof(LineWrapMode), typeof(LineWrapMode), typeof(TextLabel), LineWrapMode.Word,
                     propertyChanged: SetInternalLineWrapModeProperty, defaultValueCreator: GetInternalLineWrapModeProperty);
 
-                VerticalLineAlignmentProperty = BindableProperty.Create(nameof(VerticalLineAlignment), typeof(VerticalLineAlignment), typeof(TextLabel), VerticalLineAlignment.Bottom, 
+                VerticalLineAlignmentProperty = BindableProperty.Create(nameof(VerticalLineAlignment), typeof(VerticalLineAlignment), typeof(TextLabel), VerticalLineAlignment.Bottom,
                     propertyChanged: SetInternalVerticalLineAlignmentProperty, defaultValueCreator: GetInternalVerticalLineAlignmentProperty);
 
-                MatchSystemLanguageDirectionProperty = BindableProperty.Create(nameof(MatchSystemLanguageDirection), typeof(bool), typeof(TextLabel), false, 
+                MatchSystemLanguageDirectionProperty = BindableProperty.Create(nameof(MatchSystemLanguageDirection), typeof(bool), typeof(TextLabel), false,
                     propertyChanged: SetInternalMatchSystemLanguageDirectionProperty, defaultValueCreator: GetInternalMatchSystemLanguageDirectionProperty);
 
-                CharacterSpacingProperty = BindableProperty.Create(nameof(CharacterSpacing), typeof(float), typeof(TextLabel), default(float), 
+                CharacterSpacingProperty = BindableProperty.Create(nameof(CharacterSpacing), typeof(float), typeof(TextLabel), default(float),
                     propertyChanged: SetInternalCharacterSpacingProperty, defaultValueCreator: GetInternalCharacterSpacingProperty);
 
-                TextFitProperty = BindableProperty.Create(nameof(TextFit), typeof(PropertyMap), typeof(TextLabel), null, 
+                TextFitProperty = BindableProperty.Create(nameof(TextFit), typeof(PropertyMap), typeof(TextLabel), null,
                     propertyChanged: SetInternalTextFitProperty, defaultValueCreator: GetInternalTextFitProperty);
 
-                MinLineSizeProperty = BindableProperty.Create(nameof(MinLineSize), typeof(float), typeof(TextLabel), default(float), 
+                MinLineSizeProperty = BindableProperty.Create(nameof(MinLineSize), typeof(float), typeof(TextLabel), default(float),
                     propertyChanged: SetInternalMinLineSizeProperty, defaultValueCreator: GetInternalMinLineSizeProperty);
 
-                FontSizeScaleProperty = BindableProperty.Create(nameof(FontSizeScale), typeof(float), typeof(TextLabel), default(float), 
+                FontSizeScaleProperty = BindableProperty.Create(nameof(FontSizeScale), typeof(float), typeof(TextLabel), default(float),
                     propertyChanged: SetInternalFontSizeScaleProperty, defaultValueCreator: GetInternalFontSizeScaleProperty);
 
-                EnableFontSizeScaleProperty = BindableProperty.Create(nameof(EnableFontSizeScale), typeof(bool), typeof(TextLabel), default(bool), 
+                EnableFontSizeScaleProperty = BindableProperty.Create(nameof(EnableFontSizeScale), typeof(bool), typeof(TextLabel), default(bool),
                     propertyChanged: SetInternalEnableFontSizeScaleProperty, defaultValueCreator: GetInternalEnableFontSizeScaleProperty);
 
-                ShadowOffsetProperty = BindableProperty.Create(nameof(ShadowOffset), typeof(Tizen.NUI.Vector2), typeof(TextLabel), null, 
+                ShadowOffsetProperty = BindableProperty.Create(nameof(ShadowOffset), typeof(Tizen.NUI.Vector2), typeof(TextLabel), null,
                     propertyChanged: SetInternalShadowOffsetProperty, defaultValueCreator: GetInternalShadowOffsetProperty);
 
-                ShadowColorProperty = BindableProperty.Create(nameof(ShadowColor), typeof(Tizen.NUI.Vector4), typeof(TextLabel), null, 
+                ShadowColorProperty = BindableProperty.Create(nameof(ShadowColor), typeof(Tizen.NUI.Vector4), typeof(TextLabel), null,
                     propertyChanged: SetInternalShadowColorProperty, defaultValueCreator: GetInternalShadowColorProperty);
 
-                UnderlineEnabledProperty = BindableProperty.Create(nameof(UnderlineEnabled), typeof(bool), typeof(TextLabel), false, 
+                UnderlineEnabledProperty = BindableProperty.Create(nameof(UnderlineEnabled), typeof(bool), typeof(TextLabel), false,
                     propertyChanged: SetInternalUnderlineEnabledProperty, defaultValueCreator: GetInternalUnderlineEnabledProperty);
 
-                UnderlineColorProperty = BindableProperty.Create(nameof(UnderlineColor), typeof(Tizen.NUI.Vector4), typeof(TextLabel), null, 
+                UnderlineColorProperty = BindableProperty.Create(nameof(UnderlineColor), typeof(Tizen.NUI.Vector4), typeof(TextLabel), null,
                     propertyChanged: SetInternalUnderlineColorProperty, defaultValueCreator: GetInternalUnderlineColorProperty);
 
-                UnderlineHeightProperty = BindableProperty.Create(nameof(UnderlineHeight), typeof(float), typeof(TextLabel), 0.0f, 
+                UnderlineHeightProperty = BindableProperty.Create(nameof(UnderlineHeight), typeof(float), typeof(TextLabel), 0.0f,
                     propertyChanged: SetInternalUnderlineHeightProperty, defaultValueCreator: GetInternalUnderlineHeightProperty);
 
                 CutoutProperty = BindableProperty.Create(nameof(Cutout), typeof(bool), typeof(TextLabel), false,
@@ -243,9 +244,9 @@ namespace Tizen.NUI.BaseComponents
         private bool hasSystemFontSizeChanged = false;
         private bool hasSystemFontTypeChanged = false;
 
-        private Color internalTextColor;
-        private Color internalAnchorColor;
-        private Color internalAnchorClickedColor;
+        // private Color internalTextColor;
+        // private Color internalAnchorColor;
+        // private Color internalAnchorClickedColor;
 
         /// <summary>
         /// Creates the TextLabel control.
@@ -433,7 +434,7 @@ namespace Tizen.NUI.BaseComponents
                 {
                     SetValue(TranslatableTextProperty, value);
                 }
-                else 
+                else
                 {
                     SetInternalTranslatableTextProperty(this, null, value);
                 }
@@ -495,7 +496,7 @@ namespace Tizen.NUI.BaseComponents
                 {
                     SetValue(TextProperty, value);
                 }
-                else 
+                else
                 {
                     SetInternalTextProperty(this, null, value);
                 }
@@ -527,7 +528,7 @@ namespace Tizen.NUI.BaseComponents
                 {
                     SetValue(FontFamilyProperty, value);
                 }
-                else 
+                else
                 {
                     SetInternalFontFamilyProperty(this, null, value);
                 }
@@ -611,7 +612,7 @@ namespace Tizen.NUI.BaseComponents
                 {
                     SetValue(FontStyleProperty, value);
                 }
-                else 
+                else
                 {
                     SetInternalFontStyleProperty(this, null, value);
                 }
@@ -695,7 +696,7 @@ namespace Tizen.NUI.BaseComponents
                 {
                     SetValue(PointSizeProperty, value);
                 }
-                else 
+                else
                 {
                     SetInternalPointSizeProperty(this, null, value);
                 }
@@ -727,7 +728,7 @@ namespace Tizen.NUI.BaseComponents
                 {
                     SetValue(MultiLineProperty, value);
                 }
-                else 
+                else
                 {
                     SetInternalMultiLineProperty(this, null, value);
                 }
@@ -759,7 +760,7 @@ namespace Tizen.NUI.BaseComponents
                 {
                     SetValue(HorizontalAlignmentProperty, value);
                 }
-                else 
+                else
                 {
                     SetInternalHorizontalAlignmentProperty(this, null, value);
                 }
@@ -791,7 +792,7 @@ namespace Tizen.NUI.BaseComponents
                 {
                     SetValue(VerticalAlignmentProperty, value);
                 }
-                else 
+                else
                 {
                     SetInternalVerticalAlignmentProperty(this, null, value);
                 }
@@ -822,7 +823,8 @@ namespace Tizen.NUI.BaseComponents
                 {
                     temp = (Color)GetInternalTextColorProperty(this);
                 }
-                return new Color(OnTextColorChanged, temp.R, temp.G, temp.B, temp.A);
+                temp.callback = OnTextColorChanged;
+                return temp;
             }
             set
             {
@@ -830,7 +832,7 @@ namespace Tizen.NUI.BaseComponents
                 {
                     SetValue(TextColorProperty, value);
                 }
-                else 
+                else
                 {
                     SetInternalTextColorProperty(this, null, value);
                 }
@@ -867,7 +869,7 @@ namespace Tizen.NUI.BaseComponents
                 {
                     SetValue(ShadowOffsetProperty, value);
                 }
-                else 
+                else
                 {
                     SetInternalShadowOffsetProperty(this, null, value);
                 }
@@ -878,18 +880,13 @@ namespace Tizen.NUI.BaseComponents
         {
             get
             {
-                float x = 0.0f, y = 0.0f;
+                var shadowOffset = Vector2.GetReusable(OnShadowOffsetChanged);
                 using (var propertyValue = Shadow.Find(TextLabel.Property.SHADOW, "offset"))
-                using (var shadowOffset = new Vector2())
+                if (null != propertyValue)
                 {
-                    if (null != propertyValue)
-                    {
-                        propertyValue.Get(shadowOffset);
-                        x = shadowOffset.X;
-                        y = shadowOffset.Y;
-                    }
+                    propertyValue.Get(shadowOffset);
                 }
-                return new Vector2(OnShadowOffsetChanged, x, y);
+                return shadowOffset;
             }
             set
             {
@@ -940,7 +937,7 @@ namespace Tizen.NUI.BaseComponents
                 {
                     SetValue(ShadowColorProperty, value);
                 }
-                else 
+                else
                 {
                     SetInternalShadowColorProperty(this, null, value);
                 }
@@ -951,20 +948,13 @@ namespace Tizen.NUI.BaseComponents
         {
             get
             {
-                float x = 0.0f, y = 0.0f, z = 0.0f, w = 0.0f;
+                var shadowColor = Vector4.GetReusable(OnShadowColorChanged);
                 using (var propertyValue = Shadow.Find(TextLabel.Property.SHADOW, "color"))
-                using (var shadowColor = new Vector4())
+                if (null != propertyValue)
                 {
-                    if (null != propertyValue)
-                    {
-                        propertyValue.Get(shadowColor);
-                        x = shadowColor.X;
-                        y = shadowColor.Y;
-                        z = shadowColor.Z;
-                        w = shadowColor.W;
-                    }
+                    propertyValue.Get(shadowColor);
                 }
-                return new Vector4(OnShadowColorChanged, x, y, z, w);
+                return shadowColor;
             }
             set
             {
@@ -1014,7 +1004,7 @@ namespace Tizen.NUI.BaseComponents
                 {
                     SetValue(UnderlineEnabledProperty, value);
                 }
-                else 
+                else
                 {
                     SetInternalUnderlineEnabledProperty(this, null, value);
                 }
@@ -1084,7 +1074,7 @@ namespace Tizen.NUI.BaseComponents
                 {
                     SetValue(UnderlineColorProperty, value);
                 }
-                else 
+                else
                 {
                     SetInternalUnderlineColorProperty(this, null, value);
                 }
@@ -1095,20 +1085,13 @@ namespace Tizen.NUI.BaseComponents
         {
             get
             {
-                float x = 0.0f, y = 0.0f, z = 0.0f, w = 0.0f;
+                var underlineColor = Vector4.GetReusable(OnUnderlineColorChanged);
                 using (var propertyValue = Underline.Find(TextLabel.Property.UNDERLINE, "color"))
-                using (var underlineColor = new Vector4())
+                if (null != propertyValue)
                 {
-                    if (null != propertyValue)
-                    {
-                        propertyValue.Get(underlineColor);
-                        x = underlineColor.X;
-                        y = underlineColor.Y;
-                        z = underlineColor.Z;
-                        w = underlineColor.W;
-                    }
+                    propertyValue.Get(underlineColor);
                 }
-                return new Vector4(OnUnderlineColorChanged, x, y, z, w);
+                return underlineColor;
             }
             set
             {
@@ -1158,7 +1141,7 @@ namespace Tizen.NUI.BaseComponents
                 {
                     SetValue(UnderlineHeightProperty, value);
                 }
-                else 
+                else
                 {
                     SetInternalUnderlineHeightProperty(this, null, value);
                 }
@@ -1224,7 +1207,7 @@ namespace Tizen.NUI.BaseComponents
                 {
                     SetValue(EnableMarkupProperty, value);
                 }
-                else 
+                else
                 {
                     SetInternalEnableMarkupProperty(this, null, value);
                 }
@@ -1256,7 +1239,7 @@ namespace Tizen.NUI.BaseComponents
                 {
                     SetValue(EnableAutoScrollProperty, value);
                 }
-                else 
+                else
                 {
                     SetInternalEnableAutoScrollProperty(this, null, value);
                 }
@@ -1288,7 +1271,7 @@ namespace Tizen.NUI.BaseComponents
                 {
                     SetValue(AutoScrollSpeedProperty, value);
                 }
-                else 
+                else
                 {
                     SetInternalAutoScrollSpeedProperty(this, null, value);
                 }
@@ -1320,7 +1303,7 @@ namespace Tizen.NUI.BaseComponents
                 {
                     SetValue(AutoScrollLoopCountProperty, value);
                 }
-                else 
+                else
                 {
                     SetInternalAutoScrollLoopCountProperty(this, null, value);
                 }
@@ -1352,7 +1335,7 @@ namespace Tizen.NUI.BaseComponents
                 {
                     SetValue(AutoScrollGapProperty, value);
                 }
-                else 
+                else
                 {
                     SetInternalAutoScrollGapProperty(this, null, value);
                 }
@@ -1384,7 +1367,7 @@ namespace Tizen.NUI.BaseComponents
                 {
                     SetValue(LineSpacingProperty, value);
                 }
-                else 
+                else
                 {
                     SetInternalLineSpacingProperty(this, null, value);
                 }
@@ -1416,7 +1399,7 @@ namespace Tizen.NUI.BaseComponents
                 {
                     SetValue(RelativeLineHeightProperty, value);
                 }
-                else 
+                else
                 {
                     SetInternalRelativeLineHeightProperty(this, null, value);
                 }
@@ -1455,7 +1438,7 @@ namespace Tizen.NUI.BaseComponents
                 {
                     SetValue(UnderlineProperty, value);
                 }
-                else 
+                else
                 {
                     SetInternalUnderlineProperty(this, null, value);
                 }
@@ -1545,7 +1528,7 @@ namespace Tizen.NUI.BaseComponents
                 {
                     SetValue(ShadowProperty, value);
                 }
-                else 
+                else
                 {
                     SetInternalShadowProperty(this, null, value);
                 }
@@ -1628,7 +1611,7 @@ namespace Tizen.NUI.BaseComponents
                 {
                     SetValue(TextShadowProperty, value);
                 }
-                else 
+                else
                 {
                     SetInternalTextShadowProperty(this, null, value);
                 }
@@ -1660,7 +1643,7 @@ namespace Tizen.NUI.BaseComponents
                 {
                     SetValue(EmbossProperty, value);
                 }
-                else 
+                else
                 {
                     SetInternalEmbossProperty(this, null, value);
                 }
@@ -1698,7 +1681,7 @@ namespace Tizen.NUI.BaseComponents
                 {
                     SetValue(OutlineProperty, value);
                 }
-                else 
+                else
                 {
                     SetInternalOutlineProperty(this, null, value);
                 }
@@ -1828,7 +1811,7 @@ namespace Tizen.NUI.BaseComponents
                 {
                     SetValue(PixelSizeProperty, value);
                 }
-                else 
+                else
                 {
                     SetInternalPixelSizeProperty(this, null, value);
                 }
@@ -1860,7 +1843,7 @@ namespace Tizen.NUI.BaseComponents
                 {
                     SetValue(EllipsisProperty, value);
                 }
-                else 
+                else
                 {
                     SetInternalEllipsisProperty(this, null, value);
                 }
@@ -1892,7 +1875,7 @@ namespace Tizen.NUI.BaseComponents
                 {
                     SetValue(EllipsisPositionProperty, value);
                 }
-                else 
+                else
                 {
                     SetInternalEllipsisPositionProperty(this, null, value);
                 }
@@ -1924,7 +1907,7 @@ namespace Tizen.NUI.BaseComponents
                 {
                     SetValue(AutoScrollLoopDelayProperty, value);
                 }
-                else 
+                else
                 {
                     SetInternalAutoScrollLoopDelayProperty(this, null, value);
                 }
@@ -1957,7 +1940,7 @@ namespace Tizen.NUI.BaseComponents
                 {
                     SetValue(AutoScrollStopModeProperty, value);
                 }
-                else 
+                else
                 {
                     SetInternalAutoScrollStopModeProperty(this, null, value);
                 }
@@ -2006,7 +1989,7 @@ namespace Tizen.NUI.BaseComponents
                 {
                     SetValue(LineWrapModeProperty, value);
                 }
-                else 
+                else
                 {
                     SetInternalLineWrapModeProperty(this, null, value);
                 }
@@ -2056,7 +2039,7 @@ namespace Tizen.NUI.BaseComponents
                 {
                     SetValue(VerticalLineAlignmentProperty, value);
                 }
-                else 
+                else
                 {
                     SetInternalVerticalLineAlignmentProperty(this, null, value);
                 }
@@ -2087,7 +2070,7 @@ namespace Tizen.NUI.BaseComponents
                 {
                     SetValue(MatchSystemLanguageDirectionProperty, value);
                 }
-                else 
+                else
                 {
                     SetInternalMatchSystemLanguageDirectionProperty(this, null, value);
                 }
@@ -2128,7 +2111,7 @@ namespace Tizen.NUI.BaseComponents
                 {
                     SetValue(TextFitProperty, value);
                 }
-                else 
+                else
                 {
                     SetInternalTextFitProperty(this, null, value);
                 }
@@ -2316,7 +2299,7 @@ namespace Tizen.NUI.BaseComponents
                 {
                     SetValue(MinLineSizeProperty, value);
                 }
-                else 
+                else
                 {
                     SetInternalMinLineSizeProperty(this, null, value);
                 }
@@ -2351,7 +2334,7 @@ namespace Tizen.NUI.BaseComponents
                 {
                     SetValue(CharacterSpacingProperty, value);
                 }
-                else 
+                else
                 {
                     SetInternalCharacterSpacingProperty(this, null, value);
                 }
@@ -2382,7 +2365,8 @@ namespace Tizen.NUI.BaseComponents
                 {
                     color = (Color)GetInternalAnchorColorProperty(this);
                 }
-                return new Color(OnAnchorColorChanged, color.R, color.G, color.B, color.A);
+                color.callback = OnAnchorColorChanged;
+                return color;
             }
             set
             {
@@ -2390,7 +2374,7 @@ namespace Tizen.NUI.BaseComponents
                 {
                     SetValue(AnchorColorProperty, value);
                 }
-                else 
+                else
                 {
                     SetInternalAnchorColorProperty(this, null, value);
                 }
@@ -2421,7 +2405,8 @@ namespace Tizen.NUI.BaseComponents
                 {
                     color = (Color)GetInternalAnchorClickedColorProperty(this);
                 }
-                return new Color(OnAnchorClickedColorChanged, color.R, color.G, color.B, color.A);
+                color.callback = OnAnchorClickedColorChanged;
+                return color;
             }
             set
             {
@@ -2429,7 +2414,7 @@ namespace Tizen.NUI.BaseComponents
                 {
                     SetValue(AnchorClickedColorProperty, value);
                 }
-                else 
+                else
                 {
                     SetInternalAnchorClickedColorProperty(this, null, value);
                 }
@@ -2464,7 +2449,7 @@ namespace Tizen.NUI.BaseComponents
                 {
                     SetValue(RemoveFrontInsetProperty, value);
                 }
-                else 
+                else
                 {
                     SetInternalRemoveFrontInsetProperty(this, null, value);
                 }
@@ -2499,7 +2484,7 @@ namespace Tizen.NUI.BaseComponents
                 {
                     SetValue(RemoveBackInsetProperty, value);
                 }
-                else 
+                else
                 {
                     SetInternalRemoveBackInsetProperty(this, null, value);
                 }
@@ -2533,7 +2518,7 @@ namespace Tizen.NUI.BaseComponents
                 {
                     SetValue(FontSizeScaleProperty, value);
                 }
-                else 
+                else
                 {
                     SetInternalFontSizeScaleProperty(this, null, value);
                 }
@@ -2611,7 +2596,7 @@ namespace Tizen.NUI.BaseComponents
                 {
                     SetValue(EnableFontSizeScaleProperty, value);
                 }
-                else 
+                else
                 {
                     SetInternalEnableFontSizeScaleProperty(this, null, value);
                 }
@@ -2769,10 +2754,6 @@ namespace Tizen.NUI.BaseComponents
                 return;
             }
 
-            internalTextColor?.Dispose();
-            internalAnchorColor?.Dispose();
-            internalAnchorClickedColor?.Dispose();
-
             if (hasSystemLanguageChanged)
             {
                 systemLocaleLanguageChanged.Remove(SystemSettingsLocaleLanguageChanged);
@@ -2918,7 +2899,7 @@ namespace Tizen.NUI.BaseComponents
                 }
             }
         }
-        
+
         private void RemoveSystemSettingsFontTypeChanged()
         {
             if (hasSystemFontTypeChanged)
@@ -2996,27 +2977,27 @@ namespace Tizen.NUI.BaseComponents
 
         private void OnShadowColorChanged(float x, float y, float z, float w)
         {
-            ShadowColor = new Vector4(x, y, z, w);
+            ShadowColor = Vector4.GetReusable(x, y, z, w);
         }
         private void OnShadowOffsetChanged(float x, float y)
         {
-            ShadowOffset = new Vector2(x, y);
+            ShadowOffset = Vector2.GetReusable(x, y);
         }
         private void OnTextColorChanged(float r, float g, float b, float a)
         {
-            TextColor = new Color(r, g, b, a);
+            TextColor = Color.GetReusable(r, g, b, a);
         }
         private void OnUnderlineColorChanged(float x, float y, float z, float w)
         {
-            UnderlineColor = new Vector4(x, y, z, w);
+            UnderlineColor = Vector4.GetReusable(x, y, z, w);
         }
         private void OnAnchorColorChanged(float r, float g, float b, float a)
         {
-            AnchorColor = new Color(r, g, b, a);
+            AnchorColor = Color.GetReusable(r, g, b, a);
         }
         private void OnAnchorClickedColorChanged(float r, float g, float b, float a)
         {
-            AnchorClickedColor = new Color(r, g, b, a);
+            AnchorClickedColor = Color.GetReusable(r, g, b, a);
         }
     }
 }

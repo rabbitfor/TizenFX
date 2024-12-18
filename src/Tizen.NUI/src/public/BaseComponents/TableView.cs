@@ -83,7 +83,7 @@ namespace Tizen.NUI.BaseComponents
         internal static object GetInternalCellPaddingProperty(BindableObject bindable)
         {
             var tableView = (TableView)bindable;
-            Vector2 temp = new Vector2(0.0f, 0.0f);
+            Vector2 temp = Vector2.GetReusable(0.0f, 0.0f);
             Tizen.NUI.Object.GetProperty((HandleRef)tableView.SwigCPtr, TableView.Property.CellPadding).Get(temp);
             return temp;
         }

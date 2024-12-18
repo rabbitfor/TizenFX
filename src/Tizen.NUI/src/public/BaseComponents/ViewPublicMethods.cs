@@ -58,7 +58,7 @@ namespace Tizen.NUI.BaseComponents
             {
                 // If there is no background yet, ensure there is a transparent
                 // color visual
-                BackgroundColor = new Color(0.0f, 0.0f, 0.0f, 0.0f);
+                BackgroundColor = Color.GetReusable();
             }
             return AnimateColor("background", destinationValue, startTime, endTime, alphaFunction, initialValue);
         }

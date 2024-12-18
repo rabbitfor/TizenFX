@@ -62,35 +62,35 @@ namespace Tizen.NUI.BaseComponents
         private Constraint widthConstraint = null;
         private Constraint heightConstraint = null;
 
-        private Size2D internalMaximumSize = null;
-        private Size2D internalMinimumSize = null;
-        private Extents internalMargin = null;
-        private Extents internalPadding = null;
-        private Vector3 internalSizeModeFactor = null;
-        private Vector2 internalCellIndex = null;
-        private Color internalBackgroundColor = null;
-        private Color internalColor = null;
-        private Position internalPivotPoint = null;
-        private Position internalPosition = null;
-        private Position2D internalPosition2D = null;
-        private Vector3 internalScale = null;
-        private Size internalSize = null;
-        private Size2D internalSize2D = null;
+        // private Size2D internalMaximumSize = null;
+        // private Size2D internalMinimumSize = null;
+        // private Extents internalMargin = null;
+        // private Extents internalPadding = null;
+        // private Vector3 internalSizeModeFactor = null;
+        // private Vector2 internalCellIndex = null;
+        // private Color internalBackgroundColor = null;
+        // private Color internalColor = null;
+        // private Position internalPivotPoint = null;
+        // private Position internalPosition = null;
+        // private Position2D internalPosition2D = null;
+        // private Vector3 internalScale = null;
+        // private Size internalSize = null;
+        // private Size2D internalSize2D = null;
         private int layoutCount = 0;
         private ControlState propagatableControlStates = ControlState.All;
 
         private string internalName = string.Empty;
-        private Position internalCurrentParentOrigin = null;
-        private Position internalCurrentAnchorPoint = null;
-        private Vector3 internalTargetSize = null;
-        private Size2D internalCurrentSize = null;
-        private Position internalCurrentPosition = null;
-        private Vector3 internalCurrentWorldPosition = null;
-        private Vector3 internalCurrentScale = null;
-        private Vector3 internalCurrentWorldScale = null;
-        private Vector4 internalCurrentColor = null;
-        private Vector4 internalCurrentWorldColor = null;
-        private Vector2 internalCurrentScreenPosition = null;
+        // private Position internalCurrentParentOrigin = null;
+        // private Position internalCurrentAnchorPoint = null;
+        // private Vector3 internalTargetSize = null;
+        // private Size2D internalCurrentSize = null;
+        // private Position internalCurrentPosition = null;
+        // private Vector3 internalCurrentWorldPosition = null;
+        // private Vector3 internalCurrentScale = null;
+        // private Vector3 internalCurrentWorldScale = null;
+        // private Vector4 internalCurrentColor = null;
+        // private Vector4 internalCurrentWorldColor = null;
+        // private Vector2 internalCurrentScreenPosition = null;
 
         private static int aliveCount = 0;
 
@@ -1684,16 +1684,17 @@ namespace Tizen.NUI.BaseComponents
         {
             get
             {
+                Vector4 temp;
                 if (NUIApplication.IsUsingXaml)
                 {
-                    Vector4 temp = (Vector4)GetValue(FlexMarginProperty);
-                    return new Vector4(OnFlexMarginChanged, temp.X, temp.Y, temp.Z, temp.W);
+                    temp = (Vector4)GetValue(FlexMarginProperty);
                 }
                 else
                 {
-                    Vector4 temp = (Vector4)GetInternalFlexMarginProperty(this);
-                    return new Vector4(OnFlexMarginChanged, temp.X, temp.Y, temp.Z, temp.W);
+                    temp = (Vector4)GetInternalFlexMarginProperty(this);
                 }
+                temp.callback = OnFlexMarginChanged;
+                return temp;
             }
             set
             {
@@ -2717,7 +2718,7 @@ namespace Tizen.NUI.BaseComponents
                 Size2D sz = null;
                 if (temp != null)
                 {
-                    sz = new Size2D((int)temp.Width, (int)temp.Height);
+                    sz = Size2D.GetReusable((int)temp.Width, (int)temp.Height);
                     temp.Dispose();
                 }
                 return sz;
@@ -2736,16 +2737,19 @@ namespace Tizen.NUI.BaseComponents
         {
             get
             {
+                Position position;
                 if (NUIApplication.IsUsingXaml)
                 {
-                    var tmp = (Position)GetValue(ParentOriginProperty);
-                    return new Position(OnParentOriginChanged, tmp.X, tmp.Y, tmp.Z);
+                    position = (Position)GetValue(ParentOriginProperty);
                 }
                 else
                 {
-                    var tmp = (Position)GetInternalParentOriginProperty(this);
-                    return new Position(OnParentOriginChanged, tmp.X, tmp.Y, tmp.Z);
+                    position = (Position)GetInternalParentOriginProperty(this);
                 }
+
+                position.callback = OnParentOriginChanged;
+
+                return position;
             }
             set
             {
@@ -4859,13 +4863,10 @@ namespace Tizen.NUI.BaseComponents
         {
             get
             {
-                Extents temp = new Extents(0, 0, 0, 0);
-                var pValue = GetProperty(View.Property.PADDING);
-                pValue.Get(temp);
-                pValue.Dispose();
-                Extents ret = new Extents(OnPaddingEXChanged, temp.Start, temp.End, temp.Top, temp.Bottom);
-                temp.Dispose();
-                return ret;
+                Extents paddingEx = Extents.GetReusable(OnPaddingEXChanged);
+                using var pValue = GetProperty(View.Property.PADDING);
+                pValue.Get(paddingEx);
+                return paddingEx;
             }
             set
             {
@@ -5164,7 +5165,7 @@ namespace Tizen.NUI.BaseComponents
                         {
                             // If View already has a margin set then store it in Layout instead.
                             value.Margin = margin;
-                            SetValue(MarginProperty, new Extents(0, 0, 0, 0));
+                            SetValue(MarginProperty, Extents.GetReusable());
                             setMargin = true;
                         }
 
@@ -5178,7 +5179,7 @@ namespace Tizen.NUI.BaseComponents
                         {
                             // If View already has a padding set then store it in Layout instead.
                             value.Padding = padding;
-                            SetValue(PaddingProperty, new Extents(0, 0, 0, 0));
+                            SetValue(PaddingProperty, Extents.GetReusable());
                             setPadding = true;
                         }
 

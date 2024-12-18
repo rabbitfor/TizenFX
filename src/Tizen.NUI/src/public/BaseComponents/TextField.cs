@@ -46,221 +46,221 @@ namespace Tizen.NUI.BaseComponents
         private bool hasSystemFontTypeChanged = false;
         private bool isSettingTextInCSharp = false;
 
-        private Vector4 internalPlaceholderTextColor = null;
-        private Vector4 internalPrimaryCursorColor = null;
-        private Vector4 internalSecondaryCursorColor = null;
-        private Vector4 internalSelectionHighlightColor = null;
-        private Vector4 internalInputColor = null;
-        private Color internalTextColor = null;
-        private Color internalGrabHandleColor = null;
+        // private Vector4 internalPlaceholderTextColor = null;
+        // private Vector4 internalPrimaryCursorColor = null;
+        // private Vector4 internalSecondaryCursorColor = null;
+        // private Vector4 internalSelectionHighlightColor = null;
+        // private Vector4 internalInputColor = null;
+        // private Color internalTextColor = null;
+        // private Color internalGrabHandleColor = null;
 
 
-        static TextField() 
-        { 
+        static TextField()
+        {
             if (NUIApplication.IsUsingXaml)
             {
-                TranslatableTextProperty = BindableProperty.Create(nameof(TranslatableText), typeof(string), typeof(TextField), string.Empty, 
+                TranslatableTextProperty = BindableProperty.Create(nameof(TranslatableText), typeof(string), typeof(TextField), string.Empty,
                     propertyChanged: SetInternalTranslatableTextProperty, defaultValueCreator: GetInternalTranslatableTextProperty);
-                    
-                TranslatablePlaceholderTextProperty = BindableProperty.Create(nameof(TranslatablePlaceholderText), typeof(string), typeof(TextField), string.Empty, 
+
+                TranslatablePlaceholderTextProperty = BindableProperty.Create(nameof(TranslatablePlaceholderText), typeof(string), typeof(TextField), string.Empty,
                     propertyChanged: SetInternalTranslatablePlaceholderTextProperty, defaultValueCreator: GetInternalTranslatablePlaceholderTextProperty);
-                    
-                TranslatablePlaceholderTextFocusedProperty = BindableProperty.Create(nameof(TranslatablePlaceholderTextFocused), typeof(string), typeof(TextField), string.Empty, 
+
+                TranslatablePlaceholderTextFocusedProperty = BindableProperty.Create(nameof(TranslatablePlaceholderTextFocused), typeof(string), typeof(TextField), string.Empty,
                     propertyChanged: SetInternalTranslatablePlaceholderTextFocusedProperty, defaultValueCreator: GetInternalTranslatablePlaceholderTextFocusedProperty);
-                    
-                TextProperty = BindableProperty.Create(nameof(Text), typeof(string), typeof(TextField), string.Empty, 
+
+                TextProperty = BindableProperty.Create(nameof(Text), typeof(string), typeof(TextField), string.Empty,
                     propertyChanged: SetInternalTextProperty, defaultValueCreator: GetInternalTextProperty);
-                    
-                PlaceholderTextProperty = BindableProperty.Create(nameof(PlaceholderText), typeof(string), typeof(TextField), string.Empty, 
+
+                PlaceholderTextProperty = BindableProperty.Create(nameof(PlaceholderText), typeof(string), typeof(TextField), string.Empty,
                     propertyChanged: SetInternalPlaceholderTextProperty, defaultValueCreator: GetInternalPlaceholderTextProperty);
-                    
-                PlaceholderTextFocusedProperty = BindableProperty.Create(nameof(PlaceholderTextFocused), typeof(string), typeof(TextField), string.Empty, 
+
+                PlaceholderTextFocusedProperty = BindableProperty.Create(nameof(PlaceholderTextFocused), typeof(string), typeof(TextField), string.Empty,
                     propertyChanged: SetInternalPlaceholderTextFocusedProperty, defaultValueCreator: GetInternalPlaceholderTextFocusedProperty);
-                    
-                FontFamilyProperty = BindableProperty.Create(nameof(FontFamily), typeof(string), typeof(TextField), string.Empty, 
+
+                FontFamilyProperty = BindableProperty.Create(nameof(FontFamily), typeof(string), typeof(TextField), string.Empty,
                     propertyChanged: SetInternalFontFamilyProperty, defaultValueCreator: GetInternalFontFamilyProperty);
-                    
-                FontStyleProperty = BindableProperty.Create(nameof(FontStyle), typeof(PropertyMap), typeof(TextField), null, 
+
+                FontStyleProperty = BindableProperty.Create(nameof(FontStyle), typeof(PropertyMap), typeof(TextField), null,
                     propertyChanged: SetInternalFontStyleProperty, defaultValueCreator: GetInternalFontStyleProperty);
-                    
-                PointSizeProperty = BindableProperty.Create(nameof(PointSize), typeof(float), typeof(TextField), default(float), 
+
+                PointSizeProperty = BindableProperty.Create(nameof(PointSize), typeof(float), typeof(TextField), default(float),
                     propertyChanged: SetInternalPointSizeProperty, defaultValueCreator: GetInternalPointSizeProperty);
-                    
-                MaxLengthProperty = BindableProperty.Create(nameof(MaxLength), typeof(int), typeof(TextField), default(int), 
+
+                MaxLengthProperty = BindableProperty.Create(nameof(MaxLength), typeof(int), typeof(TextField), default(int),
                     propertyChanged: SetInternalMaxLengthProperty, defaultValueCreator: GetInternalMaxLengthProperty);
-                    
-                ExceedPolicyProperty = BindableProperty.Create(nameof(ExceedPolicy), typeof(int), typeof(TextField), default(int), 
+
+                ExceedPolicyProperty = BindableProperty.Create(nameof(ExceedPolicy), typeof(int), typeof(TextField), default(int),
                     propertyChanged: SetInternalExceedPolicyProperty, defaultValueCreator: GetInternalExceedPolicyProperty);
-                    
-                HorizontalAlignmentProperty = BindableProperty.Create(nameof(HorizontalAlignment), typeof(HorizontalAlignment), typeof(TextField), HorizontalAlignment.Begin, 
+
+                HorizontalAlignmentProperty = BindableProperty.Create(nameof(HorizontalAlignment), typeof(HorizontalAlignment), typeof(TextField), HorizontalAlignment.Begin,
                     propertyChanged: SetInternalHorizontalAlignmentProperty, defaultValueCreator: GetInternalHorizontalAlignmentProperty);
-                    
-                VerticalAlignmentProperty = BindableProperty.Create(nameof(TextField.VerticalAlignment), typeof(VerticalAlignment), typeof(TextField), VerticalAlignment.Bottom, 
+
+                VerticalAlignmentProperty = BindableProperty.Create(nameof(TextField.VerticalAlignment), typeof(VerticalAlignment), typeof(TextField), VerticalAlignment.Bottom,
                     propertyChanged: SetInternalVerticalAlignmentProperty, defaultValueCreator: GetInternalVerticalAlignmentProperty);
-                    
-                TextColorProperty = BindableProperty.Create(nameof(TextField.TextColor), typeof(Color), typeof(TextField), null, 
+
+                TextColorProperty = BindableProperty.Create(nameof(TextField.TextColor), typeof(Color), typeof(TextField), null,
                     propertyChanged: SetInternalTextColorProperty, defaultValueCreator: GetInternalTextColorProperty);
-                    
-                PlaceholderTextColorProperty = BindableProperty.Create(nameof(TextField.PlaceholderTextColor), typeof(Vector4), typeof(TextField), null, 
+
+                PlaceholderTextColorProperty = BindableProperty.Create(nameof(TextField.PlaceholderTextColor), typeof(Vector4), typeof(TextField), null,
                     propertyChanged: SetInternalPlaceholderTextColorProperty, defaultValueCreator: GetInternalPlaceholderTextColorProperty);
-                    
-                EnableGrabHandleProperty = BindableProperty.Create(nameof(TextField.EnableGrabHandle), typeof(bool), typeof(TextField), true, 
+
+                EnableGrabHandleProperty = BindableProperty.Create(nameof(TextField.EnableGrabHandle), typeof(bool), typeof(TextField), true,
                     propertyChanged: SetInternalEnableGrabHandleProperty, defaultValueCreator: GetInternalEnableGrabHandleProperty);
-                    
-                EnableGrabHandlePopupProperty = BindableProperty.Create(nameof(TextField.EnableGrabHandlePopup), typeof(bool), typeof(TextField), true, 
+
+                EnableGrabHandlePopupProperty = BindableProperty.Create(nameof(TextField.EnableGrabHandlePopup), typeof(bool), typeof(TextField), true,
                     propertyChanged: SetInternalEnableGrabHandlePopupProperty, defaultValueCreator: GetInternalEnableGrabHandlePopupProperty);
-                    
-                PrimaryCursorColorProperty = BindableProperty.Create(nameof(TextField.PrimaryCursorColor), typeof(Vector4), typeof(TextField), null, 
+
+                PrimaryCursorColorProperty = BindableProperty.Create(nameof(TextField.PrimaryCursorColor), typeof(Vector4), typeof(TextField), null,
                     propertyChanged: SetInternalPrimaryCursorColorProperty, defaultValueCreator: GetInternalPrimaryCursorColorProperty);
-                    
-                SecondaryCursorColorProperty = BindableProperty.Create(nameof(TextField.SecondaryCursorColor), typeof(Vector4), typeof(TextField), null, 
+
+                SecondaryCursorColorProperty = BindableProperty.Create(nameof(TextField.SecondaryCursorColor), typeof(Vector4), typeof(TextField), null,
                     propertyChanged: SetInternalSecondaryCursorColorProperty, defaultValueCreator: GetInternalSecondaryCursorColorProperty);
-                    
-                EnableCursorBlinkProperty = BindableProperty.Create(nameof(TextField.EnableCursorBlink), typeof(bool), typeof(TextField), false, 
+
+                EnableCursorBlinkProperty = BindableProperty.Create(nameof(TextField.EnableCursorBlink), typeof(bool), typeof(TextField), false,
                     propertyChanged: SetInternalEnableCursorBlinkProperty, defaultValueCreator: GetInternalEnableCursorBlinkProperty);
-                    
-                CursorBlinkIntervalProperty = BindableProperty.Create(nameof(TextField.CursorBlinkInterval), typeof(float), typeof(TextField), default(float), 
+
+                CursorBlinkIntervalProperty = BindableProperty.Create(nameof(TextField.CursorBlinkInterval), typeof(float), typeof(TextField), default(float),
                     propertyChanged: SetInternalCursorBlinkIntervalProperty, defaultValueCreator: GetInternalCursorBlinkIntervalProperty);
-                    
-                CursorBlinkDurationProperty = BindableProperty.Create(nameof(TextField.CursorBlinkDuration), typeof(float), typeof(TextField), default(float), 
+
+                CursorBlinkDurationProperty = BindableProperty.Create(nameof(TextField.CursorBlinkDuration), typeof(float), typeof(TextField), default(float),
                     propertyChanged: SetInternalCursorBlinkDurationProperty, defaultValueCreator: GetInternalCursorBlinkDurationProperty);
-                    
-                CursorWidthProperty = BindableProperty.Create(nameof(TextField.CursorWidth), typeof(int), typeof(TextField), default(int), 
+
+                CursorWidthProperty = BindableProperty.Create(nameof(TextField.CursorWidth), typeof(int), typeof(TextField), default(int),
                     propertyChanged: SetInternalCursorWidthProperty, defaultValueCreator: GetInternalCursorWidthProperty);
-                    
-                GrabHandleImageProperty = BindableProperty.Create(nameof(TextField.GrabHandleImage), typeof(string), typeof(TextField), string.Empty, 
+
+                GrabHandleImageProperty = BindableProperty.Create(nameof(TextField.GrabHandleImage), typeof(string), typeof(TextField), string.Empty,
                     propertyChanged: SetInternalGrabHandleImageProperty, defaultValueCreator: GetInternalGrabHandleImageProperty);
-                    
-                GrabHandlePressedImageProperty = BindableProperty.Create(nameof(TextField.GrabHandlePressedImage), typeof(string), typeof(TextField), string.Empty, 
+
+                GrabHandlePressedImageProperty = BindableProperty.Create(nameof(TextField.GrabHandlePressedImage), typeof(string), typeof(TextField), string.Empty,
                     propertyChanged: SetInternalGrabHandlePressedImageProperty, defaultValueCreator: GetInternalGrabHandlePressedImageProperty);
-                    
-                ScrollThresholdProperty = BindableProperty.Create(nameof(TextField.ScrollThreshold), typeof(float), typeof(TextField), default(float), 
+
+                ScrollThresholdProperty = BindableProperty.Create(nameof(TextField.ScrollThreshold), typeof(float), typeof(TextField), default(float),
                     propertyChanged: SetInternalScrollThresholdProperty, defaultValueCreator: GetInternalScrollThresholdProperty);
-                    
-                ScrollSpeedProperty = BindableProperty.Create(nameof(TextField.ScrollSpeed), typeof(float), typeof(TextField), default(float), 
+
+                ScrollSpeedProperty = BindableProperty.Create(nameof(TextField.ScrollSpeed), typeof(float), typeof(TextField), default(float),
                     propertyChanged: SetInternalScrollSpeedProperty, defaultValueCreator: GetInternalScrollSpeedProperty);
-                    
-                SelectionPopupStyleProperty = BindableProperty.Create(nameof(SelectionPopupStyle), typeof(PropertyMap), typeof(TextField), null, 
+
+                SelectionPopupStyleProperty = BindableProperty.Create(nameof(SelectionPopupStyle), typeof(PropertyMap), typeof(TextField), null,
                     propertyChanged: SetInternalSelectionPopupStyleProperty, defaultValueCreator: GetInternalSelectionPopupStyleProperty);
-                    
-                SelectionHandleImageLeftProperty = BindableProperty.Create(nameof(TextField.SelectionHandleImageLeft), typeof(PropertyMap), typeof(TextField), null, 
+
+                SelectionHandleImageLeftProperty = BindableProperty.Create(nameof(TextField.SelectionHandleImageLeft), typeof(PropertyMap), typeof(TextField), null,
                     propertyChanged: SetInternalSelectionHandleImageLeftProperty, defaultValueCreator: GetInternalSelectionHandleImageLeftProperty);
-                    
-                SelectionHandleImageRightProperty = BindableProperty.Create(nameof(TextField.SelectionHandleImageRight), typeof(PropertyMap), typeof(TextField), null, 
+
+                SelectionHandleImageRightProperty = BindableProperty.Create(nameof(TextField.SelectionHandleImageRight), typeof(PropertyMap), typeof(TextField), null,
                     propertyChanged: SetInternalSelectionHandleImageRightProperty, defaultValueCreator: GetInternalSelectionHandleImageRightProperty);
-                    
-                SelectionHandlePressedImageLeftProperty = BindableProperty.Create(nameof(TextField.SelectionHandlePressedImageLeft), typeof(PropertyMap), typeof(TextField), null, 
+
+                SelectionHandlePressedImageLeftProperty = BindableProperty.Create(nameof(TextField.SelectionHandlePressedImageLeft), typeof(PropertyMap), typeof(TextField), null,
                     propertyChanged: SetInternalSelectionHandlePressedImageLeftProperty, defaultValueCreator: GetInternalSelectionHandlePressedImageLeftProperty);
-                    
-                SelectionHandlePressedImageRightProperty = BindableProperty.Create(nameof(TextField.SelectionHandlePressedImageRight), typeof(PropertyMap), typeof(TextField), null, 
+
+                SelectionHandlePressedImageRightProperty = BindableProperty.Create(nameof(TextField.SelectionHandlePressedImageRight), typeof(PropertyMap), typeof(TextField), null,
                     propertyChanged: SetInternalSelectionHandlePressedImageRightProperty, defaultValueCreator: GetInternalSelectionHandlePressedImageRightProperty);
-                    
-                SelectionHandleMarkerImageLeftProperty = BindableProperty.Create(nameof(TextField.SelectionHandleMarkerImageLeft), typeof(PropertyMap), typeof(TextField), null, 
+
+                SelectionHandleMarkerImageLeftProperty = BindableProperty.Create(nameof(TextField.SelectionHandleMarkerImageLeft), typeof(PropertyMap), typeof(TextField), null,
                     propertyChanged: SetInternalSelectionHandleMarkerImageLeftProperty, defaultValueCreator: GetInternalSelectionHandleMarkerImageLeftProperty);
-                    
-                SelectionHandleMarkerImageRightProperty = BindableProperty.Create(nameof(TextField.SelectionHandleMarkerImageRight), typeof(PropertyMap), typeof(TextField), null, 
+
+                SelectionHandleMarkerImageRightProperty = BindableProperty.Create(nameof(TextField.SelectionHandleMarkerImageRight), typeof(PropertyMap), typeof(TextField), null,
                     propertyChanged: SetInternalSelectionHandleMarkerImageRightProperty, defaultValueCreator: GetInternalSelectionHandleMarkerImageRightProperty);
-                    
-                SelectionHighlightColorProperty = BindableProperty.Create(nameof(TextField.SelectionHighlightColor), typeof(Vector4), typeof(TextField), null, 
+
+                SelectionHighlightColorProperty = BindableProperty.Create(nameof(TextField.SelectionHighlightColor), typeof(Vector4), typeof(TextField), null,
                     propertyChanged: SetInternalSelectionHighlightColorProperty, defaultValueCreator: GetInternalSelectionHighlightColorProperty);
-                    
-                DecorationBoundingBoxProperty = BindableProperty.Create(nameof(TextField.DecorationBoundingBox), typeof(Rectangle), typeof(TextField), null, 
+
+                DecorationBoundingBoxProperty = BindableProperty.Create(nameof(TextField.DecorationBoundingBox), typeof(Rectangle), typeof(TextField), null,
                     propertyChanged: SetInternalDecorationBoundingBoxProperty, defaultValueCreator: GetInternalDecorationBoundingBoxProperty);
-                    
-                InputMethodSettingsProperty = BindableProperty.Create(nameof(TextField.InputMethodSettings), typeof(PropertyMap), typeof(TextField), null, 
+
+                InputMethodSettingsProperty = BindableProperty.Create(nameof(TextField.InputMethodSettings), typeof(PropertyMap), typeof(TextField), null,
                     propertyChanged: SetInternalInputMethodSettingsProperty, defaultValueCreator: GetInternalInputMethodSettingsProperty);
-                    
-                InputColorProperty = BindableProperty.Create(nameof(TextField.InputColor), typeof(Vector4), typeof(TextField), null, 
+
+                InputColorProperty = BindableProperty.Create(nameof(TextField.InputColor), typeof(Vector4), typeof(TextField), null,
                     propertyChanged: SetInternalInputColorProperty, defaultValueCreator: GetInternalInputColorProperty);
-                    
-                EnableMarkupProperty = BindableProperty.Create(nameof(TextField.EnableMarkup), typeof(bool), typeof(TextField), false, 
+
+                EnableMarkupProperty = BindableProperty.Create(nameof(TextField.EnableMarkup), typeof(bool), typeof(TextField), false,
                     propertyChanged: SetInternalEnableMarkupProperty, defaultValueCreator: GetInternalEnableMarkupProperty);
-                    
-                InputFontFamilyProperty = BindableProperty.Create(nameof(TextField.InputFontFamily), typeof(string), typeof(TextField), string.Empty, 
+
+                InputFontFamilyProperty = BindableProperty.Create(nameof(TextField.InputFontFamily), typeof(string), typeof(TextField), string.Empty,
                     propertyChanged: SetInternalInputFontFamilyProperty, defaultValueCreator: GetInternalInputFontFamilyProperty);
-                    
-                InputFontStyleProperty = BindableProperty.Create(nameof(TextField.InputFontStyle), typeof(PropertyMap), typeof(TextField), null, 
+
+                InputFontStyleProperty = BindableProperty.Create(nameof(TextField.InputFontStyle), typeof(PropertyMap), typeof(TextField), null,
                     propertyChanged: SetInternalInputFontStyleProperty, defaultValueCreator: GetInternalInputFontStyleProperty);
-                    
-                InputPointSizeProperty = BindableProperty.Create(nameof(TextField.InputPointSize), typeof(float), typeof(TextField), default(float), 
+
+                InputPointSizeProperty = BindableProperty.Create(nameof(TextField.InputPointSize), typeof(float), typeof(TextField), default(float),
                     propertyChanged: SetInternalInputPointSizeProperty, defaultValueCreator: GetInternalInputPointSizeProperty);
-                    
-                UnderlineProperty = BindableProperty.Create(nameof(TextField.Underline), typeof(PropertyMap), typeof(TextField), null, 
+
+                UnderlineProperty = BindableProperty.Create(nameof(TextField.Underline), typeof(PropertyMap), typeof(TextField), null,
                     propertyChanged: SetInternalUnderlineProperty, defaultValueCreator: GetInternalUnderlineProperty);
-                    
-                InputUnderlineProperty = BindableProperty.Create(nameof(TextField.InputUnderline), typeof(string), typeof(TextField), string.Empty, 
+
+                InputUnderlineProperty = BindableProperty.Create(nameof(TextField.InputUnderline), typeof(string), typeof(TextField), string.Empty,
                     propertyChanged: SetInternalInputUnderlineProperty, defaultValueCreator: GetInternalInputUnderlineProperty);
-                    
-                ShadowProperty = BindableProperty.Create(nameof(TextField.Shadow), typeof(PropertyMap), typeof(TextField), null, 
+
+                ShadowProperty = BindableProperty.Create(nameof(TextField.Shadow), typeof(PropertyMap), typeof(TextField), null,
                     propertyChanged: SetInternalShadowProperty, defaultValueCreator: GetInternalShadowProperty);
-                    
-                InputShadowProperty = BindableProperty.Create(nameof(TextField.InputShadow), typeof(string), typeof(TextField), string.Empty, 
+
+                InputShadowProperty = BindableProperty.Create(nameof(TextField.InputShadow), typeof(string), typeof(TextField), string.Empty,
                     propertyChanged: SetInternalInputShadowProperty, defaultValueCreator: GetInternalInputShadowProperty);
-                    
-                EmbossProperty = BindableProperty.Create(nameof(TextField.Emboss), typeof(string), typeof(TextField), string.Empty, 
+
+                EmbossProperty = BindableProperty.Create(nameof(TextField.Emboss), typeof(string), typeof(TextField), string.Empty,
                     propertyChanged: SetInternalEmbossProperty, defaultValueCreator: GetInternalEmbossProperty);
-                    
-                InputEmbossProperty = BindableProperty.Create(nameof(TextField.InputEmboss), typeof(string), typeof(TextField), string.Empty, 
+
+                InputEmbossProperty = BindableProperty.Create(nameof(TextField.InputEmboss), typeof(string), typeof(TextField), string.Empty,
                     propertyChanged: SetInternalInputEmbossProperty, defaultValueCreator: GetInternalInputEmbossProperty);
-                    
-                OutlineProperty = BindableProperty.Create(nameof(TextField.Outline), typeof(PropertyMap), typeof(TextField), null, 
+
+                OutlineProperty = BindableProperty.Create(nameof(TextField.Outline), typeof(PropertyMap), typeof(TextField), null,
                     propertyChanged: SetInternalOutlineProperty, defaultValueCreator: GetInternalOutlineProperty);
-                    
-                InputOutlineProperty = BindableProperty.Create(nameof(TextField.InputOutline), typeof(string), typeof(TextField), string.Empty, 
+
+                InputOutlineProperty = BindableProperty.Create(nameof(TextField.InputOutline), typeof(string), typeof(TextField), string.Empty,
                     propertyChanged: SetInternalInputOutlineProperty, defaultValueCreator: GetInternalInputOutlineProperty);
-                    
-                HiddenInputSettingsProperty = BindableProperty.Create(nameof(TextField.HiddenInputSettings), typeof(PropertyMap), typeof(TextField), null, 
+
+                HiddenInputSettingsProperty = BindableProperty.Create(nameof(TextField.HiddenInputSettings), typeof(PropertyMap), typeof(TextField), null,
                     propertyChanged: SetInternalHiddenInputSettingsProperty, defaultValueCreator: GetInternalHiddenInputSettingsProperty);
-                    
-                PixelSizeProperty = BindableProperty.Create(nameof(TextField.PixelSize), typeof(float), typeof(TextField), default(float), 
+
+                PixelSizeProperty = BindableProperty.Create(nameof(TextField.PixelSize), typeof(float), typeof(TextField), default(float),
                     propertyChanged: SetInternalPixelSizeProperty, defaultValueCreator: GetInternalPixelSizeProperty);
-                    
-                EnableSelectionProperty = BindableProperty.Create(nameof(TextField.EnableSelection), typeof(bool), typeof(TextField), false, 
+
+                EnableSelectionProperty = BindableProperty.Create(nameof(TextField.EnableSelection), typeof(bool), typeof(TextField), false,
                     propertyChanged: SetInternalEnableSelectionProperty, defaultValueCreator: GetInternalEnableSelectionProperty);
-                    
-                PlaceholderProperty = BindableProperty.Create(nameof(TextField.Placeholder), typeof(PropertyMap), typeof(TextField), null, 
+
+                PlaceholderProperty = BindableProperty.Create(nameof(TextField.Placeholder), typeof(PropertyMap), typeof(TextField), null,
                     propertyChanged: SetInternalPlaceholderProperty, defaultValueCreator: GetInternalPlaceholderProperty);
-                    
-                EllipsisProperty = BindableProperty.Create(nameof(TextField.Ellipsis), typeof(bool), typeof(TextField), false, 
+
+                EllipsisProperty = BindableProperty.Create(nameof(TextField.Ellipsis), typeof(bool), typeof(TextField), false,
                     propertyChanged: SetInternalEllipsisProperty, defaultValueCreator: GetInternalEllipsisProperty);
-                    
-                EllipsisPositionProperty = BindableProperty.Create(nameof(EllipsisPosition), typeof(EllipsisPosition), typeof(TextField), EllipsisPosition.End, 
+
+                EllipsisPositionProperty = BindableProperty.Create(nameof(EllipsisPosition), typeof(EllipsisPosition), typeof(TextField), EllipsisPosition.End,
                     propertyChanged: SetInternalEllipsisPositionProperty, defaultValueCreator: GetInternalEllipsisPositionProperty);
-                    
-                EnableShiftSelectionProperty = BindableProperty.Create(nameof(TextField.EnableShiftSelection), typeof(bool), typeof(TextField), false, 
+
+                EnableShiftSelectionProperty = BindableProperty.Create(nameof(TextField.EnableShiftSelection), typeof(bool), typeof(TextField), false,
                     propertyChanged: SetInternalEnableShiftSelectionProperty, defaultValueCreator: GetInternalEnableShiftSelectionProperty);
-                    
-                MatchSystemLanguageDirectionProperty = BindableProperty.Create(nameof(TextField.MatchSystemLanguageDirection), typeof(bool), typeof(TextField), false, 
+
+                MatchSystemLanguageDirectionProperty = BindableProperty.Create(nameof(TextField.MatchSystemLanguageDirection), typeof(bool), typeof(TextField), false,
                     propertyChanged: SetInternalMatchSystemLanguageDirectionProperty, defaultValueCreator: GetInternalMatchSystemLanguageDirectionProperty);
-                    
-                FontSizeScaleProperty = BindableProperty.Create(nameof(FontSizeScale), typeof(float), typeof(TextField), default(float), 
+
+                FontSizeScaleProperty = BindableProperty.Create(nameof(FontSizeScale), typeof(float), typeof(TextField), default(float),
                     propertyChanged: SetInternalFontSizeScaleProperty, defaultValueCreator: GetInternalFontSizeScaleProperty);
-                    
-                EnableFontSizeScaleProperty = BindableProperty.Create(nameof(EnableFontSizeScale), typeof(bool), typeof(TextField), default(bool), 
+
+                EnableFontSizeScaleProperty = BindableProperty.Create(nameof(EnableFontSizeScale), typeof(bool), typeof(TextField), default(bool),
                     propertyChanged: SetInternalEnableFontSizeScaleProperty, defaultValueCreator: GetInternalEnableFontSizeScaleProperty);
-                    
-                GrabHandleColorProperty = BindableProperty.Create(nameof(TextField.GrabHandleColor), typeof(Color), typeof(TextField), null, 
+
+                GrabHandleColorProperty = BindableProperty.Create(nameof(TextField.GrabHandleColor), typeof(Color), typeof(TextField), null,
                     propertyChanged: SetInternalGrabHandleColorProperty, defaultValueCreator: GetInternalGrabHandleColorProperty);
-                    
-                ShadowOffsetProperty = BindableProperty.Create(nameof(ShadowOffset), typeof(Tizen.NUI.Vector2), typeof(Tizen.NUI.BaseComponents.TextField), null, 
+
+                ShadowOffsetProperty = BindableProperty.Create(nameof(ShadowOffset), typeof(Tizen.NUI.Vector2), typeof(Tizen.NUI.BaseComponents.TextField), null,
                     propertyChanged: SetInternalShadowOffsetProperty, defaultValueCreator: GetInternalShadowOffsetProperty);
-                    
-                ShadowColorProperty = BindableProperty.Create(nameof(ShadowColor), typeof(Tizen.NUI.Vector4), typeof(Tizen.NUI.BaseComponents.TextField), null, 
+
+                ShadowColorProperty = BindableProperty.Create(nameof(ShadowColor), typeof(Tizen.NUI.Vector4), typeof(Tizen.NUI.BaseComponents.TextField), null,
                     propertyChanged: SetInternalShadowColorProperty, defaultValueCreator: GetInternalShadowColorProperty);
-                    
-                EnableEditingProperty = BindableProperty.Create(nameof(EnableEditing), typeof(bool), typeof(Tizen.NUI.BaseComponents.TextField), false, 
+
+                EnableEditingProperty = BindableProperty.Create(nameof(EnableEditing), typeof(bool), typeof(Tizen.NUI.BaseComponents.TextField), false,
                     propertyChanged: SetInternalEnableEditingProperty, defaultValueCreator: GetInternalEnableEditingProperty);
-                    
-                PrimaryCursorPositionProperty = BindableProperty.Create(nameof(PrimaryCursorPosition), typeof(int), typeof(Tizen.NUI.BaseComponents.TextField), 0, 
+
+                PrimaryCursorPositionProperty = BindableProperty.Create(nameof(PrimaryCursorPosition), typeof(int), typeof(Tizen.NUI.BaseComponents.TextField), 0,
                     propertyChanged: SetInternalPrimaryCursorPositionProperty, defaultValueCreator: GetInternalPrimaryCursorPositionProperty);
-                    
-                CharacterSpacingProperty = BindableProperty.Create(nameof(CharacterSpacing), typeof(float), typeof(TextField), default(float), 
+
+                CharacterSpacingProperty = BindableProperty.Create(nameof(CharacterSpacing), typeof(float), typeof(TextField), default(float),
                     propertyChanged: SetInternalCharacterSpacingProperty, defaultValueCreator: GetInternalCharacterSpacingProperty);
 
-                RemoveFrontInsetProperty = BindableProperty.Create(nameof(RemoveFrontInset), typeof(bool), typeof(TextField), false, 
+                RemoveFrontInsetProperty = BindableProperty.Create(nameof(RemoveFrontInset), typeof(bool), typeof(TextField), false,
                     propertyChanged: SetInternalRemoveFrontInsetProperty, defaultValueCreator: GetInternalRemoveFrontInsetProperty);
 
-                RemoveBackInsetProperty = BindableProperty.Create(nameof(RemoveBackInset), typeof(bool), typeof(TextField), false, 
+                RemoveBackInsetProperty = BindableProperty.Create(nameof(RemoveBackInset), typeof(bool), typeof(TextField), false,
                     propertyChanged: SetInternalRemoveBackInsetProperty, defaultValueCreator: GetInternalRemoveBackInsetProperty);
             }
         }
@@ -932,7 +932,8 @@ namespace Tizen.NUI.BaseComponents
                 {
                     temp = (Color)GetInternalTextColorProperty(this);
                 }
-                return new Color(OnTextColorChanged, temp.R, temp.G, temp.B, temp.A);
+                temp.callback = OnTextColorChanged;
+                return temp;
             }
             set
             {
@@ -968,7 +969,8 @@ namespace Tizen.NUI.BaseComponents
                 {
                     temp = (Vector4)GetInternalPlaceholderTextColorProperty(this);
                 }
-                return new Vector4(OnPlaceholderTextColorChanged, temp.X, temp.Y, temp.Z, temp.W);
+                temp.callback = OnPlaceholderTextColorChanged;
+                return temp;
             }
             set
             {
@@ -1023,18 +1025,13 @@ namespace Tizen.NUI.BaseComponents
         {
             get
             {
-                float x = 0.0f, y = 0.0f;
+                var shadowOffset = Vector2.GetReusable(OnShadowOffsetChanged);
                 using (var propertyValue = Shadow.Find(TextField.Property.SHADOW, "offset"))
-                using (var shadowOffset = new Vector2())
+                if (null != propertyValue)
                 {
-                    if (null != propertyValue)
-                    {
-                        propertyValue.Get(shadowOffset);
-                        x = shadowOffset.X;
-                        y = shadowOffset.Y;
-                    }
+                    propertyValue.Get(shadowOffset);
                 }
-                return new Vector2(OnShadowOffsetChanged, x, y);
+                return shadowOffset;
             }
             set
             {
@@ -1095,20 +1092,13 @@ namespace Tizen.NUI.BaseComponents
         {
             get
             {
-                float x = 0.0f, y = 0.0f, z = 0.0f, w = 0.0f;
+                var shadowColor = Vector4.GetReusable(OnShadowColorChanged);
                 using (var propertyValue = Shadow.Find(TextField.Property.SHADOW, "color"))
-                using (var shadowColor = new Vector4())
+                if (null != propertyValue)
                 {
-                    if (null != propertyValue)
-                    {
-                        propertyValue.Get(shadowColor);
-                        x = shadowColor.X;
-                        y = shadowColor.Y;
-                        z = shadowColor.Z;
-                        w = shadowColor.W;
-                    }
+                    propertyValue.Get(shadowColor);
                 }
-                return new Vector4(OnShadowColorChanged, x, y, z, w);
+                return shadowColor;
             }
             set
             {
@@ -1151,7 +1141,8 @@ namespace Tizen.NUI.BaseComponents
                 {
                     temp = (Vector4)GetInternalPrimaryCursorColorProperty(this);
                 }
-                return new Vector4(OnPrimaryCursorColorChanged, temp.X, temp.Y, temp.Z, temp.W);
+                temp.callback = OnPrimaryCursorColorChanged;
+                return temp;
             }
             set
             {
@@ -1188,7 +1179,8 @@ namespace Tizen.NUI.BaseComponents
                 {
                     temp = (Vector4)GetInternalSecondaryCursorColorProperty(this);
                 }
-                return new Vector4(OnSecondaryCursorColorChanged, temp.X, temp.Y, temp.Z, temp.W);
+                temp.callback = OnSecondaryCursorColorChanged;
+                return temp;
             }
             set
             {
@@ -1935,7 +1927,8 @@ namespace Tizen.NUI.BaseComponents
                 {
                     temp = (Vector4)GetInternalSelectionHighlightColorProperty(this);
                 }
-                return new Vector4(OnSelectionHighlightColorChanged, temp.X, temp.Y, temp.Z, temp.W);
+                temp.callback = OnSelectionHighlightColorChanged;
+                return temp;
             }
             set
             {
@@ -2055,7 +2048,8 @@ namespace Tizen.NUI.BaseComponents
                 {
                     temp = (Vector4)GetInternalInputColorProperty(this);
                 }
-                return new Vector4(OnInputColorChanged, temp.X, temp.Y, temp.Z, temp.W);
+                temp.callback = OnInputColorChanged;
+                return temp;
             }
             set
             {
@@ -3110,7 +3104,8 @@ namespace Tizen.NUI.BaseComponents
                 {
                     temp = (Color)GetInternalGrabHandleColorProperty(this);
                 }
-                return new Color(OnGrabHandleColorChanged, temp.R, temp.G, temp.B, temp.A);
+                temp.callback = OnGrabHandleColorChanged;
+                return temp;
             }
             set
             {
@@ -3755,7 +3750,7 @@ namespace Tizen.NUI.BaseComponents
                 {
                     SetValue(RemoveFrontInsetProperty, value);
                 }
-                else 
+                else
                 {
                     SetInternalRemoveFrontInsetProperty(this, null, value);
                 }
@@ -3790,7 +3785,7 @@ namespace Tizen.NUI.BaseComponents
                 {
                     SetValue(RemoveBackInsetProperty, value);
                 }
-                else 
+                else
                 {
                     SetInternalRemoveBackInsetProperty(this, null, value);
                 }
@@ -3813,14 +3808,6 @@ namespace Tizen.NUI.BaseComponents
             {
                 return;
             }
-
-            internalPlaceholderTextColor?.Dispose();
-            internalPrimaryCursorColor?.Dispose();
-            internalSecondaryCursorColor?.Dispose();
-            internalSelectionHighlightColor?.Dispose();
-            internalInputColor?.Dispose();
-            internalTextColor?.Dispose();
-            internalGrabHandleColor?.Dispose();
 
             if (hasSystemLanguageChanged)
             {
@@ -3995,7 +3982,7 @@ namespace Tizen.NUI.BaseComponents
                 }
             }
         }
-        
+
         private void RemoveSystemSettingsFontTypeChanged()
         {
             if (hasSystemFontTypeChanged)
@@ -4120,39 +4107,39 @@ namespace Tizen.NUI.BaseComponents
         }
         private void OnInputColorChanged(float x, float y, float z, float w)
         {
-            InputColor = new Vector4(x, y, z, w);
+            InputColor = Vector4.GetReusable(x, y, z, w);
         }
         private void OnPlaceholderTextColorChanged(float r, float g, float b, float a)
         {
-            PlaceholderTextColor = new Vector4(r, g, b, a);
+            PlaceholderTextColor = Vector4.GetReusable(r, g, b, a);
         }
         private void OnPrimaryCursorColorChanged(float x, float y, float z, float w)
         {
-            PrimaryCursorColor = new Vector4(x, y, z, w);
+            PrimaryCursorColor = Vector4.GetReusable(x, y, z, w);
         }
         private void OnSecondaryCursorColorChanged(float x, float y, float z, float w)
         {
-            SecondaryCursorColor = new Vector4(x, y, z, w);
+            SecondaryCursorColor = Vector4.GetReusable(x, y, z, w);
         }
         private void OnSelectionHighlightColorChanged(float x, float y, float z, float w)
         {
-            SelectionHighlightColor = new Vector4(x, y, z, w);
+            SelectionHighlightColor = Vector4.GetReusable(x, y, z, w);
         }
         private void OnShadowColorChanged(float x, float y, float z, float w)
         {
-            ShadowColor = new Vector4(x, y, z, w);
+            ShadowColor = Vector4.GetReusable(x, y, z, w);
         }
         private void OnShadowOffsetChanged(float x, float y)
         {
-            ShadowOffset = new Vector2(x, y);
+            ShadowOffset = Vector2.GetReusable(x, y);
         }
         private void OnTextColorChanged(float r, float g, float b, float a)
         {
-            TextColor = new Color(r, g, b, a);
+            TextColor = Color.GetReusable(r, g, b, a);
         }
         private void OnGrabHandleColorChanged(float r, float g, float b, float a)
         {
-            GrabHandleColor = new Color(r, g, b, a);
+            GrabHandleColor = Color.GetReusable(r, g, b, a);
         }
 
         internal class TextFieldLayout : LayoutItem
