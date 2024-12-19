@@ -41,7 +41,7 @@ namespace Tizen.NUI.BaseComponents
         internal static object GetInternalVideoProperty(BindableObject bindable)
         {
             var videoView = (VideoView)bindable;
-            PropertyMap temp = new PropertyMap();
+            PropertyMap temp = PropertyMap.GetReusable();
             Tizen.NUI.Object.GetProperty((HandleRef)videoView.SwigCPtr, VideoView.Property.VIDEO).Get(temp);
             return temp;
         }
@@ -98,7 +98,7 @@ namespace Tizen.NUI.BaseComponents
         internal static object GetInternalVolumeProperty(BindableObject bindable)
         {
             var videoView = (VideoView)bindable;
-            PropertyMap temp = new PropertyMap();
+            PropertyMap temp = PropertyMap.GetReusable();
             Tizen.NUI.Object.GetProperty((HandleRef)videoView.SwigCPtr, VideoView.Property.VOLUME).Get(temp);
             return temp;
         }

@@ -890,9 +890,9 @@ namespace Tizen.NUI.BaseComponents
             }
             set
             {
-                using (var map = new PropertyMap())
+                using (var map = PropertyMap.GetReusable())
                 {
-                    map.Add("offset", value);
+                    map.AddVector2("offset", value);
                     var shadowMap = Shadow;
                     shadowMap.Merge(map);
                     if (NUIApplication.IsUsingXaml)
@@ -958,9 +958,9 @@ namespace Tizen.NUI.BaseComponents
             }
             set
             {
-                using (var map = new PropertyMap())
+                using (var map = PropertyMap.GetReusable())
                 {
-                    map.Add("color", value);
+                    map.AddVector4("color", value);
                     var shadowMap = Shadow;
                     shadowMap.Merge(map);
                     if (NUIApplication.IsUsingXaml)
@@ -1027,9 +1027,9 @@ namespace Tizen.NUI.BaseComponents
             }
             set
             {
-                using (var map = new PropertyMap())
+                using (var map = PropertyMap.GetReusable())
                 {
-                    map.Add("enable", value);
+                    map.AddBool("enable", value);
                     var underlineMap = Underline;
                     underlineMap.Merge(map);
                     if (NUIApplication.IsUsingXaml)
@@ -1095,9 +1095,9 @@ namespace Tizen.NUI.BaseComponents
             }
             set
             {
-                using (var map = new PropertyMap())
+                using (var map = PropertyMap.GetReusable())
                 {
-                    map.Add("color", value);
+                    map.AddVector4("color", value);
                     var underlineMap = Underline;
                     underlineMap.Merge(map);
                     if (NUIApplication.IsUsingXaml)
@@ -1164,9 +1164,9 @@ namespace Tizen.NUI.BaseComponents
             }
             set
             {
-                using (var map = new PropertyMap())
+                using (var map = PropertyMap.GetReusable())
                 {
-                    map.Add("height", value);
+                    map.AddFloat("height", value);
                     var underlineMap = Underline;
                     underlineMap.Merge(map);
                     if (NUIApplication.IsUsingXaml)
@@ -1759,11 +1759,9 @@ namespace Tizen.NUI.BaseComponents
         [EditorBrowsable(EditorBrowsableState.Never)]
         public void SetStrikethrough(Strikethrough strikethrough)
         {
-            using (var map = TextMapHelper.GetStrikethroughMap(strikethrough))
-            using (var propertyValue = new PropertyValue(map))
-            {
-                SetProperty(TextLabel.Property.Strikethrough, propertyValue);
-            }
+            using var map = TextMapHelper.GetStrikethroughMap(strikethrough);
+            using var propertyValue = PropertyValue.GetReusable(map);
+            SetProperty(TextLabel.Property.Strikethrough, propertyValue);
         }
 
         /// <summary>
@@ -1778,7 +1776,7 @@ namespace Tizen.NUI.BaseComponents
         {
             Strikethrough strikethrough;
             using (var propertyValue = GetProperty(TextLabel.Property.Strikethrough))
-            using (var map = new PropertyMap())
+            using (var map = PropertyMap.GetReusable())
             {
                 propertyValue.Get(map);
                 strikethrough = TextMapHelper.GetStrikethroughStruct(map);

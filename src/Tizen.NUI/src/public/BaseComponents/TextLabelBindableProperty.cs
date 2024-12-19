@@ -116,7 +116,7 @@ namespace Tizen.NUI.BaseComponents
         internal static object GetInternalFontStyleProperty(BindableObject bindable)
         {
             var textLabel = (TextLabel)bindable;
-            PropertyMap temp = new PropertyMap();
+            PropertyMap temp = PropertyMap.GetReusable();
             Tizen.NUI.Object.GetProperty((System.Runtime.InteropServices.HandleRef)textLabel.SwigCPtr, TextLabel.Property.FontStyle).Get(temp);
             return temp;
         }
@@ -487,7 +487,7 @@ namespace Tizen.NUI.BaseComponents
         internal static object GetInternalUnderlineProperty(BindableObject bindable)
         {
             var textLabel = (TextLabel)bindable;
-            PropertyMap temp = new PropertyMap();
+            PropertyMap temp = PropertyMap.GetReusable();
             Tizen.NUI.Object.GetProperty((System.Runtime.InteropServices.HandleRef)textLabel.SwigCPtr, TextLabel.Property.UNDERLINE).Get(temp);
             return temp;
         }
@@ -506,7 +506,7 @@ namespace Tizen.NUI.BaseComponents
         internal static object GetInternalShadowProperty(BindableObject bindable)
         {
             var textLabel = (TextLabel)bindable;
-            PropertyMap temp = new PropertyMap();
+            PropertyMap temp = PropertyMap.GetReusable();
             Tizen.NUI.Object.GetProperty((System.Runtime.InteropServices.HandleRef)textLabel.SwigCPtr, TextLabel.Property.SHADOW).Get(temp);
             return temp;
         }
@@ -531,7 +531,7 @@ namespace Tizen.NUI.BaseComponents
         internal static object GetInternalTextShadowProperty(BindableObject bindable)
         {
             var textLabel = (TextLabel)bindable;
-            PropertyMap temp = new PropertyMap();
+            PropertyMap temp = PropertyMap.GetReusable();
             Tizen.NUI.Object.GetProperty((System.Runtime.InteropServices.HandleRef)textLabel.SwigCPtr, TextLabel.Property.SHADOW).Get(temp);
             return temp.Empty() ? null : new TextShadow(temp);
         }
@@ -569,7 +569,7 @@ namespace Tizen.NUI.BaseComponents
         internal static object GetInternalOutlineProperty(BindableObject bindable)
         {
             var textLabel = (TextLabel)bindable;
-            PropertyMap temp = new PropertyMap();
+            PropertyMap temp = PropertyMap.GetReusable();
             Tizen.NUI.Object.GetProperty((System.Runtime.InteropServices.HandleRef)textLabel.SwigCPtr, TextLabel.Property.OUTLINE).Get(temp);
             return temp;
         }
@@ -766,7 +766,7 @@ namespace Tizen.NUI.BaseComponents
         internal static object GetInternalTextFitProperty(BindableObject bindable)
         {
             var textLabel = (TextLabel)bindable;
-            PropertyMap temp = new PropertyMap();
+            PropertyMap temp = PropertyMap.GetReusable();
             Tizen.NUI.Object.GetProperty((System.Runtime.InteropServices.HandleRef)textLabel.SwigCPtr, TextLabel.Property.TextFit).Get(temp);
             return temp;
         }
@@ -1106,7 +1106,7 @@ namespace Tizen.NUI.BaseComponents
         {
             if (value != null)
             {
-                Object.SetProperty((System.Runtime.InteropServices.HandleRef)SwigCPtr, Property.SHADOW, TextShadow.ToPropertyValue(value));
+                Object.InternalSetPropertyMap(SwigCPtr, Property.SHADOW, TextShadow.ToPropertyMap(value).SwigCPtr);
             }
         }
     }

@@ -60,6 +60,39 @@ namespace Tizen.NUI
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
         }
 
+        internal static int InternalSetPropertyNone(HandleRef actor, int propertyType)
+        {
+            if (actor.Handle == System.IntPtr.Zero)
+            {
+                throw new System.InvalidOperationException("Error! NUI's native dali object is already disposed. OR the native dali object handle of NUI becomes null!");
+            }
+            var ret = Interop.Actor.InternalSetPropertyNone(actor, propertyType);
+            NDalicPINVOKE.ThrowExceptionIfExists();
+            return ret;
+        }
+
+        internal static int InternalSetPropertyMap(HandleRef actor, int propertyType, HandleRef map)
+        {
+            if (actor.Handle == System.IntPtr.Zero)
+            {
+                throw new System.InvalidOperationException("Error! NUI's native dali object is already disposed. OR the native dali object handle of NUI becomes null!");
+            }
+            var ret = Interop.Actor.InternalSetPropertyMap(actor, propertyType, map);
+            NDalicPINVOKE.ThrowExceptionIfExists();
+            return ret;
+        }
+
+        internal static int InternalSetPropertyExtents(HandleRef actor, int propertyType, HandleRef extents)
+        {
+            if (actor.Handle == System.IntPtr.Zero)
+            {
+                throw new System.InvalidOperationException("Error! NUI's native dali object is already disposed. OR the native dali object handle of NUI becomes null!");
+            }
+            var ret = Interop.Actor.InternalSetPropertyExtents(actor, propertyType, extents);
+            NDalicPINVOKE.ThrowExceptionIfExists();
+            return ret;
+        }
+
         internal static int InternalSetPropertyString(HandleRef actor, int propertyType, string valString)
         {
             if (actor.Handle == System.IntPtr.Zero)

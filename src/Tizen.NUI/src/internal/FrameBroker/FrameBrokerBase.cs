@@ -295,12 +295,11 @@ namespace Tizen.NUI
         private PropertyBuffer CreateQuadPropertyBuffer()
         {
             /* Create Property buffer */
-            PropertyValue value = new PropertyValue((int)PropertyType.Vector2);
-            PropertyMap vertexFormat = new PropertyMap();
-            vertexFormat.Add("aPosition", value);
+            using PropertyMap vertexFormat = PropertyMap.GetReusable();
+            vertexFormat.AddInt("aPosition", (int)PropertyType.Vector2);
 
             PropertyBuffer vertexBuffer = new PropertyBuffer(vertexFormat);
-            
+
             TexturedQuadVertex vertex1 = new TexturedQuadVertex();
             TexturedQuadVertex vertex2 = new TexturedQuadVertex();
             TexturedQuadVertex vertex3 = new TexturedQuadVertex();
@@ -333,9 +332,6 @@ namespace Tizen.NUI
                 // Free AllocHGlobal memory after call PropertyBuffer.SetData()
                 Marshal.FreeHGlobal(pA);
             }
-
-            value.Dispose();
-            vertexFormat.Dispose();
 
             return vertexBuffer;
         }

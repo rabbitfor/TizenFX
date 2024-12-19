@@ -207,38 +207,25 @@ namespace Tizen.NUI.BaseComponents
                 NUILog.Debug($"<[{GetId()}]SET url={currentStates.url}");
 
                 // TODO : Could create new Image without additional creation?
-                using PropertyMap map = new PropertyMap();
-                using PropertyValue type = new PropertyValue((int)Visual.Type.AnimatedVectorImage);
-                using PropertyValue url = new PropertyValue(currentStates.url);
-                using PropertyValue loopCnt = new PropertyValue(currentStates.loopCount);
-                using PropertyValue stopAction = new PropertyValue((int)currentStates.stopEndAction);
-                using PropertyValue loopMode = new PropertyValue((int)currentStates.loopMode);
-                using PropertyValue redrawInScalingDown = new PropertyValue(currentStates.redrawInScalingDown);
-                using PropertyValue synchronousLoading = new PropertyValue(currentStates.synchronousLoading);
-                using PropertyValue enableFrameCache = new PropertyValue(currentStates.enableFrameCache);
-                using PropertyValue notifyAfterRasterization = new PropertyValue(currentStates.notifyAfterRasterization);
-                using PropertyValue frameSpeedFactor = new PropertyValue(currentStates.frameSpeedFactor);
-
-                map.Add(Visual.Property.Type, type)
-                    .Add(ImageVisualProperty.URL, url)
-                    .Add(ImageVisualProperty.LoopCount, loopCnt)
-                    .Add(ImageVisualProperty.StopBehavior, stopAction)
-                    .Add(ImageVisualProperty.LoopingMode, loopMode)
-                    .Add(ImageVisualProperty.RedrawInScalingDown, redrawInScalingDown)
-                    .Add(ImageVisualProperty.SynchronousLoading, synchronousLoading)
-                    .Add(ImageVisualProperty.EnableFrameCache, enableFrameCache)
-                    .Add(ImageVisualProperty.NotifyAfterRasterization, notifyAfterRasterization)
-                    .Add(ImageVisualProperty.FrameSpeedFactor, frameSpeedFactor);
+                using PropertyMap map = PropertyMap.GetReusable();
+                map.AddInt(Visual.Property.Type, (int)Visual.Type.AnimatedVectorImage)
+                    .AddString(ImageVisualProperty.URL, currentStates.url)
+                    .AddInt(ImageVisualProperty.LoopCount, currentStates.loopCount)
+                    .AddInt(ImageVisualProperty.StopBehavior, (int)currentStates.stopEndAction)
+                    .AddInt(ImageVisualProperty.LoopingMode, (int)currentStates.loopMode)
+                    .AddBool(ImageVisualProperty.RedrawInScalingDown, currentStates.redrawInScalingDown)
+                    .AddBool(ImageVisualProperty.SynchronousLoading, currentStates.synchronousLoading)
+                    .AddBool(ImageVisualProperty.EnableFrameCache, currentStates.enableFrameCache)
+                    .AddBool(ImageVisualProperty.NotifyAfterRasterization, currentStates.notifyAfterRasterization)
+                    .AddFloat(ImageVisualProperty.FrameSpeedFactor, currentStates.frameSpeedFactor);
 
                 if (currentStates.desiredWidth > 0)
                 {
-                    using PropertyValue desiredWidth = new PropertyValue((int)currentStates.desiredWidth);
-                    map.Add(ImageVisualProperty.DesiredWidth, desiredWidth);
+                    map.AddInt(ImageVisualProperty.DesiredWidth, currentStates.desiredWidth);
                 }
                 if (currentStates.desiredHeight > 0)
                 {
-                    using PropertyValue desiredHeight = new PropertyValue((int)currentStates.desiredHeight);
-                    map.Add(ImageVisualProperty.DesiredHeight, desiredHeight);
+                    map.AddInt(ImageVisualProperty.DesiredHeight, currentStates.desiredHeight);
                 }
 
                 Image = map;
@@ -919,7 +906,7 @@ namespace Tizen.NUI.BaseComponents
                 if (TotalFrame > 0) // Check whether image file loaded successfuly.
                 {
                     PropertyValue val = imageMap.Find(ImageVisualProperty.ContentInfo);
-                    PropertyMap contentMap = new PropertyMap();
+                    PropertyMap contentMap = PropertyMap.GetReusable();
                     if (val?.Get(ref contentMap) == true)
                     {
                         currentStates.contentInfo = new List<Tuple<string, int, int>>();
@@ -1151,14 +1138,14 @@ namespace Tizen.NUI.BaseComponents
             // Update currentStates properties to cachedImagePropertyMap
             if (currentStates.changed)
             {
-                UpdateImage(ImageVisualProperty.LoopCount, new PropertyValue(currentStates.loopCount), false);
-                UpdateImage(ImageVisualProperty.StopBehavior, new PropertyValue((int)currentStates.stopEndAction), false);
-                UpdateImage(ImageVisualProperty.LoopingMode, new PropertyValue((int)currentStates.loopMode), false);
-                UpdateImage(ImageVisualProperty.RedrawInScalingDown, new PropertyValue(currentStates.redrawInScalingDown), false);
-                UpdateImage(ImageVisualProperty.SynchronousLoading, new PropertyValue(currentStates.synchronousLoading), false);
-                UpdateImage(ImageVisualProperty.EnableFrameCache, new PropertyValue(currentStates.enableFrameCache), false);
-                UpdateImage(ImageVisualProperty.NotifyAfterRasterization, new PropertyValue(currentStates.notifyAfterRasterization), false);
-                UpdateImage(ImageVisualProperty.FrameSpeedFactor, new PropertyValue(currentStates.frameSpeedFactor), false);
+                UpdateImage(ImageVisualProperty.LoopCount, PropertyValue.GetReusable(currentStates.loopCount), false);
+                UpdateImage(ImageVisualProperty.StopBehavior, PropertyValue.GetReusable((int)currentStates.stopEndAction), false);
+                UpdateImage(ImageVisualProperty.LoopingMode, PropertyValue.GetReusable((int)currentStates.loopMode), false);
+                UpdateImage(ImageVisualProperty.RedrawInScalingDown, PropertyValue.GetReusable(currentStates.redrawInScalingDown), false);
+                UpdateImage(ImageVisualProperty.SynchronousLoading, PropertyValue.GetReusable(currentStates.synchronousLoading), false);
+                UpdateImage(ImageVisualProperty.EnableFrameCache, PropertyValue.GetReusable(currentStates.enableFrameCache), false);
+                UpdateImage(ImageVisualProperty.NotifyAfterRasterization, PropertyValue.GetReusable(currentStates.notifyAfterRasterization), false);
+                UpdateImage(ImageVisualProperty.FrameSpeedFactor, PropertyValue.GetReusable(currentStates.frameSpeedFactor), false);
 
                 // Do not cache PlayRange and TotalFrameNumber into cachedImagePropertyMap.
                 // (To keep legacy implements behaviour)
@@ -1181,7 +1168,7 @@ namespace Tizen.NUI.BaseComponents
             if (map == null) return;
             if (cachedImagePropertyMap == null)
             {
-                cachedImagePropertyMap = new PropertyMap();
+                cachedImagePropertyMap = PropertyMap.GetReusable();
             }
             foreach (var key in cachedLottieAnimationPropertyKeyList)
             {

@@ -1556,13 +1556,13 @@ namespace Tizen.NUI.BaseComponents
             {
                 using (var propertyValue = GetProperty(Property.TOOLTIP))
                 {
-                    using var propertyMap = new PropertyMap();
+                    using var propertyMap = PropertyMap.GetReusable();
                     if (propertyValue != null && propertyValue.Get(propertyMap))
                     {
                         using var retrivedContentValue = propertyMap?.Find(NDalic.TooltipContent);
                         if (retrivedContentValue != null)
                         {
-                            using var contextPropertyMap = new PropertyMap();
+                            using var contextPropertyMap = PropertyMap.GetReusable();
                             if (retrivedContentValue.Get(contextPropertyMap))
                             {
                                 using var retrivedTextValue = contextPropertyMap?.Find(NDalic.TextVisualText);
@@ -5329,10 +5329,8 @@ namespace Tizen.NUI.BaseComponents
 
                     if (!string.IsNullOrEmpty(BackgroundImage))
                     {
-                        PropertyMap bgMap = this.Background;
-                        var temp = new PropertyValue(backgroundImageSynchronousLoading);
-                        bgMap[ImageVisualProperty.SynchronousLoading] = temp;
-                        temp.Dispose();
+                        using PropertyMap bgMap = this.Background;
+                        bgMap.SetBool(ImageVisualProperty.SynchronousLoading, backgroundImageSynchronousLoading);
                         Background = bgMap;
                     }
                 }

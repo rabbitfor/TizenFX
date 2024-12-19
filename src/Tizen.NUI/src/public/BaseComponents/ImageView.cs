@@ -58,9 +58,9 @@ namespace Tizen.NUI.BaseComponents
                 FastTrackUploadingProperty = BindableProperty.Create(nameof(FastTrackUploading), typeof(bool), typeof(ImageView), false, propertyChanged: SetInternalFastTrackUploadingProperty, defaultValueCreator: GetInternalFastTrackUploadingProperty);
 
                 ImageMapProperty = BindableProperty.Create(nameof(ImageMap), typeof(Tizen.NUI.PropertyMap), typeof(ImageView), null, propertyChanged: SetInternalImageMapProperty, defaultValueCreator: GetInternalImageMapProperty);
-                
+
                 AlphaMaskURLProperty = BindableProperty.Create(nameof(AlphaMaskURL), typeof(string), typeof(ImageView), string.Empty, propertyChanged: SetInternalAlphaMaskURLProperty, defaultValueCreator: GetInternalAlphaMaskURLProperty);
-                
+
                 CropToMaskProperty = BindableProperty.Create(nameof(CropToMask), typeof(bool), typeof(ImageView), false, propertyChanged: SetInternalCropToMaskProperty, defaultValueCreator: GetInternalCropToMaskProperty);
 
                 FittingModeProperty = BindableProperty.Create(nameof(FittingMode), typeof(FittingModeType), typeof(ImageView), default(FittingModeType), propertyChanged: SetInternalFittingModeProperty, defaultValueCreator: GetInternalFittingModeProperty);
@@ -68,7 +68,7 @@ namespace Tizen.NUI.BaseComponents
                 DesiredWidthProperty = BindableProperty.Create(nameof(DesiredWidth), typeof(int), typeof(ImageView), 0, propertyChanged: SetInternalDesiredWidthProperty, defaultValueCreator: GetInternalDesiredWidthProperty);
 
                 DesiredHeightProperty = BindableProperty.Create(nameof(DesiredHeight), typeof(int), typeof(ImageView), 0, propertyChanged: SetInternalDesiredHeightProperty, defaultValueCreator: GetInternalDesiredHeightProperty);
-                        
+
                 ReleasePolicyProperty = BindableProperty.Create(nameof(ReleasePolicy), typeof(ReleasePolicyType), typeof(ImageView), default(ReleasePolicyType), propertyChanged: SetInternalReleasePolicyProperty, defaultValueCreator: GetInternalReleasePolicyProperty);
 
                 WrapModeUProperty = BindableProperty.Create(nameof(WrapModeU), typeof(Tizen.NUI.WrapModeType), typeof(ImageView), default(WrapModeType), propertyChanged: SetInternalWrapModeUProperty, defaultValueCreator: GetInternalWrapModeUProperty);
@@ -206,10 +206,8 @@ namespace Tizen.NUI.BaseComponents
             _resourceUrl = url;
 
             // Update cached property. Note that we should not re-create new visual.
-            using (PropertyValue urlValue = new PropertyValue(_resourceUrl))
-            {
-                UpdateImage(ImageVisualProperty.URL, urlValue, false);
-            }
+            using var urlValue = PropertyValue.GetReusable(_resourceUrl);
+            UpdateImage(ImageVisualProperty.URL, urlValue, false);
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
 
         }
@@ -226,10 +224,8 @@ namespace Tizen.NUI.BaseComponents
             _resourceUrl = url;
 
             // Update cached property. Note that we should not re-create new visual.
-            using (PropertyValue urlValue = new PropertyValue(_resourceUrl))
-            {
-                UpdateImage(ImageVisualProperty.URL, urlValue, false);
-            }
+            using var urlValue = PropertyValue.GetReusable(_resourceUrl);
+            UpdateImage(ImageVisualProperty.URL, urlValue, false);
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
             SetVisible(shown);
         }
@@ -241,18 +237,15 @@ namespace Tizen.NUI.BaseComponents
             _desired_height = size?.GetHeight() ?? -1;
 
             // Update cached property. Note that we should not re-create new visual.
-            using (PropertyValue urlValue = new PropertyValue(_resourceUrl))
-            {
-                UpdateImage(ImageVisualProperty.URL, urlValue, false);
-            }
-            using (PropertyValue desiredWidthValue = new PropertyValue(_desired_width))
-            {
-                UpdateImage(ImageVisualProperty.DesiredWidth, desiredWidthValue, false);
-            }
-            using (PropertyValue desiredHeightValue = new PropertyValue(_desired_height))
-            {
-                UpdateImage(ImageVisualProperty.DesiredWidth, desiredHeightValue, false);
-            }
+            using var urlValue = PropertyValue.GetReusable(_resourceUrl);
+            UpdateImage(ImageVisualProperty.URL, urlValue, false);
+
+            using var desiredWidthValue = PropertyValue.GetReusable(_desired_width);
+            UpdateImage(ImageVisualProperty.DesiredWidth, desiredWidthValue, false);
+
+            using var desiredHeightValue = PropertyValue.GetReusable(_desired_height);
+            UpdateImage(ImageVisualProperty.DesiredWidth, desiredHeightValue, false);
+
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
 
             if (!shown)
@@ -842,9 +835,8 @@ namespace Tizen.NUI.BaseComponents
             set
             {
                 MaskingModeType ret = value;
-                PropertyValue setValue = new PropertyValue((int)ret);
+                using var setValue = PropertyValue.GetReusable((int)ret);
                 UpdateImage(ImageVisualProperty.MaskingMode, setValue);
-                setValue?.Dispose();
             }
         }
 
@@ -906,9 +898,8 @@ namespace Tizen.NUI.BaseComponents
                 {
                     _fastTrackUploading = value;
 
-                    PropertyValue setValue = new PropertyValue(_fastTrackUploading);
+                    using var setValue = PropertyValue.GetReusable(_fastTrackUploading);
                     UpdateImage(ImageVisualProperty.FastTrackUploading, setValue);
-                    setValue?.Dispose();
 
                     if (_fastTrackUploading && !string.IsNullOrEmpty(_resourceUrl))
                     {
@@ -979,10 +970,9 @@ namespace Tizen.NUI.BaseComponents
 
             _resourceUrl = url;
             // Update cached property. Note that we should not re-create new visual.
-            using (PropertyValue urlValue = new PropertyValue(_resourceUrl))
-            {
-                UpdateImage(ImageVisualProperty.URL, urlValue, false);
-            }
+            using var urlValue = PropertyValue.GetReusable(_resourceUrl);
+            UpdateImage(ImageVisualProperty.URL, urlValue, false);
+
             imagePropertyUpdatedFlag = false;
         }
 
@@ -1100,18 +1090,17 @@ namespace Tizen.NUI.BaseComponents
             }
             set
             {
-                PropertyValue setValue = new PropertyValue(value ?? "");
+                using PropertyValue setValue = PropertyValue.GetReusable(value ?? "");
                 UpdateImage(ImageVisualProperty.AlphaMaskURL, setValue);
                 // When we never set CropToMask property before, we should set default value as true.
                 using (PropertyValue cropToMask = GetCachedImageVisualProperty(ImageVisualProperty.CropToMask))
                 {
                     if (cropToMask == null)
                     {
-                        using PropertyValue setCropValue = new PropertyValue(true);
+                        using PropertyValue setCropValue = PropertyValue.GetReusable(true);
                         UpdateImage(ImageVisualProperty.CropToMask, setCropValue);
                     }
                 }
-                setValue?.Dispose();
             }
         }
 
@@ -1160,9 +1149,8 @@ namespace Tizen.NUI.BaseComponents
             }
             set
             {
-                PropertyValue setValue = new PropertyValue(value);
+                using PropertyValue setValue = PropertyValue.GetReusable(value);
                 UpdateImage(ImageVisualProperty.CropToMask, setValue);
-                setValue?.Dispose();
             }
         }
 
@@ -1283,9 +1271,8 @@ namespace Tizen.NUI.BaseComponents
             set
             {
                 VisualFittingModeType ret = ConvertFittingModetoVisualFittingMode(value);
-                PropertyValue setValue = new PropertyValue((int)ret);
+                using PropertyValue setValue = PropertyValue.GetReusable((int)ret);
                 UpdateImage(Visual.Property.VisualFittingMode, setValue);
-                setValue?.Dispose();
             }
         }
 
@@ -1309,7 +1296,7 @@ namespace Tizen.NUI.BaseComponents
             }
             set
             {
-                using PropertyValue setValue = new PropertyValue((int)value);
+                using PropertyValue setValue = PropertyValue.GetReusable((int)value);
                 UpdateImage(ImageVisualProperty.SamplingMode, setValue);
                 NotifyPropertyChanged();
             }
@@ -1326,49 +1313,36 @@ namespace Tizen.NUI.BaseComponents
         [EditorBrowsable(EditorBrowsableState.Never)]
         public void SetTransitionEffectOption(object initialImageAlpha,object destinationImageAlpha, float delay, float speed, AlphaFunction.BuiltinFunctions? alphaFunction = null)
         {
-            using (PropertyMap animator = new PropertyMap())
-            using (PropertyMap timePeriod = new PropertyMap())
+            using (PropertyMap animator = PropertyMap.GetReusable())
+            using (PropertyMap timePeriod = PropertyMap.GetReusable())
             using (PropertyValue initValue = PropertyValue.CreateFromObject(initialImageAlpha))
             using (PropertyValue destValue = PropertyValue.CreateFromObject(destinationImageAlpha))
-            using (PropertyValue pvDelay = new PropertyValue(delay))
-            using (PropertyValue pvSpeed = new PropertyValue(speed))
-            using (PropertyValue pvProperty = new PropertyValue("opacity"))
-            using (PropertyValue pvAnimationType = new PropertyValue("BETWEEN"))
-            using (PropertyMap transition = new PropertyMap())
+            using (PropertyMap transition = PropertyMap.GetReusable())
             {
                 if (alphaFunction != null)
                 {
-                    using (PropertyValue pvAlpha = new PropertyValue(AlphaFunction.BuiltinToPropertyKey(alphaFunction)))
-                    {
-                        animator.Add("alphaFunction", pvAlpha);
-                    }
+                    animator.AddString("alphaFunction", AlphaFunction.BuiltinToPropertyKey(alphaFunction));
                 }
 
-                timePeriod.Add("duration", pvSpeed);
-                timePeriod.Add("delay", pvDelay);
-                using (PropertyValue pvTimePeriod = new PropertyValue(timePeriod))
-                {
-                    animator.Add("timePeriod", pvTimePeriod);
-                }
+                timePeriod.AddFloat("duration", speed);
+                timePeriod.AddFloat("delay", delay);
 
-                animator.Add("animationType", pvAnimationType);
+                using PropertyValue pvTimePeriod = PropertyValue.GetReusable(timePeriod);
+                animator.Add("timePeriod", pvTimePeriod);
 
-                using (PropertyValue pvAnimator = new PropertyValue(animator))
-                {
-                    transition.Add("animator", pvAnimator);
-                }
-                using(PropertyValue pvTarget = new PropertyValue("image"))
-                {
-                    transition.Add("target", pvTarget);
-                }
+                animator.AddString("animationType", "BETWEEN");
 
-                transition.Add("property", pvProperty);
+                using PropertyValue pvAnimator = PropertyValue.GetReusable(animator);
+                transition.Add("animator", pvAnimator);
+
+                transition.AddString("target", "image");
+
+                transition.AddString("property", "opacity");
                 transition.Add("initialValue", initValue);
                 transition.Add("targetValue", destValue);
 
-                SetProperty(ImageView.Property.TransitionEffectOption, new Tizen.NUI.PropertyValue(transition));
-                if (NDalicPINVOKE.SWIGPendingException.Pending)
-                    throw NDalicPINVOKE.SWIGPendingException.Retrieve();
+                SetProperty(Property.TransitionEffectOption, PropertyValue.GetReusable(transition));
+                NDalicPINVOKE.ThrowExceptionIfExists();
             }
         }
 
@@ -1426,9 +1400,8 @@ namespace Tizen.NUI.BaseComponents
                 if (_desired_width != value)
                 {
                     _desired_width = value;
-                    PropertyValue setValue = new PropertyValue(value);
+                    using PropertyValue setValue = PropertyValue.GetReusable(value);
                     UpdateImage(ImageVisualProperty.DesiredWidth, setValue, false);
-                    setValue?.Dispose();
                 }
             }
         }
@@ -1487,9 +1460,8 @@ namespace Tizen.NUI.BaseComponents
                 if (_desired_height != value)
                 {
                     _desired_height = value;
-                    PropertyValue setValue = new PropertyValue(value);
+                    using PropertyValue setValue = PropertyValue.GetReusable(value);
                     UpdateImage(ImageVisualProperty.DesiredHeight, setValue, false);
-                    setValue?.Dispose();
                 }
             }
         }
@@ -1540,9 +1512,8 @@ namespace Tizen.NUI.BaseComponents
             }
             set
             {
-                PropertyValue setValue = new PropertyValue((int)value);
+                using PropertyValue setValue = PropertyValue.GetReusable((int)value);
                 UpdateImage(ImageVisualProperty.ReleasePolicy, setValue);
-                setValue?.Dispose();
             }
         }
 
@@ -1596,9 +1567,8 @@ namespace Tizen.NUI.BaseComponents
             }
             set
             {
-                PropertyValue setValue = new PropertyValue((int)value);
+                using PropertyValue setValue = PropertyValue.GetReusable((int)value);
                 UpdateImage(ImageVisualProperty.WrapModeU, setValue);
-                setValue?.Dispose();
             }
         }
 
@@ -1653,9 +1623,8 @@ namespace Tizen.NUI.BaseComponents
             }
             set
             {
-                PropertyValue setValue = new PropertyValue((int)value);
+                using PropertyValue setValue = PropertyValue.GetReusable((int)value);
                 UpdateImage(ImageVisualProperty.WrapModeV, setValue);
-                setValue?.Dispose();
             }
         }
 
@@ -1713,7 +1682,7 @@ namespace Tizen.NUI.BaseComponents
                 if (NUIApplication.IsUsingXaml)
                 {
                     return (string)GetValue(PlaceHolderUrlProperty);
-                    
+
                 }
                 else
                 {
@@ -1901,18 +1870,15 @@ namespace Tizen.NUI.BaseComponents
             _desired_height = size?.GetHeight() ?? -1;
 
             // Update cached property. Note that we should not re-create new visual.
-            using (PropertyValue urlValue = new PropertyValue(_resourceUrl))
-            {
-                UpdateImage(ImageVisualProperty.URL, urlValue, false);
-            }
-            using (PropertyValue desiredWidthValue = new PropertyValue(_desired_width))
-            {
-                UpdateImage(ImageVisualProperty.DesiredWidth, desiredWidthValue, false);
-            }
-            using (PropertyValue desiredHeightValue = new PropertyValue(_desired_height))
-            {
-                UpdateImage(ImageVisualProperty.DesiredWidth, desiredHeightValue, false);
-            }
+            using PropertyValue urlValue = PropertyValue.GetReusable(_resourceUrl);
+            UpdateImage(ImageVisualProperty.URL, urlValue, false);
+
+            using PropertyValue desiredWidthValue = PropertyValue.GetReusable(_desired_width);
+            UpdateImage(ImageVisualProperty.DesiredWidth, desiredWidthValue, false);
+
+            using PropertyValue desiredHeightValue = PropertyValue.GetReusable(_desired_height);
+            UpdateImage(ImageVisualProperty.DesiredWidth, desiredHeightValue, false);
+
             imagePropertyUpdatedFlag = false;
         }
 
@@ -2032,10 +1998,9 @@ namespace Tizen.NUI.BaseComponents
                 else
                 {
                     _resourceUrl = value;
-                    using (PropertyValue setValue = new PropertyValue(value))
-                    {
-                        UpdateImage(ImageVisualProperty.URL, setValue);
-                    }
+                    using PropertyValue setValue = PropertyValue.GetReusable(value);
+                    UpdateImage(ImageVisualProperty.URL, setValue);
+
                     // Special case. If we set GeneratedUrl, or FastTrackUploading, Create ImageVisual synchronously.
                     if (value.StartsWith("dali://") || value.StartsWith("enbuf://") || _fastTrackUploading)
                     {
@@ -2054,7 +2019,8 @@ namespace Tizen.NUI.BaseComponents
             if (_border != value)
             {
                 _border = new Rectangle(value);
-                UpdateImage(NpatchImageVisualProperty.Border, new PropertyValue(_border));
+                using var propertyValue = PropertyValue.GetReusable(_border);
+                UpdateImage(NpatchImageVisualProperty.Border, propertyValue);
             }
         }
 
@@ -2067,17 +2033,15 @@ namespace Tizen.NUI.BaseComponents
             // Unregist and detach process only if previous resourceUrl was not empty
             if (!string.IsNullOrEmpty(_resourceUrl))
             {
-                PropertyValue emptyValue = new PropertyValue();
-
                 // Remove current registed Image.
-                SetProperty(ImageView.Property.IMAGE, emptyValue);
+                Object.InternalSetPropertyNone(SwigCPtr, Property.IMAGE);
 
                 // Image visual is not exist anymore. We should ignore lazy UpdateImage
                 imagePropertyUpdatedFlag = false;
 
                 // Update resourceUrl as empty value
                 _resourceUrl = "";
-                cachedImagePropertyMap[ImageVisualProperty.URL] = emptyValue;
+                cachedImagePropertyMap.SetNone(ImageVisualProperty.URL);
             }
         }
 
@@ -2226,41 +2190,26 @@ namespace Tizen.NUI.BaseComponents
                 }
                 if (_border == null)
                 {
-                    PropertyValue image = new PropertyValue((int)Visual.Type.Image);
-                    cachedImagePropertyMap[Visual.Property.Type] = image;
-                    image?.Dispose();
+                    cachedImagePropertyMap.SetInt(Visual.Property.Type, (int)Visual.Type.Image);
                 }
                 else
                 {
-                    PropertyValue nPatch = new PropertyValue((int)Visual.Type.NPatch);
-                    cachedImagePropertyMap[Visual.Property.Type] = nPatch;
-                    nPatch?.Dispose();
-                    PropertyValue border = new PropertyValue(_border);
-                    cachedImagePropertyMap[NpatchImageVisualProperty.Border] = border;
-                    border?.Dispose();
+                    cachedImagePropertyMap.SetInt(Visual.Property.Type, (int)Visual.Type.NPatch);
+                    cachedImagePropertyMap.SetRectangle(NpatchImageVisualProperty.Border, _border);
                 }
             }
 
             if (backgroundExtraData != null && backgroundExtraData.CornerRadius != null)
             {
-                using (var cornerRadius = new PropertyValue(backgroundExtraData.CornerRadius))
-                using (var cornerRadiusPolicy = new PropertyValue((int)backgroundExtraData.CornerRadiusPolicy))
-                {
-                    cachedImagePropertyMap[Visual.Property.CornerRadius] = cornerRadius;
-                    cachedImagePropertyMap[Visual.Property.CornerRadiusPolicy] = new PropertyValue((int)(backgroundExtraData.CornerRadiusPolicy));
-                }
+                cachedImagePropertyMap.SetVector4(Visual.Property.CornerRadius, backgroundExtraData.CornerRadius);
+                cachedImagePropertyMap.SetInt(Visual.Property.CornerRadiusPolicy, (int)backgroundExtraData.CornerRadiusPolicy);
             }
 
             if (backgroundExtraData != null && backgroundExtraData.BorderlineWidth > 0.0f)
             {
-                using (var borderlineWidth = new PropertyValue(backgroundExtraData.BorderlineWidth))
-                using (var borderlineColor = new PropertyValue(backgroundExtraData.BorderlineColor))
-                using (var borderlineOffset = new PropertyValue(backgroundExtraData.BorderlineOffset))
-                {
-                    cachedImagePropertyMap[Visual.Property.BorderlineWidth] = borderlineWidth;
-                    cachedImagePropertyMap[Visual.Property.BorderlineColor] = borderlineColor;
-                    cachedImagePropertyMap[Visual.Property.BorderlineOffset] = borderlineOffset;
-                }
+                cachedImagePropertyMap.SetFloat(Visual.Property.BorderlineWidth, backgroundExtraData.BorderlineWidth);
+                cachedImagePropertyMap.SetColor(Visual.Property.BorderlineColor, backgroundExtraData.BorderlineColor);
+                cachedImagePropertyMap.SetFloat(Visual.Property.BorderlineOffset, backgroundExtraData.BorderlineOffset);
             }
 
             // We already applied background extra data now.
@@ -2286,10 +2235,8 @@ namespace Tizen.NUI.BaseComponents
                 {
                     imageMap?.Merge(cachedImagePropertyMap);
                 }
-                using (PropertyValue setValue = new PropertyValue(imageMap))
-                {
-                    SetProperty(ImageView.Property.IMAGE, setValue);
-                }
+                using PropertyValue setValue = PropertyValue.GetReusable(imageMap);
+                SetProperty(Property.IMAGE, setValue);
 
                 // Update cached image property.
                 MergeCachedImageVisualProperty(imageMap);

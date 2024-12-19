@@ -188,6 +188,15 @@ namespace Tizen.NUI
 
             [global::System.Runtime.InteropServices.DllImport(NDalicPINVOKE.Lib, EntryPoint = "CSharp_Dali_Actor_InternalSetPropertyInt")]
             public static extern int InternalSetPropertyInt(HandleRef actor, int propertyType, int valInt);
+
+            [DllImport(NDalicPINVOKE.Lib, EntryPoint = "CSharp_Dali_Actor_InternalSetPropertyMap")]
+            public static extern int InternalSetPropertyMap(HandleRef actor, int propertyType, HandleRef map);
+
+            [DllImport(NDalicPINVOKE.Lib, EntryPoint = "CSharp_Dali_Actor_InternalSetPropertyExtents")]
+            public static extern int InternalSetPropertyExtents(HandleRef actor, int propertyType, HandleRef extents);
+
+            [DllImport(NDalicPINVOKE.Lib, EntryPoint = "CSharp_Dali_Actor_InternalSetPropertyNone")]
+            public static extern int InternalSetPropertyNone(HandleRef actor, int propertyType);
         }
     }
 }

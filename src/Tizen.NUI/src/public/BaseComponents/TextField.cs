@@ -1035,9 +1035,9 @@ namespace Tizen.NUI.BaseComponents
             }
             set
             {
-                using (var map = new PropertyMap())
+                using (var map = PropertyMap.GetReusable())
                 {
-                    map.Add("offset", value);
+                    map.AddVector2("offset", value);
                     var shadowMap = Shadow;
                     shadowMap.Merge(map);
                     if (NUIApplication.IsUsingXaml)
@@ -1102,9 +1102,9 @@ namespace Tizen.NUI.BaseComponents
             }
             set
             {
-                using (var map = new PropertyMap())
+                using (var map = PropertyMap.GetReusable())
                 {
-                    map.Add("color", value);
+                    map.AddVector4("color", value);
                     var shadowMap = Shadow;
                     shadowMap.Merge(map);
                     if (NUIApplication.IsUsingXaml)
@@ -3021,11 +3021,8 @@ namespace Tizen.NUI.BaseComponents
             }
             set
             {
-                using (var propertyValue = new PropertyValue(value))
-                {
-                    SetProperty(TextField.Property.EnableEditing, propertyValue);
-                    NotifyPropertyChanged();
-                }
+                Object.InternalSetPropertyBool(SwigCPtr, Property.EnableEditing, value);
+                NotifyPropertyChanged();
             }
         }
 
@@ -3076,11 +3073,8 @@ namespace Tizen.NUI.BaseComponents
             }
             set
             {
-                using (PropertyValue propertyValue = new PropertyValue(value))
-                {
-                    SetProperty(TextField.Property.PrimaryCursorPosition, propertyValue);
-                    NotifyPropertyChanged();
-                }
+                Object.InternalSetPropertyInt(SwigCPtr, Property.PrimaryCursorPosition, value);
+                NotifyPropertyChanged();
             }
         }
 
@@ -3209,11 +3203,9 @@ namespace Tizen.NUI.BaseComponents
         /// <since_tizen> 9 </since_tizen>
         public void SetInputFilter(InputFilter inputFilter)
         {
-            using (var map = TextMapHelper.GetInputFilterMap(inputFilter))
-            using (var propertyValue = new PropertyValue(map))
-            {
-                SetProperty(TextField.Property.InputFilter, propertyValue);
-            }
+            using var map = TextMapHelper.GetInputFilterMap(inputFilter);
+            using var propertyValue = PropertyValue.GetReusable(map);
+            SetProperty(TextField.Property.InputFilter, propertyValue);
         }
 
         /// <summary>
@@ -3228,7 +3220,7 @@ namespace Tizen.NUI.BaseComponents
         {
             InputFilter inputFilter;
             using (var propertyValue = GetProperty(TextField.Property.InputFilter))
-            using (var map = new PropertyMap())
+            using (var map = PropertyMap.GetReusable())
             {
                 propertyValue.Get(map);
                 inputFilter = TextMapHelper.GetInputFilterStruct(map);
@@ -3256,11 +3248,9 @@ namespace Tizen.NUI.BaseComponents
         [EditorBrowsable(EditorBrowsableState.Never)]
         public void SetStrikethrough(Strikethrough strikethrough)
         {
-            using (var map = TextMapHelper.GetStrikethroughMap(strikethrough))
-            using (var propertyValue = new PropertyValue(map))
-            {
-                SetProperty(TextField.Property.Strikethrough, propertyValue);
-            }
+            using var map = TextMapHelper.GetStrikethroughMap(strikethrough);
+            using var propertyValue = PropertyValue.GetReusable(map);
+            SetProperty(TextEditor.Property.Strikethrough, propertyValue);
         }
 
         /// <summary>
@@ -3275,7 +3265,7 @@ namespace Tizen.NUI.BaseComponents
         {
             Strikethrough strikethrough;
             using (var propertyValue = GetProperty(TextField.Property.Strikethrough))
-            using (var map = new PropertyMap())
+            using (var map = PropertyMap.GetReusable())
             {
                 propertyValue.Get(map);
                 strikethrough = TextMapHelper.GetStrikethroughStruct(map);
@@ -3335,34 +3325,33 @@ namespace Tizen.NUI.BaseComponents
                 string defalutText = "";
 
                 if (TextMapHelper.IsValue(map, 0))
-                    map.Add("text", TextMapHelper.GetStringFromMap(map, 0, defalutText));
+                    map.AddString("text", TextMapHelper.GetStringFromMap(map, 0, defalutText));
 
                 if (TextMapHelper.IsValue(map, 1))
-                    map.Add("textFocused", TextMapHelper.GetStringFromMap(map, 1, defalutText));
+                    map.AddString("textFocused", TextMapHelper.GetStringFromMap(map, 1, defalutText));
 
                 if (TextMapHelper.IsValue(map, 2))
                 {
                     using (var color = TextMapHelper.GetColorFromMap(map, 2))
                     {
-                        map.Add("color", color);
+                        map.AddColor("color", color);
                     }
                 }
 
                 if (TextMapHelper.IsValue(map, 3))
-                    map.Add("fontFamily", TextMapHelper.GetStringFromMap(map, 3, defalutText));
+                    map.AddString("fontFamily", TextMapHelper.GetStringFromMap(map, 3, defalutText));
 
                 if (TextMapHelper.IsValue(map, 4))
                 {
                     using (var properyValue = map.Find(4))
-                    using (var fontStyle = new PropertyMap())
+                    using (var fontStyle = PropertyMap.GetReusable())
                     {
                         properyValue.Get(fontStyle);
-                        using (var fontStyleValue = new PropertyValue(fontStyle))
-                        {
-                            map.Add("fontStyle", fontStyleValue);
-                        }
+                        map.AddMap("fontStyle", fontStyle);
                     }
                 }
+
+                // NOTE Need check! When GetNullableFloatFromMap returns null, it seems an exception would be thrown
 
                 if (TextMapHelper.IsValue(map, 5))
                     map.Add("pointSize", TextMapHelper.GetNullableFloatFromMap(map, 5));
@@ -3371,7 +3360,7 @@ namespace Tizen.NUI.BaseComponents
                     map.Add("pixelSize", TextMapHelper.GetNullableFloatFromMap(map, 6));
 
                 if (TextMapHelper.IsValue(map, 7))
-                    map.Add("ellipsis", TextMapHelper.GetBoolFromMap(map, 7, false));
+                    map.AddBool("ellipsis", TextMapHelper.GetBoolFromMap(map, 7, false));
 
                 return map;
             }

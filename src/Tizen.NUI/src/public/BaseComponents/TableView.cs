@@ -102,7 +102,7 @@ namespace Tizen.NUI.BaseComponents
         internal static object GetInternalLayoutRowsProperty(BindableObject bindable)
         {
             var tableView = (TableView)bindable;
-            PropertyMap temp = new PropertyMap();
+            PropertyMap temp = PropertyMap.GetReusable();
             Tizen.NUI.Object.GetProperty((HandleRef)tableView.SwigCPtr, TableView.Property.LayoutRows).Get(temp);
             return temp;
         }
@@ -121,7 +121,7 @@ namespace Tizen.NUI.BaseComponents
         internal static object GetInternalLayoutColumnsProperty(BindableObject bindable)
         {
             var tableView = (TableView)bindable;
-            PropertyMap temp = new PropertyMap();
+            PropertyMap temp = PropertyMap.GetReusable();
             Tizen.NUI.Object.GetProperty((HandleRef)tableView.SwigCPtr, TableView.Property.LayoutColumns).Get(temp);
             return temp;
         }

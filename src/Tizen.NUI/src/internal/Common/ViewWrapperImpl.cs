@@ -375,7 +375,7 @@ namespace Tizen.NUI
 
         private void DirectorOnPropertySet(int index, global::System.IntPtr propertyValue)
         {
-            var value = new PropertyValue(propertyValue, false);
+            var value = PropertyValue.GetReusable(propertyValue, false);
             OnPropertySet?.Invoke(index, value);
             value.Dispose();
         }

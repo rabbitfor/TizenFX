@@ -160,10 +160,10 @@ namespace Tizen.NUI.BaseComponents
         [EditorBrowsable(EditorBrowsableState.Never)]
         public static PropertyMap GetFontStyleMap(FontStyle fontStyle)
         {
-            var map = new PropertyMap();
-            map.Add("width", GetFontWidthString(fontStyle.Width));
-            map.Add("weight", GetFontWeightString(fontStyle.Weight));
-            map.Add("slant", GetFontSlantString(fontStyle.Slant));
+            var map = PropertyMap.GetReusable();
+            map.AddString("width", GetFontWidthString(fontStyle.Width));
+            map.AddString("weight", GetFontWeightString(fontStyle.Weight));
+            map.AddString("slant", GetFontSlantString(fontStyle.Slant));
 
             return map;
         }
@@ -200,11 +200,11 @@ namespace Tizen.NUI.BaseComponents
         {
             var defaultValue = "";
 
-            var map = new PropertyMap();
+            var map = PropertyMap.GetReusable();
             var accepted = inputFilter.Accepted == null ? defaultValue : inputFilter.Accepted;
             var rejected = inputFilter.Rejected == null ? defaultValue : inputFilter.Rejected;
-            map.Add(0, accepted);
-            map.Add(1, rejected);
+            map.AddString(0, accepted);
+            map.AddString(1, rejected);
 
             return map;
         }
@@ -238,15 +238,19 @@ namespace Tizen.NUI.BaseComponents
         [EditorBrowsable(EditorBrowsableState.Never)]
         public static PropertyMap GetStrikethroughMap(Strikethrough strikethrough)
         {
-            var map = new PropertyMap();
+            var map = PropertyMap.GetReusable();
 
-            map.Add("enable", strikethrough.Enable);
+            map.AddBool("enable", strikethrough.Enable);
 
             if (strikethrough.Color != null)
-                map.Add("color", strikethrough.Color);
+            {
+                map.AddColor("color", strikethrough.Color);
+            }
 
             if (strikethrough.Height != null)
-                map.Add("height", (float)strikethrough.Height);
+            {
+                map.AddFloat("height", (float)strikethrough.Height);
+            }
 
             return map;
         }
@@ -281,22 +285,22 @@ namespace Tizen.NUI.BaseComponents
         [EditorBrowsable(EditorBrowsableState.Never)]
         public static PropertyMap GetUnderlineMap(Underline underline)
         {
-            var map = new PropertyMap();
+            var map = PropertyMap.GetReusable();
 
-            map.Add("enable", underline.Enable);
-            map.Add("type", (int)underline.Type);
+            map.AddBool("enable", underline.Enable);
+            map.AddInt("type", (int)underline.Type);
 
             if (underline.Color != null)
-                map.Add("color", underline.Color);
+                map.AddColor("color", underline.Color);
 
             if (underline.Height != null)
-                map.Add("height", (float)underline.Height);
+                map.AddFloat("height", (float)underline.Height);
 
             if (underline.DashWidth != null)
-                map.Add("dashWidth", (float)underline.DashWidth);
+                map.AddFloat("dashWidth", (float)underline.DashWidth);
 
             if (underline.DashGap != null)
-                map.Add("dashGap", (float)underline.DashGap);
+                map.AddFloat("dashGap", (float)underline.DashGap);
 
             return map;
         }
@@ -333,16 +337,16 @@ namespace Tizen.NUI.BaseComponents
         [EditorBrowsable(EditorBrowsableState.Never)]
         public static PropertyMap GetShadowMap(Tizen.NUI.Text.Shadow shadow)
         {
-            var map = new PropertyMap();
+            var map = PropertyMap.GetReusable();
 
             if (shadow.Offset != null)
-                map.Add("offset", shadow.Offset);
+                map.AddVector2("offset", shadow.Offset);
 
             if (shadow.Color != null)
-                map.Add("color", shadow.Color);
+                map.AddColor("color", shadow.Color);
 
             if (shadow.BlurRadius != null)
-                map.Add("blurRadius", (float)shadow.BlurRadius);
+                map.AddFloat("blurRadius", (float)shadow.BlurRadius);
 
             return map;
         }
@@ -376,19 +380,19 @@ namespace Tizen.NUI.BaseComponents
         [EditorBrowsable(EditorBrowsableState.Never)]
         public static PropertyMap GetOutlineMap(Outline outline)
         {
-            var map = new PropertyMap();
+            var map = PropertyMap.GetReusable();
 
             if (outline.Color != null)
-                map.Add("color", outline.Color);
+                map.AddColor("color", outline.Color);
 
             if (outline.Width != null)
-                map.Add("width", (float)outline.Width);
+                map.AddFloat("width", (float)outline.Width);
 
             if (outline.Offset != null)
-                map.Add("offset", outline.Offset);
+                map.AddVector2("offset", outline.Offset);
 
             if (outline.BlurRadius != null)
-                map.Add("blurRadius", (float)outline.BlurRadius);
+                map.AddFloat("blurRadius", (float)outline.BlurRadius);
 
             return map;
         }
@@ -423,18 +427,18 @@ namespace Tizen.NUI.BaseComponents
         [EditorBrowsable(EditorBrowsableState.Never)]
         public static PropertyMap GetTextFitMap(TextFit textFit)
         {
-            var map = new PropertyMap();
-            map.Add("enable", textFit.Enable);
-            map.Add("fontSizeType", GetFontSizeString(textFit.FontSizeType));
+            var map = PropertyMap.GetReusable();
+            map.AddBool("enable", textFit.Enable);
+            map.AddString("fontSizeType", GetFontSizeString(textFit.FontSizeType));
 
             if (textFit.MinSize != null)
-                map.Add("minSize", (float)textFit.MinSize);
+                map.AddFloat("minSize", (float)textFit.MinSize);
 
             if (textFit.MaxSize != null)
-                map.Add("maxSize", (float)textFit.MaxSize);
+                map.AddFloat("maxSize", (float)textFit.MaxSize);
 
             if (textFit.StepSize != null)
-                map.Add("stepSize", (float)textFit.StepSize);
+                map.AddFloat("stepSize", (float)textFit.StepSize);
 
             return map;
         }
@@ -472,39 +476,36 @@ namespace Tizen.NUI.BaseComponents
         [EditorBrowsable(EditorBrowsableState.Never)]
         public static PropertyMap GetPlaceholderMap(Placeholder placeholder)
         {
-            var map = new PropertyMap();
+            var map = PropertyMap.GetReusable();
 
             if (placeholder.Text != null)
-                map.Add("text", placeholder.Text);
+                map.AddString("text", placeholder.Text);
 
             if (placeholder.TextFocused != null)
-                map.Add("textFocused", placeholder.TextFocused);
+                map.AddString("textFocused", placeholder.TextFocused);
 
             if (placeholder.Color != null)
-                map.Add("color", placeholder.Color);
+                map.AddColor("color", placeholder.Color);
 
             if (placeholder.FontFamily != null)
-                map.Add("fontFamily", placeholder.FontFamily);
+                map.AddString("fontFamily", placeholder.FontFamily);
 
             if (placeholder.FontStyle != null)
             {
-                using (var fontStyleMap = GetFontStyleMap((FontStyle)placeholder.FontStyle))
-                using (var fontStyleValue = new PropertyValue(fontStyleMap))
-                {
-                    map.Add("fontStyle", fontStyleValue);
-                }
+                using var fontStyleMap = GetFontStyleMap((FontStyle)placeholder.FontStyle);
+                map.AddMap("fontStyle", fontStyleMap);
             }
 
             if (placeholder.PointSize != null && placeholder.PixelSize != null)
-                map.Add("pointSize", (float)placeholder.PointSize);
+                map.AddFloat("pointSize", (float)placeholder.PointSize);
 
             else if (placeholder.PointSize != null)
-                map.Add("pointSize", (float)placeholder.PointSize);
+                map.AddFloat("pointSize", (float)placeholder.PointSize);
 
             else if (placeholder.PixelSize != null)
-                map.Add("pixelSize", (float)placeholder.PixelSize);
+                map.AddFloat("pixelSize", (float)placeholder.PixelSize);
 
-            map.Add("ellipsis", placeholder.Ellipsis);
+            map.AddBool("ellipsis", placeholder.Ellipsis);
 
             return map;
         }
@@ -547,18 +548,18 @@ namespace Tizen.NUI.BaseComponents
         [EditorBrowsable(EditorBrowsableState.Never)]
         public static PropertyMap GetHiddenInputMap(HiddenInput hiddenInput)
         {
-            var map = new PropertyMap();
+            var map = PropertyMap.GetReusable();
 
-            map.Add(0, (int)hiddenInput.Mode);
+            map.AddInt(0, (int)hiddenInput.Mode);
 
             if (hiddenInput.SubstituteCharacter != null)
-                map.Add(1, Convert.ToInt32(hiddenInput.SubstituteCharacter));
+                map.AddInt(1, Convert.ToInt32(hiddenInput.SubstituteCharacter));
 
             if (hiddenInput.SubstituteCount != null)
-                map.Add(2, (int)hiddenInput.SubstituteCount);
+                map.AddInt(2, (int)hiddenInput.SubstituteCount);
 
             if (hiddenInput.ShowLastCharacterDuration != null)
-                map.Add(3, (int)hiddenInput.ShowLastCharacterDuration);
+                map.AddInt(3, (int)hiddenInput.ShowLastCharacterDuration);
 
             return map;
         }
@@ -598,7 +599,7 @@ namespace Tizen.NUI.BaseComponents
         [EditorBrowsable(EditorBrowsableState.Never)]
         public static PropertyMap GetFileNameMap(string fileName)
         {
-            return new PropertyMap().Add("filename", fileName);
+            return PropertyMap.GetReusable().AddString("filename", fileName);
         }
 
         /// <summary>
@@ -737,7 +738,7 @@ namespace Tizen.NUI.BaseComponents
 
         internal static PropertyMap GetMapFromMap(PropertyMap map, int key)
         {
-            PropertyMap value = new PropertyMap();
+            PropertyMap value = PropertyMap.GetReusable();
             using (var propertyValue = map.Find(key))
             {
                 if (null != propertyValue) propertyValue.Get(value);

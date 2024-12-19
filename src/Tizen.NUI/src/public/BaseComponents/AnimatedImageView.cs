@@ -124,7 +124,7 @@ namespace Tizen.NUI.BaseComponents
             }
             set
             {
-                using PropertyValue setValue = new PropertyValue(value);
+                using PropertyValue setValue = PropertyValue.GetReusable(value);
                 UpdateImage(ImageVisualProperty.BatchSize, setValue);
             }
         }
@@ -166,7 +166,7 @@ namespace Tizen.NUI.BaseComponents
             }
             set
             {
-                using PropertyValue setValue = new PropertyValue(value);
+                using PropertyValue setValue = PropertyValue.GetReusable(value);
                 UpdateImage(ImageVisualProperty.CacheSize, setValue);
             }
         }
@@ -207,7 +207,7 @@ namespace Tizen.NUI.BaseComponents
             }
             set
             {
-                using PropertyValue setValue = new PropertyValue(value);
+                using PropertyValue setValue = PropertyValue.GetReusable(value);
                 UpdateImage(ImageVisualProperty.FrameDelay, setValue);
             }
         }
@@ -244,7 +244,7 @@ namespace Tizen.NUI.BaseComponents
             }
             set
             {
-                using PropertyValue setValue = new PropertyValue(value);
+                using PropertyValue setValue = PropertyValue.GetReusable(value);
                 UpdateImage(ImageVisualProperty.LoopCount, setValue);
             }
         }
@@ -280,7 +280,7 @@ namespace Tizen.NUI.BaseComponents
             }
             set
             {
-                using PropertyValue setValue = new PropertyValue((int)value);
+                using PropertyValue setValue = PropertyValue.GetReusable((int)value);
                 UpdateImage(ImageVisualProperty.StopBehavior, setValue);
             }
         }
@@ -324,7 +324,7 @@ namespace Tizen.NUI.BaseComponents
             }
             set
             {
-                using PropertyValue setValue = new PropertyValue(value);
+                using PropertyValue setValue = PropertyValue.GetReusable(value);
                 UpdateImage(ImageVisualProperty.FrameSpeedFactor, setValue);
             }
         }
@@ -380,8 +380,8 @@ namespace Tizen.NUI.BaseComponents
             {
                 // Sync as current properties
                 UpdateImage();
-
-                DoAction(ImageView.Property.IMAGE, ActionJumpTo, new PropertyValue(value));
+                using var propertyValue = PropertyValue.GetReusable(value);
+                DoAction(Property.IMAGE, ActionJumpTo, propertyValue);
             }
             get
             {
@@ -434,10 +434,8 @@ namespace Tizen.NUI.BaseComponents
 
             // Assume that we are using standard Image at first.
             // (Since we might cache Visual.Property.Type as Visual.Type.AnimatedImage even we don't use URLs.)
-            using (PropertyValue imageType = new PropertyValue((int)Visual.Type.Image))
-            {
-                UpdateImage(Visual.Property.Type, imageType, false);
-            }
+            using var imageType = PropertyValue.GetReusable((int)Visual.Type.Image);
+            UpdateImage(Visual.Property.Type, imageType, false);
 
             if (resourceURLs != null && resourceURLs.Count != 0)
             {
@@ -446,10 +444,8 @@ namespace Tizen.NUI.BaseComponents
                     PropertyArray returnedArr = new PropertyArray();
                     foreach (var iter in resourceURLs)
                     {
-                        using (PropertyValue index = new PropertyValue(iter))
-                        {
-                            returnedArr = indexPropertyArray.Add(index);
-                        }
+                        using var index = PropertyValue.GetReusable(iter);
+                        returnedArr = indexPropertyArray.Add(index);
                     }
                     returnedArr.Dispose();
                     using PropertyValue arrayProperty = new PropertyValue(indexPropertyArray);
@@ -459,7 +455,7 @@ namespace Tizen.NUI.BaseComponents
                 }
 
                 // Trick that we are using resourceURLs without ResourceUrl API.
-                using PropertyValue animatiedImage = new PropertyValue((int)Visual.Type.AnimatedImage);
+                using var animatiedImage = PropertyValue.GetReusable((int)Visual.Type.AnimatedImage);
                 UpdateImage(Visual.Property.Type, animatiedImage, false);
             }
 
@@ -479,7 +475,7 @@ namespace Tizen.NUI.BaseComponents
             if (map == null) return;
             if (cachedImagePropertyMap == null)
             {
-                cachedImagePropertyMap = new PropertyMap();
+                cachedImagePropertyMap = PropertyMap.GetReusable();
             }
             foreach (var key in cachedAnimatedImagePropertyKeyList)
             {

@@ -69,53 +69,37 @@ namespace Tizen.NUI.BaseComponents
         /// <since_tizen> 3 </since_tizen>
         public Animation AnimateColor(string targetVisual, object destinationColor, int startTime, int endTime, AlphaFunction.BuiltinFunctions? alphaFunction = null, object initialColor = null)
         {
-            Animation animation = null;
-            using (PropertyMap animator = new PropertyMap())
-            using (PropertyMap timePeriod = new PropertyMap())
-            using (PropertyValue pvDuration = new PropertyValue((endTime - startTime) / 1000.0f))
-            using (PropertyValue pvDelay = new PropertyValue(startTime / 1000.0f))
-            using (PropertyMap transition = new PropertyMap())
-            using (PropertyValue pvTarget = new PropertyValue(targetVisual))
-            using (PropertyValue pvProperty = new PropertyValue("mixColor"))
-            using (PropertyValue destValue = PropertyValue.CreateFromObject(destinationColor))
+            using PropertyMap animator = PropertyMap.GetReusable();
+
+            if (alphaFunction != null)
             {
-                if (alphaFunction != null)
-                {
-                    using (PropertyValue pvAlpha = new PropertyValue(AlphaFunction.BuiltinToPropertyKey(alphaFunction)))
-                    {
-                        animator.Add("alphaFunction", pvAlpha);
-                    }
-                }
-
-                timePeriod.Add("duration", pvDuration);
-                timePeriod.Add("delay", pvDelay);
-                using (PropertyValue pvTimePeriod = new PropertyValue(timePeriod))
-                {
-                    animator.Add("timePeriod", pvTimePeriod);
-                }
-                using (PropertyValue pvAnimator = new PropertyValue(animator))
-                {
-                    transition.Add("animator", pvAnimator);
-                }
-                transition.Add("target", pvTarget);
-                transition.Add("property", pvProperty);
-
-                if (initialColor != null)
-                {
-                    using (PropertyValue initValue = PropertyValue.CreateFromObject(initialColor))
-                    {
-                        transition.Add("initialValue", initValue);
-                    }
-                }
-
-                transition.Add("targetValue", destValue);
-                using (TransitionData transitionData = new TransitionData(transition))
-                {
-                    animation = new Animation(Interop.View.CreateTransition(SwigCPtr, TransitionData.getCPtr(transitionData)), true);
-                }
-                if (NDalicPINVOKE.SWIGPendingException.Pending)
-                    throw NDalicPINVOKE.SWIGPendingException.Retrieve();
+                animator.AddString("alphaFunction", AlphaFunction.BuiltinToPropertyKey(alphaFunction));
             }
+
+            using PropertyMap timePeriod = PropertyMap.GetReusable();
+            timePeriod.AddFloat("duration", (endTime - startTime) / 1000.0f);
+            timePeriod.AddFloat("delay", startTime / 1000.0f);
+
+            animator.AddMap("timePeriod", timePeriod);
+
+            using PropertyMap transition = PropertyMap.GetReusable();
+            transition.AddMap("animator", animator);
+            transition.AddString("target", targetVisual);
+            transition.AddString("property", "mixColor");
+
+            if (initialColor != null)
+            {
+                using PropertyValue initValue = PropertyValue.CreateFromObject(initialColor);
+                transition.Add("initialValue", initValue);
+            }
+
+            using PropertyValue destValue = PropertyValue.CreateFromObject(destinationColor);
+            transition.Add("targetValue", destValue);
+
+            using TransitionData transitionData = new TransitionData(transition);
+            Animation animation = new Animation(Interop.View.CreateTransition(SwigCPtr, getCPtr(transitionData)), true);
+            NDalicPINVOKE.ThrowExceptionIfExists();
+
             return animation;
         }
 

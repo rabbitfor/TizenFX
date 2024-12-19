@@ -495,7 +495,7 @@ namespace Tizen.NUI.BaseComponents
 
         internal Position GetCurrentParentOrigin()
         {
-            var position = DisposablePool.GetOrCreate<Position>();
+            var position = Position.GetReusable();
 
             Interop.ActorInternal.RetrieveCurrentPropertyVector3(SwigCPtr, View.Property.ParentOrigin, position.SwigCPtr);
 
@@ -515,7 +515,7 @@ namespace Tizen.NUI.BaseComponents
 
         internal Position GetCurrentAnchorPoint()
         {
-            var position = DisposablePool.GetOrCreate<Position>();
+            var position = Position.GetReusable();
 
             Interop.ActorInternal.RetrieveCurrentPropertyVector3(SwigCPtr, View.Property.AnchorPoint, position.SwigCPtr);
 
@@ -556,7 +556,7 @@ namespace Tizen.NUI.BaseComponents
 
         internal Vector3 GetTargetSize()
         {
-            var vector3 = DisposablePool.GetOrCreate<Vector3>();
+            var vector3 = Vector3.GetReusable();
 
             Interop.ActorInternal.RetrieveTargetSize(SwigCPtr, vector3.SwigCPtr);
 
@@ -569,7 +569,7 @@ namespace Tizen.NUI.BaseComponents
 
         internal Size2D GetCurrentSize()
         {
-            var size2D = DisposablePool.GetOrCreate<Size2D>();
+            var size2D = Size2D.GetReusable();
 
             Interop.ActorInternal.RetrieveCurrentPropertyVector2ActualVector3(SwigCPtr, Property.SIZE, size2D.SwigCPtr);
 
@@ -630,7 +630,7 @@ namespace Tizen.NUI.BaseComponents
 
         internal Position GetCurrentPosition()
         {
-            var position = DisposablePool.GetOrCreate<Position>();
+            var position = Position.GetReusable();
 
             Interop.ActorInternal.RetrieveCurrentPropertyVector3(SwigCPtr, Property.POSITION, position.SwigCPtr);
 
@@ -642,7 +642,7 @@ namespace Tizen.NUI.BaseComponents
         }
         internal Vector3 GetCurrentWorldPosition()
         {
-            var vector3 = DisposablePool.GetOrCreate<Vector3>();
+            var vector3 = Vector3.GetReusable();
 
             Interop.ActorInternal.RetrieveCurrentPropertyVector3(SwigCPtr, View.Property.WorldPosition, vector3.SwigCPtr);
 
@@ -655,7 +655,7 @@ namespace Tizen.NUI.BaseComponents
 
         internal Vector2 GetCurrentScreenPosition()
         {
-            var vector2 = DisposablePool.GetOrCreate<Vector2>();
+            var vector2 = Vector2.GetReusable();
 
             Object.InternalRetrievingPropertyVector2(SwigCPtr, View.Property.ScreenPosition, vector2.SwigCPtr);
 
@@ -763,7 +763,7 @@ namespace Tizen.NUI.BaseComponents
 
         internal Vector3 GetCurrentScale()
         {
-            var vector3 = DisposablePool.GetOrCreate<Vector3>();
+            var vector3 = Vector3.GetReusable();
 
             Interop.ActorInternal.RetrieveCurrentPropertyVector3(SwigCPtr, View.Property.SCALE, vector3.SwigCPtr);
 
@@ -776,7 +776,7 @@ namespace Tizen.NUI.BaseComponents
 
         internal Vector3 GetCurrentWorldScale()
         {
-            var vector3 = DisposablePool.GetOrCreate<Vector3>();
+            var vector3 = Vector3.GetReusable();
 
             Interop.ActorInternal.RetrieveCurrentPropertyVector3(SwigCPtr, View.Property.WorldScale, vector3.SwigCPtr);
 
@@ -849,7 +849,7 @@ namespace Tizen.NUI.BaseComponents
 
         internal Vector4 GetCurrentColor()
         {
-            var vector4 = DisposablePool.GetOrCreate<Vector4>();
+            var vector4 = Vector4.GetReusable();
 
             Interop.ActorInternal.RetrieveCurrentPropertyVector4(SwigCPtr, Interop.ActorProperty.ColorGet(), vector4.SwigCPtr);
 
@@ -869,7 +869,7 @@ namespace Tizen.NUI.BaseComponents
 
         internal Vector4 GetCurrentWorldColor()
         {
-            var vector4 = DisposablePool.GetOrCreate<Vector4>();
+            var vector4 = Vector4.GetReusable();
 
             Interop.ActorInternal.RetrieveCurrentPropertyVector4(SwigCPtr, Property.WorldColor, vector4.SwigCPtr);
 
@@ -957,7 +957,7 @@ namespace Tizen.NUI.BaseComponents
 
         internal Vector3 GetSizeModeFactor()
         {
-            var vector3 = DisposablePool.GetOrCreate<Vector3>();
+            var vector3 = Vector3.GetReusable();
             Object.InternalRetrievingPropertyVector3(SwigCPtr, View.Property.SizeModeFactor, vector3.SwigCPtr);
             NDalicPINVOKE.ThrowExceptionIfExists();
             return vector3;
@@ -972,7 +972,7 @@ namespace Tizen.NUI.BaseComponents
 
         internal Vector2 GetMinimumSize()
         {
-            var vector2 = DisposablePool.GetOrCreate<Vector2>();
+            var vector2 = Vector2.GetReusable();
             Object.InternalRetrievingPropertyVector2(SwigCPtr, View.Property.MinimumSize, vector2.SwigCPtr);
             NDalicPINVOKE.ThrowExceptionIfExists();
             return vector2;
@@ -987,7 +987,7 @@ namespace Tizen.NUI.BaseComponents
 
         internal Vector2 GetMaximumSize()
         {
-            var vector2 = DisposablePool.GetOrCreate<Vector2>();
+            var vector2 = Vector2.GetReusable();
             Object.InternalRetrievingPropertyVector2(SwigCPtr, View.Property.MaximumSize, vector2.SwigCPtr);
             NDalicPINVOKE.ThrowExceptionIfExists();
             return vector2;

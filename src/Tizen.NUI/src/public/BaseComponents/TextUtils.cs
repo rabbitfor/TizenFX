@@ -1098,7 +1098,7 @@ namespace Tizen.NUI.BaseComponents
             {
                 for (uint i = 0 ; i < fontArray.Count(); i ++)
                 {
-                    using (var fontInfoMap = new PropertyMap())
+                    using (var fontInfoMap = PropertyMap.GetReusable())
                     using (var propertyValue = fontArray[i])
                     {
                         propertyValue.Get(fontInfoMap);

@@ -66,11 +66,11 @@ namespace Tizen.NUI.BaseComponents
                     PropertyValue urlValue = map.Find(NDalic.ImageVisualUrl);
                     bool ret = false;
                     if (urlValue != null) ret = urlValue.Get(out url);
-                    PropertyMap mmap = new PropertyMap();
+                    using PropertyMap mmap = PropertyMap.GetReusable();
                     if (ret && url.StartsWith("*Resource*"))
                     {
                         url = url.Replace("*Resource*", resource);
-                        mmap.Insert(NDalic.ImageVisualUrl, new PropertyValue(url));
+                        mmap.AddString(NDalic.ImageVisualUrl, url);
                     }
 
                     ret = false;
@@ -79,7 +79,7 @@ namespace Tizen.NUI.BaseComponents
                     if (ret && alphaMaskURL.StartsWith("*Resource*"))
                     {
                         alphaMaskURL = alphaMaskURL.Replace("*Resource*", resource);
-                        mmap.Insert(NDalic.ImageVisualAlphaMaskUrl, new PropertyValue(alphaMaskURL));
+                        mmap.AddString(NDalic.ImageVisualAlphaMaskUrl, alphaMaskURL);
                     }
 
                     ret = false;
@@ -88,7 +88,7 @@ namespace Tizen.NUI.BaseComponents
                     if (ret && auxiliaryImageURL.StartsWith("*Resource*"))
                     {
                         auxiliaryImageURL = auxiliaryImageURL.Replace("*Resource*", resource);
-                        mmap.Insert(NDalic.ImageVisualAuxiliaryImageUrl, new PropertyValue(auxiliaryImageURL));
+                        mmap.AddString(NDalic.ImageVisualAuxiliaryImageUrl, auxiliaryImageURL);
                     }
 
                     map.Merge(mmap);
@@ -109,7 +109,7 @@ namespace Tizen.NUI.BaseComponents
                 imageView.UpdateImage();
 
                 // Get current properties force.
-                PropertyMap returnValue = new PropertyMap();
+                PropertyMap returnValue = PropertyMap.GetReusable();
                 Tizen.NUI.Object.GetProperty((HandleRef)imageView.SwigCPtr, ImageView.Property.IMAGE).Get(returnValue);
 
                 // Update cached property map
@@ -136,8 +136,9 @@ namespace Tizen.NUI.BaseComponents
             {
                 if (imageView.imagePropertyUpdatedFlag)
                 {
+                    using var propertyValue = PropertyValue.GetReusable((bool)newValue);
                     // If imageView Property still not send to the dali, Append cached property.
-                    imageView.UpdateImage(Visual.Property.PremultipliedAlpha, new PropertyValue((bool)newValue));
+                    imageView.UpdateImage(Visual.Property.PremultipliedAlpha, propertyValue);
                 }
                 else
                 {
@@ -238,7 +239,8 @@ namespace Tizen.NUI.BaseComponents
                         }
                     }
                 }
-                imageView.UpdateImage(NpatchImageVisualProperty.BorderOnly, new PropertyValue((bool)newValue));
+                using var propertyValue = PropertyValue.GetReusable((bool)newValue);
+                imageView.UpdateImage(NpatchImageVisualProperty.BorderOnly, propertyValue);
             }
         }
 
@@ -273,8 +275,9 @@ namespace Tizen.NUI.BaseComponents
                         }
                     }
                 }
+                using var propertyValue = PropertyValue.GetReusable((bool)newValue);
                 // Note : We need to create new visual if previous visual was async, and now we set value as sync.
-                imageView.UpdateImage(ImageVisualProperty.SynchronousLoading, new PropertyValue((bool)newValue), (bool)newValue);
+                imageView.UpdateImage(ImageVisualProperty.SynchronousLoading, propertyValue, (bool)newValue);
             }
         }
 
@@ -309,8 +312,9 @@ namespace Tizen.NUI.BaseComponents
                         }
                     }
                 }
+                using var propertyValue = PropertyValue.GetReusable((bool)newValue);
                 // Note : We need to create new visual if previous visual was async, and now we set value as sync.
-                imageView.UpdateImage(ImageVisualProperty.SynchronousLoading, new PropertyValue((bool)newValue), (bool)newValue);
+                imageView.UpdateImage(ImageVisualProperty.SynchronousLoading, propertyValue, (bool)newValue);
             }
         }
 
@@ -345,7 +349,8 @@ namespace Tizen.NUI.BaseComponents
                         }
                     }
                 }
-                imageView.UpdateImage(ImageVisualProperty.OrientationCorrection, new PropertyValue((bool)newValue));
+                using var propertyValue = PropertyValue.GetReusable((bool)newValue);
+                imageView.UpdateImage(ImageVisualProperty.OrientationCorrection, propertyValue);
             }
         }
 
@@ -365,7 +370,8 @@ namespace Tizen.NUI.BaseComponents
         /// </summary>
         internal static void SetInternalSynchronousSizingProperty(ImageView imageView, bool newValue)
         {
-            imageView.UpdateImage(ImageVisualProperty.SynchronousSizing, new PropertyValue(newValue));
+            using var propertyValue = PropertyValue.GetReusable(newValue);
+            imageView.UpdateImage(ImageVisualProperty.SynchronousSizing, propertyValue);
         }
 
         internal static object GetInternalSynchronousSizingProperty(ImageView imageView)
@@ -680,8 +686,10 @@ namespace Tizen.NUI.BaseComponents
             var imageView = (ImageView)bindable;
             if (newValue != null)
             {
-                imageView.UpdateImage(Visual.Property.Opacity, new PropertyValue(((Color)newValue).A), false);
-                imageView.UpdateImage(Visual.Property.MixColor, new PropertyValue((Color)newValue), false);
+                using var opacityPropertyValue = PropertyValue.GetReusable(((Color)newValue).A);
+                using var colorPropertyValue = PropertyValue.GetReusable((Color)newValue);
+                imageView.UpdateImage(Visual.Property.Opacity, opacityPropertyValue, false);
+                imageView.UpdateImage(Visual.Property.MixColor, colorPropertyValue, false);
 
                 // Update property
                 Interop.View.InternalUpdateVisualPropertyVector4(imageView.SwigCPtr, ImageView.Property.IMAGE, Visual.Property.MixColor, Vector4.getCPtr((Color)newValue));

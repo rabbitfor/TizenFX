@@ -173,7 +173,7 @@ namespace Tizen.NUI.BaseComponents
         internal static object GetInternalFontStyleProperty(BindableObject bindable)
         {
             var textField = (TextField)bindable;
-            PropertyMap temp = new PropertyMap();
+            PropertyMap temp = PropertyMap.GetReusable();
             Tizen.NUI.Object.GetProperty((System.Runtime.InteropServices.HandleRef)textField.SwigCPtr, TextField.Property.FontStyle).Get(temp);
             return temp;
         }
@@ -560,7 +560,7 @@ namespace Tizen.NUI.BaseComponents
         internal static object GetInternalSelectionPopupStyleProperty(BindableObject bindable)
         {
             var textField = (TextField)bindable;
-            PropertyMap temp = new PropertyMap();
+            PropertyMap temp = PropertyMap.GetReusable();
             Tizen.NUI.Object.GetProperty((System.Runtime.InteropServices.HandleRef)textField.SwigCPtr, TextField.Property.SelectionPopupStyle).Get(temp);
             return temp;
         }
@@ -579,7 +579,7 @@ namespace Tizen.NUI.BaseComponents
         internal static object GetInternalSelectionHandleImageLeftProperty(BindableObject bindable)
         {
             var textField = (TextField)bindable;
-            PropertyMap temp = new PropertyMap();
+            PropertyMap temp = PropertyMap.GetReusable();
             Tizen.NUI.Object.GetProperty((System.Runtime.InteropServices.HandleRef)textField.SwigCPtr, TextField.Property.SelectionHandleImageLeft).Get(temp);
             return temp;
         }
@@ -598,7 +598,7 @@ namespace Tizen.NUI.BaseComponents
         internal static object GetInternalSelectionHandleImageRightProperty(BindableObject bindable)
         {
             var textField = (TextField)bindable;
-            PropertyMap temp = new PropertyMap();
+            PropertyMap temp = PropertyMap.GetReusable();
             Tizen.NUI.Object.GetProperty((System.Runtime.InteropServices.HandleRef)textField.SwigCPtr, TextField.Property.SelectionHandleImageRight).Get(temp);
             return temp;
         }
@@ -617,7 +617,7 @@ namespace Tizen.NUI.BaseComponents
         internal static object GetInternalSelectionHandlePressedImageLeftProperty(BindableObject bindable)
         {
             var textField = (TextField)bindable;
-            PropertyMap temp = new PropertyMap();
+            PropertyMap temp = PropertyMap.GetReusable();
             Tizen.NUI.Object.GetProperty((System.Runtime.InteropServices.HandleRef)textField.SwigCPtr, TextField.Property.SelectionHandlePressedImageLeft).Get(temp);
             return temp;
         }
@@ -636,7 +636,7 @@ namespace Tizen.NUI.BaseComponents
         internal static object GetInternalSelectionHandlePressedImageRightProperty(BindableObject bindable)
         {
             var textField = (TextField)bindable;
-            PropertyMap temp = new PropertyMap();
+            PropertyMap temp = PropertyMap.GetReusable();
             Tizen.NUI.Object.GetProperty((System.Runtime.InteropServices.HandleRef)textField.SwigCPtr, TextField.Property.SelectionHandlePressedImageRight).Get(temp);
             return temp;
         }
@@ -655,7 +655,7 @@ namespace Tizen.NUI.BaseComponents
         internal static object GetInternalSelectionHandleMarkerImageLeftProperty(BindableObject bindable)
         {
             var textField = (TextField)bindable;
-            PropertyMap temp = new PropertyMap();
+            PropertyMap temp = PropertyMap.GetReusable();
             Tizen.NUI.Object.GetProperty((System.Runtime.InteropServices.HandleRef)textField.SwigCPtr, TextField.Property.SelectionHandleMarkerImageLeft).Get(temp);
             return temp;
         }
@@ -674,7 +674,7 @@ namespace Tizen.NUI.BaseComponents
         internal static object GetInternalSelectionHandleMarkerImageRightProperty(BindableObject bindable)
         {
             var textField = (TextField)bindable;
-            PropertyMap temp = new PropertyMap();
+            PropertyMap temp = PropertyMap.GetReusable();
             Tizen.NUI.Object.GetProperty((System.Runtime.InteropServices.HandleRef)textField.SwigCPtr, TextField.Property.SelectionHandleMarkerImageRight).Get(temp);
             return temp;
         }
@@ -732,7 +732,7 @@ namespace Tizen.NUI.BaseComponents
         internal static object GetInternalInputMethodSettingsProperty(BindableObject bindable)
         {
             var textField = (TextField)bindable;
-            PropertyMap temp = new PropertyMap();
+            PropertyMap temp = PropertyMap.GetReusable();
             Tizen.NUI.Object.GetProperty((System.Runtime.InteropServices.HandleRef)textField.SwigCPtr, TextField.Property.InputMethodSettings).Get(temp);
             return temp;
         }
@@ -809,7 +809,7 @@ namespace Tizen.NUI.BaseComponents
         internal static object GetInternalInputFontStyleProperty(BindableObject bindable)
         {
             var textField = (TextField)bindable;
-            PropertyMap temp = new PropertyMap();
+            PropertyMap temp = PropertyMap.GetReusable();
             Tizen.NUI.Object.GetProperty((System.Runtime.InteropServices.HandleRef)textField.SwigCPtr, TextField.Property.InputFontStyle).Get(temp);
             return temp;
         }
@@ -847,7 +847,7 @@ namespace Tizen.NUI.BaseComponents
         internal static object GetInternalUnderlineProperty(BindableObject bindable)
         {
             var textField = (TextField)bindable;
-            PropertyMap temp = new PropertyMap();
+            PropertyMap temp = PropertyMap.GetReusable();
             Tizen.NUI.Object.GetProperty((System.Runtime.InteropServices.HandleRef)textField.SwigCPtr, TextField.Property.UNDERLINE).Get(temp);
             return temp;
         }
@@ -885,7 +885,7 @@ namespace Tizen.NUI.BaseComponents
         internal static object GetInternalShadowProperty(BindableObject bindable)
         {
             var textField = (TextField)bindable;
-            PropertyMap temp = new PropertyMap();
+            PropertyMap temp = PropertyMap.GetReusable();
             Tizen.NUI.Object.GetProperty((System.Runtime.InteropServices.HandleRef)textField.SwigCPtr, TextField.Property.SHADOW).Get(temp);
             return temp;
         }
@@ -961,7 +961,7 @@ namespace Tizen.NUI.BaseComponents
         internal static object GetInternalOutlineProperty(BindableObject bindable)
         {
             var textField = (TextField)bindable;
-            PropertyMap temp = new PropertyMap();
+            PropertyMap temp = PropertyMap.GetReusable();
             Tizen.NUI.Object.GetProperty((System.Runtime.InteropServices.HandleRef)textField.SwigCPtr, TextField.Property.OUTLINE).Get(temp);
             return temp;
         }

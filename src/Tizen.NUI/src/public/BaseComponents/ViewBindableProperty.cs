@@ -297,7 +297,7 @@ namespace Tizen.NUI.BaseComponents
             var view = (View)bindable;
             if (newValue != null)
             {
-                PropertyMap map = (PropertyMap)newValue;
+                using PropertyMap map = (PropertyMap)newValue;
 
                 // Background extra data is not valid anymore. We should ignore lazy UpdateBackgroundExtraData
                 view.backgroundExtraData = null;
@@ -320,8 +320,7 @@ namespace Tizen.NUI.BaseComponents
                     }
                 }
 
-                using var mapValue = new PropertyValue(map);
-                Object.SetProperty(view.SwigCPtr, Property.BACKGROUND, mapValue);
+                Object.InternalSetPropertyMap(view.SwigCPtr, Property.BACKGROUND, map.SwigCPtr);
             }
         }
         internal static object GetInternalBackgroundProperty(BindableObject bindable)
@@ -331,7 +330,7 @@ namespace Tizen.NUI.BaseComponents
             // Sync as current properties
             view.UpdateBackgroundExtraData();
 
-            PropertyMap tmp = new PropertyMap();
+            PropertyMap tmp = PropertyMap.GetReusable();
             var propertyValue = Object.GetProperty(view.SwigCPtr, Property.BACKGROUND);
             propertyValue.Get(tmp);
             propertyValue.Dispose();
@@ -481,9 +480,8 @@ namespace Tizen.NUI.BaseComponents
         internal static object GetInternalCellIndexProperty(BindableObject bindable)
         {
             var view = (View)bindable;
-            var vector2 = DisposablePool.GetOrCreate<Vector2>();
+            var vector2 = Vector2.GetReusable(view.OnCellIndexChanged);
             Object.InternalRetrievingPropertyVector2(view.SwigCPtr, TableView.ChildProperty.CellIndex, vector2.SwigCPtr);
-            vector2.Reset(view.OnCellIndexChanged);
             return vector2;
 
         }
@@ -797,9 +795,8 @@ namespace Tizen.NUI.BaseComponents
         internal static object GetInternalSize2DProperty(BindableObject bindable)
         {
             var view = (View)bindable;
-            var size2D = DisposablePool.GetOrCreate<Size2D>();
+            var size2D = Size2D.GetReusable(view.OnSize2DChanged);
             Object.InternalRetrievingPropertyVector2ActualVector3(view.SwigCPtr, View.Property.SIZE, size2D.SwigCPtr);
-            size2D.Reset(view.OnSize2DChanged);
             return size2D;
         }
 
@@ -848,9 +845,8 @@ namespace Tizen.NUI.BaseComponents
         internal static object GetInternalPosition2DProperty(BindableObject bindable)
         {
             var view = (View)bindable;
-            var position2D = DisposablePool.GetOrCreate<Position2D>();
+            var position2D = Position2D.GetReusable(view.OnPosition2DChanged);
             Object.InternalRetrievingPropertyVector2ActualVector3(view.SwigCPtr, View.Property.POSITION, position2D.SwigCPtr);
-            position2D.Reset(view.OnPosition2DChanged);
             return position2D;
         }
 
@@ -934,9 +930,8 @@ namespace Tizen.NUI.BaseComponents
         internal static object GetInternalPivotPointProperty(BindableObject bindable)
         {
             var view = (View)bindable;
-            var vector3 = DisposablePool.GetOrCreate<Vector3>();
+            var vector3 = Vector3.GetReusable(view.OnPivotPointChanged);
             Object.InternalRetrievingPropertyVector3(view.SwigCPtr, View.Property.AnchorPoint, vector3.SwigCPtr);
-            vector3.Reset(view.OnPivotPointChanged);
             return vector3;
         }
 
@@ -997,9 +992,8 @@ namespace Tizen.NUI.BaseComponents
         internal static object GetInternalPositionProperty(BindableObject bindable)
         {
             var view = (View)bindable;
-            var position = DisposablePool.GetOrCreate<Position>();
+            var position = Position.GetReusable(view.OnPositionChanged);
             Object.InternalRetrievingPropertyVector3(view.SwigCPtr, View.Property.POSITION, position.SwigCPtr);
-            position.Reset(view.OnPositionChanged);
             return position;
         }
 
@@ -1103,9 +1097,8 @@ namespace Tizen.NUI.BaseComponents
         internal static object GetInternalScaleProperty(BindableObject bindable)
         {
             var view = (View)bindable;
-            var vector3 = DisposablePool.GetOrCreate<Vector3>();
+            var vector3 = Vector3.GetReusable(view.OnScaleChanged);
             Object.InternalRetrievingPropertyVector3(view.SwigCPtr, Property.SCALE, vector3.SwigCPtr);
-            vector3.Reset(view.OnScaleChanged);
             return vector3;
         }
 
@@ -1348,10 +1341,9 @@ namespace Tizen.NUI.BaseComponents
         internal static object GetInternalSizeModeFactorProperty(BindableObject bindable)
         {
             var view = (View)bindable;
-            var vector3 = DisposablePool.GetOrCreate<Vector3>();
+            var vector3 = Vector3.GetReusable(view.OnSizeModeFactorChanged);
 
             Object.InternalRetrievingPropertyVector3(view.SwigCPtr, View.Property.SizeModeFactor, vector3.SwigCPtr);
-            vector3.Reset(view.OnSizeModeFactorChanged);
             return vector3;
         }
 
@@ -1469,23 +1461,20 @@ namespace Tizen.NUI.BaseComponents
                 if (view.Layout != null)
                 {
                     var newExtents = (Extents)newValue;
-                    var extents = DisposablePool.GetOrCreate<Extents>();
 
                     if ((newExtents.Start != 0) || (newExtents.End != 0) || (newExtents.Top != 0) || (newExtents.Bottom != 0))
                     {
-                        extents.Reset(null, 0, 0, 0, 0);
-                        using var propertyValue = PropertyValue.GetReusable(extents);
-                        Object.SetProperty(view.SwigCPtr, Property.PADDING, propertyValue);
+                        using var noExtents = Extents.GetReusable();
+                        Object.InternalSetPropertyExtents(view.SwigCPtr, Property.PADDING, noExtents.SwigCPtr);
                     }
 
-                    extents.Reset(extents);
+                    var extents = Extents.GetReusable(newExtents);
                     view.Layout.Padding = extents;
                     view.Layout.RequestLayout();
                 }
                 else
                 {
-                    using var tmp = PropertyValue.GetReusable((Extents)newValue);
-                    Object.SetProperty(view.SwigCPtr, Property.PADDING, tmp);
+                    Object.InternalSetPropertyExtents(view.SwigCPtr, Property.PADDING, ((Extents)newValue).SwigCPtr);
                 }
             }
         }
@@ -1493,7 +1482,7 @@ namespace Tizen.NUI.BaseComponents
         {
             var view = (View)bindable;
 
-            var padding = DisposablePool.GetOrCreate<Extents>();
+            Extents padding;
 
             if (view.Layout != null)
             {
@@ -1508,14 +1497,13 @@ namespace Tizen.NUI.BaseComponents
                         bottom = view.Layout.Padding.Bottom;
                     }
                 }
-                padding.Reset(view.OnPaddingChanged, start, end, top, bottom);
+                padding = Extents.GetReusable(view.OnPaddingChanged, start, end, top, bottom);
             }
             else
             {
-                var tmp = Object.GetProperty(view.SwigCPtr, Property.PADDING);
-                tmp?.Get(padding);
-                tmp?.Dispose();
-                padding.Reset(view.OnPaddingChanged);
+                using var tmp = Object.GetProperty(view.SwigCPtr, Property.PADDING);
+                padding = Extents.GetReusable(view.OnPaddingChanged);
+                tmp.Get(padding);
             }
 
             return padding;
@@ -1571,9 +1559,8 @@ namespace Tizen.NUI.BaseComponents
         internal static object GetInternalSizeProperty(BindableObject bindable)
         {
             var view = (View)bindable;
-            var size = DisposablePool.GetOrCreate<Size>();
+            var size = Size.GetReusable(view.OnSizeChanged);
             Object.InternalRetrievingPropertyVector3(view.SwigCPtr, View.Property.SIZE, size.SwigCPtr);
-            size.Reset(view.OnSizeChanged);
             return size;
         }
 
@@ -1596,9 +1583,8 @@ namespace Tizen.NUI.BaseComponents
         {
 
             var view = (View)bindable;
-            var size2D = DisposablePool.GetOrCreate<Size2D>();
+            var size2D = Size2D.GetReusable(view.OnMinimumSizeChanged);
             Object.InternalRetrievingPropertyVector2(view.SwigCPtr, View.Property.MinimumSize, size2D.SwigCPtr);
-            size2D.Reset(view.OnMinimumSizeChanged);
             return size2D;
         }
 
@@ -1620,9 +1606,8 @@ namespace Tizen.NUI.BaseComponents
         internal static object GetInternalMaximumSizeProperty(BindableObject bindable)
         {
             var view = (View)bindable;
-            var maximumSize = DisposablePool.GetOrCreate<Size2D>();
+            var maximumSize = Size2D.GetReusable(view.OnMaximumSizeChanged);
             Object.InternalRetrievingPropertyVector2(view.SwigCPtr, View.Property.MaximumSize, maximumSize.SwigCPtr);
-            maximumSize.Reset(view.OnMaximumSizeChanged);
             return maximumSize;
         }
 
@@ -1722,23 +1707,21 @@ namespace Tizen.NUI.BaseComponents
                     view.Layout.Margin = Extents.GetReusable((Extents)newValue);
                     if ((view.Margin.Start != 0) || (view.Margin.End != 0) || (view.Margin.Top != 0) || (view.Margin.Bottom != 0))
                     {
-                        using var tmp = new PropertyValue(Extents.GetReusable());
-                        Object.SetProperty(view.SwigCPtr, Property.MARGIN, tmp);
+                        using var zeroExtents = Extents.GetReusable();
+                        Object.InternalSetPropertyExtents(view.SwigCPtr, Property.MARGIN, zeroExtents.SwigCPtr);
                     }
                     view.Layout.RequestLayout();
                 }
                 else
                 {
-                    var tmp = new PropertyValue((Extents)newValue);
-                    Object.SetProperty(view.SwigCPtr, Property.MARGIN, tmp);
-                    tmp?.Dispose();
+                    Object.InternalSetPropertyExtents(view.SwigCPtr, Property.MARGIN, ((Extents)newValue).SwigCPtr);
                 }
             }
         }
         internal static object GetInternalMarginProperty(BindableObject bindable)
         {
             var view = (View)bindable;
-            var extents = DisposablePool.GetOrCreate<Extents>();
+            Extents extents;
 
             if (view.Layout != null)
             {
@@ -1753,15 +1736,13 @@ namespace Tizen.NUI.BaseComponents
                         bottom = view.Layout.Margin.Bottom;
                     }
                 }
-                extents.Reset(view.OnMarginChanged, start, end, top, bottom);
+                extents = Extents.GetReusable(view.OnMarginChanged, start, end, top, bottom);
             }
             else
             {
-
-                var tmp = Object.GetProperty(view.SwigCPtr, Property.MARGIN);
-                tmp?.Get(extents);
-                tmp?.Dispose();
-                extents.Reset(view.OnMarginChanged);
+                using var tmp = Object.GetProperty(view.SwigCPtr, Property.MARGIN);
+                extents = Extents.GetReusable(view.OnMarginChanged);
+                tmp.Get(extents);
             }
 
             return extents;
@@ -1819,7 +1800,7 @@ namespace Tizen.NUI.BaseComponents
             // Sync as current properties
             view.UpdateBackgroundExtraData();
 
-            PropertyMap map = new PropertyMap();
+            PropertyMap map = PropertyMap.GetReusable();
             Tizen.NUI.Object.GetProperty((System.Runtime.InteropServices.HandleRef)view.SwigCPtr, View.Property.SHADOW).Get(map);
 
             var shadow = new ImageShadow(map);
@@ -1855,7 +1836,7 @@ namespace Tizen.NUI.BaseComponents
             // Sync as current properties
             view.UpdateBackgroundExtraData();
 
-            PropertyMap map = new PropertyMap();
+            PropertyMap map = PropertyMap.GetReusable();
             Tizen.NUI.Object.GetProperty((System.Runtime.InteropServices.HandleRef)view.SwigCPtr, View.Property.SHADOW).Get(map);
 
             var shadow = new Shadow(map);
@@ -2591,10 +2572,8 @@ namespace Tizen.NUI.BaseComponents
 
                 backgroundImageUrl = null;
 
-                var empty = new PropertyValue();
                 // Clear background
-                Object.SetProperty(SwigCPtr, Property.BACKGROUND, empty);
-                empty.Dispose();
+                Object.InternalSetPropertyNone(SwigCPtr, Property.BACKGROUND);
                 return;
             }
 
@@ -2613,47 +2592,32 @@ namespace Tizen.NUI.BaseComponents
                 return;
             }
 
-            using var map = new PropertyMap();
-            using var url = new PropertyValue(value);
-            using var synchronousLoading = new PropertyValue(backgroundImageSynchronousLoading);
+            using var map = PropertyMap.GetReusable();
 
-            map.Add(ImageVisualProperty.URL, url)
-               .Add(ImageVisualProperty.SynchronousLoading, synchronousLoading);
+            map.AddString(ImageVisualProperty.URL, value)
+               .AddBool(ImageVisualProperty.SynchronousLoading, backgroundImageSynchronousLoading);
 
             if ((backgroundExtraData?.BackgroundImageBorder) != null)
             {
-                using var npatchType = new PropertyValue((int)Visual.Type.NPatch);
-                using var border = new PropertyValue(backgroundExtraData.BackgroundImageBorder);
-                map.Add(Visual.Property.Type, npatchType)
-                   .Add(NpatchImageVisualProperty.Border, border);
+                map.AddInt(Visual.Property.Type, (int)Visual.Type.NPatch)
+                   .AddRectangle(NpatchImageVisualProperty.Border, backgroundExtraData.BackgroundImageBorder);
             }
             else
             {
-                using var imageType = new PropertyValue((int)Visual.Type.Image);
-                map.Add(Visual.Property.Type, imageType);
+                map.AddInt(Visual.Property.Type, (int)Visual.Type.Image);
             }
 
             if (backgroundExtraData != null)
             {
-                using var cornerRadiusValue = backgroundExtraData.CornerRadius == null ? new PropertyValue() : new PropertyValue(backgroundExtraData.CornerRadius);
-                using var cornerRadius = new PropertyValue(cornerRadiusValue);
-                using var cornerRadiusPolicy = new PropertyValue((int)(backgroundExtraData.CornerRadiusPolicy));
-                using var borderlineWidth = new PropertyValue(backgroundExtraData.BorderlineWidth);
-                using var borderlineColorValue = backgroundExtraData.BorderlineColor == null ? new PropertyValue(Color.Black) : new PropertyValue(backgroundExtraData.BorderlineColor);
-                using var borderlineColor = new PropertyValue(borderlineColorValue);
-                using var borderlineOffset = new PropertyValue(backgroundExtraData.BorderlineOffset);
-
-                map.Add(Visual.Property.CornerRadius, cornerRadius)
-                   .Add(Visual.Property.CornerRadiusPolicy, cornerRadiusPolicy)
-                   .Add(Visual.Property.BorderlineWidth, borderlineWidth)
-                   .Add(Visual.Property.BorderlineColor, borderlineColor)
-                   .Add(Visual.Property.BorderlineOffset, borderlineOffset);
+                map.AddVector4(Visual.Property.CornerRadius, backgroundExtraData.CornerRadius)
+                   .AddInt(Visual.Property.CornerRadiusPolicy, (int)backgroundExtraData.CornerRadiusPolicy)
+                   .AddFloat(Visual.Property.BorderlineWidth, backgroundExtraData.BorderlineWidth)
+                   .AddColor(Visual.Property.BorderlineColor, backgroundExtraData.BorderlineColor ?? Color.Black)
+                   .AddFloat(Visual.Property.BorderlineOffset, backgroundExtraData.BorderlineOffset);
             }
 
             backgroundExtraDataUpdatedFlag &= ~BackgroundExtraDataUpdatedFlag.Background;
-
-            using var mapValue = new PropertyValue(map);
-            Object.SetProperty(SwigCPtr, Property.BACKGROUND, mapValue);
+            Object.InternalSetPropertyMap(SwigCPtr, Property.BACKGROUND, map.SwigCPtr);
         }
 
         private void SetBackgroundImageBorder(Rectangle value)
@@ -2669,14 +2633,14 @@ namespace Tizen.NUI.BaseComponents
                 return;
             }
 
-            PropertyMap map = Background;
+            using PropertyMap map = Background;
 
             if (map.Empty())
             {
                 return;
             }
 
-            map[NpatchImageVisualProperty.Border] = new PropertyValue(backgroundImageBorder);
+            map.SetRectangle(NpatchImageVisualProperty.Border, backgroundImageBorder);
 
             int visualType = 0;
 
@@ -2684,13 +2648,13 @@ namespace Tizen.NUI.BaseComponents
 
             if (visualType == (int)Visual.Type.Image)
             {
-                map[Visual.Property.Type] = new PropertyValue((int)Visual.Type.NPatch);
+                map.SetInt(Visual.Property.Type, (int)Visual.Type.NPatch);
             }
 
             // Background extra data flag is not meanful anymore.
             backgroundExtraDataUpdatedFlag &= ~BackgroundExtraDataUpdatedFlag.Background;
 
-            Tizen.NUI.Object.SetProperty((System.Runtime.InteropServices.HandleRef)SwigCPtr, View.Property.BACKGROUND, new PropertyValue(map));
+            Object.InternalSetPropertyMap(SwigCPtr, View.Property.BACKGROUND, map.SwigCPtr);
         }
 
         private void SetBorderlineColor(Color value)
@@ -2721,41 +2685,18 @@ namespace Tizen.NUI.BaseComponents
                 return;
             }
 
-            var map = new PropertyMap();
-            var colorType = new PropertyValue((int)Visual.Type.Color);
-            var mixColor = new PropertyValue(value);
-            var cornerRadiusValue = backgroundExtraData.CornerRadius == null ? new PropertyValue() : new PropertyValue(backgroundExtraData.CornerRadius);
-            var cornerRadius = new PropertyValue(cornerRadiusValue);
-            var cornerRadiusPolicy = new PropertyValue((int)(backgroundExtraData.CornerRadiusPolicy));
-            var borderlineWidth = new PropertyValue(backgroundExtraData.BorderlineWidth);
-            var borderlineColorValue = backgroundExtraData.BorderlineColor == null ? new PropertyValue(Color.Black) : new PropertyValue(backgroundExtraData.BorderlineColor);
-            var borderlineColor = new PropertyValue(borderlineColorValue);
-            var borderlineOffset = new PropertyValue(backgroundExtraData.BorderlineOffset);
-
-            map.Add(Visual.Property.Type, colorType)
-               .Add(ColorVisualProperty.MixColor, mixColor)
-               .Add(Visual.Property.CornerRadius, cornerRadius)
-               .Add(Visual.Property.CornerRadiusPolicy, cornerRadiusPolicy)
-               .Add(Visual.Property.BorderlineWidth, borderlineWidth)
-               .Add(Visual.Property.BorderlineColor, borderlineColor)
-               .Add(Visual.Property.BorderlineOffset, borderlineOffset);
+            using var map = PropertyMap.GetReusable();
+            map.AddVector4(Visual.Property.CornerRadius, backgroundExtraData.CornerRadius)
+               .AddInt(Visual.Property.Type, (int)Visual.Type.Color)
+               .AddColor(ColorVisualProperty.MixColor, value)
+               .AddInt(Visual.Property.CornerRadiusPolicy, (int)backgroundExtraData.CornerRadiusPolicy)
+               .AddFloat(Visual.Property.BorderlineWidth, backgroundExtraData.BorderlineWidth)
+               .AddColor(Visual.Property.BorderlineColor, backgroundExtraData.BorderlineColor ?? Color.Black)
+               .AddFloat(Visual.Property.BorderlineOffset, backgroundExtraData.BorderlineOffset);
 
             backgroundExtraDataUpdatedFlag &= ~BackgroundExtraDataUpdatedFlag.Background;
 
-            var mapValue = new PropertyValue(map);
-            Object.SetProperty(SwigCPtr, Property.BACKGROUND, mapValue);
-
-            borderlineOffset?.Dispose();
-            borderlineColor?.Dispose();
-            borderlineColorValue?.Dispose();
-            borderlineWidth?.Dispose();
-            cornerRadiusPolicy?.Dispose();
-            cornerRadius?.Dispose();
-            cornerRadiusValue?.Dispose();
-            mixColor?.Dispose();
-            colorType?.Dispose();
-            map?.Dispose();
-            mapValue?.Dispose();
+            Object.InternalSetPropertyMap(SwigCPtr, Property.BACKGROUND, map.SwigCPtr);
         }
 
         private void SetColor(Color value)
@@ -2819,7 +2760,16 @@ namespace Tizen.NUI.BaseComponents
         private void SetShadow(ShadowBase value)
         {
             backgroundExtraDataUpdatedFlag &= ~BackgroundExtraDataUpdatedFlag.Shadow;
-            Tizen.NUI.Object.SetProperty((System.Runtime.InteropServices.HandleRef)SwigCPtr, View.Property.SHADOW, value == null ? new PropertyValue() : value.ToPropertyValue(this));
+
+            if (value == null || value.IsEmpty())
+            {
+                Object.InternalSetPropertyNone(SwigCPtr, Property.SHADOW);
+            }
+            else
+            {
+                using var map = value.ToPropertyMap(this);
+                Object.InternalSetPropertyMap(SwigCPtr, Property.SHADOW, map.SwigCPtr);
+            }
         }
     }
 }

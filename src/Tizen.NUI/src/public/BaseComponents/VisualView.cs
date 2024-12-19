@@ -253,58 +253,41 @@ namespace Tizen.NUI.BaseComponents
             {
                 if (item.Value == target.Name)
                 {
-                    using (PropertyMap animator = new PropertyMap())
-                    using (PropertyMap timePeriod = new PropertyMap())
-                    using (PropertyValue pvDuration = new PropertyValue((endTime - startTime) / 1000.0f))
-                    using (PropertyValue pvDelay = new PropertyValue(startTime / 1000.0f))
-                    using (PropertyValue destVal = PropertyValue.CreateFromObject(destinationValue))
-                    using (PropertyMap transition = new PropertyMap())
-                    using (PropertyValue pvTarget = new PropertyValue(target.Name))
+                    using PropertyMap animator = PropertyMap.GetReusable();
+                    if (strAlpha != null)
                     {
-                        if (strAlpha != null)
-                        {
-                            using (PropertyValue pvAlpha = new PropertyValue(strAlpha))
-                            {
-                                animator.Add("alphaFunction", pvAlpha);
-                            }
-                        }
-                        timePeriod.Add("duration", pvDuration);
-                        timePeriod.Add("delay", pvDelay);
-                        using (PropertyValue pvTimePeriod = new PropertyValue(timePeriod))
-                        {
-                            animator.Add("timePeriod", pvTimePeriod);
-                        }
+                        animator.AddString("alphaFunction", strAlpha);
+                    }
 
-                        StringBuilder sb = new StringBuilder(property);
-                        sb[0] = (char)(sb[0] | 0x20);
-                        string _str = sb.ToString();
-                        if (_str == "position") { _str = "offset"; }
+                    using PropertyMap timePeriod = PropertyMap.GetReusable();
+                    timePeriod.AddFloat("duration", (endTime - startTime) / 1000.0f);
+                    timePeriod.AddFloat("delay", startTime / 1000.0f);
+                    animator.AddMap("timePeriod", timePeriod);
 
-                        transition.Add("target", pvTarget);
-                        using (PropertyValue pvStr = new PropertyValue(_str))
-                        {
-                            transition.Add("property", pvStr);
-                        }
+                    StringBuilder sb = new StringBuilder(property);
+                    sb[0] = (char)(sb[0] | 0x20);
+                    string _str = sb.ToString();
+                    if (_str == "position") { _str = "offset"; }
 
-                        if (initialValue != null)
-                        {
-                            using (PropertyValue initVal = PropertyValue.CreateFromObject(initialValue))
-                            using (PropertyValue pvInitialValue = new PropertyValue(initVal))
-                            {
-                                transition.Add("initialValue", pvInitialValue);
-                            }
-                        }
-                        transition.Add("targetValue", destVal);
-                        using (PropertyValue pvAnimator = new PropertyValue(animator))
-                        {
-                            transition.Add("animator", pvAnimator);
-                        }
+                    using PropertyMap transition = PropertyMap.GetReusable();
+                    transition.AddString("target", target.Name);
+                    transition.AddString("property", _str);
 
-                        using (TransitionData transitionData = new TransitionData(transition))
+                    if (initialValue != null)
+                    {
+                        // NOTE Check why nested property value is used here
+                        using (PropertyValue initVal = PropertyValue.CreateFromObject(initialValue))
+                        using (PropertyValue pvInitialValue = new PropertyValue(initVal))
                         {
-                            return this.CreateTransition(transitionData);
+                            transition.Add("initialValue", pvInitialValue);
                         }
                     }
+                    using PropertyValue destVal = PropertyValue.CreateFromObject(destinationValue);
+                    transition.Add("targetValue", destVal);
+                    transition.AddMap("animator", animator);
+
+                    using TransitionData transitionData = new TransitionData(transition);
+                    return CreateTransition(transitionData);
                 }
             }
             return null;
@@ -335,59 +318,47 @@ namespace Tizen.NUI.BaseComponents
             {
                 if (item.Value == target.Name)
                 {
-                    using (PropertyMap animator = new PropertyMap())
-                    using (PropertyMap timePeriod = new PropertyMap())
-                    using (PropertyValue pvDuration = new PropertyValue((endTime - startTime) / 1000.0f))
-                    using (PropertyValue pvDelay = new PropertyValue(startTime / 1000.0f))
-                    using (PropertyValue destVal = PropertyValue.CreateFromObject(destinationValue))
-                    using (PropertyMap transition = new PropertyMap())
-                    using (PropertyValue pvTarget = new PropertyValue(target.Name))
+                    using PropertyMap animator = PropertyMap.GetReusable();
+                    if (strAlpha != null)
                     {
-                        if (strAlpha != null)
-                        {
-                            using (PropertyValue pvStrAlpha = new PropertyValue(strAlpha))
-                            {
-                                animator.Add("alphaFunction", pvStrAlpha);
-                            }
-                        }
+                        animator.AddString("alphaFunction", strAlpha);
+                    }
 
-                        timePeriod.Add("duration", pvDuration);
-                        timePeriod.Add("delay", pvDelay);
-                        using (PropertyValue pvTimePeriod = new PropertyValue(timePeriod))
-                        {
-                            animator.Add("timePeriod", pvTimePeriod);
-                        }
+                    using PropertyMap timePeriod = PropertyMap.GetReusable();
+                    timePeriod.AddFloat("duration", (endTime - startTime) / 1000.0f);
+                    timePeriod.AddFloat("delay", startTime / 1000.0f);
+                    using (PropertyValue pvTimePeriod = new PropertyValue(timePeriod))
+                    {
+                        animator.Add("timePeriod", pvTimePeriod);
+                    }
 
-                        StringBuilder sb = new StringBuilder(property);
-                        sb[0] = (char)(sb[0] | 0x20);
-                        string _str = sb.ToString();
-                        if (_str == "position") { _str = "offset"; }
+                    StringBuilder sb = new StringBuilder(property);
+                    sb[0] = (char)(sb[0] | 0x20);
+                    string _str = sb.ToString();
+                    if (_str == "position") { _str = "offset"; }
 
-                        transition.Add("target", pvTarget);
-                        using (PropertyValue pvStr = new PropertyValue(_str))
-                        {
-                            transition.Add("property", pvStr);
-                        }
+                    using PropertyMap transition = PropertyMap.GetReusable();
+                    transition.AddString("target", target.Name);
+                    transition.AddString("property", _str);
 
-                        if (initialValue != null)
+                    if (initialValue != null)
+                    {
+                        // NOTE Check why nested property value is used here
+                        using (PropertyValue initVal = PropertyValue.CreateFromObject(initialValue))
+                        using (PropertyValue pvInitialValue = new PropertyValue(initVal))
                         {
-                            using (PropertyValue initVal = PropertyValue.CreateFromObject(initialValue))
-                            using (PropertyValue pvInitialValue = new PropertyValue(initVal))
-                            {
-                                transition.Add("initialValue", pvInitialValue);
-                            }
+                            transition.Add("initialValue", pvInitialValue);
                         }
-                        transition.Add("targetValue", destVal);
-                        using (PropertyValue pvAnimator = new PropertyValue(animator))
-                        {
-                            transition.Add("animator", pvAnimator);
-                        }
+                    }
 
-                        using (PropertyValue pvTransition = new PropertyValue(transition))
-                        {
-                            PropertyArray temp = animateArray.Add(pvTransition);
-                            temp.Dispose();
-                        }
+                    using PropertyValue destVal = PropertyValue.CreateFromObject(destinationValue);
+                    transition.Add("targetValue", destVal);
+                    transition.AddMap("animator", animator);
+
+                    using (PropertyValue pvTransition = new PropertyValue(transition))
+                    {
+                        PropertyArray temp = animateArray.Add(pvTransition);
+                        temp.Dispose();
                     }
                 }
             }
