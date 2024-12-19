@@ -243,86 +243,6 @@ namespace Tizen.NUI
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
         }
 
-        internal static PropertyValue GetReusableVector2(float x, float y)
-        {
-            return GetReusable(Interop.PropertyValue.NewPropertyValueNVector2(x, y), true);
-        }
-
-        internal static PropertyValue GetReusableVector2(Vector2 value)
-        {
-            return GetReusable(Interop.PropertyValue.NewPropertyValueVector2(value.SwigCPtr), true);
-        }
-
-        internal static PropertyValue GetReusableSize2D(int x, int y)
-        {
-            return GetReusableVector2(x, y);
-        }
-
-        internal static PropertyValue GetReusableSize2D(Size2D value)
-        {
-            return GetReusable(Interop.PropertyValue.NewPropertyValueVector2(value.SwigCPtr), true);
-        }
-
-        internal static PropertyValue GetReusablePosition2D(int x, int y)
-        {
-            return GetReusableVector2(x, y);
-        }
-
-        internal static PropertyValue GetReusablePosition2D(Position2D value)
-        {
-            return GetReusable(Interop.PropertyValue.NewPropertyValueVector2(value.SwigCPtr), true);
-        }
-
-        internal static PropertyValue GetReusableVector3(float x, float y, float z)
-        {
-            return GetReusable(Interop.PropertyValue.NewPropertyValueNVector3(x, y, z), true);
-        }
-
-        internal static PropertyValue GetReusableVector3(Vector3 value)
-        {
-            return GetReusable(Interop.PropertyValue.NewPropertyValueVector3(value.SwigCPtr), true);
-        }
-
-        internal static PropertyValue GetReusablePosition(float x, float y, float z)
-        {
-            return GetReusableVector3(x, y, z);
-        }
-
-        internal static PropertyValue GetReusablePosition(Position value)
-        {
-            return GetReusable(Interop.PropertyValue.NewPropertyValueVector3(value.SwigCPtr), true);
-        }
-
-        internal static PropertyValue GetReusableVector4(float x, float y, float z, float w)
-        {
-            return GetReusable(Interop.PropertyValue.NewPropertyValueNVector4(x, y, z, w), true);
-        }
-
-        internal static PropertyValue GetReusableVector4(Vector4 value)
-        {
-            return GetReusable(Interop.PropertyValue.NewPropertyValueVector4(value.SwigCPtr), true);
-        }
-
-        internal static PropertyValue GetReusableColor(float r, float g, float b, float a)
-        {
-            return GetReusableVector4(r, g, b, a);
-        }
-
-        internal static PropertyValue GetReusableColor(Color value)
-        {
-            return GetReusable(Interop.PropertyValue.NewPropertyValueVector4(value.SwigCPtr), true);
-        }
-
-        internal static PropertyValue GetReusableExtents(ushort start, ushort end, ushort top, ushort bottom)
-        {
-            return GetReusable(Interop.PropertyValue.NewPropertyValueNExtents(start, end, top, bottom), true);
-        }
-
-        internal static PropertyValue GetReusableExtents(Extents value)
-        {
-            return GetReusable(Interop.PropertyValue.NewPropertyValueExtents(value.SwigCPtr), true);
-        }
-
         /// <summary>
         /// Determines whether the ProperyValue has equal value with the current ProperyValue.
         /// </summary>
@@ -399,83 +319,83 @@ namespace Tizen.NUI
             PropertyValue value;
             if (type.IsEnum)
             {
-                value = new PropertyValue((int)obj);//Enum.Parse(type, str);
+                value = GetReusable((int)obj);//Enum.Parse(type, str);
             }
             else if (type.Equals(typeof(int)))
             {
-                value = new PropertyValue((int)obj);
+                value = GetReusable((int)obj);
             }
             else if (type.Equals(typeof(System.Int32)))
             {
-                value = new PropertyValue((int)obj);
+                value = GetReusable((int)obj);
             }
             else if (type.Equals(typeof(bool)))
             {
-                value = new PropertyValue((bool)obj);
+                value = GetReusable((bool)obj);
             }
             else if (type.Equals(typeof(float)))
             {
-                value = new PropertyValue((float)obj);
+                value = GetReusable((float)obj);
             }
             else if (type.Equals(typeof(string)))
             {
-                value = new PropertyValue((string)obj);
+                value = GetReusable((string)obj);
             }
             else if (type.Equals(typeof(Vector2)))
             {
-                value = new PropertyValue((Vector2)obj);
+                value = GetReusable((Vector2)obj);
             }
             else if (type.Equals(typeof(Vector3)))
             {
-                value = new PropertyValue((Vector3)obj);
+                value = GetReusable((Vector3)obj);
             }
             else if (type.Equals(typeof(Vector4)))
             {
-                value = new PropertyValue((Vector4)obj);
+                value = GetReusable((Vector4)obj);
             }
             else if (type.Equals(typeof(Position)))
             {
-                value = new PropertyValue((Position)obj);
+                value = GetReusable((Position)obj);
             }
             else if (type.Equals(typeof(Position2D)))
             {
-                value = new PropertyValue((Position2D)obj);
+                value = GetReusable((Position2D)obj);
             }
             else if (type.Equals(typeof(Size)))
             {
-                value = new PropertyValue((Size)obj);
+                value = GetReusable((Size)obj);
             }
             else if (type.Equals(typeof(Size2D)))
             {
-                value = new PropertyValue((Size2D)obj);
+                value = GetReusable((Size2D)obj);
             }
             else if (type.Equals(typeof(Color)))
             {
-                value = new PropertyValue((Color)obj);
+                value = GetReusable((Color)obj);
             }
             else if (type.Equals(typeof(Rotation)))
             {
-                value = new PropertyValue((Rotation)obj);
+                value = GetReusable((Rotation)obj);
             }
             else if (type.Equals(typeof(RelativeVector2)))
             {
-                value = new PropertyValue((RelativeVector2)obj);
+                value = GetReusable((RelativeVector2)obj);
             }
             else if (type.Equals(typeof(RelativeVector3)))
             {
-                value = new PropertyValue((RelativeVector3)obj);
+                value = GetReusable((RelativeVector3)obj);
             }
             else if (type.Equals(typeof(RelativeVector4)))
             {
-                value = new PropertyValue((RelativeVector4)obj);
+                value = GetReusable((RelativeVector4)obj);
             }
             else if (type.Equals(typeof(Extents)))
             {
-                value = new PropertyValue((Extents)obj);
+                value = GetReusable((Extents)obj);
             }
             else if (type.Equals(typeof(Rectangle)))
             {
-                value = new PropertyValue((Rectangle)obj);
+                value = GetReusable((Rectangle)obj);
             }
             else
             {
@@ -931,25 +851,159 @@ namespace Tizen.NUI
         [EditorBrowsable(EditorBrowsableState.Never)]
         protected override bool IsReusable => true;
 
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        protected override void Reuse()
+        {
+            if (SwigCMemOwn && SwigCPtr.Handle != IntPtr.Zero)
+            {
+                ReleaseSwigCPtr(SwigCPtr);
+                ResetCPtr(IntPtr.Zero, false);
+            }
+        }
+
         internal static PropertyValue GetReusable(IntPtr cPtr, bool ownPtr)
         {
-            var reusable = DisposablePool.Get<PropertyValue>();
-
-            if (reusable != null)
+            if (DisposablePool.Get<PropertyValue>() is PropertyValue propertyValue)
             {
-                reusable.ReleaseSwigCPtrIfExist();
-                reusable.Reset(cPtr, ownPtr);
-                return reusable;
+                propertyValue.ResetCPtr(cPtr, ownPtr);
+                return propertyValue;
             }
             return new PropertyValue(cPtr, ownPtr);
         }
 
-        void ReleaseSwigCPtrIfExist()
+        internal static PropertyValue GetReusable()
         {
-            if (SwigCMemOwn && SwigCPtr.Handle != System.IntPtr.Zero)
-            {
-                ReleaseSwigCPtr(SwigCPtr);
-            }
+            return GetReusable(Interop.PropertyValue.NewPropertyValue(), true);
+        }
+
+        internal static PropertyValue GetReusable(bool value)
+        {
+            return GetReusable(Interop.PropertyValue.NewPropertyValue(value), true);
+        }
+
+        internal static PropertyValue GetReusable(int value)
+        {
+            return GetReusable(Interop.PropertyValue.NewPropertyValue(value), true);
+        }
+
+        internal static PropertyValue GetReusable(VisualTransformPolicyType value)
+        {
+            return GetReusable(Interop.PropertyValue.NewPropertyValue((int)value), true);
+        }
+
+        internal static PropertyValue GetReusable(float value)
+        {
+            return GetReusable(Interop.PropertyValue.NewPropertyValue(value), true);
+        }
+
+        internal static PropertyValue GetReusable(string value)
+        {
+            return GetReusable(Interop.PropertyValue.NewPropertyValueString(value), true);
+        }
+
+        internal static PropertyValue GetReusable(Rectangle value)
+        {
+            return GetReusable(Interop.PropertyValue.NewPropertyValueRect(value.SwigCPtr), true);
+        }
+
+        internal static PropertyValue GetReusable(Color value)
+        {
+            return GetReusable(Interop.PropertyValue.NewPropertyValueVector4(value.SwigCPtr), true);
+        }
+
+        internal static PropertyValue GetReusable(Vector4 value)
+        {
+            return GetReusable(Interop.PropertyValue.NewPropertyValueVector4(value.SwigCPtr), true);
+        }
+
+        internal static PropertyValue GetReusable(PropertyMap value)
+        {
+            return GetReusable(Interop.PropertyValue.NewPropertyValueMap(value.SwigCPtr), true);
+        }
+
+        internal static PropertyValue GetReusable(PropertyArray value)
+        {
+            return GetReusable(Interop.PropertyValue.NewPropertyValueArray(value.SwigCPtr), true);
+        }
+
+        internal static PropertyValue GetReusable(Size2D value)
+        {
+            return GetReusable(Interop.PropertyValue.NewPropertyValueVector2(value.SwigCPtr), true);
+        }
+
+        internal static PropertyValue GetReusable(Vector2 value)
+        {
+            return GetReusable(Interop.PropertyValue.NewPropertyValueVector2(value.SwigCPtr), true);
+        }
+
+        internal static PropertyValue GetReusable(Position2D value)
+        {
+            return GetReusable(Interop.PropertyValue.NewPropertyValueVector2(value.SwigCPtr), true);
+        }
+
+        internal static PropertyValue GetReusable(Vector3 value)
+        {
+            return GetReusable(Interop.PropertyValue.NewPropertyValueVector3(value.SwigCPtr), true);
+        }
+
+        internal static PropertyValue GetReusable(Size value)
+        {
+            return GetReusable(Interop.PropertyValue.NewPropertyValueVector3(value.SwigCPtr), true);
+        }
+
+        internal static PropertyValue GetReusable(Position value)
+        {
+            return GetReusable(Interop.PropertyValue.NewPropertyValueVector3(value.SwigCPtr), true);
+        }
+
+        internal static PropertyValue GetReusable(Extents value)
+        {
+            return GetReusable(Interop.PropertyValue.NewPropertyValueExtents(value.SwigCPtr), true);
+        }
+
+        internal static PropertyValue GetReusable(Rotation value)
+        {
+            return GetReusable(Interop.PropertyValue.NewPropertyValueQuaternion(value.SwigCPtr), true);
+        }
+
+        internal static PropertyValue GetReusableVector2(float x, float y)
+        {
+            return GetReusable(Interop.PropertyValue.NewPropertyValueNVector2(x, y), true);
+        }
+
+        internal static PropertyValue GetReusableSize2D(int x, int y)
+        {
+            return GetReusableVector2(x, y);
+        }
+
+        internal static PropertyValue GetReusablePosition2D(int x, int y)
+        {
+            return GetReusableVector2(x, y);
+        }
+
+        internal static PropertyValue GetReusableVector3(float x, float y, float z)
+        {
+            return GetReusable(Interop.PropertyValue.NewPropertyValueNVector3(x, y, z), true);
+        }
+
+        internal static PropertyValue GetReusablePosition(float x, float y, float z)
+        {
+            return GetReusableVector3(x, y, z);
+        }
+
+        internal static PropertyValue GetReusableVector4(float x, float y, float z, float w)
+        {
+            return GetReusable(Interop.PropertyValue.NewPropertyValueNVector4(x, y, z, w), true);
+        }
+
+        internal static PropertyValue GetReusableColor(float r, float g, float b, float a)
+        {
+            return GetReusableVector4(r, g, b, a);
+        }
+
+        internal static PropertyValue GetReusableExtents(ushort start, ushort end, ushort top, ushort bottom)
+        {
+            return GetReusable(Interop.PropertyValue.NewPropertyValueNExtents(start, end, top, bottom), true);
         }
     }
 }

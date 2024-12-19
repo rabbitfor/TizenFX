@@ -821,6 +821,8 @@ namespace Tizen.NUI
 
         internal static Position GetReusable(Position2D other) => GetReusable(other.X, other.Y);
 
+        internal static Position GetReusable(PositionChangedCallback cb) => GetReusable(cb, 0, 0, 0);
+
         internal static Position GetReusable(PositionChangedCallback cb, float x, float y, float z)
         {
             if (DisposablePool.Get<Position>() is Position reusable)

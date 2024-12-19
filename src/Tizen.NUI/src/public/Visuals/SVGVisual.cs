@@ -58,13 +58,9 @@ namespace Tizen.NUI
         {
             if (url != null)
             {
-                _outputVisualMap = new PropertyMap();
-                PropertyValue temp = new PropertyValue((int)Visual.Type.SVG);
-                _outputVisualMap.Add(Visual.Property.Type, temp);
-                temp.Dispose();
-                temp = new PropertyValue(url);
-                _outputVisualMap.Add(ImageVisualProperty.URL, temp);
-                temp.Dispose();
+                _outputVisualMap = PropertyMap.GetReusable();
+                _outputVisualMap.AddInt(Visual.Property.Type, (int)Visual.Type.SVG);
+                _outputVisualMap.AddString(ImageVisualProperty.URL, url);
                 base.ComposingPropertyMap();
             }
         }

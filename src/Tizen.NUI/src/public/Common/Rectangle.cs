@@ -97,7 +97,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Rectangle rectangle = new Rectangle();
-        /// rectangle.X = 1; 
+        /// rectangle.X = 1;
         /// // USE like this
         /// int x = 1, y = 2, width = 3, height = 4;
         /// Rectangle rectangle = new Rectangle(x, y, width, height);
@@ -127,7 +127,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Rectangle rectangle = new Rectangle();
-        /// rectangle.Y = 2; 
+        /// rectangle.Y = 2;
         /// // USE like this
         /// int x = 1, y = 2, width = 3, height = 4;
         /// Rectangle rectangle = new Rectangle(x, y, width, height);
@@ -157,7 +157,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Rectangle rectangle = new Rectangle();
-        /// rectangle.Width = 3; 
+        /// rectangle.Width = 3;
         /// // USE like this
         /// int x = 1, y = 2, width = 3, height = 4;
         /// Rectangle rectangle = new Rectangle(x, y, width, height);
@@ -187,7 +187,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Rectangle rectangle = new Rectangle();
-        /// rectangle.Height = 4; 
+        /// rectangle.Height = 4;
         /// // USE like this
         /// int x = 1, y = 2, width = 3, height = 4;
         /// Rectangle rectangle = new Rectangle(x, y, width, height);
@@ -535,6 +535,48 @@ namespace Tizen.NUI
             Rectangle ret = new Rectangle(cPtr, false);
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
             return ret;
+        }
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        protected override bool IsReusable => true;
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        protected override void Dispose(bool disposing)
+        {
+            if (disposed)
+            {
+                return;
+            }
+
+            callback = null;
+
+            base.Dispose(disposing);
+        }
+
+        internal static Rectangle GetReusable() => GetReusable(0, 0, 0, 0);
+
+        internal static Rectangle GetReusable(Rectangle other) => GetReusable(other.X, other.Y, other.Width, other.Height);
+
+        internal static Rectangle GetReusable(int x, int y, int w, int h) => GetReusable(null, x, y, w, h);
+
+        internal static Rectangle GetReusable(RectangleChangedCallback cb) => GetReusable(cb, 0, 0, 0, 0);
+
+        internal static Rectangle GetReusable(RectangleChangedCallback cb, int x, int y, int w, int h)
+        {
+            if (DisposablePool.Get<Rectangle>() is Rectangle reusable)
+            {
+                reusable.InternalSetAll(x, y, w, h);
+                reusable.callback = cb;
+                return reusable;
+            }
+
+            return new Rectangle(cb, x, y, w, h);
+        }
+
+        private void InternalSetAll(int x, int y, int w, int h)
+        {
+            Interop.Rectangle.SetAll(SwigCPtr, x, y, w, h);
+            NDalicPINVOKE.ThrowExceptionIfExists();
         }
     }
 }

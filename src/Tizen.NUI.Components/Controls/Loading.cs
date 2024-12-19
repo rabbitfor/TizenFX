@@ -343,9 +343,8 @@ namespace Tizen.NUI.Components
             }
             else
             {
-                PropertyValue attributes = new PropertyValue(0);
+                using PropertyValue attributes = PropertyValue.GetReusable(0);
                 this.DoAction(imageVisual.VisualIndex, ActionPlay, attributes);
-                attributes.Dispose();
             }
         }
 
@@ -361,9 +360,8 @@ namespace Tizen.NUI.Components
             }
             else
             {
-                PropertyValue attributes = new PropertyValue(0);
+                using PropertyValue attributes = PropertyValue.GetReusable(0);
                 this.DoAction(imageVisual.VisualIndex, ActionPause, attributes);
-                attributes.Dispose();
             }
         }
 
@@ -379,9 +377,8 @@ namespace Tizen.NUI.Components
             }
             else
             {
-                PropertyValue attributes = new PropertyValue(0);
+                using PropertyValue attributes = PropertyValue.GetReusable(0);
                 this.DoAction(imageVisual.VisualIndex, ActionStop, attributes);
-                attributes.Dispose();
             }
         }
 

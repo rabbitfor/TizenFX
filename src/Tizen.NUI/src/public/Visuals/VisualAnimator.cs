@@ -142,50 +142,28 @@ namespace Tizen.NUI
         /// <since_tizen> 3 </since_tizen>
         protected override void ComposingPropertyMap()
         {
-            PropertyMap animator = new PropertyMap();
-            PropertyValue temp = new PropertyValue(alphaFunction);
-            animator.Add("alphaFunction", temp);
-            temp.Dispose();
+            using PropertyMap animator = PropertyMap.GetReusable();
+            animator.AddString("alphaFunction", alphaFunction);
 
-            PropertyMap timePeriod = new PropertyMap();
-            temp = new PropertyValue((endTime - startTime) / 1000.0f);
-            timePeriod.Add("duration", temp);
-            temp.Dispose();
-
-            temp = new PropertyValue(startTime / 1000.0f);
-            timePeriod.Add("delay", temp);
-            temp.Dispose();
-
-            temp = new PropertyValue(timePeriod);
-            animator.Add("timePeriod", temp);
-            temp.Dispose();
+            using PropertyMap timePeriod = PropertyMap.GetReusable();
+            timePeriod.AddFloat("duration", (endTime - startTime) / 1000.0f);
+            timePeriod.AddFloat("delay", startTime / 1000.0f);
+            animator.AddMap("timePeriod", timePeriod);
 
             StringBuilder sb = new StringBuilder(propertyIndex);
             sb[0] = (char)(sb[0] | 0x20);
             string str = sb.ToString();
 
-            PropertyValue val = PropertyValue.CreateFromObject(destinationValue);
+            using PropertyValue val = PropertyValue.CreateFromObject(destinationValue);
 
-            PropertyMap transition = new PropertyMap();
-            temp = new PropertyValue(target);
-            transition.Add("target", temp);
-            temp.Dispose();
-
-            temp = new PropertyValue(str);
-            transition.Add("property", temp);
-            temp.Dispose();
-
+            PropertyMap transition = PropertyMap.GetReusable();
+            transition.AddString("target", target);
+            transition.AddString("property", str);
             transition.Add("targetValue", val);
-            temp = new PropertyValue(animator);
-            transition.Add("animator", temp);
-            temp.Dispose();
+            transition.AddMap("animator", animator);
 
             _outputVisualMap = transition;
             base.ComposingPropertyMap();
-
-            animator.Dispose();
-            timePeriod.Dispose();
-            val.Dispose();
         }
     }
     //temporary fix for TCT

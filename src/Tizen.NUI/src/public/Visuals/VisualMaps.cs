@@ -740,109 +740,77 @@ namespace Tizen.NUI
         {
             if (null == _outputVisualMap)
             {
-                _outputVisualMap = new PropertyMap();
+                _outputVisualMap = PropertyMap.GetReusable();
             }
 
             if (_shader != null)
             {
-                PropertyValue temp = new PropertyValue(_shader);
-                _outputVisualMap.Add(Visual.Property.Shader, temp);
-                temp.Dispose();
+                _outputVisualMap.AddMap(Visual.Property.Shader, _shader);
             }
             if (_premultipliedAlpha != null)
             {
-                PropertyValue temp = new PropertyValue((bool)_premultipliedAlpha);
-                _outputVisualMap.Add(Visual.Property.PremultipliedAlpha, temp);
-                temp.Dispose();
+                _outputVisualMap.AddBool(Visual.Property.PremultipliedAlpha, (bool)_premultipliedAlpha);
             }
             if (_mixColor != null)
             {
-                PropertyValue temp = new PropertyValue(_mixColor);
-                _outputVisualMap.Add(Visual.Property.MixColor, temp);
-                temp.Dispose();
+                _outputVisualMap.AddColor(Visual.Property.MixColor, _mixColor);
             }
             if (_opacity != null)
             {
-                PropertyValue temp = new PropertyValue((float)_opacity);
-                _outputVisualMap.Add(Visual.Property.Opacity, temp);
-                temp.Dispose();
+                _outputVisualMap.AddFloat(Visual.Property.Opacity, (float)_opacity);
             }
             if (_visualFittingMode != null)
             {
-                PropertyValue temp = new PropertyValue((int)_visualFittingMode);
-                _outputVisualMap.Add(Visual.Property.VisualFittingMode, temp);
-                temp.Dispose();
+                _outputVisualMap.AddInt(Visual.Property.VisualFittingMode, (int)_visualFittingMode);
             }
             if (cornerRadius != null)
             {
-                PropertyValue temp = new PropertyValue(cornerRadius);
-                _outputVisualMap.Add(Visual.Property.CornerRadius, temp);
-                temp.Dispose();
+                _outputVisualMap.AddVector4(Visual.Property.CornerRadius, cornerRadius);
             }
             if (cornerRadiusPolicy != null)
             {
-                PropertyValue temp = new PropertyValue((int)cornerRadiusPolicy);
-                _outputVisualMap.Add(Visual.Property.CornerRadiusPolicy, temp);
-                temp.Dispose();
+                _outputVisualMap.AddInt(Visual.Property.CornerRadiusPolicy, (int)cornerRadiusPolicy);
             }
             if (borderlineWidth != null)
             {
-                PropertyValue temp = new PropertyValue((float)borderlineWidth);
-                _outputVisualMap.Add(Visual.Property.BorderlineWidth, temp);
-                temp.Dispose();
+                _outputVisualMap.AddFloat(Visual.Property.BorderlineWidth, (float)borderlineWidth);
             }
             if (borderlineColor != null)
             {
-                PropertyValue temp = new PropertyValue(borderlineColor);
-                _outputVisualMap.Add(Visual.Property.BorderlineColor, temp);
-                temp.Dispose();
+                _outputVisualMap.AddColor(Visual.Property.BorderlineColor, borderlineColor);
             }
             if (borderlineOffset != null)
             {
-                PropertyValue temp = new PropertyValue((float)borderlineOffset);
-                _outputVisualMap.Add(Visual.Property.BorderlineOffset, temp);
-                temp.Dispose();
+                _outputVisualMap.AddFloat(Visual.Property.BorderlineOffset, (float)borderlineOffset);
             }
         }
 
         private void ComposingTransformMap()
         {
-            visualTransformMap = new PropertyMap();
+            visualTransformMap = PropertyMap.GetReusable();
             if (visualSize != null)
             {
-                PropertyValue temp = new PropertyValue(visualSize);
-                visualTransformMap.Add((int)VisualTransformPropertyType.Size, temp);
-                temp.Dispose();
+                visualTransformMap.AddVector2((int)VisualTransformPropertyType.Size, visualSize);
             }
             if (visualOffset != null)
             {
-                PropertyValue temp = new PropertyValue(visualOffset);
-                visualTransformMap.Add((int)VisualTransformPropertyType.Offset, temp);
-                temp.Dispose();
+                visualTransformMap.AddVector2((int)VisualTransformPropertyType.Offset, visualOffset);
             }
             if (visualOffsetPolicy != null)
             {
-                PropertyValue temp = new PropertyValue(visualOffsetPolicy);
-                visualTransformMap.Add((int)VisualTransformPropertyType.OffsetPolicy, temp);
-                temp.Dispose();
+                visualTransformMap.AddVector2((int)VisualTransformPropertyType.OffsetPolicy, visualOffsetPolicy);
             }
             if (visualSizePolicy != null)
             {
-                PropertyValue temp = new PropertyValue(visualSizePolicy);
-                visualTransformMap.Add((int)VisualTransformPropertyType.SizePolicy, temp);
-                temp.Dispose();
+                visualTransformMap.AddVector2((int)VisualTransformPropertyType.SizePolicy, visualSizePolicy);
             }
             if (visualOrigin != null)
             {
-                PropertyValue temp = new PropertyValue((int)visualOrigin);
-                visualTransformMap.Add((int)VisualTransformPropertyType.Origin, temp);
-                temp.Dispose();
+                visualTransformMap.AddInt((int)VisualTransformPropertyType.Origin, (int)visualOrigin);
             }
             if (visualAnchorPoint != null)
             {
-                PropertyValue temp = new PropertyValue((int)visualAnchorPoint);
-                visualTransformMap.Add((int)VisualTransformPropertyType.AnchorPoint, temp);
-                temp.Dispose();
+                visualTransformMap.AddInt((int)VisualTransformPropertyType.AnchorPoint, (int)visualAnchorPoint);
             }
         }
 

@@ -16,7 +16,7 @@
  */
 using System;
 using System.ComponentModel;
-using System.Diagnostics;
+using System.Runtime.InteropServices;
 
 namespace Tizen.NUI
 {
@@ -159,6 +159,7 @@ namespace Tizen.NUI
 
             if (SwigCMemOwn && SwigCPtr.Handle != IntPtr.Zero && IsReusable && DisposablePool.Push(this))
             {
+                isDisposeQueued = false;
                 GC.ReRegisterForFinalize(this);
                 Reuse();
                 return;
@@ -222,10 +223,18 @@ namespace Tizen.NUI
         {
         }
 
-        internal void ClearCPtr()
+        internal void ResetCPtr(IntPtr cPtr, bool cMemoryOwn)
         {
-            swigCMemOwn = false;
-            swigCPtr = new System.Runtime.InteropServices.HandleRef(null, IntPtr.Zero);
+            if (cPtr == IntPtr.Zero)
+            {
+                swigCMemOwn = false;
+                swigCPtr = new HandleRef(null, IntPtr.Zero);
+            }
+            else
+            {
+                swigCMemOwn = cMemoryOwn;
+                swigCPtr = new HandleRef(this, cPtr);
+            }
         }
     }
 

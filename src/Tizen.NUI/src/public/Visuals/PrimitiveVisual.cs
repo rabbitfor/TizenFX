@@ -311,93 +311,67 @@ namespace Tizen.NUI
         /// <since_tizen> 3 </since_tizen>
         protected override void ComposingPropertyMap()
         {
-            _outputVisualMap = new PropertyMap();
-            PropertyValue temp = new PropertyValue((int)Visual.Type.Primitive);
-            _outputVisualMap.Add(Visual.Property.Type, temp);
-            temp.Dispose();
+            _outputVisualMap = PropertyMap.GetReusable();
+            _outputVisualMap.AddInt(Visual.Property.Type, (int)Visual.Type.Primitive);
 
             if (_shape != null)
             {
-                temp = new PropertyValue((int)_shape);
-                _outputVisualMap.Add(PrimitiveVisualProperty.Shape, temp);
-                temp.Dispose();
+                _outputVisualMap.AddInt(PrimitiveVisualProperty.Shape, (int)_shape);
             }
 
             if (_mixColorForPrimitiveVisual != null)
             {
-                temp = new PropertyValue(_mixColorForPrimitiveVisual);
-                _outputVisualMap.Add(PrimitiveVisualProperty.MixColor, temp);
-                temp.Dispose();
+                _outputVisualMap.AddColor(PrimitiveVisualProperty.MixColor, _mixColorForPrimitiveVisual);
             }
 
             if (_slices != null)
             {
-                temp = new PropertyValue((int)_slices);
-                _outputVisualMap.Add(PrimitiveVisualProperty.Slices, temp);
-                temp.Dispose();
+                _outputVisualMap.AddInt(PrimitiveVisualProperty.Slices, (int)_slices);
             }
 
             if (_stacks != null)
             {
-                temp = new PropertyValue((int)_stacks);
-                _outputVisualMap.Add(PrimitiveVisualProperty.Stacks, temp);
-                temp.Dispose();
+                _outputVisualMap.AddInt(PrimitiveVisualProperty.Stacks, (int)_stacks);
             }
 
             if (_scaleTopRadius != null)
             {
-                temp = new PropertyValue((float)_scaleTopRadius);
-                _outputVisualMap.Add(PrimitiveVisualProperty.ScaleTopRadius, temp);
-                temp.Dispose();
+                _outputVisualMap.AddFloat(PrimitiveVisualProperty.ScaleTopRadius, (float)_scaleTopRadius);
             }
 
             if (_scaleBottomRadius != null)
             {
-                temp = new PropertyValue((float)_scaleBottomRadius);
-                _outputVisualMap.Add(PrimitiveVisualProperty.ScaleBottomRadius, temp);
-                temp.Dispose();
+                _outputVisualMap.AddFloat(PrimitiveVisualProperty.ScaleBottomRadius, (float)_scaleBottomRadius);
             }
 
             if (_scaleHeight != null)
             {
-                temp = new PropertyValue((float)_scaleHeight);
-                _outputVisualMap.Add(PrimitiveVisualProperty.ScaleHeight, temp);
-                temp.Dispose();
+                _outputVisualMap.AddFloat(PrimitiveVisualProperty.ScaleHeight, (float)_scaleHeight);
             }
 
             if (_scaleRadius != null)
             {
-                temp = new PropertyValue((float)_scaleRadius);
-                _outputVisualMap.Add(PrimitiveVisualProperty.ScaleRadius, temp);
-                temp.Dispose();
+                _outputVisualMap.AddFloat(PrimitiveVisualProperty.ScaleRadius, (float)_scaleRadius);
             }
 
             if (_scaleDimensions != null)
             {
-                temp = new PropertyValue(_scaleDimensions);
-                _outputVisualMap.Add(PrimitiveVisualProperty.ScaleDimensions, temp);
-                temp.Dispose();
+                _outputVisualMap.AddVector3(PrimitiveVisualProperty.ScaleDimensions, _scaleDimensions);
             }
 
             if (_bevelPercentage != null)
             {
-                temp = new PropertyValue((float)_bevelPercentage);
-                _outputVisualMap.Add(PrimitiveVisualProperty.BevelPercentage, temp);
-                temp.Dispose();
+                _outputVisualMap.AddFloat(PrimitiveVisualProperty.BevelPercentage, (float)_bevelPercentage);
             }
 
             if (_bevelSmoothness != null)
             {
-                temp = new PropertyValue((float)_bevelSmoothness);
-                _outputVisualMap.Add(PrimitiveVisualProperty.BevelSmoothness, temp);
-                temp.Dispose();
+                _outputVisualMap.AddFloat(PrimitiveVisualProperty.BevelSmoothness, (float)_bevelSmoothness);
             }
 
             if (_lightPosition != null)
             {
-                temp = new PropertyValue(_lightPosition);
-                _outputVisualMap.Add(PrimitiveVisualProperty.LightPosition, temp);
-                temp.Dispose();
+                _outputVisualMap.AddVector3(PrimitiveVisualProperty.LightPosition, _lightPosition);
             }
             base.ComposingPropertyMap();
         }

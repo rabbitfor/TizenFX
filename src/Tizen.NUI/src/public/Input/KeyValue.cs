@@ -582,7 +582,7 @@ namespace Tizen.NUI
         {
             get
             {
-                PropertyMap retrivedValue = new PropertyMap();
+                PropertyMap retrivedValue = PropertyMap.GetReusable();
                 if (TrueValue.Get(retrivedValue))
                 {
                     return retrivedValue;

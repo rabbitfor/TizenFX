@@ -749,25 +749,14 @@ namespace Tizen.NUI
             set
             {
                 arrowImage = value;
-                var ptMap = new PropertyMap();
-                var temp = new PropertyValue((int)Visual.Type.Image);
-                ptMap.Add(Visual.Property.Type, temp);
-                temp.Dispose();
 
-                temp = new PropertyValue(arrowImage);
-                ptMap.Add(ImageVisualProperty.URL, temp);
-                temp.Dispose();
-
-                temp = new PropertyValue(150);
-                ptMap.Add(ImageVisualProperty.DesiredHeight, temp);
-                temp.Dispose();
-
-                temp = new PropertyValue(150);
-                ptMap.Add(ImageVisualProperty.DesiredWidth, temp);
-                temp.Dispose();
+                using var ptMap = PropertyMap.GetReusable();
+                ptMap.AddInt(Visual.Property.Type, (int)Visual.Type.Image)
+                     .AddString(ImageVisualProperty.URL, arrowImage)
+                     .AddInt(ImageVisualProperty.DesiredHeight, 150)
+                     .AddInt(ImageVisualProperty.DesiredWidth, 150);
 
                 arrowVisual = VisualFactory.Instance.CreateVisual(ptMap);
-                ptMap.Dispose();
 
                 RegisterVisual(arrowVisualPropertyIndex, arrowVisual);
             }
@@ -797,29 +786,16 @@ namespace Tizen.NUI
             maxTextLength = 0;
 
             // Create image visual for the arrow keys
-            var temp = new PropertyValue(arrowImage);
+            using var temp = PropertyValue.GetReusable(arrowImage);
             arrowVisualPropertyIndex = RegisterProperty("ArrowImage", temp, Tizen.NUI.PropertyAccessMode.ReadWrite);
-            temp.Dispose();
 
-            var ptMap = new PropertyMap();
-            temp = new PropertyValue((int)Visual.Type.Image);
-            ptMap.Add(Visual.Property.Type, temp);
-            temp.Dispose();
-
-            temp = new PropertyValue(arrowImage);
-            ptMap.Add(ImageVisualProperty.URL, temp);
-            temp.Dispose();
-
-            temp = new PropertyValue(150);
-            ptMap.Add(ImageVisualProperty.DesiredHeight, temp);
-            temp.Dispose();
-
-            temp = new PropertyValue(150);
-            ptMap.Add(ImageVisualProperty.DesiredWidth, temp);
-            temp.Dispose();
+            using var ptMap = PropertyMap.GetReusable();
+            ptMap.AddInt(Visual.Property.Type, (int)Visual.Type.Image)
+                 .AddString(ImageVisualProperty.URL, arrowImage)
+                 .AddInt(ImageVisualProperty.DesiredHeight, 150)
+                 .AddInt(ImageVisualProperty.DesiredWidth, 150);
 
             arrowVisual = VisualFactory.Instance.CreateVisual(ptMap);
-            ptMap.Dispose();
             RegisterVisual(arrowVisualPropertyIndex, arrowVisual);
 
             // Create a text field

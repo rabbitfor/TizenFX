@@ -58,7 +58,8 @@ namespace Tizen.NUI.Visuals
         {
             set
             {
-                UpdateVisualProperty((int)Tizen.NUI.ColorVisualProperty.BlurRadius, new PropertyValue(value), false);
+                using var property = PropertyValue.GetReusable(value);
+                UpdateVisualProperty((int)Tizen.NUI.ColorVisualProperty.BlurRadius, property, false);
             }
             get
             {
@@ -77,7 +78,8 @@ namespace Tizen.NUI.Visuals
         {
             set
             {
-                UpdateVisualProperty((int)Tizen.NUI.ColorVisualProperty.CutoutPolicy, new PropertyValue((int)value));
+                using var property = PropertyValue.GetReusable((int)value);
+                UpdateVisualProperty((int)Tizen.NUI.ColorVisualProperty.CutoutPolicy, property);
             }
             get
             {
@@ -100,7 +102,8 @@ namespace Tizen.NUI.Visuals
         {
             set
             {
-                UpdateVisualProperty((int)Tizen.NUI.Visual.Property.CornerRadius, new PropertyValue(value), false);
+                using var property = PropertyValue.GetReusable(value);
+                UpdateVisualProperty((int)Tizen.NUI.Visual.Property.CornerRadius, property, false);
             }
             get
             {
@@ -121,7 +124,8 @@ namespace Tizen.NUI.Visuals
         {
             set
             {
-                UpdateVisualProperty((int)Tizen.NUI.Visual.Property.CornerRadiusPolicy, new PropertyValue((int)value), false);
+                using var property = PropertyValue.GetReusable((int)value);
+                UpdateVisualProperty((int)Tizen.NUI.Visual.Property.CornerRadiusPolicy, property, false);
             }
             get
             {
@@ -140,7 +144,8 @@ namespace Tizen.NUI.Visuals
         {
             set
             {
-                UpdateVisualProperty((int)Tizen.NUI.Visual.Property.BorderlineWidth, new PropertyValue(value), false);
+                using var property = PropertyValue.GetReusable(value);
+                UpdateVisualProperty((int)Tizen.NUI.Visual.Property.BorderlineWidth, property, false);
             }
             get
             {
@@ -160,7 +165,8 @@ namespace Tizen.NUI.Visuals
         {
             set
             {
-                UpdateVisualProperty((int)Tizen.NUI.Visual.Property.BorderlineColor, new PropertyValue(value), false);
+                using var property = PropertyValue.GetReusable(value);
+                UpdateVisualProperty((int)Tizen.NUI.Visual.Property.BorderlineColor, property, false);
             }
             get
             {
@@ -184,7 +190,8 @@ namespace Tizen.NUI.Visuals
         {
             set
             {
-                UpdateVisualProperty((int)Tizen.NUI.Visual.Property.BorderlineOffset, new PropertyValue(value), false);
+                using var property = PropertyValue.GetReusable(value);
+                UpdateVisualProperty(Visual.Property.BorderlineOffset, property, false);
             }
             get
             {

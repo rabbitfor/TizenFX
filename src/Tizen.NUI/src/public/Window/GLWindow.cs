@@ -393,9 +393,8 @@ namespace Tizen.NUI
             PropertyArray orientationArray = new PropertyArray();
             for (int i = 0; i < orientations.Count; i++)
             {
-                PropertyValue val = new PropertyValue((int)orientations[i]);
+                using PropertyValue val = PropertyValue.GetReusable((int)orientations[i]);
                 orientationArray.PushBack(val);
-                val.Dispose();
             }
 
             Interop.GLWindow.GlWindowSetAvailableOrientations(SwigCPtr, PropertyArray.getCPtr(orientationArray), orientations.Count);

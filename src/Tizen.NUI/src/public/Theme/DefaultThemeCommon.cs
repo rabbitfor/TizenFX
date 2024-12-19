@@ -40,7 +40,7 @@ namespace Tizen.NUI
                 FontFamily = Tizen.NUI.FontFamily.UseSystemSetting,
                 PixelSize = 24,
                 TextColor = Color.GetReusable(0.04f, 0.05f, 0.13f, 1),
-                FontStyle = new PropertyMap().Add("weight", new PropertyValue("regular")),
+                FontStyle = PropertyMap.GetReusable().AddString("weight", "regular"),
                 AutoScrollLoopCount = 2,
                 AutoScrollGap = 50.0f,
                 AutoScrollSpeed = 80,
@@ -56,7 +56,7 @@ namespace Tizen.NUI
                 PixelSize = 24,
                 TextColor = Color.GetReusable(0.04f, 0.05f, 0.13f, 1),
                 PlaceholderTextColor = Vector4.GetReusable(0.79f, 0.79f, 0.79f, 1),
-                FontStyle = new PropertyMap().Add("weight", new PropertyValue("regular")),
+                FontStyle = PropertyMap.GetReusable().AddString("weight", "regular"),
                 PrimaryCursorColor = Vector4.GetReusable(0.04f, 0.05f, 0.13f, 1),
                 SecondaryCursorColor = Vector4.GetReusable(0.04f, 0.05f, 0.13f, 1),
                 CursorWidth = 2,
@@ -64,26 +64,26 @@ namespace Tizen.NUI
                 SelectionHighlightColor = Vector4.GetReusable(1.00f, 0.38f, 0.00f, 0.30f),
                 GrabHandleColor = Color.GetReusable(1.00f, 1.00f, 1.00f, 1),
                 GrabHandleImage = FrameworkInformation.ResourcePath + "IoT_handler_center_downW.png",
-                SelectionHandleImageLeft = new PropertyMap().Add("filename", new PropertyValue(FrameworkInformation.ResourcePath + "IoT_handler_downleftW.png")),
-                SelectionHandleImageRight = new PropertyMap().Add("filename", new PropertyValue(FrameworkInformation.ResourcePath + "IoT_handler_downrightW.png")),
-                SelectionPopupStyle = new PropertyMap()
-                .Add(SelectionPopupStyleProperty.MaxSize, new PropertyValue(Vector2.GetReusable(1200.0f, 40.0f)))
-                .Add(SelectionPopupStyleProperty.DividerSize, new PropertyValue(Vector2.GetReusable(0.0f, 0.0f)))
-                .Add(SelectionPopupStyleProperty.DividerPadding, new PropertyValue(Vector4.GetReusable(0.0f, 0.0f, 0.0f, 0.0f)))
-                .Add(SelectionPopupStyleProperty.Background, new PropertyValue(new PropertyMap().Add(ImageVisualProperty.URL, new PropertyValue(FrameworkInformation.ResourcePath + "IoT-selection-popup-background.9.png"))))
-                .Add(SelectionPopupStyleProperty.BackgroundBorder, new PropertyValue(new PropertyMap().Add(ImageVisualProperty.URL, new PropertyValue(FrameworkInformation.ResourcePath + "IoT-selection-popup-border.9.png"))))
-                .Add(SelectionPopupStyleProperty.PressedColor, new PropertyValue(Vector4.GetReusable(1.0f, 0.39f, 0.0f, 0.16f)))
-                .Add(SelectionPopupStyleProperty.PressedCornerRadius, new PropertyValue(12.0f))
-                .Add(SelectionPopupStyleProperty.FadeInDuration, new PropertyValue(0.25f))
-                .Add(SelectionPopupStyleProperty.FadeOutDuration, new PropertyValue(0.25f))
-                .Add(SelectionPopupStyleProperty.EnableScrollBar, new PropertyValue(false))
-                .Add(SelectionPopupStyleProperty.LabelMinimumSize, new PropertyValue(Vector2.GetReusable(0, 40.0f)))
-                .Add(SelectionPopupStyleProperty.LabelPadding, new PropertyValue(Vector4.GetReusable(-4.0f, -4.0f, 0.0f, 0.0f)))
-                .Add(SelectionPopupStyleProperty.LabelTextVisual, new PropertyValue(new PropertyMap()
-                    .Add(TextVisualProperty.PointSize, new PropertyValue(6.0f))
-                    .Add(TextVisualProperty.TextColor, new PropertyValue(Vector4.GetReusable(1.00f, 0.38f, 0.00f, 1)))
-                    .Add(TextVisualProperty.FontFamily, new PropertyValue("TizenSans"))
-                    .Add(TextVisualProperty.FontStyle, new PropertyValue(new PropertyMap().Add("weight", new PropertyValue("regular")))))),
+                SelectionHandleImageLeft = PropertyMap.GetReusable().AddString("filename",  FrameworkInformation.ResourcePath + "IoT_handler_downleftW.png"),
+                SelectionHandleImageRight = PropertyMap.GetReusable().AddString("filename", FrameworkInformation.ResourcePath + "IoT_handler_downrightW.png"),
+                SelectionPopupStyle = PropertyMap.GetReusable()
+                .AddVector2(SelectionPopupStyleProperty.MaxSize, 1200.0f, 40.0f)
+                .AddVector2(SelectionPopupStyleProperty.DividerSize, 0.0f, 0.0f)
+                .AddVector4(SelectionPopupStyleProperty.DividerPadding, 0.0f, 0.0f, 0.0f, 0.0f)
+                .AddMap(SelectionPopupStyleProperty.Background, PropertyMap.GetReusable().AddString(ImageVisualProperty.URL, FrameworkInformation.ResourcePath + "IoT-selection-popup-background.9.png"))
+                .AddMap(SelectionPopupStyleProperty.BackgroundBorder, PropertyMap.GetReusable().AddString(ImageVisualProperty.URL, FrameworkInformation.ResourcePath + "IoT-selection-popup-border.9.png"))
+                .AddVector4(SelectionPopupStyleProperty.PressedColor, 1.0f, 0.39f, 0.0f, 0.16f)
+                .AddFloat(SelectionPopupStyleProperty.PressedCornerRadius, 12.0f)
+                .AddFloat(SelectionPopupStyleProperty.FadeInDuration, 0.25f)
+                .AddFloat(SelectionPopupStyleProperty.FadeOutDuration, 0.25f)
+                .AddBool(SelectionPopupStyleProperty.EnableScrollBar, false)
+                .AddVector2(SelectionPopupStyleProperty.LabelMinimumSize, 0, 40.0f)
+                .AddVector4(SelectionPopupStyleProperty.LabelPadding, -4.0f, -4.0f, 0.0f, 0.0f)
+                .AddMap(SelectionPopupStyleProperty.LabelTextVisual, PropertyMap.GetReusable()
+                    .AddFloat(TextVisualProperty.PointSize, 6.0f)
+                    .AddVector4(TextVisualProperty.TextColor, 1.00f, 0.38f, 0.00f, 1)
+                    .AddString(TextVisualProperty.FontFamily, "TizenSans")
+                    .AddMap(TextVisualProperty.FontStyle, PropertyMap.GetReusable().AddString("weight", "regular"))),
             });
 
             // TextEditor style.
@@ -93,7 +93,7 @@ namespace Tizen.NUI
                 PixelSize = 24,
                 TextColor = Color.GetReusable(0.04f, 0.05f, 0.13f, 1),
                 PlaceholderTextColor = Color.GetReusable(0.79f, 0.79f, 0.79f, 1),
-                FontStyle = new PropertyMap().Add("weight", new PropertyValue("regular")),
+                FontStyle = PropertyMap.GetReusable().AddString("weight", "regular"),
                 PrimaryCursorColor = Vector4.GetReusable(0.04f, 0.05f, 0.13f, 1),
                 SecondaryCursorColor = Vector4.GetReusable(0.04f, 0.05f, 0.13f, 1),
                 CursorWidth = 2,
@@ -104,26 +104,26 @@ namespace Tizen.NUI
                 SelectionHighlightColor = Vector4.GetReusable(1.00f, 0.38f, 0.00f, 0.30f),
                 GrabHandleColor = Color.GetReusable(1.00f, 1.00f, 1.00f, 1),
                 GrabHandleImage = FrameworkInformation.ResourcePath + "IoT_handler_center_downW.png",
-                SelectionHandleImageLeft = new PropertyMap().Add("filename", new PropertyValue(FrameworkInformation.ResourcePath + "IoT_handler_downleftW.png")),
-                SelectionHandleImageRight = new PropertyMap().Add("filename", new PropertyValue(FrameworkInformation.ResourcePath + "IoT_handler_downrightW.png")),
-                SelectionPopupStyle = new PropertyMap()
-                .Add(SelectionPopupStyleProperty.MaxSize, new PropertyValue(Vector2.GetReusable(1200.0f, 40.0f)))
-                .Add(SelectionPopupStyleProperty.DividerSize, new PropertyValue(Vector2.GetReusable(0.0f, 0.0f)))
-                .Add(SelectionPopupStyleProperty.DividerPadding, new PropertyValue(Vector4.GetReusable(0.0f, 0.0f, 0.0f, 0.0f)))
-                .Add(SelectionPopupStyleProperty.Background, new PropertyValue(new PropertyMap().Add(ImageVisualProperty.URL, new PropertyValue(FrameworkInformation.ResourcePath + "IoT-selection-popup-background.9.png"))))
-                .Add(SelectionPopupStyleProperty.BackgroundBorder, new PropertyValue(new PropertyMap().Add(ImageVisualProperty.URL, new PropertyValue(FrameworkInformation.ResourcePath + "IoT-selection-popup-border.9.png"))))
-                .Add(SelectionPopupStyleProperty.PressedColor, new PropertyValue(Vector4.GetReusable(1.0f, 0.39f, 0.0f, 0.16f)))
-                .Add(SelectionPopupStyleProperty.PressedCornerRadius, new PropertyValue(12.0f))
-                .Add(SelectionPopupStyleProperty.FadeInDuration, new PropertyValue(0.25f))
-                .Add(SelectionPopupStyleProperty.FadeOutDuration, new PropertyValue(0.25f))
-                .Add(SelectionPopupStyleProperty.EnableScrollBar, new PropertyValue(false))
-                .Add(SelectionPopupStyleProperty.LabelMinimumSize, new PropertyValue(Vector2.GetReusable(0, 40.0f)))
-                .Add(SelectionPopupStyleProperty.LabelPadding, new PropertyValue(Vector4.GetReusable(-4.0f, -4.0f, 0.0f, 0.0f)))
-                .Add(SelectionPopupStyleProperty.LabelTextVisual, new PropertyValue(new PropertyMap()
-                    .Add(TextVisualProperty.PointSize, new PropertyValue(6.0f))
-                    .Add(TextVisualProperty.TextColor, new PropertyValue(Vector4.GetReusable(1.00f, 0.38f, 0.00f, 1)))
-                    .Add(TextVisualProperty.FontFamily, new PropertyValue("TizenSans"))
-                    .Add(TextVisualProperty.FontStyle, new PropertyValue(new PropertyMap().Add("weight", new PropertyValue("regular")))))),
+                SelectionHandleImageLeft = PropertyMap.GetReusable().AddString("filename", FrameworkInformation.ResourcePath + "IoT_handler_downleftW.png"),
+                SelectionHandleImageRight = PropertyMap.GetReusable().AddString("filename", FrameworkInformation.ResourcePath + "IoT_handler_downrightW.png"),
+                SelectionPopupStyle = PropertyMap.GetReusable()
+                .AddVector2(SelectionPopupStyleProperty.MaxSize, 1200.0f, 40.0f)
+                .AddVector2(SelectionPopupStyleProperty.DividerSize, 0.0f, 0.0f)
+                .AddVector4(SelectionPopupStyleProperty.DividerPadding, 0.0f, 0.0f, 0.0f, 0.0f)
+                .AddMap(SelectionPopupStyleProperty.Background, PropertyMap.GetReusable().AddString(ImageVisualProperty.URL, FrameworkInformation.ResourcePath + "IoT-selection-popup-background.9.png"))
+                .AddMap(SelectionPopupStyleProperty.BackgroundBorder, PropertyMap.GetReusable().AddString(ImageVisualProperty.URL, FrameworkInformation.ResourcePath + "IoT-selection-popup-border.9.png"))
+                .AddVector4(SelectionPopupStyleProperty.PressedColor, 1.0f, 0.39f, 0.0f, 0.16f)
+                .AddFloat(SelectionPopupStyleProperty.PressedCornerRadius, 12.0f)
+                .AddFloat(SelectionPopupStyleProperty.FadeInDuration, 0.25f)
+                .AddFloat(SelectionPopupStyleProperty.FadeOutDuration, 0.25f)
+                .AddBool(SelectionPopupStyleProperty.EnableScrollBar, false)
+                .AddVector2(SelectionPopupStyleProperty.LabelMinimumSize, 0, 40.0f)
+                .AddVector4(SelectionPopupStyleProperty.LabelPadding, -4.0f, -4.0f, 0.0f, 0.0f)
+                .AddMap(SelectionPopupStyleProperty.LabelTextVisual, PropertyMap.GetReusable()
+                    .AddFloat(TextVisualProperty.PointSize, 6.0f)
+                    .AddVector4(TextVisualProperty.TextColor, 1.00f, 0.38f, 0.00f, 1)
+                    .AddString(TextVisualProperty.FontFamily, "TizenSans")
+                    .AddMap(TextVisualProperty.FontStyle, PropertyMap.GetReusable().AddString("weight", "regular")))
             });
 
             return theme;

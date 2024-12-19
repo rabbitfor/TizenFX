@@ -101,17 +101,17 @@ namespace Tizen.NUI.Visuals
             {
                 if (cachedVisualTransformPropertyMap == null)
                 {
-                    cachedVisualTransformPropertyMap = new PropertyMap();
+                    cachedVisualTransformPropertyMap = PropertyMap.GetReusable();
                 }
 
                 cachedVisualTransformPropertyMap.Clear();
-                cachedVisualTransformPropertyMap.Add((int)VisualTransformPropertyType.Size, new PropertyValue(Vector2.GetReusable(width, height)))
-                                                .Add((int)VisualTransformPropertyType.Offset, new PropertyValue(Vector2.GetReusable(offsetX, offsetY)))
-                                                .Add((int)VisualTransformPropertyType.SizePolicy, new PropertyValue(Vector2.GetReusable((float)widthPolicy, (float)heightPolicy)))
-                                                .Add((int)VisualTransformPropertyType.OffsetPolicy, new PropertyValue(Vector2.GetReusable((float)offsetXPolicy, (float)offsetYPolicy)))
-                                                .Add((int)VisualTransformPropertyType.Origin, new PropertyValue((int)origin))
-                                                .Add((int)VisualTransformPropertyType.AnchorPoint, new PropertyValue((int)pivotPoint))
-                                                .Add((int)VisualTransformPropertyType.ExtraSize, new PropertyValue(Vector2.GetReusable(extraWidth, extraHeight)));
+                cachedVisualTransformPropertyMap.AddVector2((int)VisualTransformPropertyType.Size, width, height)
+                                                .AddVector2((int)VisualTransformPropertyType.Offset, offsetX, offsetY)
+                                                .AddVector2((int)VisualTransformPropertyType.SizePolicy, (float)widthPolicy, (float)heightPolicy)
+                                                .AddVector2((int)VisualTransformPropertyType.OffsetPolicy, (float)offsetXPolicy, (float)offsetYPolicy)
+                                                .AddInt((int)VisualTransformPropertyType.Origin, (int)origin)
+                                                .AddInt((int)VisualTransformPropertyType.AnchorPoint, (int)pivotPoint)
+                                                .AddVector2((int)VisualTransformPropertyType.ExtraSize, extraWidth, extraHeight);
             }
 
             internal void ConvertFromPropertyMap(PropertyMap inputMap)
@@ -257,7 +257,8 @@ namespace Tizen.NUI.Visuals
                 if(internalType != value)
                 {
                     internalType = value;
-                    UpdateVisualProperty((int)Tizen.NUI.Visual.Property.Type, new PropertyValue(value), true);
+                    using var property = PropertyValue.GetReusable(value);
+                    UpdateVisualProperty((int)Tizen.NUI.Visual.Property.Type, property, true);
                 }
             }
             get
@@ -303,10 +304,12 @@ namespace Tizen.NUI.Visuals
         {
             set
             {
-                UpdateVisualProperty((int)Tizen.NUI.Visual.Property.MixColor, new PropertyValue(value), false);
+                using var property = PropertyValue.GetReusable(value);
+                UpdateVisualProperty((int)Tizen.NUI.Visual.Property.MixColor, property, false);
 
                 // warning : We should set cached Opacity after set MixColor.
-                UpdateVisualProperty((int)Tizen.NUI.Visual.Property.Opacity, new PropertyValue(value.A), false);
+                using var propertyAlpha = PropertyValue.GetReusable(value.A);
+                UpdateVisualProperty((int)Tizen.NUI.Visual.Property.Opacity, propertyAlpha, false);
             }
             get
             {
@@ -331,11 +334,12 @@ namespace Tizen.NUI.Visuals
                 using Tizen.NUI.Color currentVisualColor = Color;
                 if (currentVisualColor.A != value)
                 {
-                    using Tizen.NUI.Color visualColor = new Tizen.NUI.Color(currentVisualColor.R, currentVisualColor.G, currentVisualColor.B, value);
-                    UpdateVisualProperty((int)Tizen.NUI.Visual.Property.MixColor, new PropertyValue(visualColor), false);
+                    using var property = PropertyValue.GetReusableColor(currentVisualColor.R, currentVisualColor.G, currentVisualColor.B, value);
+                    UpdateVisualProperty((int)Tizen.NUI.Visual.Property.MixColor, property, false);
 
                     // warning : We should set cached Opacity after set MixColor.
-                    UpdateVisualProperty((int)Tizen.NUI.Visual.Property.Opacity, new PropertyValue(value), false);
+                    using var propertyAlpha = PropertyValue.GetReusable(value);
+                    UpdateVisualProperty((int)Tizen.NUI.Visual.Property.Opacity, propertyAlpha, false);
                 }
             }
             get
@@ -377,7 +381,8 @@ namespace Tizen.NUI.Visuals
                     {
                         visualFittingModeApplied = false;
                     }
-                    UpdateVisualProperty((int)Tizen.NUI.Visual.Property.VisualFittingMode, new PropertyValue((int)value));
+                    using var property = PropertyValue.GetReusable((int)value);
+                    UpdateVisualProperty((int)Tizen.NUI.Visual.Property.VisualFittingMode, property);
                 }
                 else
                 {
@@ -827,7 +832,7 @@ namespace Tizen.NUI.Visuals
         /// </summary>
         internal void UnregisterVisual()
         {
-            using var tempPropertyMap = new PropertyMap();
+            using var tempPropertyMap = PropertyMap.GetReusable();
             Interop.VisualObject.CreateVisual(SwigCPtr, PropertyMap.getCPtr(tempPropertyMap));
         }
 
@@ -854,7 +859,7 @@ namespace Tizen.NUI.Visuals
                 using var transformValue = cachedVisualPropertyMap?.Find((int)Tizen.NUI.Visual.Property.Transform);
                 if (transformValue != null)
                 {
-                    PropertyMap transformMap = new PropertyMap();
+                    PropertyMap transformMap = PropertyMap.GetReusable();
                     if (transformValue.Get(ref transformMap) && transformMap != null)
                     {
                         transformInfo.ConvertFromPropertyMap(transformMap);
@@ -879,7 +884,7 @@ namespace Tizen.NUI.Visuals
                 // Sync as current properties
                 UpdateVisualPropertyMap();
 
-                PropertyMap ret = new PropertyMap();
+                PropertyMap ret = PropertyMap.GetReusable();
                 Interop.VisualObject.RetrieveVisualPropertyMap(SwigCPtr, PropertyMap.getCPtr(ret));
                 return ret;
             }
@@ -914,7 +919,7 @@ namespace Tizen.NUI.Visuals
 
                 if (cachedVisualPropertyMap == null)
                 {
-                    cachedVisualPropertyMap = new PropertyMap();
+                    cachedVisualPropertyMap = PropertyMap.GetReusable();
                 }
 
                 visualCreationRequiredFlag |= requiredVisualCreation;
@@ -929,7 +934,7 @@ namespace Tizen.NUI.Visuals
                         visualUpdateRequiredFlag = true;
                         if (changedPropertyMap == null)
                         {
-                            changedPropertyMap = new PropertyMap();
+                            changedPropertyMap = PropertyMap.GetReusable();
                         }
                         changedPropertyMap[key] = value;
                     }
@@ -988,7 +993,7 @@ namespace Tizen.NUI.Visuals
 
             if (cachedVisualPropertyMap == null)
             {
-                cachedVisualPropertyMap = new PropertyMap();
+                cachedVisualPropertyMap = PropertyMap.GetReusable();
             }
 
             if (transformInfo.changed)
@@ -1000,8 +1005,7 @@ namespace Tizen.NUI.Visuals
 
                 if (transformInfo.cachedVisualTransformPropertyMap != null)
                 {
-                    using var transformValue = new PropertyValue(transformInfo.cachedVisualTransformPropertyMap);
-                    cachedVisualPropertyMap.Add((int)Tizen.NUI.Visual.Property.Transform, transformValue);
+                    cachedVisualPropertyMap.AddMap((int)Tizen.NUI.Visual.Property.Transform, transformInfo.cachedVisualTransformPropertyMap);
                 }
             }
 
@@ -1035,7 +1039,7 @@ namespace Tizen.NUI.Visuals
                 {
                     if (cachedVisualPropertyMap == null)
                     {
-                        cachedVisualPropertyMap = new PropertyMap();
+                        cachedVisualPropertyMap = PropertyMap.GetReusable();
                     }
                     cachedVisualPropertyMap[key] = ret;
                 }
@@ -1070,7 +1074,7 @@ namespace Tizen.NUI.Visuals
         {
             if (transformInfo.cachedVisualTransformPropertyMap == null)
             {
-                transformInfo.cachedVisualTransformPropertyMap = new PropertyMap();
+                transformInfo.cachedVisualTransformPropertyMap = PropertyMap.GetReusable();
             }
 
             // Mark as transform property map.

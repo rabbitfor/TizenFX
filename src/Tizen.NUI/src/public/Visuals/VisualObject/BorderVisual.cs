@@ -55,7 +55,8 @@ namespace Tizen.NUI.Visuals
         {
             set
             {
-                UpdateVisualProperty((int)Tizen.NUI.BorderVisualProperty.Color, new PropertyValue(value));
+                using var property = PropertyValue.GetReusable(value);
+                UpdateVisualProperty((int)Tizen.NUI.BorderVisualProperty.Color, property);
             }
             get
             {
@@ -74,7 +75,8 @@ namespace Tizen.NUI.Visuals
         {
             set
             {
-                UpdateVisualProperty((int)Tizen.NUI.BorderVisualProperty.Size, new PropertyValue(value));
+                using var property = PropertyValue.GetReusable(value);
+                UpdateVisualProperty((int)Tizen.NUI.BorderVisualProperty.Size, property);
             }
             get
             {
@@ -93,7 +95,8 @@ namespace Tizen.NUI.Visuals
         {
             set
             {
-                UpdateVisualProperty((int)Tizen.NUI.BorderVisualProperty.AntiAliasing, new PropertyValue(value));
+                using var property = PropertyValue.GetReusable(value);
+                UpdateVisualProperty((int)Tizen.NUI.BorderVisualProperty.AntiAliasing, property);
             }
             get
             {

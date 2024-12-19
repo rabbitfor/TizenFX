@@ -66,7 +66,8 @@ namespace Tizen.NUI.Visuals
         {
             set
             {
-                UpdateVisualProperty((int)Tizen.NUI.NpatchImageVisualProperty.BorderOnly, new PropertyValue(value));
+                using var property = PropertyValue.GetReusable(value);
+                UpdateVisualProperty((int)Tizen.NUI.NpatchImageVisualProperty.BorderOnly, property);
             }
             get
             {
@@ -88,7 +89,15 @@ namespace Tizen.NUI.Visuals
         {
             set
             {
-                UpdateVisualProperty((int)Tizen.NUI.NpatchImageVisualProperty.Border, (value == null) ? null : new PropertyValue(value));
+                if (value == null)
+                {
+                    UpdateVisualProperty((int)Tizen.NUI.NpatchImageVisualProperty.Border, null);
+                }
+                else
+                {
+                    using var property = PropertyValue.GetReusable(value);
+                    UpdateVisualProperty((int)Tizen.NUI.NpatchImageVisualProperty.Border, property);
+                }
             }
             get
             {
@@ -108,7 +117,15 @@ namespace Tizen.NUI.Visuals
         {
             set
             {
-                UpdateVisualProperty((int)Tizen.NUI.ImageVisualProperty.AuxiliaryImageURL, string.IsNullOrEmpty(value) ? null : new PropertyValue(value));
+                if (string.IsNullOrEmpty(value))
+                {
+                    UpdateVisualProperty((int)Tizen.NUI.ImageVisualProperty.AuxiliaryImageURL, null);
+                }
+                else
+                {
+                    using var property = PropertyValue.GetReusable(value);
+                    UpdateVisualProperty((int)Tizen.NUI.ImageVisualProperty.AuxiliaryImageURL, property);
+                }
             }
             get
             {
@@ -127,7 +144,8 @@ namespace Tizen.NUI.Visuals
         {
             set
             {
-                UpdateVisualProperty((int)Tizen.NUI.ImageVisualProperty.AuxiliaryImageAlpha, new PropertyValue(value));
+                using var property = PropertyValue.GetReusable(value);
+                UpdateVisualProperty((int)Tizen.NUI.ImageVisualProperty.AuxiliaryImageAlpha, property);
             }
             get
             {

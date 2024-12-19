@@ -30,31 +30,26 @@ namespace Tizen.NUI
         {
             if (pools.TryGetValue(typeof(T), out var typePool) && typePool.Count > 0)
             {
-                Log.Debug("JYJY", $"Get {typeof(T)} pool: {typePool.Count}");
+                // Log.Debug("JYJY", $"Get {typeof(T)} from pool: {typePool.Count}");
                 return typePool.Pop() as T;
             }
             return null;
         }
 
-        // public static T GetOrCreate<T>() where T : Disposable
-        // {
-        //     // NOTE Remove reflextion later
-        //     return Get<T>() ?? (T)Activator.CreateInstance(typeof(T));
-        // }
-
         public static bool Push<T>(T item) where T : Disposable
         {
-            if (!pools.TryGetValue(typeof(T), out var typePool))
+            var type = item.GetType();
+            if (!pools.TryGetValue(type, out var typePool))
             {
-                pools[typeof(T)] = typePool = new Stack<Disposable>();
+                pools[type] = typePool = new Stack<Disposable>();
             }
 
             if (typePool.Count == MaximumPoolSize)
             {
-                Log.Debug("JYJY", $"{typeof(T)} maximum pool size reached");
                 return false;
             }
 
+            // Log.Debug("JYJY", $"Push {type} to pool: {typePool.Count}");
             typePool.Push(item);
 
             return true;

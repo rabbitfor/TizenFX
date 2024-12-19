@@ -467,7 +467,9 @@ namespace Tizen.NUI
 
         internal static Position2D GetReusable(Position2D other) => GetReusable(other.X, other.Y);
 
-        internal static Position2D GetReusable(int x, int y) => GetReusable(x, y);
+        internal static Position2D GetReusable(int x, int y) => GetReusable(null, x, y);
+
+        internal static Position2D GetReusable(Position2DChangedCallback cb) => GetReusable(cb, 0, 0);
 
         internal static Position2D GetReusable(Position2DChangedCallback cb, int x, int y)
         {

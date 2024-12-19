@@ -17,6 +17,7 @@
 
 using System;
 using System.ComponentModel;
+using System.Diagnostics;
 
 namespace Tizen.NUI
 {
@@ -37,16 +38,16 @@ namespace Tizen.NUI
         [EditorBrowsable(EditorBrowsableState.Never)]
         public TextShadow(Color color, Vector2 offset, float blurRadius)
         {
-            propertyMap = new PropertyMap();
+            propertyMap = PropertyMap.GetReusable();
 
             Color = color;
-            propertyMap["color"] = PropertyValue.CreateWithGuard(Color);
+            propertyMap.SetColor("color", Color);
 
             Offset = offset;
-            propertyMap["offset"] = PropertyValue.CreateWithGuard(Offset);
+            propertyMap.SetVector2("offset", Offset);
 
             BlurRadius = blurRadius;
-            propertyMap["blurRadius"] = new PropertyValue(BlurRadius);
+            propertyMap.SetFloat("blurRadius", BlurRadius);
         }
 
         /// <summary>
@@ -93,18 +94,19 @@ namespace Tizen.NUI
 
         internal TextShadow(TextShadow other)
         {
-            propertyMap = new PropertyMap();
+            propertyMap = PropertyMap.GetReusable();
 
             Color = other.Color;
-            propertyMap["color"] = PropertyValue.CreateWithGuard(Color);
+            propertyMap.SetColor("color", Color);
 
             Offset = other.Offset;
-            propertyMap["offset"] = PropertyValue.CreateWithGuard(Offset);
+            propertyMap.SetVector2("offset", Offset);
 
             BlurRadius = other.BlurRadius;
-            propertyMap["blurRadius"] = new PropertyValue(BlurRadius);
+            propertyMap.SetFloat("blurRadius", BlurRadius);
         }
 
+        // NOTE Please remove after check FLUX does not use it
         static internal PropertyValue ToPropertyValue(TextShadow instance)
         {
             if (instance == null)
@@ -113,6 +115,12 @@ namespace Tizen.NUI
             }
 
             return new PropertyValue(instance.propertyMap);
+        }
+
+        static internal PropertyMap ToPropertyMap(TextShadow instance)
+        {
+            Debug.Assert(instance == null);
+            return instance.propertyMap;
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]

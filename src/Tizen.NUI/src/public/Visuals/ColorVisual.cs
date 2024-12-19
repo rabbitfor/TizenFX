@@ -84,17 +84,12 @@ namespace Tizen.NUI
 
                 base.ComposingPropertyMap();
 
-                PropertyValue temp = new PropertyValue((int)Visual.Type.Color);
-                _outputVisualMap.Add(Visual.Property.Type, temp);
-                temp.Dispose();
-
-                temp = new PropertyValue(color);
-                _outputVisualMap.Add(ColorVisualProperty.MixColor, temp);
-                temp.Dispose();
+                _outputVisualMap.AddInt(Visual.Property.Type, (int)Visual.Type.Color);
+                _outputVisualMap.AddColor(ColorVisualProperty.MixColor, color);
             }
             else
             {
-                _outputVisualMap = new PropertyMap();
+                _outputVisualMap = PropertyMap.GetReusable();
             }
         }
     }

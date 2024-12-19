@@ -68,7 +68,7 @@ namespace Tizen.NUI
                 return;
             }
 
-            var transformMap = new PropertyMap();
+            var transformMap = PropertyMap.GetReusable();
 
             if (transformProperty.Get(transformMap))
             {
@@ -153,22 +153,15 @@ namespace Tizen.NUI
 
         internal abstract bool IsEmpty();
 
-        internal PropertyValue ToPropertyValue(BaseComponents.View attachedView)
+        internal PropertyMap ToPropertyMap(BaseComponents.View attachedView)
         {
-            if (IsEmpty())
-            {
-                return new PropertyValue();
-            }
+            Debug.Assert(!IsEmpty());
 
             var map = GetPropertyMap();
+            map.SetInt(Visual.Property.CornerRadiusPolicy, (int)attachedView.CornerRadiusPolicy);
+            map.SetVector4(Visual.Property.CornerRadius, attachedView.CornerRadius);
 
-            if (attachedView.CornerRadius != null)
-            {
-                map[Visual.Property.CornerRadius] = attachedView.CornerRadius == null ? new PropertyValue() : new PropertyValue(attachedView.CornerRadius);
-                map[Visual.Property.CornerRadiusPolicy] = new PropertyValue((int)attachedView.CornerRadiusPolicy);
-            }
-
-            return new PropertyValue(map);
+            return map;
         }
 
         /// <summary>
@@ -177,36 +170,27 @@ namespace Tizen.NUI
         [EditorBrowsable(EditorBrowsableState.Never)]
         protected virtual PropertyMap GetPropertyMap()
         {
-            PropertyMap map = new PropertyMap();
+            PropertyMap map = PropertyMap.GetReusable();
 
-            map[Visual.Property.Transform] = GetTransformMap();
-
-            return map;
-        }
-
-        private PropertyValue GetTransformMap()
-        {
-            var transformMap = new PropertyMap();
+            using var transformMap = PropertyMap.GetReusable();
 
             if (!noOffset.Equals(Offset))
             {
-                var temp = Vector2.GetReusable((int)VisualTransformPolicyType.Absolute, (int)VisualTransformPolicyType.Absolute);
-                transformMap[(int)VisualTransformPropertyType.OffsetPolicy] = new PropertyValue(temp);
-                transformMap[(int)VisualTransformPropertyType.Offset] = PropertyValue.CreateWithGuard(Offset);
-                temp.Dispose();
+                transformMap.SetVector2((int)VisualTransformPropertyType.OffsetPolicy, (int)VisualTransformPolicyType.Absolute, (int)VisualTransformPolicyType.Absolute);
+                transformMap.SetVector2((int)VisualTransformPropertyType.Offset, Offset);
             }
 
             if (!noExtents.Equals(Extents))
             {
-                transformMap[(int)VisualTransformPropertyType.ExtraSize] = PropertyValue.CreateWithGuard(Extents);
+                transformMap.SetVector2((int)VisualTransformPropertyType.ExtraSize, Extents);
             }
 
-            transformMap[(int)VisualTransformPropertyType.Origin] = new PropertyValue((int)Visual.AlignType.Center);
-            transformMap[(int)VisualTransformPropertyType.AnchorPoint] = new PropertyValue((int)Visual.AlignType.Center);
+            transformMap.SetInt((int)VisualTransformPropertyType.Origin, (int)Visual.AlignType.Center);
+            transformMap.SetInt((int)VisualTransformPropertyType.AnchorPoint, (int)Visual.AlignType.Center);
 
-            var ret = new PropertyValue(transformMap);
-            transformMap.Dispose();
-            return ret;
+            map.AddMap(Visual.Property.Transform, transformMap);
+
+            return map;
         }
 
         private void SetTransformMap(PropertyMap transformMap)

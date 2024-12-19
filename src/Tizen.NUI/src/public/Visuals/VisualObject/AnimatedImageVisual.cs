@@ -92,7 +92,8 @@ namespace Tizen.NUI.Visuals
         {
             set
             {
-                UpdateVisualProperty((int)Tizen.NUI.ImageVisualProperty.FrameDelay, new PropertyValue(value));
+                using var property = PropertyValue.GetReusable(value);
+                UpdateVisualProperty((int)Tizen.NUI.ImageVisualProperty.FrameDelay, property);
             }
             get
             {
@@ -112,7 +113,8 @@ namespace Tizen.NUI.Visuals
         {
             set
             {
-                UpdateVisualProperty((int)Tizen.NUI.ImageVisualProperty.LoopCount, new PropertyValue(value));
+                using var property = PropertyValue.GetReusable(value);
+                UpdateVisualProperty((int)Tizen.NUI.ImageVisualProperty.LoopCount, property);
             }
             get
             {
@@ -131,7 +133,8 @@ namespace Tizen.NUI.Visuals
         {
             set
             {
-                UpdateVisualProperty((int)Tizen.NUI.ImageVisualProperty.StopBehavior, new PropertyValue((int)value));
+                using var property = PropertyValue.GetReusable((int)value);
+                UpdateVisualProperty((int)Tizen.NUI.ImageVisualProperty.StopBehavior, property);
             }
             get
             {
@@ -153,7 +156,8 @@ namespace Tizen.NUI.Visuals
         {
             set
             {
-                UpdateVisualProperty((int)Tizen.NUI.ImageVisualProperty.FrameSpeedFactor, new PropertyValue(value));
+                using var property = PropertyValue.GetReusable(value);
+                UpdateVisualProperty((int)Tizen.NUI.ImageVisualProperty.FrameSpeedFactor, property);
             }
             get
             {
@@ -219,7 +223,8 @@ namespace Tizen.NUI.Visuals
         {
             set
             {
-                UpdateVisualProperty((int)Tizen.NUI.ImageVisualProperty.BatchSize, new PropertyValue(value));
+                using var property = PropertyValue.GetReusable(value);
+                UpdateVisualProperty((int)Tizen.NUI.ImageVisualProperty.BatchSize, property);
             }
             get
             {
@@ -238,7 +243,8 @@ namespace Tizen.NUI.Visuals
         {
             set
             {
-                UpdateVisualProperty((int)Tizen.NUI.ImageVisualProperty.CacheSize, new PropertyValue(value));
+                using var property = PropertyValue.GetReusable(value);
+                UpdateVisualProperty((int)Tizen.NUI.ImageVisualProperty.CacheSize, property);
             }
             get
             {
@@ -296,9 +302,9 @@ namespace Tizen.NUI.Visuals
                 using var urlArray = new PropertyArray();
                 foreach (var url in resourceUrls)
                 {
-                    urlArray.Add(new PropertyValue(url));
+                    urlArray.Add(PropertyValue.GetReusable(url));
                 }
-                using var urlArrayValue = new PropertyValue(urlArray);
+                using var urlArrayValue = PropertyValue.GetReusable(urlArray);
 
                 if (cachedVisualPropertyMap != null)
                 {

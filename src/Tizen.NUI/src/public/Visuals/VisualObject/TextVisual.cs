@@ -56,7 +56,8 @@ namespace Tizen.NUI.Visuals
         {
             set
             {
-                UpdateVisualProperty((int)Tizen.NUI.TextVisualProperty.Text, new PropertyValue(string.IsNullOrEmpty(value) ? "" : value));
+                using var property = PropertyValue.GetReusable(string.IsNullOrEmpty(value) ? "" : value);
+                UpdateVisualProperty((int)Tizen.NUI.TextVisualProperty.Text, property);
             }
             get
             {
@@ -75,7 +76,8 @@ namespace Tizen.NUI.Visuals
         {
             set
             {
-                UpdateVisualProperty((int)Tizen.NUI.TextVisualProperty.FontFamily, new PropertyValue(string.IsNullOrEmpty(value) ? "" : value));
+                using var property = PropertyValue.GetReusable(string.IsNullOrEmpty(value) ? "" : value);
+                UpdateVisualProperty((int)Tizen.NUI.TextVisualProperty.FontFamily, property);
             }
             get
             {
@@ -94,7 +96,8 @@ namespace Tizen.NUI.Visuals
         {
             set
             {
-                UpdateVisualProperty((int)Tizen.NUI.TextVisualProperty.PointSize, new PropertyValue(value));
+                using var property = PropertyValue.GetReusable(value);
+                UpdateVisualProperty((int)Tizen.NUI.TextVisualProperty.PointSize, property);
             }
             get
             {
@@ -113,7 +116,8 @@ namespace Tizen.NUI.Visuals
         {
             set
             {
-                UpdateVisualProperty((int)Tizen.NUI.TextVisualProperty.MultiLine, new PropertyValue(value));
+                using var property = PropertyValue.GetReusable(value);
+                UpdateVisualProperty((int)Tizen.NUI.TextVisualProperty.MultiLine, property);
             }
             get
             {
@@ -132,7 +136,8 @@ namespace Tizen.NUI.Visuals
         {
             set
             {
-                UpdateVisualProperty((int)Tizen.NUI.TextVisualProperty.HorizontalAlignment, new PropertyValue((int)value));
+                using var property = PropertyValue.GetReusable((int)value);
+                UpdateVisualProperty((int)Tizen.NUI.TextVisualProperty.HorizontalAlignment, property);
             }
             get
             {
@@ -151,7 +156,8 @@ namespace Tizen.NUI.Visuals
         {
             set
             {
-                UpdateVisualProperty((int)Tizen.NUI.TextVisualProperty.VerticalAlignment, new PropertyValue((int)value));
+                using var property = PropertyValue.GetReusable((int)value);
+                UpdateVisualProperty((int)Tizen.NUI.TextVisualProperty.VerticalAlignment, property);
             }
             get
             {
@@ -170,7 +176,8 @@ namespace Tizen.NUI.Visuals
         {
             set
             {
-                UpdateVisualProperty((int)Tizen.NUI.TextVisualProperty.TextColor, new PropertyValue(value));
+                using var property = PropertyValue.GetReusable(value);
+                UpdateVisualProperty((int)Tizen.NUI.TextVisualProperty.TextColor, property);
             }
             get
             {
@@ -189,7 +196,8 @@ namespace Tizen.NUI.Visuals
         {
             set
             {
-                UpdateVisualProperty((int)Tizen.NUI.TextVisualProperty.EnableMarkup, new PropertyValue(value));
+                using var property = PropertyValue.GetReusable(value);
+                UpdateVisualProperty((int)Tizen.NUI.TextVisualProperty.EnableMarkup, property);
             }
             get
             {

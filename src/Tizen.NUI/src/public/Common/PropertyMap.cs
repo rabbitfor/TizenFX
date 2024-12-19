@@ -14,6 +14,8 @@
  * limitations under the License.
  *
  */
+using System;
+using System.Runtime.InteropServices;
 using System.Collections.Generic;
 using System.ComponentModel;
 
@@ -190,17 +192,7 @@ namespace Tizen.NUI
         /// <param name="value">The value to insert.</param>
         /// <returns>Returns a reference to this object.</returns>
         /// <since_tizen> 3 </since_tizen>
-        public PropertyMap Add(string key, PropertyValue value)
-        {
-            global::System.IntPtr cPtr = Interop.PropertyMap.Find(SwigCPtr, key);
-            if (cPtr != global::System.IntPtr.Zero)
-            {
-                Tizen.Log.Error("NUI", $"The key {key} already exists. please do not use duplicate key");
-            }
-            Interop.PropertyMap.Add(SwigCPtr, key, PropertyValue.getCPtr(value));
-            if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
-            return this;
-        }
+        public PropertyMap Add(string key, PropertyValue value) => Add(key, getCPtr(value));
 
         /// <summary>
         /// Inserts the key-value pair in the map, with the key type as string.<br />
@@ -210,17 +202,7 @@ namespace Tizen.NUI
         /// <param name="value">The value to insert.</param>
         /// <returns>Returns a reference to this object.</returns>
         /// <since_tizen> 3 </since_tizen>
-        public PropertyMap Add(int key, PropertyValue value)
-        {
-            global::System.IntPtr cPtr = Interop.PropertyMap.Find(SwigCPtr, key);
-            if (cPtr != global::System.IntPtr.Zero)
-            {
-                Tizen.Log.Error("NUI", $"The key {key} already exists. please do not use duplicate key");
-            }
-            Interop.PropertyMap.Add(SwigCPtr, key, PropertyValue.getCPtr(value));
-            if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
-            return this;
-        }
+        public PropertyMap Add(int key, PropertyValue value) => Add(key, getCPtr(value));
 
         /// <summary>
         /// Inserts the keyvalue to the map.<br />
@@ -442,6 +424,513 @@ namespace Tizen.NUI
         protected override void ReleaseSwigCPtr(System.Runtime.InteropServices.HandleRef swigCPtr)
         {
             Interop.PropertyMap.DeletePropertyMap(swigCPtr);
+        }
+
+        internal PropertyMap Add(string key, HandleRef value)
+        {
+            IntPtr cPtr = Interop.PropertyMap.Find(SwigCPtr, key);
+            if (cPtr != IntPtr.Zero)
+            {
+                Log.Error("NUI", $"The key {key} already exists. please do not use duplicate key");
+            }
+            Interop.PropertyMap.Add(SwigCPtr, key, value);
+            NDalicPINVOKE.ThrowExceptionIfExists();
+            return this;
+        }
+
+        internal PropertyMap Add(int key, HandleRef value)
+        {
+            IntPtr cPtr = Interop.PropertyMap.Find(SwigCPtr, key);
+            if (cPtr != IntPtr.Zero)
+            {
+                Log.Error("NUI", $"The key {key} already exists. please do not use duplicate key");
+            }
+            Interop.PropertyMap.Add(SwigCPtr, key, value);
+            NDalicPINVOKE.ThrowExceptionIfExists();
+            return this;
+        }
+
+        bool HasDuplicateKey(string key) => Interop.PropertyMap.Find(SwigCPtr, key) != IntPtr.Zero;
+
+        bool HasDuplicateKey(int key) => Interop.PropertyMap.Find(SwigCPtr, key) != IntPtr.Zero;
+
+        void NotifyDuplicateKeyError(string key)
+        {
+            if (HasDuplicateKey(key))
+            {
+                Log.Error("NUI", $"The key {key} already exists. please do not use duplicate key");
+            }
+        }
+
+        void NotifyDuplicateKeyError(int key)
+        {
+            if (HasDuplicateKey(key))
+            {
+                Log.Error("NUI", $"The key {key} already exists. please do not use duplicate key");
+            }
+        }
+
+        internal PropertyMap AddNone(int key)
+        {
+            NotifyDuplicateKeyError(key);
+            Interop.PropertyMap.AddNone(SwigCPtr, key);
+            NDalicPINVOKE.ThrowExceptionIfExists();
+            return this;
+        }
+
+        internal PropertyMap AddBool(string key, bool value)
+        {
+            NotifyDuplicateKeyError(key);
+            Interop.PropertyMap.AddBool(SwigCPtr, key, value);
+            NDalicPINVOKE.ThrowExceptionIfExists();
+            return this;
+        }
+
+        internal PropertyMap AddBool(int key, bool value)
+        {
+            NotifyDuplicateKeyError(key);
+            Interop.PropertyMap.AddBool(SwigCPtr, key, value);
+            NDalicPINVOKE.ThrowExceptionIfExists();
+            return this;
+        }
+
+        internal PropertyMap AddInt(string key, int value)
+        {
+            NotifyDuplicateKeyError(key);
+            Interop.PropertyMap.AddInt(SwigCPtr, key, value);
+            NDalicPINVOKE.ThrowExceptionIfExists();
+            return this;
+        }
+
+        internal PropertyMap AddInt(int key, int value)
+        {
+            NotifyDuplicateKeyError(key);
+            Interop.PropertyMap.AddInt(SwigCPtr, key, value);
+            NDalicPINVOKE.ThrowExceptionIfExists();
+            return this;
+        }
+
+        internal PropertyMap AddFloat(string key, float value)
+        {
+            NotifyDuplicateKeyError(key);
+            Interop.PropertyMap.AddFloat(SwigCPtr, key, value);
+            NDalicPINVOKE.ThrowExceptionIfExists();
+            return this;
+        }
+
+        internal PropertyMap AddFloat(int key, float value)
+        {
+            NotifyDuplicateKeyError(key);
+            Interop.PropertyMap.AddFloat(SwigCPtr, key, value);
+            NDalicPINVOKE.ThrowExceptionIfExists();
+            return this;
+        }
+
+        internal PropertyMap AddString(string key, string value)
+        {
+            NotifyDuplicateKeyError(key);
+            Interop.PropertyMap.AddString(SwigCPtr, key, value);
+            NDalicPINVOKE.ThrowExceptionIfExists();
+            return this;
+        }
+
+        internal PropertyMap AddString(int key, string value)
+        {
+            NotifyDuplicateKeyError(key);
+            Interop.PropertyMap.AddString(SwigCPtr, key, value);
+            NDalicPINVOKE.ThrowExceptionIfExists();
+            return this;
+        }
+
+        internal PropertyMap AddVector2(string key, float x, float y)
+        {
+            NotifyDuplicateKeyError(key);
+            Interop.PropertyMap.AddVector2(SwigCPtr, key, x, y);
+            NDalicPINVOKE.ThrowExceptionIfExists();
+            return this;
+        }
+
+        internal PropertyMap AddVector2(int key, float x, float y)
+        {
+            NotifyDuplicateKeyError(key);
+            Interop.PropertyMap.AddVector2(SwigCPtr, key, x, y);
+            NDalicPINVOKE.ThrowExceptionIfExists();
+            return this;
+        }
+
+        internal PropertyMap AddVector2(string key, Vector2 value)
+        {
+            NotifyDuplicateKeyError(key);
+            if (!AddNoneIfNull(key, value))
+            {
+                Interop.PropertyMap.AddVector2(SwigCPtr, key, value.SwigCPtr);
+            }
+            NDalicPINVOKE.ThrowExceptionIfExists();
+            return this;
+        }
+
+        internal PropertyMap AddVector2(int key, Vector2 value)
+        {
+            NotifyDuplicateKeyError(key);
+            if (!AddNoneIfNull(key, value))
+            {
+                Interop.PropertyMap.AddVector2(SwigCPtr, key, value.SwigCPtr);
+            }
+            NDalicPINVOKE.ThrowExceptionIfExists();
+            return this;
+        }
+
+        internal PropertyMap AddVector3(string key, Vector3 value)
+        {
+            NotifyDuplicateKeyError(key);
+            if (!AddNoneIfNull(key, value))
+            {
+                Interop.PropertyMap.AddVector3(SwigCPtr, key, value.SwigCPtr);
+            }
+            NDalicPINVOKE.ThrowExceptionIfExists();
+            return this;
+        }
+
+        internal PropertyMap AddVector3(int key, Vector3 value)
+        {
+            NotifyDuplicateKeyError(key);
+            if (!AddNoneIfNull(key, value))
+            {
+                Interop.PropertyMap.AddVector3(SwigCPtr, key, value.SwigCPtr);
+            }
+            NDalicPINVOKE.ThrowExceptionIfExists();
+            return this;
+        }
+
+        internal PropertyMap AddVector4(string key, float x, float y, float z, float w)
+        {
+            NotifyDuplicateKeyError(key);
+            Interop.PropertyMap.AddVector4(SwigCPtr, key, x, y, z, w);
+            NDalicPINVOKE.ThrowExceptionIfExists();
+            return this;
+        }
+
+        internal PropertyMap AddVector4(int key, float x, float y, float z, float w)
+        {
+            NotifyDuplicateKeyError(key);
+            Interop.PropertyMap.AddVector4(SwigCPtr, key, x, y, z, w);
+            NDalicPINVOKE.ThrowExceptionIfExists();
+            return this;
+        }
+
+        internal PropertyMap AddVector4(string key, Vector4 value)
+        {
+            NotifyDuplicateKeyError(key);
+            if (!AddNoneIfNull(key, value))
+            {
+                Interop.PropertyMap.AddVector4(SwigCPtr, key, value.SwigCPtr);
+            }
+            NDalicPINVOKE.ThrowExceptionIfExists();
+            return this;
+        }
+
+        internal PropertyMap AddVector4(int key, Vector4 value)
+        {
+            NotifyDuplicateKeyError(key);
+            if (!AddNoneIfNull(key, value))
+            {
+                Interop.PropertyMap.AddVector4(SwigCPtr, key, value.SwigCPtr);
+            }
+            NDalicPINVOKE.ThrowExceptionIfExists();
+            return this;
+        }
+
+        internal PropertyMap AddColor(string key, Color value)
+        {
+            NotifyDuplicateKeyError(key);
+            if (!AddNoneIfNull(key, value))
+            {
+                Interop.PropertyMap.AddVector4(SwigCPtr, key, value.SwigCPtr);
+            }
+            NDalicPINVOKE.ThrowExceptionIfExists();
+            return this;
+        }
+
+        internal PropertyMap AddColor(int key, Color value)
+        {
+            NotifyDuplicateKeyError(key);
+            if (!AddNoneIfNull(key, value))
+            {
+                Interop.PropertyMap.AddVector4(SwigCPtr, key, value.SwigCPtr);
+            }
+            NDalicPINVOKE.ThrowExceptionIfExists();
+            return this;
+        }
+
+        internal PropertyMap AddRectangle(string key, Rectangle value)
+        {
+            NotifyDuplicateKeyError(key);
+            if (!AddNoneIfNull(key, value))
+            {
+                Interop.PropertyMap.AddRectangle(SwigCPtr, key, value.SwigCPtr);
+            }
+            NDalicPINVOKE.ThrowExceptionIfExists();
+            return this;
+        }
+
+        internal PropertyMap AddRectangle(int key, Rectangle value)
+        {
+            NotifyDuplicateKeyError(key);
+            if (!AddNoneIfNull(key, value))
+            {
+                Interop.PropertyMap.AddRectangle(SwigCPtr, key, value.SwigCPtr);
+            }
+            NDalicPINVOKE.ThrowExceptionIfExists();
+            return this;
+        }
+
+        internal PropertyMap AddMap(string key, PropertyMap value)
+        {
+            NotifyDuplicateKeyError(key);
+            if (!AddNoneIfNull(key, value))
+            {
+                Interop.PropertyMap.AddMap(SwigCPtr, key, value.SwigCPtr);
+            }
+            NDalicPINVOKE.ThrowExceptionIfExists();
+            return this;
+        }
+
+        internal PropertyMap AddMap(int key, PropertyMap value)
+        {
+            NotifyDuplicateKeyError(key);
+            if (!AddNoneIfNull(key, value))
+            {
+                Interop.PropertyMap.AddMap(SwigCPtr, key, value.SwigCPtr);
+            }
+            NDalicPINVOKE.ThrowExceptionIfExists();
+            return this;
+        }
+
+        internal PropertyMap SetNone(string key)
+        {
+            Interop.PropertyMap.SetNone(SwigCPtr, key);
+            NDalicPINVOKE.ThrowExceptionIfExists();
+            return this;
+        }
+
+        internal PropertyMap SetNone(int key)
+        {
+            Interop.PropertyMap.SetNone(SwigCPtr, key);
+            NDalicPINVOKE.ThrowExceptionIfExists();
+            return this;
+        }
+
+        internal PropertyMap SetBool(string key, bool value)
+        {
+            Interop.PropertyMap.SetBool(SwigCPtr, key, value);
+            NDalicPINVOKE.ThrowExceptionIfExists();
+            return this;
+        }
+
+        internal PropertyMap SetBool(int key, bool value)
+        {
+            Interop.PropertyMap.SetBool(SwigCPtr, key, value);
+            NDalicPINVOKE.ThrowExceptionIfExists();
+            return this;
+        }
+
+        internal PropertyMap SetInt(string key, int value)
+        {
+            Interop.PropertyMap.SetInt(SwigCPtr, key, value);
+            NDalicPINVOKE.ThrowExceptionIfExists();
+            return this;
+        }
+
+        internal PropertyMap SetInt(int key, int value)
+        {
+            Interop.PropertyMap.SetInt(SwigCPtr, key, value);
+            NDalicPINVOKE.ThrowExceptionIfExists();
+            return this;
+        }
+
+        internal PropertyMap SetFloat(string key, float value)
+        {
+            Interop.PropertyMap.SetFloat(SwigCPtr, key, value);
+            NDalicPINVOKE.ThrowExceptionIfExists();
+            return this;
+        }
+
+        internal PropertyMap SetFloat(int key, float value)
+        {
+            Interop.PropertyMap.SetFloat(SwigCPtr, key, value);
+            NDalicPINVOKE.ThrowExceptionIfExists();
+            return this;
+        }
+
+        internal PropertyMap SetString(string key, string value)
+        {
+            if (!SetNoneIfNull(key, value))
+            {
+                Interop.PropertyMap.SetString(SwigCPtr, key, value);
+            }
+            NDalicPINVOKE.ThrowExceptionIfExists();
+            return this;
+        }
+
+        internal PropertyMap SetString(int key, string value)
+        {
+            if (!SetNoneIfNull(key, value))
+            {
+                Interop.PropertyMap.SetString(SwigCPtr, key, value);
+            }
+            NDalicPINVOKE.ThrowExceptionIfExists();
+            return this;
+        }
+
+        internal PropertyMap SetRectangle(string key, Rectangle value)
+        {
+            if (!SetNoneIfNull(key, value))
+            {
+                Interop.PropertyMap.SetRectangle(SwigCPtr, key, value.SwigCPtr);
+            }
+            NDalicPINVOKE.ThrowExceptionIfExists();
+            return this;
+        }
+
+        internal PropertyMap SetRectangle(int key, Rectangle value)
+        {
+            if (!SetNoneIfNull(key, value))
+            {
+                Interop.PropertyMap.SetRectangle(SwigCPtr, key, value.SwigCPtr);
+            }
+            NDalicPINVOKE.ThrowExceptionIfExists();
+            return this;
+        }
+
+        internal PropertyMap SetVector2(string key, float x, float y)
+        {
+            Interop.PropertyMap.SetVector2(SwigCPtr, key, x, y);
+            NDalicPINVOKE.ThrowExceptionIfExists();
+            return this;
+        }
+
+        internal PropertyMap SetVector2(int key, float x, float y)
+        {
+            Interop.PropertyMap.SetVector2(SwigCPtr, key, x, y);
+            NDalicPINVOKE.ThrowExceptionIfExists();
+            return this;
+        }
+
+        internal PropertyMap SetVector2(string key, Vector2 value)
+        {
+            if (!SetNoneIfNull(key, value))
+            {
+                Interop.PropertyMap.SetVector2(SwigCPtr, key, value.SwigCPtr);
+            }
+            NDalicPINVOKE.ThrowExceptionIfExists();
+            return this;
+        }
+
+        internal PropertyMap SetVector2(int key, Vector2 value)
+        {
+            if (!SetNoneIfNull(key, value))
+            {
+                Interop.PropertyMap.SetVector2(SwigCPtr, key, value.SwigCPtr);
+            }
+            NDalicPINVOKE.ThrowExceptionIfExists();
+            return this;
+        }
+
+        internal PropertyMap SetVector4(string key, Vector4 value)
+        {
+            if (!SetNoneIfNull(key, value))
+            {
+                Interop.PropertyMap.SetVector4(SwigCPtr, key, value.SwigCPtr);
+            }
+            NDalicPINVOKE.ThrowExceptionIfExists();
+            return this;
+        }
+
+        internal PropertyMap SetVector4(int key, Vector4 value)
+        {
+            if (!SetNoneIfNull(key, value))
+            {
+                Interop.PropertyMap.SetVector4(SwigCPtr, key, value.SwigCPtr);
+            }
+            NDalicPINVOKE.ThrowExceptionIfExists();
+            return this;
+        }
+
+        internal PropertyMap SetColor(string key, Color value)
+        {
+            if (!SetNoneIfNull(key, value))
+            {
+                Interop.PropertyMap.SetVector4(SwigCPtr, key, value.SwigCPtr);
+            }
+            NDalicPINVOKE.ThrowExceptionIfExists();
+            return this;
+        }
+
+        internal PropertyMap SetColor(int key, Color value)
+        {
+            if (!SetNoneIfNull(key, value))
+            {
+                Interop.PropertyMap.SetVector4(SwigCPtr, key, value.SwigCPtr);
+            }
+            NDalicPINVOKE.ThrowExceptionIfExists();
+            return this;
+        }
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        protected override bool IsReusable => true;
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        protected override void Reuse()
+        {
+            if (SwigCPtr.Handle != IntPtr.Zero)
+            {
+                Clear();
+            }
+        }
+
+        internal static PropertyMap GetReusable()
+        {
+            return DisposablePool.Get<PropertyMap>() ?? new PropertyMap();
+        }
+
+        private bool AddNoneIfNull(string key, object value)
+        {
+            if (value == null)
+            {
+                Interop.PropertyMap.AddNone(SwigCPtr, key);
+                return true;
+            }
+            return false;
+        }
+
+        private bool AddNoneIfNull(int key, object value)
+        {
+            if (value == null)
+            {
+                Interop.PropertyMap.AddNone(SwigCPtr, key);
+                return true;
+            }
+            return false;
+        }
+
+        private bool SetNoneIfNull(string key, object value)
+        {
+            if (value == null)
+            {
+                Interop.PropertyMap.SetNone(SwigCPtr, key);
+                return true;
+            }
+            return false;
+        }
+
+        private bool SetNoneIfNull(int key, object value)
+        {
+            if (value == null)
+            {
+                Interop.PropertyMap.SetNone(SwigCPtr, key);
+                return true;
+            }
+            return false;
         }
     }
 

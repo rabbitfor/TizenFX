@@ -73,7 +73,8 @@ namespace Tizen.NUI.Visuals
                 {
                     isResourceUrlValid = true;
 
-                    UpdateVisualProperty((int)Tizen.NUI.ImageVisualProperty.URL, new PropertyValue(value));
+                    using var property = PropertyValue.GetReusable(value);
+                    UpdateVisualProperty((int)Tizen.NUI.ImageVisualProperty.URL, property);
 
                     // Special case. If set GeneratedUrl, or FastTrackUploading, Create ImageVisual synchronously.
                     if (value.StartsWith("dali://") || value.StartsWith("enbuf://") || FastTrackUploading)
@@ -104,7 +105,8 @@ namespace Tizen.NUI.Visuals
         {
             set
             {
-                UpdateVisualProperty((int)Tizen.NUI.ImageVisualProperty.PixelArea, new PropertyValue(value), false);
+                using var property = PropertyValue.GetReusable(value);
+                UpdateVisualProperty((int)Tizen.NUI.ImageVisualProperty.PixelArea, property, false);
             }
             get
             {
@@ -124,7 +126,8 @@ namespace Tizen.NUI.Visuals
         {
             set
             {
-                UpdateVisualProperty((int)Tizen.NUI.Visual.Property.PremultipliedAlpha, new PropertyValue(value), true);
+                using var property = PropertyValue.GetReusable(value);
+                UpdateVisualProperty((int)Tizen.NUI.Visual.Property.PremultipliedAlpha, property, true);
             }
             get
             {
@@ -143,8 +146,9 @@ namespace Tizen.NUI.Visuals
         {
             set
             {
+                using var property = PropertyValue.GetReusable(value);
                 // Note : We need to create new visual if previous visual was async, and now we set value as sync.
-                UpdateVisualProperty((int)Tizen.NUI.ImageVisualProperty.SynchronousLoading, new PropertyValue(value), value);
+                UpdateVisualProperty((int)Tizen.NUI.ImageVisualProperty.SynchronousLoading, property, value);
             }
             get
             {
@@ -163,7 +167,8 @@ namespace Tizen.NUI.Visuals
         {
             set
             {
-                UpdateVisualProperty((int)Tizen.NUI.ImageVisualProperty.OrientationCorrection, new PropertyValue(value), true);
+                using var property = PropertyValue.GetReusable(value);
+                UpdateVisualProperty((int)Tizen.NUI.ImageVisualProperty.OrientationCorrection, property, true);
             }
             get
             {
@@ -186,7 +191,8 @@ namespace Tizen.NUI.Visuals
         {
             set
             {
-                UpdateVisualProperty((int)Tizen.NUI.ImageVisualProperty.SynchronousSizing, new PropertyValue(value), true);
+                using var property = PropertyValue.GetReusable(value);
+                UpdateVisualProperty((int)Tizen.NUI.ImageVisualProperty.SynchronousSizing, property, true);
             }
             get
             {
@@ -206,7 +212,15 @@ namespace Tizen.NUI.Visuals
         {
             set
             {
-                UpdateVisualProperty((int)Tizen.NUI.ImageVisualProperty.AlphaMaskURL, string.IsNullOrEmpty(value) ? null : new PropertyValue(value));
+                if (string.IsNullOrEmpty(value))
+                {
+                    UpdateVisualProperty((int)Tizen.NUI.ImageVisualProperty.AlphaMaskURL, null);
+                }
+                else
+                {
+                    using var property = PropertyValue.GetReusable(value);
+                    UpdateVisualProperty((int)Tizen.NUI.ImageVisualProperty.AlphaMaskURL, property);
+                }
             }
             get
             {
@@ -225,7 +239,8 @@ namespace Tizen.NUI.Visuals
         {
             set
             {
-                UpdateVisualProperty((int)Tizen.NUI.ImageVisualProperty.MaskContentScale, new PropertyValue(value));
+                using var property = PropertyValue.GetReusable(value);
+                UpdateVisualProperty((int)Tizen.NUI.ImageVisualProperty.MaskContentScale, property);
             }
             get
             {
@@ -244,7 +259,8 @@ namespace Tizen.NUI.Visuals
         {
             set
             {
-                UpdateVisualProperty((int)Tizen.NUI.ImageVisualProperty.CropToMask, new PropertyValue(value));
+                using var property = PropertyValue.GetReusable(value);
+                UpdateVisualProperty((int)Tizen.NUI.ImageVisualProperty.CropToMask, property);
             }
             get
             {
@@ -263,7 +279,8 @@ namespace Tizen.NUI.Visuals
         {
             set
             {
-                UpdateVisualProperty((int)Tizen.NUI.ImageVisualProperty.MaskingMode, new PropertyValue((int)value));
+                using var property = PropertyValue.GetReusable((int)value);
+                UpdateVisualProperty((int)Tizen.NUI.ImageVisualProperty.MaskingMode, property);
             }
             get
             {
@@ -293,7 +310,8 @@ namespace Tizen.NUI.Visuals
         {
             set
             {
-                UpdateVisualProperty((int)Tizen.NUI.ImageVisualProperty.FastTrackUploading, new PropertyValue(value));
+                using var property = PropertyValue.GetReusable(value);
+                UpdateVisualProperty((int)Tizen.NUI.ImageVisualProperty.FastTrackUploading, property);
 
                 if (value && !string.IsNullOrEmpty(ResourceUrl))
                 {
@@ -320,7 +338,8 @@ namespace Tizen.NUI.Visuals
         {
             set
             {
-                UpdateVisualProperty((int)Tizen.NUI.ImageVisualProperty.ReleasePolicy, new PropertyValue((int)value));
+                using var property = PropertyValue.GetReusable((int)value);
+                UpdateVisualProperty((int)Tizen.NUI.ImageVisualProperty.ReleasePolicy, property);
             }
             get
             {
@@ -342,7 +361,8 @@ namespace Tizen.NUI.Visuals
         {
             set
             {
-                UpdateVisualProperty((int)Tizen.NUI.ImageVisualProperty.SamplingMode, new PropertyValue((int)value));
+                using var property = PropertyValue.GetReusable((int)value);
+                UpdateVisualProperty((int)Tizen.NUI.ImageVisualProperty.SamplingMode, property);
             }
             get
             {
@@ -364,7 +384,8 @@ namespace Tizen.NUI.Visuals
         {
             set
             {
-                UpdateVisualProperty((int)Tizen.NUI.ImageVisualProperty.DesiredWidth, new PropertyValue(value));
+                using var property = PropertyValue.GetReusable(value);
+                UpdateVisualProperty((int)Tizen.NUI.ImageVisualProperty.DesiredWidth, property);
             }
             get
             {
@@ -386,7 +407,8 @@ namespace Tizen.NUI.Visuals
         {
             set
             {
-                UpdateVisualProperty((int)Tizen.NUI.ImageVisualProperty.DesiredHeight, new PropertyValue(value));
+                using var property = PropertyValue.GetReusable(value);
+                UpdateVisualProperty((int)Tizen.NUI.ImageVisualProperty.DesiredHeight, property);
             }
             get
             {
@@ -406,7 +428,8 @@ namespace Tizen.NUI.Visuals
         {
             set
             {
-                UpdateVisualProperty((int)Tizen.NUI.ImageVisualProperty.LoadPolicy, new PropertyValue((int)value));
+                using var property = PropertyValue.GetReusable((int)value);
+                UpdateVisualProperty((int)Tizen.NUI.ImageVisualProperty.LoadPolicy, property);
             }
             get
             {
@@ -429,7 +452,8 @@ namespace Tizen.NUI.Visuals
         {
             set
             {
-                UpdateVisualProperty((int)Tizen.NUI.ImageVisualProperty.WrapModeU, new PropertyValue((int)value));
+                using var property = PropertyValue.GetReusable((int)value);
+                UpdateVisualProperty((int)Tizen.NUI.ImageVisualProperty.WrapModeU, property);
             }
             get
             {
@@ -453,7 +477,8 @@ namespace Tizen.NUI.Visuals
         {
             set
             {
-                UpdateVisualProperty((int)Tizen.NUI.ImageVisualProperty.WrapModeV, new PropertyValue((int)value));
+                using var property = PropertyValue.GetReusable((int)value);
+                UpdateVisualProperty((int)Tizen.NUI.ImageVisualProperty.WrapModeV, property);
             }
             get
             {
@@ -476,7 +501,8 @@ namespace Tizen.NUI.Visuals
         {
             set
             {
-                UpdateVisualProperty((int)Tizen.NUI.Visual.Property.CornerRadius, new PropertyValue(value), false);
+                using var property = PropertyValue.GetReusable(value);
+                UpdateVisualProperty((int)Tizen.NUI.Visual.Property.CornerRadius, property, false);
             }
             get
             {
@@ -497,7 +523,8 @@ namespace Tizen.NUI.Visuals
         {
             set
             {
-                UpdateVisualProperty((int)Tizen.NUI.Visual.Property.CornerRadiusPolicy, new PropertyValue((int)value), false);
+                using var property = PropertyValue.GetReusable(value);
+                UpdateVisualProperty((int)Tizen.NUI.Visual.Property.CornerRadiusPolicy, property, false);
             }
             get
             {
@@ -516,7 +543,8 @@ namespace Tizen.NUI.Visuals
         {
             set
             {
-                UpdateVisualProperty((int)Tizen.NUI.Visual.Property.BorderlineWidth, new PropertyValue(value), false);
+                using var property = PropertyValue.GetReusable(value);
+                UpdateVisualProperty((int)Tizen.NUI.Visual.Property.BorderlineWidth, property, false);
             }
             get
             {
@@ -536,7 +564,8 @@ namespace Tizen.NUI.Visuals
         {
             set
             {
-                UpdateVisualProperty((int)Tizen.NUI.Visual.Property.BorderlineColor, new PropertyValue(value), false);
+                using var property = PropertyValue.GetReusable(value);
+                UpdateVisualProperty((int)Tizen.NUI.Visual.Property.BorderlineColor, property, false);
             }
             get
             {
@@ -560,7 +589,8 @@ namespace Tizen.NUI.Visuals
         {
             set
             {
-                UpdateVisualProperty((int)Tizen.NUI.Visual.Property.BorderlineOffset, new PropertyValue(value), false);
+                using var property = PropertyValue.GetReusable(value);
+                UpdateVisualProperty((int)Tizen.NUI.Visual.Property.BorderlineOffset, property, false);
             }
             get
             {

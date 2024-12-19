@@ -91,7 +91,7 @@ namespace Tizen.NUI
         {
             get
             {
-                PropertyMap map = new PropertyMap();
+                PropertyMap map = PropertyMap.GetReusable();
                 CreatePropertyMap(map);
                 return map;
             }
