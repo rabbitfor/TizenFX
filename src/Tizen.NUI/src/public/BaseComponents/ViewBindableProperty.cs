@@ -129,9 +129,7 @@ namespace Tizen.NUI.BaseComponents
             Interop.View.InternalRetrievingVisualPropertyInt(view.SwigCPtr, Property.BACKGROUND, Visual.Property.Type, out visualType);
             if (visualType == (int)Visual.Type.Color)
             {
-                using var handle = Color.GetEmptyReusableNativeHandle();
-                Interop.View.InternalRetrievingVisualPropertyVector4(view.SwigCPtr, Property.BACKGROUND, ColorVisualProperty.MixColor, handle);
-                view.internalBackgroundColor.FillFrom(handle);
+                Interop.View.InternalRetrievingVisualPropertyVector4(view.SwigCPtr, Property.BACKGROUND, ColorVisualProperty.MixColor, Color.getCPtr(view.internalBackgroundColor));
             }
             return view.internalBackgroundColor;
         }
@@ -166,9 +164,8 @@ namespace Tizen.NUI.BaseComponents
             {
                 view.internalColor = new Color(view.OnColorChanged, 0, 0, 0, 0);
             }
-            using var handle = Color.GetEmptyReusableNativeHandle();
-            Object.InternalRetrievingPropertyVector4(view.SwigCPtr, View.Property.COLOR, handle);
-            return view.internalColor.FillFrom(handle);;
+            Object.InternalRetrievingPropertyVector4(view.SwigCPtr, View.Property.COLOR, view.internalColor.SwigCPtr);
+            return view.internalColor;
         }
 
         /// <summary>
@@ -224,8 +221,8 @@ namespace Tizen.NUI.BaseComponents
             return view.GetInternalColorBlue();
         }
 
-        /// <summary>
-        /// BackgroundImageProperty
+        /// <summary> 
+        /// BackgroundImageProperty 
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
         public static readonly BindableProperty BackgroundImageProperty = null;
@@ -462,16 +459,15 @@ namespace Tizen.NUI.BaseComponents
             var view = (View)bindable;
             if (newValue != null)
             {
-                using var handle = ((Vector4)newValue).GetReusableNativeHandle();
-                Object.InternalSetPropertyVector4(view.SwigCPtr, FlexContainer.ChildProperty.FlexMargin, handle);
+                Object.InternalSetPropertyVector4(view.SwigCPtr, FlexContainer.ChildProperty.FlexMargin, ((Vector4)newValue).SwigCPtr);
             }
         }
         internal static object GetInternalFlexMarginProperty(BindableObject bindable)
         {
             var view = (View)bindable;
-            using var handle = Vector4.GetEmptyReusableNativeHandle();
-            Object.InternalRetrievingPropertyVector4(view.SwigCPtr, FlexContainer.ChildProperty.FlexMargin, handle);
-            return Vector4.GetVector4FromPtr(handle.Value.DangerousGetHandle());
+            Vector4 temp = new Vector4(0.0f, 0.0f, 0.0f, 0.0f);
+            Object.InternalRetrievingPropertyVector4(view.SwigCPtr, FlexContainer.ChildProperty.FlexMargin, temp.SwigCPtr);
+            return temp;
         }
 
         /// <summary>
@@ -1804,16 +1800,17 @@ namespace Tizen.NUI.BaseComponents
             var view = (View)bindable;
             if (newValue != null)
             {
-                using var handle = ((Vector4)newValue).GetReusableNativeHandle();
-                Object.InternalSetPropertyVector4(view.SwigCPtr, Interop.ActorProperty.UpdateAreaHintGet(), handle);
+
+                Object.InternalSetPropertyVector4(view.SwigCPtr, Interop.ActorProperty.UpdateAreaHintGet(), ((Vector4)newValue).SwigCPtr);
             }
         }
         internal static object GetInternalUpdateAreaHintProperty(BindableObject bindable)
         {
             var view = (View)bindable;
-            using var handle = Vector4.GetEmptyReusableNativeHandle();
-            Object.InternalRetrievingPropertyVector4(view.SwigCPtr, Interop.ActorProperty.UpdateAreaHintGet(), handle);
-            return Vector4.GetVector4FromPtr(handle.Value.DangerousGetHandle());
+            Vector4 temp = new Vector4(0.0f, 0.0f, 0.0f, 0.0f);
+
+            Object.InternalRetrievingPropertyVector4(view.SwigCPtr, Interop.ActorProperty.UpdateAreaHintGet(), temp.SwigCPtr);
+            return temp;
         }
 
         /// <summary>
@@ -2746,8 +2743,7 @@ namespace Tizen.NUI.BaseComponents
 
             if (backgroundExtraData == null)
             {
-                using var handle = ((Color)value).GetReusableNativeHandle();
-                Object.InternalSetPropertyVector4(SwigCPtr, View.Property.BACKGROUND, handle);
+                Object.InternalSetPropertyVector4(SwigCPtr, View.Property.BACKGROUND, ((Color)value).SwigCPtr);
                 return;
             }
 

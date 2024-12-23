@@ -290,7 +290,7 @@ namespace Tizen.NUI
 
         /// <summary>
         /// Hidden API (Inhouse API).
-        /// Dispose.
+        /// Dispose. 
         /// </summary>
         /// <remarks>
         /// Following the guide of https://docs.microsoft.com/en-us/dotnet/standard/garbage-collection/implementing-dispose.
@@ -810,7 +810,7 @@ namespace Tizen.NUI
                 if (!childLayout?.Owner?.ExcludeLayouting ?? false)
                 {
                     // Get the frame for the child, start, top, end, bottom.
-                    Vector4 frame = Vector4.GetVector4FromPtr(Interop.FlexLayout.GetNodeFrame(swigCPtr, childIndex));
+                    Vector4 frame = new Vector4(Interop.FlexLayout.GetNodeFrame(swigCPtr, childIndex), true);
 
                     // Child view's size is calculated in OnLayout() without considering child layout's measured size unlike other layouts' OnLayout().
                     // This causes that the grand child view's size is calculated incorrectly if the child and grand child have MatchParent Specification.

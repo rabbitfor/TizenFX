@@ -74,10 +74,8 @@ namespace Tizen.NUI
         /// </summary>
         /// <param name="vec4">Vector4 to create this vector from.</param>
         /// <since_tizen> 3 </since_tizen>
-        public Vector3(Vector4 vec4) : base()
+        public Vector3(Vector4 vec4) : this(Interop.Vector3.NewVector3WithVector4(Vector4.getCPtr(vec4)), true)
         {
-            using var handle = vec4.GetReusableNativeHandle();
-            Reset(Interop.Vector3.NewVector3WithVector4(handle), true);
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
         }
 
@@ -224,7 +222,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Vector3 vector3 = new Vector3();
-        /// vector3.X = 0.1f;
+        /// vector3.X = 0.1f; 
         /// // USE like this
         /// float x = 0.1f, y = 0.5f, z = 0.9f;
         /// Vector3 vector3 = new Vector3(x, y, z);
@@ -257,7 +255,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Vector3 vector3 = new Vector3();
-        /// vector3.Width = 1.0f;
+        /// vector3.Width = 1.0f; 
         /// // USE like this
         /// float width = 1.0f, height = 2.0f, depth = 3.0f;
         /// Vector3 vector3 = new Vector3(width, height, depth);
@@ -290,7 +288,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Vector3 vector3 = new Vector3();
-        /// vector3.R = 0.1f;
+        /// vector3.R = 0.1f; 
         /// // USE like this
         /// float r = 0.1f, g = 0.5f, b = 0.9f;
         /// Vector3 vector3 = new Vector3(r, g, b);
@@ -323,7 +321,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Vector3 vector3 = new Vector3();
-        /// vector3.Y = 0.5f;
+        /// vector3.Y = 0.5f; 
         /// // USE like this
         /// float x = 0.1f, y = 0.5f, z = 0.9f;
         /// Vector3 vector3 = new Vector3(x, y, z);
@@ -356,7 +354,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Vector3 vector3 = new Vector3();
-        /// vector3.Height = 2.0f;
+        /// vector3.Height = 2.0f; 
         /// // USE like this
         /// float width = 1.0f, height = 2.0f, depth = 3.0f;
         /// Vector3 vector3 = new Vector3(width, height, depth);
@@ -389,7 +387,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Vector3 vector3 = new Vector3();
-        /// vector3.G = 0.5f;
+        /// vector3.G = 0.5f; 
         /// // USE like this
         /// float r = 0.1f, g = 0.5f, b = 0.9f;
         /// Vector3 vector3 = new Vector3(r, g, b);
@@ -422,7 +420,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Vector3 vector3 = new Vector3();
-        /// vector3.Z = 0.9f;
+        /// vector3.Z = 0.9f; 
         /// // USE like this
         /// float x = 0.1f, y = 0.5f, z = 0.9f;
         /// Vector3 vector3 = new Vector3(x, y, z);
@@ -455,7 +453,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Vector3 vector3 = new Vector3();
-        /// vector3.Depth = 3.0f;
+        /// vector3.Depth = 3.0f; 
         /// // USE like this
         /// float width = 1.0f, height = 2.0f, depth = 3.0f;
         /// Vector3 vector3 = new Vector3(width, height, depth);
@@ -488,7 +486,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Vector3 vector3 = new Vector3();
-        /// vector3.B = 0.9f;
+        /// vector3.B = 0.9f; 
         /// // USE like this
         /// float r = 0.1f, g = 0.5f, b = 0.9f;
         /// Vector3 vector3 = new Vector3(r, g, b);

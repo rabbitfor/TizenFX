@@ -84,26 +84,21 @@ namespace Tizen.NUI
 
         public static Vector4 Min(Vector4 a, Vector4 b)
         {
-            using var aHandle = a.GetReusableNativeHandle();
-            using var bHandle = b.GetReusableNativeHandle();
-            Vector4 ret = Vector4.GetVector4FromPtr(Interop.NDalic.MinVector4(aHandle, bHandle));
+            Vector4 ret = new Vector4(Interop.NDalic.MinVector4(Vector4.getCPtr(a), Vector4.getCPtr(b)), true);
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
             return ret;
         }
 
         public static Vector4 Max(Vector4 a, Vector4 b)
         {
-            using var aHandle = a.GetReusableNativeHandle();
-            using var bHandle = b.GetReusableNativeHandle();
-            Vector4 ret = Vector4.GetVector4FromPtr(Interop.NDalic.MaxVector4(aHandle, bHandle));
+            Vector4 ret = new Vector4(Interop.NDalic.MaxVector4(Vector4.getCPtr(a), Vector4.getCPtr(b)), true);
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
             return ret;
         }
 
         public static Vector4 Clamp(Vector4 v, float min, float max)
         {
-            using var handle = v.GetReusableNativeHandle();
-            Vector4 ret = Vector4.GetVector4FromPtr(Interop.NDalic.ClampVector4(handle, min, max));
+            Vector4 ret = new Vector4(Interop.NDalic.ClampVector4(Vector4.getCPtr(v), min, max), true);
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
             return ret;
         }
@@ -228,7 +223,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.AliceBlueGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -239,7 +234,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.AntiqueWhiteGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -250,7 +245,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.AquaGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -261,7 +256,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.AquaMarineGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -272,7 +267,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.AzureGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -283,7 +278,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.BeigeGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -294,7 +289,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.BisqueGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -305,7 +300,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.BlackGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -316,7 +311,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.BlancheDalmondGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -327,7 +322,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.BlueGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -338,7 +333,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.BlueVioletGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -349,7 +344,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.BrownGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -360,7 +355,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.BurlyWoodGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -371,7 +366,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.CadetBlueGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -382,7 +377,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.ChartreuseGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -393,7 +388,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.ChocolateGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -404,7 +399,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.CoralGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -415,7 +410,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.CornflowerBlueGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -426,7 +421,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.CornsilkGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -437,7 +432,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.CrimsonGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -448,7 +443,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.CyanGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -459,7 +454,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.DarkBlueGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -470,7 +465,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.DarkCyanGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -481,7 +476,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.DarkGoldenrodGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -492,7 +487,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.DarkGrayGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -503,7 +498,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.DarkGreenGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -514,7 +509,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.DarkGreyGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -525,7 +520,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.DarkKhakiGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -536,7 +531,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.DarkMagentaGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -547,7 +542,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.DarkOliveGreenGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -558,7 +553,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.DarkOrangeGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -569,7 +564,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.DarkOrchidGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -580,7 +575,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.DarkRedGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -591,7 +586,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.DarkSalmonGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -602,7 +597,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.DarkSeaGreenGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -613,7 +608,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.DarkSlateBlueGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -624,7 +619,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.DarkSlateGrayGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -635,7 +630,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.DarkSlateGreyGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -646,7 +641,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.DarkTurquoiseGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -657,7 +652,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.DarkVioletGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -668,7 +663,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.DeepPinkGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -679,7 +674,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.DeepSkyBlueGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -690,7 +685,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.DimGrayGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -701,7 +696,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.DimGreyGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -712,7 +707,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.DodgerBlueGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -723,7 +718,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.FireBrickGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -734,7 +729,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.FloralWhiteGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -745,7 +740,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.ForestGreenGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -756,7 +751,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.FuchsiaGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -767,7 +762,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.GainsboroGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -778,7 +773,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.GhostWhiteGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -789,7 +784,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.GoldGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -800,7 +795,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.GoldenRodGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -811,7 +806,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.GrayGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -822,7 +817,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.GreenGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -833,7 +828,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.GreenYellowGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -844,7 +839,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.GreyGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -855,7 +850,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.HoneydewGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -866,7 +861,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.HotPinkGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -877,7 +872,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.IndianredGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -888,7 +883,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.IndigoGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -899,7 +894,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.IvoryGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -910,7 +905,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.KhakiGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -921,7 +916,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.LavenderGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -932,7 +927,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.LavenderBlushGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -943,7 +938,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.LawnGreenGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -954,7 +949,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.LemonChiffonGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -965,7 +960,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.LightBlueGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -976,7 +971,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.LightCoralGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -987,7 +982,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.LightCyanGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -998,7 +993,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.LightGoldenRodYellowGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1009,7 +1004,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.LightGrayGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1020,7 +1015,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.LightGreenGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1031,7 +1026,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.LightGreyGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1042,7 +1037,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.LightPinkGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1053,7 +1048,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.LightSalmonGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1064,7 +1059,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.LightSeaGreenGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1075,7 +1070,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.LightSkyBlueGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1086,7 +1081,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.LightSlateGrayGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1097,7 +1092,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.LightSlateGreyGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1108,7 +1103,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.LightSteelBlueGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1119,7 +1114,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.LightYellowGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1130,7 +1125,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.LimeGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1141,7 +1136,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.LimeGreenGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1152,7 +1147,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.LinenGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1163,7 +1158,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.MagentaGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1174,7 +1169,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.MaroonGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1185,7 +1180,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.MediumAquaMarineGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1196,7 +1191,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.MediumBlueGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1207,7 +1202,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.MediumOrchidGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1218,7 +1213,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.MediumPurpleGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1229,7 +1224,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.MediumSeaGreenGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1240,7 +1235,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.MediumSlateBlueGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1251,7 +1246,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.MediumSpringGreenGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1262,7 +1257,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.MediumTurquoiseGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1273,7 +1268,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.MediumVioletredGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1284,7 +1279,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.MidnightBlueGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1295,7 +1290,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.MintCreamGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1306,7 +1301,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.MistyRoseGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1317,7 +1312,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.MoccasinGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1328,7 +1323,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.NavajoWhiteGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1339,7 +1334,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.NavyGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1350,7 +1345,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.OldLaceGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1361,7 +1356,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.OliveGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1372,7 +1367,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.OliveDrabGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1383,7 +1378,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.OrangeGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1394,7 +1389,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.OrangeRedGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1405,7 +1400,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.OrchidGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1416,7 +1411,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.PaleGoldenRodGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1427,7 +1422,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.PaleGreenGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1438,7 +1433,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.PaleTurquoiseGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1449,7 +1444,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.PaleVioletRedGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1460,7 +1455,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.PapayaWhipGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1471,7 +1466,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.PeachPuffGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1482,7 +1477,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.PeruGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1493,7 +1488,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.PinkGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1504,7 +1499,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.PlumGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1515,7 +1510,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.PowderBlueGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1526,7 +1521,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.PurpleGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1537,7 +1532,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.RedGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1548,7 +1543,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.RosyBrownGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1559,7 +1554,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.RoyalBlueGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1570,7 +1565,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.SaddleBrownGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1581,7 +1576,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.SalmonGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1592,7 +1587,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.SandyBrownGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1603,7 +1598,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.SeaGreenGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1614,7 +1609,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.SeaShellGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1625,7 +1620,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.SiennaGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1636,7 +1631,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.SilverGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1647,7 +1642,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.SkyBlueGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1658,7 +1653,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.SlateBlueGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1669,7 +1664,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.SlateGrayGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1680,7 +1675,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.SlateGreyGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1691,7 +1686,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.SnowGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1702,7 +1697,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.SpringGreenGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1713,7 +1708,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.SteelBlueGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1724,7 +1719,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.TanGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1735,7 +1730,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.TealGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1746,7 +1741,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.ThistleGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1757,7 +1752,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.TomatoGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1768,7 +1763,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.TransparentGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1779,7 +1774,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.TurquoiseGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1790,7 +1785,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.VioletGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1801,7 +1796,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.WheatGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1812,7 +1807,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.WhiteGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1823,7 +1818,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.WhiteSmokeGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1834,7 +1829,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.YellowGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1845,7 +1840,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.NDalicColor.YellowGreenGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }

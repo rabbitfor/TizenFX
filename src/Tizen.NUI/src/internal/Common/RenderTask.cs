@@ -114,7 +114,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.RenderTask.DefaultClearColorGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw new InvalidOperationException("FATAL: get Exception", NDalicPINVOKE.SWIGPendingException.Retrieve());
                 return ret;
             }
@@ -320,15 +320,14 @@ namespace Tizen.NUI
         [Obsolete("This has been deprecated in API9 and will be removed in API11. Use ClearColor property instead.")]
         public void SetClearColor(Vector4 color)
         {
-            using var handle = color.GetReusableNativeHandle();
-            Interop.RenderTask.SetClearColor(SwigCPtr, handle);
+            Interop.RenderTask.SetClearColor(SwigCPtr, Vector4.getCPtr(color));
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
         }
 
         [Obsolete("This has been deprecated in API9 and will be removed in API11. Use ClearColor property instead.")]
         public Vector4 GetClearColor()
         {
-            Vector4 ret = Vector4.GetVector4FromPtr(Interop.RenderTask.GetClearColor(SwigCPtr));
+            Vector4 ret = new Vector4(Interop.RenderTask.GetClearColor(SwigCPtr), true);
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
             return ret;
         }

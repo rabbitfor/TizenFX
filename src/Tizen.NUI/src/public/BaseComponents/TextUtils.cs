@@ -426,13 +426,12 @@ namespace Tizen.NUI.BaseComponents
         {
             set
             {
-                using var handle = value.GetReusableNativeHandle();
-                Interop.RendererParameters.TextColorSet(SwigCPtr, handle);
+                Interop.RendererParameters.TextColorSet(SwigCPtr, Vector4.getCPtr(value));
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
             }
             get
             {
-                Vector4 ret = Vector4.GetVector4FromPtr(Interop.RendererParameters.TextColorGet(SwigCPtr));
+                Vector4 ret = new Vector4(Interop.RendererParameters.TextColorGet(SwigCPtr), true);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw new InvalidOperationException("FATAL: get Exception", NDalicPINVOKE.SWIGPendingException.Retrieve());
                 return ret;
             }
@@ -890,13 +889,12 @@ namespace Tizen.NUI.BaseComponents
         {
             set
             {
-                using var handle = value.GetReusableNativeHandle();
-                Interop.ShadowParameters.TextColorSet(SwigCPtr, handle);
+                Interop.ShadowParameters.TextColorSet(SwigCPtr, Vector4.getCPtr(value));
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
             }
             get
             {
-                Vector4 ret = Vector4.GetVector4FromPtr(Interop.ShadowParameters.TextColorGet(SwigCPtr));
+                Vector4 ret = new Vector4(Interop.ShadowParameters.TextColorGet(SwigCPtr), true);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw new InvalidOperationException("FATAL: get Exception", NDalicPINVOKE.SWIGPendingException.Retrieve());
                 return ret;
             }
@@ -911,13 +909,12 @@ namespace Tizen.NUI.BaseComponents
         {
             set
             {
-                using var handle = value.GetReusableNativeHandle();
-                Interop.ShadowParameters.ColorSet(SwigCPtr, handle);
+                Interop.ShadowParameters.ColorSet(SwigCPtr, Vector4.getCPtr(value));
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
             }
             get
             {
-                Vector4 ret = Vector4.GetVector4FromPtr(Interop.ShadowParameters.ColorGet(SwigCPtr));
+                Vector4 ret = new Vector4(Interop.ShadowParameters.ColorGet(SwigCPtr), true);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw new InvalidOperationException("FATAL: get Exception", NDalicPINVOKE.SWIGPendingException.Retrieve());
                 return ret;
             }
@@ -1050,8 +1047,7 @@ namespace Tizen.NUI.BaseComponents
         [EditorBrowsable(EditorBrowsableState.Never)]
         public static PixelBuffer ConvertToRgba8888(PixelBuffer pixelBuffer, Vector4 color, bool multiplyByAlpha)
         {
-            using var handle = color.GetReusableNativeHandle();
-            PixelBuffer ret = new PixelBuffer(Interop.TextUtils.ConvertToRgba8888(PixelBuffer.getCPtr(pixelBuffer), handle, multiplyByAlpha), true);
+            PixelBuffer ret = new PixelBuffer(Interop.TextUtils.ConvertToRgba8888(PixelBuffer.getCPtr(pixelBuffer), Vector4.getCPtr(color), multiplyByAlpha), true);
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
             return ret;
         }

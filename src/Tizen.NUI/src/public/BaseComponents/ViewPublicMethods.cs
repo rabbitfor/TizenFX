@@ -1045,7 +1045,7 @@ namespace Tizen.NUI.BaseComponents
         [EditorBrowsable(EditorBrowsableState.Never)]
         public Vector4 CalculateScreenPositionSize()
         {
-            Vector4 ret = Vector4.GetVector4FromPtr(Interop.Actor.CalculateScreenExtents(SwigCPtr));
+            Vector4 ret = new Vector4(Interop.Actor.CalculateScreenExtents(SwigCPtr), true);
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
             return ret;
         }

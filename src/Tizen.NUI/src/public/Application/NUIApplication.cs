@@ -58,6 +58,9 @@ namespace Tizen.NUI
 
         private States currentState = States.Invalid;
 
+        static System.Diagnostics.Stopwatch stopWatch = new System.Diagnostics.Stopwatch();
+        static Color color;
+
         /// <summary>
         /// Xaml loaded delegate.
         /// </summary>
@@ -745,12 +748,14 @@ namespace Tizen.NUI
         /// <since_tizen> 3 </since_tizen>
         protected override void OnCreate()
         {
+            Log.Debug("JYJY", $"Create1");
             Tizen.Tracer.Begin("[NUI] OnCreate()");
             currentState = States.Created;
 
             base.OnCreate();
 
             Tizen.Tracer.End();
+            Log.Debug("JYJY", $"Create2");
         }
 
         /// <summary>
@@ -759,7 +764,7 @@ namespace Tizen.NUI
         [EditorBrowsable(EditorBrowsableState.Never)]
         static public void Preload()
         {
-            Interop.Application.PreInitialize();
+            Log.Debug("JYJY", $"Preload1");
 
             // Initialize some static utility
             var disposalbeQueue = DisposeQueue.Instance;
@@ -776,7 +781,17 @@ namespace Tizen.NUI
             // Initialize exception tasks. It must be called end of Preload()
             NDalicPINVOKE.Preload();
 
+            stopWatch = new System.Diagnostics.Stopwatch();
+            Log.Debug("JYJY", $"Start measuring");
+            stopWatch.Start();
+            color = new Color(1, 1, 1, 1);
+            // color = Color.White;
+            stopWatch.Stop();
+            Log.Debug("JYJY", $"Time taken : {stopWatch.ElapsedMilliseconds} ms");
+
             IsPreload = true;
+
+            Log.Debug("JYJY", $"Preload2");
         }
 
         /// <summary>

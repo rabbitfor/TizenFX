@@ -696,7 +696,7 @@ namespace Tizen.NUI.BaseComponents
 
         internal Vector4 GetCurrentScreenPositionSize()
         {
-            Vector4 ret = Vector4.GetVector4FromPtr(Interop.Actor.CurrentScreenExtents(SwigCPtr));
+            Vector4 ret = new Vector4(Interop.Actor.CurrentScreenExtents(SwigCPtr), true);
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw new InvalidOperationException("FATAL: get Exception", NDalicPINVOKE.SWIGPendingException.Retrieve());
             return ret;
         }
@@ -891,14 +891,13 @@ namespace Tizen.NUI.BaseComponents
                 internalCurrentColor = new Vector4(0, 0, 0, 0);
             }
 
-            using var handle = Vector4.GetEmptyReusableNativeHandle();
-            Interop.ActorInternal.RetrieveCurrentPropertyVector4(SwigCPtr, Interop.ActorProperty.ColorGet(), handle);
+            Interop.ActorInternal.RetrieveCurrentPropertyVector4(SwigCPtr, Interop.ActorProperty.ColorGet(), internalCurrentColor.SwigCPtr);
 
             if (NDalicPINVOKE.SWIGPendingException.Pending)
             {
                 throw NDalicPINVOKE.SWIGPendingException.Retrieve();
             }
-            return internalCurrentColor.FillFrom(handle);
+            return internalCurrentColor;
         }
         internal ColorMode GetColorMode()
         {
@@ -916,14 +915,13 @@ namespace Tizen.NUI.BaseComponents
                 internalCurrentWorldColor = new Vector4(0, 0, 0, 0);
             }
 
-            using var handle = Vector4.GetEmptyReusableNativeHandle();
-            Interop.ActorInternal.RetrieveCurrentPropertyVector4(SwigCPtr, Property.WorldColor, handle);
+            Interop.ActorInternal.RetrieveCurrentPropertyVector4(SwigCPtr, Property.WorldColor, internalCurrentWorldColor.SwigCPtr);
 
             if (NDalicPINVOKE.SWIGPendingException.Pending)
             {
                 throw NDalicPINVOKE.SWIGPendingException.Retrieve();
             }
-            return internalCurrentWorldColor.FillFrom(handle);
+            return internalCurrentWorldColor;
         }
 
         internal void SetDrawMode(DrawModeType drawMode)
@@ -1270,13 +1268,11 @@ namespace Tizen.NUI.BaseComponents
             {
                 if (backgroundExtraData.CornerRadius != null)
                 {
-                    using var handle = backgroundExtraData.CornerRadius.GetReusableNativeHandle();
-                    Interop.View.InternalUpdateVisualPropertyVector4(this.SwigCPtr, View.Property.BACKGROUND, Visual.Property.CornerRadius, handle);
+                    Interop.View.InternalUpdateVisualPropertyVector4(this.SwigCPtr, View.Property.BACKGROUND, Visual.Property.CornerRadius, Vector4.getCPtr(backgroundExtraData.CornerRadius));
                 }
                 if (backgroundExtraData.CornerSquareness != null)
                 {
-                    using var handle = backgroundExtraData.CornerSquareness.GetReusableNativeHandle();
-                    Interop.View.InternalUpdateVisualPropertyVector4(this.SwigCPtr, View.Property.BACKGROUND, Visual.Property.CornerSquareness, handle);
+                    Interop.View.InternalUpdateVisualPropertyVector4(this.SwigCPtr, View.Property.BACKGROUND, Visual.Property.CornerSquareness, Vector4.getCPtr(backgroundExtraData.CornerSquareness));
                 }
                 Interop.View.InternalUpdateVisualPropertyInt(this.SwigCPtr, View.Property.BACKGROUND, Visual.Property.CornerRadiusPolicy, (int)backgroundExtraData.CornerRadiusPolicy);
             }
@@ -1284,13 +1280,11 @@ namespace Tizen.NUI.BaseComponents
             {
                 if (backgroundExtraData.CornerRadius != null)
                 {
-                    using var handle = backgroundExtraData.CornerRadius.GetReusableNativeHandle();
-                    Interop.View.InternalUpdateVisualPropertyVector4(this.SwigCPtr, View.Property.SHADOW, Visual.Property.CornerRadius, handle);
+                    Interop.View.InternalUpdateVisualPropertyVector4(this.SwigCPtr, View.Property.SHADOW, Visual.Property.CornerRadius, Vector4.getCPtr(backgroundExtraData.CornerRadius));
                 }
                 if (backgroundExtraData.CornerSquareness != null)
                 {
-                    using var handle = backgroundExtraData.CornerSquareness.GetReusableNativeHandle();
-                    Interop.View.InternalUpdateVisualPropertyVector4(this.SwigCPtr, View.Property.SHADOW, Visual.Property.CornerSquareness, handle);
+                    Interop.View.InternalUpdateVisualPropertyVector4(this.SwigCPtr, View.Property.SHADOW, Visual.Property.CornerSquareness, Vector4.getCPtr(backgroundExtraData.CornerSquareness));
                 }
                 Interop.View.InternalUpdateVisualPropertyInt(this.SwigCPtr, View.Property.SHADOW, Visual.Property.CornerRadiusPolicy, (int)backgroundExtraData.CornerRadiusPolicy);
             }
@@ -1316,9 +1310,7 @@ namespace Tizen.NUI.BaseComponents
             if (backgroundExtraDataUpdatedFlag.HasFlag(BackgroundExtraDataUpdatedFlag.BackgroundBorderline))
             {
                 Interop.View.InternalUpdateVisualPropertyFloat(this.SwigCPtr, View.Property.BACKGROUND, Visual.Property.BorderlineWidth, backgroundExtraData.BorderlineWidth);
-                var borderlineColor = backgroundExtraData.BorderlineColor ?? Color.Black;
-                using var handle = borderlineColor.GetReusableNativeHandle();
-                Interop.View.InternalUpdateVisualPropertyVector4(this.SwigCPtr, View.Property.BACKGROUND, Visual.Property.BorderlineColor, handle);
+                Interop.View.InternalUpdateVisualPropertyVector4(this.SwigCPtr, View.Property.BACKGROUND, Visual.Property.BorderlineColor, Vector4.getCPtr(backgroundExtraData.BorderlineColor ?? Color.Black));
                 Interop.View.InternalUpdateVisualPropertyFloat(this.SwigCPtr, View.Property.BACKGROUND, Visual.Property.BorderlineOffset, backgroundExtraData.BorderlineOffset);
             }
         }

@@ -70,15 +70,13 @@ namespace Tizen.NUI
 
         public void SetBackgroundColor(Vector4 color)
         {
-            using var handle = color.GetReusableNativeHandle();
-            Interop.ViewImpl.SetBackgroundColor(SwigCPtr, handle);
+            Interop.ViewImpl.SetBackgroundColor(SwigCPtr, Vector4.getCPtr(color));
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
         }
 
         public Vector4 GetBackgroundColor()
         {
-
-            Vector4 ret = Vector4.GetVector4FromPtr(Interop.ViewImpl.GetBackgroundColor(SwigCPtr));
+            Vector4 ret = new Vector4(Interop.ViewImpl.GetBackgroundColor(SwigCPtr), true);
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
             return ret;
         }
