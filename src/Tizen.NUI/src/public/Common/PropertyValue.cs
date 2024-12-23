@@ -62,8 +62,10 @@ namespace Tizen.NUI
         /// </summary>
         /// <param name="vectorValue">Color values.</param>
         /// <since_tizen> 3 </since_tizen>
-        public PropertyValue(Color vectorValue) : this(Interop.PropertyValue.NewPropertyValueVector4(Color.getCPtr(vectorValue)), true)
+        public PropertyValue(Color vectorValue) : base()
         {
+            using var handle = vectorValue.GetReusableNativeHandle();
+            Reset(Interop.PropertyValue.NewPropertyValueVector4(handle), true);
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
         }
 
@@ -131,8 +133,10 @@ namespace Tizen.NUI
         /// </summary>
         /// <param name="vectorValue">A vector of 4 floating-point values.</param>
         /// <since_tizen> 3 </since_tizen>
-        public PropertyValue(Vector4 vectorValue) : this(Interop.PropertyValue.NewPropertyValueVector4(Vector4.getCPtr(vectorValue)), true)
+        public PropertyValue(Vector4 vectorValue) : base()
         {
+            using var handle = vectorValue.GetReusableNativeHandle();
+            Reset(Interop.PropertyValue.NewPropertyValueVector4(handle), true);
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
         }
 
@@ -312,7 +316,7 @@ namespace Tizen.NUI
 
         /// <summary>
         /// Hidden API (Inhouse API).
-        /// Dispose. 
+        /// Dispose.
         /// </summary>
         /// <remarks>
         /// Following the guide of https://docs.microsoft.com/en-us/dotnet/standard/garbage-collection/implementing-dispose.
@@ -502,7 +506,8 @@ namespace Tizen.NUI
             }
             else if (type.Equals(typeof(Vector4)))
             {
-                value = Interop.PropertyValue.NewPropertyValueVector4(Vector4.getCPtr((Vector4)obj));
+                using var handle = ((Vector4)obj).GetReusableNativeHandle();
+                value = Interop.PropertyValue.NewPropertyValueVector4(handle);
             }
             else if (type.Equals(typeof(Position)))
             {
@@ -522,7 +527,8 @@ namespace Tizen.NUI
             }
             else if (type.Equals(typeof(Color)))
             {
-                value = Interop.PropertyValue.NewPropertyValueVector4(Color.getCPtr((Color)obj));
+                using var handle = ((Color)obj).GetReusableNativeHandle();
+                value = Interop.PropertyValue.NewPropertyValueVector4(handle);
             }
             else if (type.Equals(typeof(Rotation)))
             {
@@ -611,7 +617,9 @@ namespace Tizen.NUI
         /// <since_tizen> 3 </since_tizen>
         public bool Get(Color vectorValue)
         {
-            bool ret = Interop.PropertyValue.GetVector4(SwigCPtr, Color.getCPtr(vectorValue));
+            using var handle = Vector4.GetEmptyReusableNativeHandle();
+            bool ret = Interop.PropertyValue.GetVector4(SwigCPtr, handle);
+            vectorValue.FillFrom(handle);
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
             return ret;
         }
@@ -714,7 +722,9 @@ namespace Tizen.NUI
         /// <since_tizen> 3 </since_tizen>
         public bool Get(Vector4 vectorValue)
         {
-            bool ret = Interop.PropertyValue.GetVector4(SwigCPtr, Vector4.getCPtr(vectorValue));
+            using var handle = Vector4.GetEmptyReusableNativeHandle();
+            bool ret = Interop.PropertyValue.GetVector4(SwigCPtr, handle);
+            vectorValue.FillFrom(handle);
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
             return ret;
         }

@@ -684,7 +684,8 @@ namespace Tizen.NUI.BaseComponents
                 imageView.UpdateImage(Visual.Property.MixColor, new PropertyValue((Color)newValue), false);
 
                 // Update property
-                Interop.View.InternalUpdateVisualPropertyVector4(imageView.SwigCPtr, ImageView.Property.IMAGE, Visual.Property.MixColor, Vector4.getCPtr((Color)newValue));
+                using var handle = ((Color)newValue).GetReusableNativeHandle();
+                Interop.View.InternalUpdateVisualPropertyVector4(imageView.SwigCPtr, ImageView.Property.IMAGE, Visual.Property.MixColor, handle);
             }
         }
 

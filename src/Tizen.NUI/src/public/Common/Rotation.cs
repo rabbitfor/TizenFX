@@ -79,8 +79,10 @@ namespace Tizen.NUI
         /// </summary>
         /// <param name="vector">Quaternion vector for Rotation.</param>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public Rotation(Vector4 vector) : this(Interop.Rotation.NewRotation4(Vector4.getCPtr(vector)), true)
+        public Rotation(Vector4 vector) : base()
         {
+            using var handle = vector.GetReusableNativeHandle();
+            Reset(Interop.Rotation.NewRotation4(handle), true);
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
         }
 
@@ -309,7 +311,8 @@ namespace Tizen.NUI
         [EditorBrowsable(EditorBrowsableState.Never)]
         public Vector4 Rotate(Vector4 vector)
         {
-            Vector4 ret = new Vector4(Interop.Rotation.RotateVector4(SwigCPtr, Vector4.getCPtr(vector)), true);
+            using var handle = vector.GetReusableNativeHandle();
+            Vector4 ret = Vector4.GetVector4FromPtr(Interop.Rotation.RotateVector4(SwigCPtr, handle));
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
             return ret;
         }

@@ -152,7 +152,8 @@ namespace Tizen.NUI
 
             if (source is View || source is Layer)
             {
-                Interop.Capture.Start4(SwigCPtr, source.SwigCPtr, new Vector2(position.X, position.Y).SwigCPtr, new Vector2(size.Width, size.Height).SwigCPtr, path, new Vector4(color.R, color.G, color.B, color.A).SwigCPtr);
+                using var handle = color.GetReusableNativeHandle();
+                Interop.Capture.Start4(SwigCPtr, source.SwigCPtr, new Vector2(position.X, position.Y).SwigCPtr, new Vector2(size.Width, size.Height).SwigCPtr, path, handle);
 
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
             }
@@ -196,7 +197,8 @@ namespace Tizen.NUI
 
             if (source is View || source is Layer)
             {
-                Interop.Capture.Start3(SwigCPtr, source.SwigCPtr, new Vector2(size.Width, size.Height).SwigCPtr, path, new Vector4(color.R, color.G, color.B, color.A).SwigCPtr, quality);
+                using var handle = color.GetReusableNativeHandle();
+                Interop.Capture.Start3(SwigCPtr, source.SwigCPtr, new Vector2(size.Width, size.Height).SwigCPtr, path, handle, quality);
 
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
             }
@@ -235,7 +237,8 @@ namespace Tizen.NUI
 
             if (source is View || source is Layer)
             {
-                Interop.Capture.Start1(SwigCPtr, source.SwigCPtr, new Vector2(size.Width, size.Height).SwigCPtr, path, new Vector4(color.R, color.G, color.B, color.A).SwigCPtr);
+                using var handle = color.GetReusableNativeHandle();
+                Interop.Capture.Start1(SwigCPtr, source.SwigCPtr, new Vector2(size.Width, size.Height).SwigCPtr, path, handle);
 
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
             }

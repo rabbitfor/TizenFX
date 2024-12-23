@@ -58,9 +58,9 @@ namespace Tizen.NUI.BaseComponents
                 FastTrackUploadingProperty = BindableProperty.Create(nameof(FastTrackUploading), typeof(bool), typeof(ImageView), false, propertyChanged: SetInternalFastTrackUploadingProperty, defaultValueCreator: GetInternalFastTrackUploadingProperty);
 
                 ImageMapProperty = BindableProperty.Create(nameof(ImageMap), typeof(Tizen.NUI.PropertyMap), typeof(ImageView), null, propertyChanged: SetInternalImageMapProperty, defaultValueCreator: GetInternalImageMapProperty);
-                
+
                 AlphaMaskURLProperty = BindableProperty.Create(nameof(AlphaMaskURL), typeof(string), typeof(ImageView), string.Empty, propertyChanged: SetInternalAlphaMaskURLProperty, defaultValueCreator: GetInternalAlphaMaskURLProperty);
-                
+
                 CropToMaskProperty = BindableProperty.Create(nameof(CropToMask), typeof(bool), typeof(ImageView), false, propertyChanged: SetInternalCropToMaskProperty, defaultValueCreator: GetInternalCropToMaskProperty);
 
                 FittingModeProperty = BindableProperty.Create(nameof(FittingMode), typeof(FittingModeType), typeof(ImageView), default(FittingModeType), propertyChanged: SetInternalFittingModeProperty, defaultValueCreator: GetInternalFittingModeProperty);
@@ -68,7 +68,7 @@ namespace Tizen.NUI.BaseComponents
                 DesiredWidthProperty = BindableProperty.Create(nameof(DesiredWidth), typeof(int), typeof(ImageView), 0, propertyChanged: SetInternalDesiredWidthProperty, defaultValueCreator: GetInternalDesiredWidthProperty);
 
                 DesiredHeightProperty = BindableProperty.Create(nameof(DesiredHeight), typeof(int), typeof(ImageView), 0, propertyChanged: SetInternalDesiredHeightProperty, defaultValueCreator: GetInternalDesiredHeightProperty);
-                        
+
                 ReleasePolicyProperty = BindableProperty.Create(nameof(ReleasePolicy), typeof(ReleasePolicyType), typeof(ImageView), default(ReleasePolicyType), propertyChanged: SetInternalReleasePolicyProperty, defaultValueCreator: GetInternalReleasePolicyProperty);
 
                 WrapModeUProperty = BindableProperty.Create(nameof(WrapModeU), typeof(Tizen.NUI.WrapModeType), typeof(ImageView), default(WrapModeType), propertyChanged: SetInternalWrapModeUProperty, defaultValueCreator: GetInternalWrapModeUProperty);
@@ -1713,7 +1713,7 @@ namespace Tizen.NUI.BaseComponents
                 if (NUIApplication.IsUsingXaml)
                 {
                     return (string)GetValue(PlaceHolderUrlProperty);
-                    
+
                 }
                 else
                 {
@@ -1935,11 +1935,13 @@ namespace Tizen.NUI.BaseComponents
             {
                 if (backgroundExtraData.CornerRadius != null)
                 {
-                    Interop.View.InternalUpdateVisualPropertyVector4(this.SwigCPtr, ImageView.Property.IMAGE, Visual.Property.CornerRadius, Vector4.getCPtr(backgroundExtraData.CornerRadius));
+                    using var handle = backgroundExtraData.CornerRadius.GetReusableNativeHandle();
+                    Interop.View.InternalUpdateVisualPropertyVector4(this.SwigCPtr, ImageView.Property.IMAGE, Visual.Property.CornerRadius, handle);
                 }
                 if (backgroundExtraData.CornerSquareness != null)
                 {
-                    Interop.View.InternalUpdateVisualPropertyVector4(this.SwigCPtr, ImageView.Property.IMAGE, Visual.Property.CornerSquareness, Vector4.getCPtr(backgroundExtraData.CornerSquareness));
+                    using var handle = backgroundExtraData.CornerSquareness.GetReusableNativeHandle();
+                    Interop.View.InternalUpdateVisualPropertyVector4(this.SwigCPtr, ImageView.Property.IMAGE, Visual.Property.CornerSquareness, handle);
                 }
                 Interop.View.InternalUpdateVisualPropertyInt(this.SwigCPtr, ImageView.Property.IMAGE, Visual.Property.CornerRadiusPolicy, (int)backgroundExtraData.CornerRadiusPolicy);
             }
@@ -1956,7 +1958,9 @@ namespace Tizen.NUI.BaseComponents
             {
                 // Update borderline properties to image by ActionUpdateProperty
                 Interop.View.InternalUpdateVisualPropertyFloat(this.SwigCPtr, ImageView.Property.IMAGE, Visual.Property.BorderlineWidth, backgroundExtraData.BorderlineWidth);
-                Interop.View.InternalUpdateVisualPropertyVector4(this.SwigCPtr, ImageView.Property.IMAGE, Visual.Property.BorderlineColor, Vector4.getCPtr(backgroundExtraData.BorderlineColor ?? Color.Black));
+                var borderlineColor = backgroundExtraData.BorderlineColor ?? Color.Black;
+                using var handle = borderlineColor.GetReusableNativeHandle();
+                Interop.View.InternalUpdateVisualPropertyVector4(this.SwigCPtr, ImageView.Property.IMAGE, Visual.Property.BorderlineColor, handle);
                 Interop.View.InternalUpdateVisualPropertyFloat(this.SwigCPtr, ImageView.Property.IMAGE, Visual.Property.BorderlineOffset, backgroundExtraData.BorderlineOffset);
             }
         }

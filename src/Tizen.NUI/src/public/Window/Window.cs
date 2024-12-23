@@ -657,7 +657,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.Stage.DefaultBackgroundColorGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -668,7 +668,7 @@ namespace Tizen.NUI
             get
             {
                 global::System.IntPtr cPtr = Interop.Stage.DebugBackgroundColorGet();
-                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : new Vector4(cPtr, false);
+                Vector4 ret = (cPtr == global::System.IntPtr.Zero) ? null : Vector4.GetVector4FromPtr(cPtr);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
                 return ret;
             }
@@ -1695,13 +1695,14 @@ namespace Tizen.NUI
 
         internal void SetBackgroundColor(Vector4 color)
         {
-            Interop.Window.SetBackgroundColor(SwigCPtr, Vector4.getCPtr(color));
+            using var handle = color.GetReusableNativeHandle();
+            Interop.Window.SetBackgroundColor(SwigCPtr, handle);
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
         }
 
         internal Vector4 GetBackgroundColor()
         {
-            Vector4 ret = new Vector4(Interop.Window.GetBackgroundColor(SwigCPtr), true);
+            Vector4 ret = Vector4.GetVector4FromPtr(Interop.Window.GetBackgroundColor(SwigCPtr));
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
             return ret;
         }
@@ -2649,8 +2650,8 @@ namespace Tizen.NUI
 
         /// <summary>
         /// Sets or gets the window blur using window blur information.
-        /// 
-        /// It is designed to apply a blur effect to a window based on specified parameters. 
+        ///
+        /// It is designed to apply a blur effect to a window based on specified parameters.
         /// This supports different types of blurring effects, including blurring the window's background only.
         /// Or blurring the area surrounding the window while keeping the window itself clear.
         /// The more information is written WindowBlurInfo struct.
@@ -2684,7 +2685,7 @@ namespace Tizen.NUI
                 finally {
                     Interop.WindowBlurInfo.DeleteWindowBlurInfo(internalBlurInfo);
                 }
-            }            
+            }
         }
 
         IntPtr IWindowProvider.WindowHandle => GetNativeWindowHandler();

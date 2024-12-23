@@ -114,7 +114,7 @@ namespace Tizen.NUI.BaseComponents
                 Tizen.NUI.Object.SetProperty((HandleRef)scrollable.SwigCPtr, Scrollable.Property.OvershootEnabled, new Tizen.NUI.PropertyValue((bool)newValue));
             }
         }
-        
+
         internal static object GetInternalOvershootEnabledProperty(BindableObject bindable)
         {
             var scrollable = (Scrollable)bindable;
@@ -136,7 +136,7 @@ namespace Tizen.NUI.BaseComponents
                 Tizen.NUI.Object.SetProperty((HandleRef)scrollable.SwigCPtr, Scrollable.Property.OvershootSize, new Tizen.NUI.PropertyValue((Vector2)newValue));
             }
         }
-        
+
         internal static object GetInternalOvershootSizeProperty(BindableObject bindable)
         {
             var scrollable = (Scrollable)bindable;
@@ -150,7 +150,7 @@ namespace Tizen.NUI.BaseComponents
         [Obsolete("This has been deprecated in API12")]
         public static readonly BindableProperty ScrollToAlphaFunctionProperty = null;
 
-        internal static void SetInternalScrollToAlphaFunctionProperty(BindableObject bindable, object oldValue, object newValue) 
+        internal static void SetInternalScrollToAlphaFunctionProperty(BindableObject bindable, object oldValue, object newValue)
         {
             var scrollable = (Scrollable)bindable;
             if (newValue != null)
@@ -158,7 +158,7 @@ namespace Tizen.NUI.BaseComponents
                 Tizen.NUI.Object.SetProperty((HandleRef)scrollable.SwigCPtr, Scrollable.Property.ScrollToAlphaFunction, new Tizen.NUI.PropertyValue((int)newValue));
             }
         }
-        
+
         internal static object GetInternalScrollToAlphaFunctionProperty(BindableObject bindable)
         {
             var scrollable = (Scrollable)bindable;
@@ -180,7 +180,7 @@ namespace Tizen.NUI.BaseComponents
                 Tizen.NUI.Object.SetProperty((HandleRef)scrollable.SwigCPtr, Scrollable.Property.ScrollRelativePosition, new Tizen.NUI.PropertyValue((Vector2)newValue));
             }
         }
-        
+
         internal static object GetInternalScrollRelativePositionProperty(BindableObject bindable)
         {
             var scrollable = (Scrollable)bindable;
@@ -202,7 +202,7 @@ namespace Tizen.NUI.BaseComponents
                 Tizen.NUI.Object.SetProperty((HandleRef)scrollable.SwigCPtr, Scrollable.Property.ScrollPositionMin, new Tizen.NUI.PropertyValue((Vector2)newValue));
             }
         }
-        
+
         internal static object GetInternalScrollPositionMinProperty(BindableObject bindable)
         {
             var scrollable = (Scrollable)bindable;
@@ -224,7 +224,7 @@ namespace Tizen.NUI.BaseComponents
                 Tizen.NUI.Object.SetProperty((HandleRef)scrollable.SwigCPtr, Scrollable.Property.ScrollPositionMax, new Tizen.NUI.PropertyValue((Vector2)newValue));
             }
         }
-        
+
         internal static object GetInternalScrollPositionMaxProperty(BindableObject bindable)
         {
             var scrollable = (Scrollable)bindable;
@@ -268,7 +268,7 @@ namespace Tizen.NUI.BaseComponents
                 Tizen.NUI.Object.SetProperty((HandleRef)scrollable.SwigCPtr, Scrollable.Property.CanScrollHorizontal, new Tizen.NUI.PropertyValue((bool)newValue));
             }
         }
-        
+
         internal static object GetInternalCanScrollHorizontalProperty(BindableObject bindable)
         {
             var scrollable = (Scrollable)bindable;
@@ -852,13 +852,14 @@ namespace Tizen.NUI.BaseComponents
 
         private void SetOvershootEffectColor(Vector4 color)
         {
-            Interop.Scrollable.SetOvershootEffectColor(SwigCPtr, Vector4.getCPtr(color));
+            using var handle = color.GetReusableNativeHandle();
+            Interop.Scrollable.SetOvershootEffectColor(SwigCPtr, handle);
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
         }
 
         private Vector4 GetOvershootEffectColor()
         {
-            Vector4 ret = new Vector4(Interop.Scrollable.GetOvershootEffectColor(SwigCPtr), true);
+            Vector4 ret = Vector4.GetVector4FromPtr(Interop.Scrollable.GetOvershootEffectColor(SwigCPtr));
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
             return ret;
         }

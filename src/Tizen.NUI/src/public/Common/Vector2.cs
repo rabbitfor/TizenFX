@@ -84,8 +84,10 @@ namespace Tizen.NUI
         /// </summary>
         /// <param name="vec4">Vector4 to create this vector from.</param>
         /// <since_tizen> 3 </since_tizen>
-        public Vector2(Vector4 vec4) : this(Interop.Vector2.NewVector2WithVector4(Vector4.getCPtr(vec4)), true)
+        public Vector2(Vector4 vec4) : base()
         {
+            using var handle = vec4.GetReusableNativeHandle();
+            Reset(Interop.Vector2.NewVector2WithVector4(handle), true);
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
         }
 
@@ -207,7 +209,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Vector2 vector2 = new Vector2();
-        /// vector2.X = 0.1f; 
+        /// vector2.X = 0.1f;
         /// // USE like this
         /// float x = 0.1f, y = 0.5f;
         /// Vector2 vector2 = new Vector2(x, y);
@@ -240,7 +242,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Vector2 vector2 = new Vector2();
-        /// vector2.Width = 1.0f; 
+        /// vector2.Width = 1.0f;
         /// // USE like this
         /// float width = 1.0f, height = 2.0f;
         /// Vector2 vector2 = new Vector2(x, y);
@@ -273,7 +275,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Vector2 vector2 = new Vector2();
-        /// vector2.Y = 0.5f; 
+        /// vector2.Y = 0.5f;
         /// // USE like this
         /// float x = 0.1f, y = 0.5f;
         /// Vector2 vector2 = new Vector2(x, y);
@@ -306,7 +308,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use like the followings!
         /// Vector2 vector2 = new Vector2();
-        /// vector2.Height = 2.0f; 
+        /// vector2.Height = 2.0f;
         /// // USE like this
         /// float width = 1.0f, height = 2.0f;
         /// Vector2 vector2 = new Vector2(x, y);

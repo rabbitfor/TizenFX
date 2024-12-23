@@ -19,6 +19,9 @@ using System;
 using Tizen.NUI.Binding;
 using System.ComponentModel;
 using System.Globalization;
+using System.Runtime.InteropServices;
+using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace Tizen.NUI
 {
@@ -918,14 +921,18 @@ namespace Tizen.NUI
         [EditorBrowsable(EditorBrowsableState.Never)]
         public static readonly Color YellowGreen = NDalic.YELLOW_GREEN;
 
+        private float r;
+        private float g;
+        private float b;
+        private float a;
+
 
         /// <summary>
         /// Default constructor
         /// </summary>
         /// <since_tizen> 3 </since_tizen>
-        public Color() : this(Interop.Vector4.NewVector4(), true)
+        public Color() : base()
         {
-            if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
         }
 
 
@@ -937,9 +944,12 @@ namespace Tizen.NUI
         /// <param name="b">The blue component.</param>
         /// <param name="a">The alpha component.</param>
         /// <since_tizen> 3 </since_tizen>
-        public Color(float r, float g, float b, float a) : this(Interop.Vector4.NewVector4(ValueCheck(r), ValueCheck(g), ValueCheck(b), ValueCheck(a)), true)
+        public Color(float r, float g, float b, float a) : this()
         {
-            if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
+            this.r = ValueCheck(r);
+            this.g = ValueCheck(g);
+            this.b = ValueCheck(b);
+            this.a = ValueCheck(a);
         }
 
         /// <summary>
@@ -947,9 +957,16 @@ namespace Tizen.NUI
         /// </summary>
         /// <param name="array">array Array of R,G,B,A.</param>
         /// <since_tizen> 3 </since_tizen>
-        public Color(float[] array) : this(Interop.Vector4.NewVector4(ValueCheck(array)), true)
+        public Color(float[] array) : this()
         {
-            if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
+            if (array.Length < 4)
+            {
+                throw new ArgumentException($"Invalid length of {array}");
+            }
+            r = ValueCheck(array[0]);
+            g = ValueCheck(array[1]);
+            b = ValueCheck(array[2]);
+            a = ValueCheck(array[3]);
         }
 
         /// <summary>
@@ -962,7 +979,7 @@ namespace Tizen.NUI
         /// <since_tizen> 6 </since_tizen>
         /// This will be public opened in tizen_6.0 after ACR done. Before ACR, need to be hidden as inhouse API.
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public Color(string textColor) : this(Interop.Vector4.NewVector4(), true)
+        public Color(string textColor) : this()
         {
             try
             {
@@ -1045,7 +1062,7 @@ namespace Tizen.NUI
         /// </summary>
         /// <param name="color">System.Drawing.Color instance</param>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public Color(global::System.Drawing.Color color) : this(Interop.Vector4.NewVector4(), true)
+        public Color(global::System.Drawing.Color color) : this()
         {
             R = color.R / 255.0f;
             G = color.G / 255.0f;
@@ -1065,12 +1082,18 @@ namespace Tizen.NUI
 
         internal Color(global::System.IntPtr cPtr, bool cMemoryOwn) : base(cPtr, cMemoryOwn)
         {
+            Log.Error("JYJY", "Please do not create Color with c pointer");
+            StackTrace st = new StackTrace(true);
+            for (int i = 0; i < st.FrameCount; i++)
+            {
+                StackFrame sf = st.GetFrame(i);
+                Log.Error("JYJY", "   Method " + sf.GetMethod() + ":" + sf.GetFileName() + ":" + sf.GetFileLineNumber());
+            }
         }
 
-        internal Color(ColorChangedCallback cb, float r, float g, float b, float a) : this(Interop.Vector4.NewVector4(ValueCheck(r), ValueCheck(g), ValueCheck(b), ValueCheck(a)), true)
+        internal Color(ColorChangedCallback cb, float r, float g, float b, float a) : this(r, g, b, a)
         {
             callback = cb;
-            if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
         }
 
         internal Color(ColorChangedCallback cb, Color other) : this(cb, other.R, other.G, other.B, other.A)
@@ -1089,7 +1112,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use as follows:
         /// Color color = new Color();
-        /// color.R = 0.1f; 
+        /// color.R = 0.1f;
         /// // USE like this
         /// float r = 0.1f, g = 0.5f, b = 0.9f, a = 1.0f;
         /// Color color = new Color(r, g, b, a);
@@ -1100,17 +1123,10 @@ namespace Tizen.NUI
             [Obsolete("Do not use this setter, that is deprecated in API8 and will be removed in API10. Use the new Color(...) constructor")]
             set
             {
-                Interop.Vector4.RSet(SwigCPtr, ValueCheck(value));
-                if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
-
+                r = value;
                 callback?.Invoke(value, G, B, A);
             }
-            get
-            {
-                float ret = Interop.Vector4.RGet(SwigCPtr);
-                if (NDalicPINVOKE.SWIGPendingException.Pending) throw new InvalidOperationException("FATAL: get Exception", NDalicPINVOKE.SWIGPendingException.Retrieve());
-                return ret;
-            }
+            get => r;
         }
 
         /// <summary>
@@ -1122,7 +1138,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use as follows:
         /// Color color = new Color();
-        /// color.G = 0.5f; 
+        /// color.G = 0.5f;
         /// // USE like this
         /// float r = 0.1f, g = 0.5f, b = 0.9f, a = 1.0f;
         /// Color color = new Color(r, g, b, a);
@@ -1133,17 +1149,10 @@ namespace Tizen.NUI
             [Obsolete("Do not use this setter, that is deprecated in API8 and will be removed in API10. Use the new Color(...) constructor")]
             set
             {
-                Interop.Vector4.GSet(SwigCPtr, ValueCheck(value));
-                if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
-
+                g = value;
                 callback?.Invoke(R, value, B, A);
             }
-            get
-            {
-                float ret = Interop.Vector4.GGet(SwigCPtr);
-                if (NDalicPINVOKE.SWIGPendingException.Pending) throw new InvalidOperationException("FATAL: get Exception", NDalicPINVOKE.SWIGPendingException.Retrieve());
-                return ret;
-            }
+            get => g;
         }
 
         /// <summary>
@@ -1155,7 +1164,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use as follows:
         /// Color color = new Color();
-        /// color.B = 0.9f; 
+        /// color.B = 0.9f;
         /// // USE like this
         /// float r = 0.1f, g = 0.5f, b = 0.9f, a = 1.0f;
         /// Color color = new Color(r, g, b, a);
@@ -1166,17 +1175,10 @@ namespace Tizen.NUI
             [Obsolete("Do not use this setter, that is deprecated in API8 and will be removed in API10. Use the new Color(...) constructor")]
             set
             {
-                Interop.Vector4.BSet(SwigCPtr, ValueCheck(value));
-                if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
-
+                b = value;
                 callback?.Invoke(R, G, value, A);
             }
-            get
-            {
-                float ret = Interop.Vector4.BGet(SwigCPtr);
-                if (NDalicPINVOKE.SWIGPendingException.Pending) throw new InvalidOperationException("FATAL: get Exception", NDalicPINVOKE.SWIGPendingException.Retrieve());
-                return ret;
-            }
+            get => b;
         }
 
         /// <summary>
@@ -1188,7 +1190,7 @@ namespace Tizen.NUI
         /// <code>
         /// // DO NOT use as follows:
         /// Color color = new Color();
-        /// color.A = 1.0f; 
+        /// color.A = 1.0f;
         /// // USE like this
         /// float r = 0.1f, g = 0.5f, b = 0.9f, a = 1.0f;
         /// Color color = new Color(r, g, b, a);
@@ -1199,17 +1201,10 @@ namespace Tizen.NUI
             [Obsolete("Do not use this setter, that is deprecated in API8 and will be removed in API10. Use the new Color(...) constructor")]
             set
             {
-                Interop.Vector4.ASet(SwigCPtr, ValueCheck(value));
-                if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
-
+                a = value;
                 callback?.Invoke(R, G, B, value);
             }
-            get
-            {
-                float ret = Interop.Vector4.AGet(SwigCPtr);
-                if (NDalicPINVOKE.SWIGPendingException.Pending) throw new InvalidOperationException("FATAL: get Exception", NDalicPINVOKE.SWIGPendingException.Retrieve());
-                return ret;
-            }
+            get => a;
         }
 
         /// <summary>
@@ -1387,7 +1382,9 @@ namespace Tizen.NUI
         /// <since_tizen> 3 </since_tizen>
         public bool EqualTo(Color rhs)
         {
-            bool ret = Interop.Vector4.EqualTo(SwigCPtr, Color.getCPtr(rhs));
+            using var handle = GetReusableNativeHandle();
+            using var rhsHandle = rhs.GetReusableNativeHandle();
+            bool ret = Interop.Vector4.EqualTo(handle, rhsHandle);
 
             if (rhs == null) return false;
 
@@ -1403,7 +1400,9 @@ namespace Tizen.NUI
         /// <since_tizen> 3 </since_tizen>
         public bool NotEqualTo(Color rhs)
         {
-            bool ret = Interop.Vector4.NotEqualTo(SwigCPtr, Color.getCPtr(rhs));
+            using var handle = GetReusableNativeHandle();
+            using var rhsHandle = rhs.GetReusableNativeHandle();
+            bool ret = Interop.Vector4.NotEqualTo(handle, rhsHandle);
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
             return ret;
         }
@@ -1412,11 +1411,29 @@ namespace Tizen.NUI
         [EditorBrowsable(EditorBrowsableState.Never)]
         public object Clone() => new Color(this);
 
-        internal static Color GetColorFromPtr(global::System.IntPtr cPtr)
+        internal static Color GetColorFromPtr(global::System.IntPtr cPtr, bool releaseCPtr)
         {
-            Color ret = new Color(cPtr, false);
-            if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
-            return ret;
+            var handle = new HandleRef(null, cPtr);
+            var color = new Color(Interop.Vector4.RGet(handle), Interop.Vector4.GGet(handle), Interop.Vector4.BGet(handle), Interop.Vector4.AGet(handle));
+
+            if (releaseCPtr)
+            {
+                Interop.Vector4.DeleteVector4(handle);
+            }
+
+            NDalicPINVOKE.ThrowExceptionIfExists();
+            return color;
+        }
+
+        internal static Color GetColorFromPtr(global::System.IntPtr cPtr) => GetColorFromPtr(cPtr, true);
+
+        internal Color FillFrom(HandleRef handle)
+        {
+            r = Interop.Vector4.RGet(handle);
+            g = Interop.Vector4.GGet(handle);
+            b = Interop.Vector4.BGet(handle);
+            a = Interop.Vector4.AGet(handle);
+            return this;
         }
 
         internal static Color ValueCheck(Color color)
@@ -1487,91 +1504,112 @@ namespace Tizen.NUI
 
         private Color Add(Color rhs)
         {
-            Color ret = new Color(Interop.Vector4.Add(SwigCPtr, Color.getCPtr(rhs)), true);
+            using var handle = GetReusableNativeHandle();
+            using var rhsHandle = rhs.GetReusableNativeHandle();
+            Color ret = GetColorFromPtr(Interop.Vector4.Add(handle, rhsHandle));
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
             return ret;
         }
 
         private Color AddAssign(Vector4 rhs)
         {
-            Color ret = new Color(Interop.Vector4.AddAssign(SwigCPtr, Color.getCPtr(rhs)), false);
+            using var handle = GetReusableNativeHandle();
+            using var rhsHandle = rhs.GetReusableNativeHandle();
+            Color ret = GetColorFromPtr(Interop.Vector4.AddAssign(handle, rhsHandle));
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
             return ret;
         }
 
         private Color Subtract(Color rhs)
         {
-            Color ret = new Color(Interop.Vector4.Subtract(SwigCPtr, Color.getCPtr(rhs)), true);
+            using var handle = GetReusableNativeHandle();
+            using var rhsHandle = rhs.GetReusableNativeHandle();
+            Color ret = GetColorFromPtr(Interop.Vector4.Subtract(handle, rhsHandle));
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
             return ret;
         }
 
         private Color SubtractAssign(Color rhs)
         {
-            Color ret = new Color(Interop.Vector4.SubtractAssign(SwigCPtr, Color.getCPtr(rhs)), false);
+            using var handle = GetReusableNativeHandle();
+            using var rhsHandle = rhs.GetReusableNativeHandle();
+            Color ret = GetColorFromPtr(Interop.Vector4.SubtractAssign(handle, rhsHandle), false);
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
             return ret;
         }
 
         private Color Multiply(Color rhs)
         {
-            Color ret = new Color(Interop.Vector4.Multiply(SwigCPtr, Color.getCPtr(rhs)), true);
+            using var handle = GetReusableNativeHandle();
+            using var rhsHandle = rhs.GetReusableNativeHandle();
+            Color ret = GetColorFromPtr(Interop.Vector4.Multiply(handle, rhsHandle));
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
             return ret;
         }
 
         private Color Multiply(float rhs)
         {
-            Color ret = new Color(Interop.Vector4.Multiply(SwigCPtr, rhs), true);
+            using var handle = GetReusableNativeHandle();
+            Color ret = GetColorFromPtr(Interop.Vector4.Multiply(handle, rhs));
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
             return ret;
         }
 
         private Color MultiplyAssign(Color rhs)
         {
-            Color ret = new Color(Interop.Vector4.MultiplyAssign(SwigCPtr, Color.getCPtr(rhs)), false);
+            using var handle = GetReusableNativeHandle();
+            using var rhsHandle = rhs.GetReusableNativeHandle();
+            Color ret = GetColorFromPtr(Interop.Vector4.MultiplyAssign(handle, rhsHandle), false);
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
             return ret;
         }
 
         private Color MultiplyAssign(float rhs)
         {
-            Color ret = new Color(Interop.Vector4.MultiplyAssign(SwigCPtr, rhs), false);
+            using var handle = GetReusableNativeHandle();
+            Color ret = GetColorFromPtr(Interop.Vector4.MultiplyAssign(handle, rhs), false);
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
             return ret;
         }
 
         private Color Divide(Vector4 rhs)
         {
-            Color ret = new Color(Interop.Vector4.Divide(SwigCPtr, Color.getCPtr(rhs)), true);
+            using var handle = GetReusableNativeHandle();
+            using var rhsHandle = rhs.GetReusableNativeHandle();
+            Color ret = GetColorFromPtr(Interop.Vector4.Divide(handle, rhsHandle));
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
             return ret;
         }
 
         private Color Divide(float rhs)
         {
-            Color ret = new Color(Interop.Vector4.Divide(SwigCPtr, rhs), true);
+            using var handle = GetReusableNativeHandle();
+            Color ret = GetColorFromPtr(Interop.Vector4.Divide(handle, rhs));
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
             return ret;
         }
 
         private Color DivideAssign(Color rhs)
         {
-            Color ret = new Color(Interop.Vector4.DivideAssign(SwigCPtr, Color.getCPtr(rhs)), false);
+            using var handle = GetReusableNativeHandle();
+            using var rhsHandle = rhs.GetReusableNativeHandle();
+            Color ret = GetColorFromPtr(Interop.Vector4.DivideAssign(handle, rhsHandle), false);
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
             return ret;
         }
 
         private Color DivideAssign(float rhs)
         {
-            Color ret = new Color(Interop.Vector4.DivideAssign(SwigCPtr, rhs), false);
+            using var handle = GetReusableNativeHandle();
+            Color ret = GetColorFromPtr(Interop.Vector4.DivideAssign(handle, rhs), false);
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
             return ret;
         }
 
         private Color Subtract()
         {
-            Color ret = new Color(Interop.Vector4.Subtract(SwigCPtr), true);
+            using var handle = GetReusableNativeHandle();
+            Color ret = GetColorFromPtr(Interop.Vector4.Subtract(handle));
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
             return ret;
         }
@@ -1631,7 +1669,7 @@ namespace Tizen.NUI
             {
                 if (arg2 is null)
                     return true;
-                
+
                 return false;
             }
 
@@ -1656,13 +1694,183 @@ namespace Tizen.NUI
 
         private float ValueOfIndex(uint index)
         {
-            float ret = Interop.Vector4.ValueOfIndex(SwigCPtr, index);
+            using var handle = GetReusableNativeHandle();
+            float ret = Interop.Vector4.ValueOfIndex(handle, index);
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
             return ret;
         }
 
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        protected override HandleRef GetNativeHandle()
+        {
+            Log.Error("JYJY", "Please do not use naive SwigCPtr for Color");
+            StackTrace st = new StackTrace(true);
+            for (int i = 0; i < st.FrameCount; i++)
+            {
+                StackFrame sf = st.GetFrame(i);
+                Log.Error("JYJY", "   Method " + sf.GetMethod() + ":" + sf.GetFileName() + ":" + sf.GetFileLineNumber());
+            }
+
+            if (!SwigCMemOwn && base.SwigCPtr.Handle == IntPtr.Zero)
+            {
+                Reset(Interop.Vector4.NewVector4(r, g, b, a), true);
+            }
+
+            return base.SwigCPtr;
+        }
+
+        internal override HandleRef SwigCPtr
+        {
+            get
+            {
+                Log.Error("JYJY", "Please do not use naive SwigCPtr for Color");
+                StackTrace st = new StackTrace(true);
+                for (int i = 0; i < st.FrameCount; i++)
+                {
+                    StackFrame sf = st.GetFrame(i);
+                    Log.Error("JYJY", "   Method " + sf.GetMethod() + ":" + sf.GetFileName() + ":" + sf.GetFileLineNumber());
+                }
+
+                if (!SwigCMemOwn && base.SwigCPtr.Handle == IntPtr.Zero)
+                {
+                    Reset(Interop.Vector4.NewVector4(r, g, b, a), true);
+                }
+                return base.SwigCPtr;
+            }
+            set => base.SwigCPtr = value;
+        }
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        internal ObjectPool<Vector4Handle> GetReusableNativeHandle()
+        {
+            var reusableHandle = ObjectPool<Vector4Handle>.New() ?? new ObjectPool<Vector4Handle>(new Vector4Handle(Interop.Vector4.NewVector4()));
+            Interop.Vector4.SetAll(reusableHandle, r, g, b, a);
+            return reusableHandle;
+        }
+
+        internal static ObjectPool<Vector4Handle> GetEmptyReusableNativeHandle()
+        {
+            var reusableHandle = ObjectPool<Vector4Handle>.New() ?? new ObjectPool<Vector4Handle>(new Vector4Handle(Interop.Vector4.NewVector4()));
+            return reusableHandle;
+        }
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        protected override void Dispose(bool disposing)
+        {
+            if (disposed)
+            {
+                return;
+            }
+
+            if (disposing)
+            {
+                Dispose(DisposeTypes.Explicit);
+            }
+            else if (SwigCMemOwn && !IsDisposeQueued)
+            {
+                base.Dispose(false);
+            }
+        }
     }
 
+    /// <summary>
+    /// Provides a pool of objects that can be reused to improve performance and reduce memory usage.
+    /// </summary>
+    /// <typeparam name="T">The type of object to pool.</typeparam>
+    internal class ObjectPool<T> : IDisposable where T : SafeHandle
+    {
+        static Stack<T> s_pool = new Stack<T>();
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ObjectPool{T}"/> class.
+        /// </summary>
+        /// <param name="value">The initial value of the object.</param>
+        public ObjectPool(T value)
+        {
+            Value = value;
+        }
+
+        /// <summary>
+        /// Gets the current value of the object.
+        /// </summary>
+        public T Value { get; }
+
+        /// <summary>
+        /// Releases the object back into the pool.
+        /// </summary>
+        public void Dispose()
+        {
+            if (Value != null)
+            {
+                s_pool.Push(Value);
+            }
+        }
+
+        public HandleRef GetHandleRef() => new HandleRef(Value, Value.DangerousGetHandle());
+
+        /// <summary>
+        /// Creates a new object from the pool or creates a new instance if the pool is empty.
+        /// </summary>
+        /// <returns>A new object from the pool or a new instance if the pool is empty.</returns>
+        public static ObjectPool<T> New()
+        {
+            if (s_pool.Count > 0 && s_pool.TryPop(out T value))
+            {
+                return new ObjectPool<T>(value);
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// Implicitly converts the object pool to its underlying value.
+        /// </summary>
+        /// <param name="obj">The object pool to convert.</param>
+        public static implicit operator T(ObjectPool<T> obj)
+        {
+            return obj.Value;
+        }
+
+
+        public static implicit operator HandleRef(ObjectPool<T> obj) => obj.GetHandleRef();
+
+        /// <summary>
+        /// Gets the number of objects currently in the pool.
+        /// </summary>
+        public static int Count => s_pool.Count;
+    }
+
+    /// <summary>
+    /// The Vector4Handle class represents a handle to a native Vector4 object.
+    /// </summary>
+    public class Vector4Handle : SafeHandle
+    {
+        /// <summary>
+        /// Initializes a new instance of the Vector4Handle class.
+        /// </summary>
+        public Vector4Handle() : base(IntPtr.Zero, true)
+        {
+        }
+
+        public Vector4Handle(IntPtr cptr) : base(cptr, true)
+        {
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether this instance is invalid.
+        /// </summary>
+        public override bool IsInvalid => handle == IntPtr.Zero;
+
+        /// <summary>
+        /// Releases the handle.
+        /// </summary>
+        /// <returns>True if the handle was released successfully; otherwise, false.</returns>
+        protected override bool ReleaseHandle()
+        {
+            Interop.Vector4.DeleteVector4(new HandleRef(this, handle));
+            SetHandle(IntPtr.Zero);
+            return true;
+        }
+    }
 }
 
 

@@ -264,8 +264,9 @@ namespace Tizen.NUI.BaseComponents
             {
                 textLabel.internalTextColor = new Color(0, 0, 0, 0);
             }
-            Object.InternalRetrievingPropertyVector4(textLabel.SwigCPtr, TextLabel.Property.TextColor, textLabel.internalTextColor.SwigCPtr);
-            return textLabel.internalTextColor;
+            using var handle = Vector4.GetEmptyReusableNativeHandle();
+            Object.InternalRetrievingPropertyVector4(textLabel.SwigCPtr, TextLabel.Property.TextColor, handle);
+            return textLabel.internalTextColor.FillFrom(handle);
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
@@ -275,7 +276,8 @@ namespace Tizen.NUI.BaseComponents
             var textLabel = (TextLabel)bindable;
             if (newValue != null)
             {
-                Object.InternalSetPropertyVector4(textLabel.SwigCPtr, TextLabel.Property.AnchorColor, ((Color)newValue).SwigCPtr);
+                using var handle = ((Color)newValue).GetReusableNativeHandle();
+                Object.InternalSetPropertyVector4(textLabel.SwigCPtr, TextLabel.Property.AnchorColor, handle);
             }
         }
         internal static object GetInternalAnchorColorProperty(BindableObject bindable)
@@ -286,8 +288,9 @@ namespace Tizen.NUI.BaseComponents
             {
                 textLabel.internalAnchorColor = new Color(0, 0, 0, 0);
             }
-            Object.InternalRetrievingPropertyVector4(textLabel.SwigCPtr, TextLabel.Property.TextColor, textLabel.internalAnchorColor.SwigCPtr);
-            return textLabel.internalAnchorColor;
+            using var handle = Vector4.GetEmptyReusableNativeHandle();
+            Object.InternalRetrievingPropertyVector4(textLabel.SwigCPtr, TextLabel.Property.TextColor, handle);
+            return textLabel.internalAnchorColor.FillFrom(handle);
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
@@ -297,7 +300,8 @@ namespace Tizen.NUI.BaseComponents
             var textLabel = (TextLabel)bindable;
             if (newValue != null)
             {
-                Object.InternalSetPropertyVector4(textLabel.SwigCPtr, TextLabel.Property.AnchorClickedColor, ((Color)newValue).SwigCPtr);
+                using var handle = ((Color)newValue).GetReusableNativeHandle();
+                Object.InternalSetPropertyVector4(textLabel.SwigCPtr, TextLabel.Property.AnchorClickedColor, handle);
             }
         }
         internal static object GetInternalAnchorClickedColorProperty(BindableObject bindable)
@@ -308,8 +312,9 @@ namespace Tizen.NUI.BaseComponents
             {
                 textLabel.internalAnchorClickedColor = new Color(0, 0, 0, 0);
             }
-            Object.InternalRetrievingPropertyVector4(textLabel.SwigCPtr, TextLabel.Property.TextColor, textLabel.internalAnchorClickedColor.SwigCPtr);
-            return textLabel.internalAnchorClickedColor;
+            using var handle = Vector4.GetEmptyReusableNativeHandle();
+            Object.InternalRetrievingPropertyVector4(textLabel.SwigCPtr, TextLabel.Property.TextColor, handle);
+            return textLabel.internalAnchorClickedColor.FillFrom(handle);
         }
 
         /// <summary>
@@ -1089,8 +1094,8 @@ namespace Tizen.NUI.BaseComponents
         {
             if (value != null)
             {
-
-                Object.InternalSetPropertyVector4(SwigCPtr, TextLabel.Property.TextColor, value.SwigCPtr);
+                using var handle = value.GetReusableNativeHandle();
+                Object.InternalSetPropertyVector4(SwigCPtr, TextLabel.Property.TextColor, handle);
             }
         }
 

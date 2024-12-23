@@ -269,7 +269,8 @@ namespace Tizen.NUI
             {
                 return false;
             }
-            bool ret = Interop.FrameUpdateCallbackInterface.FrameCallbackInterfaceGetColor(proxyIntPtr, id, Vector4.getCPtr(color));
+            using var handle = color.GetReusableNativeHandle();
+            bool ret = Interop.FrameUpdateCallbackInterface.FrameCallbackInterfaceGetColor(proxyIntPtr, id, handle);
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
             return ret;
         }
@@ -282,7 +283,8 @@ namespace Tizen.NUI
             {
                 return false;
             }
-            bool ret = Interop.FrameUpdateCallbackInterface.FrameCallbackInterfaceSetColor(proxyIntPtr, id, Vector4.getCPtr(color));
+            using var handle = color.GetReusableNativeHandle();
+            bool ret = Interop.FrameUpdateCallbackInterface.FrameCallbackInterfaceSetColor(proxyIntPtr, id, handle);
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
             return ret;
         }
@@ -295,7 +297,8 @@ namespace Tizen.NUI
             {
                 return false;
             }
-            bool ret = Interop.FrameUpdateCallbackInterface.FrameCallbackInterfaceBakeColor(proxyIntPtr, id, Vector4.getCPtr(color));
+            using var handle = color.GetReusableNativeHandle();
+            bool ret = Interop.FrameUpdateCallbackInterface.FrameCallbackInterfaceBakeColor(proxyIntPtr, id, handle);
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
             return ret;
         }

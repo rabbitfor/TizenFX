@@ -271,13 +271,14 @@ namespace Tizen.NUI
 
         internal void SetBackgroundColor(Vector4 color)
         {
-            Interop.GaussianBlurView.SetBackgroundColor(SwigCPtr, Vector4.getCPtr(color));
+            using var handle = color.GetReusableNativeHandle();
+            Interop.GaussianBlurView.SetBackgroundColor(SwigCPtr, handle);
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
         }
 
         internal Vector4 GetBackgroundColor()
         {
-            Vector4 ret = new Vector4(Interop.GaussianBlurView.GetBackgroundColor(SwigCPtr), true);
+            Vector4 ret = Vector4.GetVector4FromPtr(Interop.GaussianBlurView.GetBackgroundColor(SwigCPtr));
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
             return ret;
         }

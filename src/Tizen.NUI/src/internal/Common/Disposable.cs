@@ -85,12 +85,12 @@ namespace Tizen.NUI
 
         internal static global::System.Runtime.InteropServices.HandleRef getCPtr(Disposable obj)
         {
-            return (obj == null) ? new global::System.Runtime.InteropServices.HandleRef(null, global::System.IntPtr.Zero) : obj.SwigCPtr;
+            return (obj == null) ? new global::System.Runtime.InteropServices.HandleRef(null, global::System.IntPtr.Zero) : obj.GetNativeHandle();
         }
 
         /// <summary>
         /// Hidden API (Inhouse API).
-        /// Dispose. 
+        /// Dispose.
         /// </summary>
         /// <remarks>
         /// Following the guide of https://docs.microsoft.com/en-us/dotnet/standard/garbage-collection/implementing-dispose.
@@ -183,7 +183,7 @@ namespace Tizen.NUI
         {
         }
 
-        internal global::System.Runtime.InteropServices.HandleRef SwigCPtr
+        internal virtual System.Runtime.InteropServices.HandleRef SwigCPtr
         {
             get => swigCPtr;
             set
@@ -193,6 +193,16 @@ namespace Tizen.NUI
         }
 
         internal bool SwigCMemOwn => swigCMemOwn;
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        protected virtual System.Runtime.InteropServices.HandleRef GetNativeHandle() => swigCPtr;
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        protected void Reset(IntPtr cptr, bool memOwn)
+        {
+            swigCPtr = new System.Runtime.InteropServices.HandleRef(this, cptr);
+            swigCMemOwn = memOwn;
+        }
 
         /// <summary>
         /// The flag to check if it is already disposed of.

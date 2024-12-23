@@ -285,8 +285,8 @@ namespace Tizen.NUI.BaseComponents
             var textField = (TextField)bindable;
             if (newValue != null)
             {
-
-                Object.InternalSetPropertyVector4(textField.SwigCPtr, TextField.Property.TextColor, ((Color)newValue).SwigCPtr);
+                using var handle = ((Color)newValue).GetReusableNativeHandle();
+                Object.InternalSetPropertyVector4(textField.SwigCPtr, TextField.Property.TextColor, handle);
             }
         }
         internal static object GetInternalTextColorProperty(BindableObject bindable)
@@ -297,8 +297,9 @@ namespace Tizen.NUI.BaseComponents
             {
                 textField.internalTextColor = new Color(0, 0, 0, 0);
             }
-            Object.InternalRetrievingPropertyVector4(textField.SwigCPtr, TextField.Property.TextColor, textField.internalTextColor.SwigCPtr);
-            return textField.internalTextColor;
+            using var handle = Vector4.GetEmptyReusableNativeHandle();
+            Object.InternalRetrievingPropertyVector4(textField.SwigCPtr, TextField.Property.TextColor, handle);
+            return textField.internalTextColor.FillFrom(handle);
         }
 
         /// This will be public opened after ACR done. Before ACR, need to be hidden as inhouse API.
@@ -309,8 +310,8 @@ namespace Tizen.NUI.BaseComponents
             var textField = (TextField)bindable;
             if (newValue != null)
             {
-
-                Object.InternalSetPropertyVector4(textField.SwigCPtr, TextField.Property.PlaceholderTextColor, ((Vector4)newValue).SwigCPtr);
+                using var handle = ((Vector4)newValue).GetReusableNativeHandle();
+                Object.InternalSetPropertyVector4(textField.SwigCPtr, TextField.Property.PlaceholderTextColor, handle);
             }
         }
         internal static object GetInternalPlaceholderTextColorProperty(BindableObject bindable)
@@ -321,7 +322,9 @@ namespace Tizen.NUI.BaseComponents
             {
                 textField.internalPlaceholderTextColor = new Vector4(0, 0, 0, 0);
             }
-            Object.InternalRetrievingPropertyVector4(textField.SwigCPtr, TextField.Property.PlaceholderTextColor, textField.internalPlaceholderTextColor.SwigCPtr);
+            using var handle = Vector4.GetEmptyReusableNativeHandle();
+            Object.InternalRetrievingPropertyVector4(textField.SwigCPtr, TextField.Property.PlaceholderTextColor, handle);
+            textField.internalPlaceholderTextColor.FillFrom(handle);
             return textField.internalPlaceholderTextColor;
         }
 
@@ -371,8 +374,8 @@ namespace Tizen.NUI.BaseComponents
             var textField = (TextField)bindable;
             if (newValue != null)
             {
-
-                Object.InternalSetPropertyVector4(textField.SwigCPtr, TextField.Property.PrimaryCursorColor, ((Vector4)newValue).SwigCPtr);
+                using var handle = ((Vector4)newValue).GetReusableNativeHandle();
+                Object.InternalSetPropertyVector4(textField.SwigCPtr, TextField.Property.PrimaryCursorColor, handle);
             }
         }
         internal static object GetInternalPrimaryCursorColorProperty(BindableObject bindable)
@@ -383,7 +386,9 @@ namespace Tizen.NUI.BaseComponents
             {
                 textField.internalPrimaryCursorColor = new Vector4(0, 0, 0, 0);
             }
-            Object.InternalRetrievingPropertyVector4(textField.SwigCPtr, TextField.Property.PrimaryCursorColor, textField.internalPrimaryCursorColor.SwigCPtr);
+            using var handle = Vector4.GetEmptyReusableNativeHandle();
+            Object.InternalRetrievingPropertyVector4(textField.SwigCPtr, TextField.Property.PrimaryCursorColor, handle);
+            textField.internalPrimaryCursorColor.FillFrom(handle);
             return textField.internalPrimaryCursorColor;
         }
 
@@ -395,8 +400,8 @@ namespace Tizen.NUI.BaseComponents
             var textField = (TextField)bindable;
             if (newValue != null)
             {
-
-                Object.InternalSetPropertyVector4(textField.SwigCPtr, TextField.Property.SecondaryCursorColor, ((Vector4)newValue).SwigCPtr);
+                using var handle = ((Vector4)newValue).GetReusableNativeHandle();
+                Object.InternalSetPropertyVector4(textField.SwigCPtr, TextField.Property.SecondaryCursorColor, handle);
             }
         }
         internal static object GetInternalSecondaryCursorColorProperty(BindableObject bindable)
@@ -407,8 +412,9 @@ namespace Tizen.NUI.BaseComponents
             {
                 textField.internalSecondaryCursorColor = new Vector4(0, 0, 0, 0);
             }
-            Object.InternalRetrievingPropertyVector4(textField.SwigCPtr, TextField.Property.SecondaryCursorColor, textField.internalSecondaryCursorColor.SwigCPtr);
-            return textField.internalSecondaryCursorColor;
+            using var handle = Vector4.GetEmptyReusableNativeHandle();
+            Object.InternalRetrievingPropertyVector4(textField.SwigCPtr, TextField.Property.SecondaryCursorColor, handle);
+            return textField.internalSecondaryCursorColor.FillFrom(handle);
         }
 
         /// This will be public opened after ACR done. Before ACR, need to be hidden as inhouse API.
@@ -448,7 +454,7 @@ namespace Tizen.NUI.BaseComponents
 
             return Object.InternalGetPropertyFloat(textField.SwigCPtr, TextField.Property.CursorBlinkInterval);
         }
-        
+
         /// This will be public opened after ACR done. Before ACR, need to be hidden as inhouse API.
         [EditorBrowsable(EditorBrowsableState.Never)]
         public static readonly BindableProperty CursorBlinkDurationProperty = null;
@@ -703,8 +709,8 @@ namespace Tizen.NUI.BaseComponents
             var textField = (TextField)bindable;
             if (newValue != null)
             {
-
-                Object.InternalSetPropertyVector4(textField.SwigCPtr, TextField.Property.SelectionHighlightColor, ((Vector4)newValue).SwigCPtr);
+                using var handle = ((Vector4)newValue).GetReusableNativeHandle();
+                Object.InternalSetPropertyVector4(textField.SwigCPtr, TextField.Property.SelectionHighlightColor, handle);
             }
         }
         internal static object GetInternalSelectionHighlightColorProperty(BindableObject bindable)
@@ -715,8 +721,9 @@ namespace Tizen.NUI.BaseComponents
             {
                 textField.internalSelectionHighlightColor = new Vector4(0, 0, 0, 0);
             }
-            Object.InternalRetrievingPropertyVector4(textField.SwigCPtr, TextField.Property.SelectionHighlightColor, textField.internalSelectionHighlightColor.SwigCPtr);
-            return textField.internalSelectionHighlightColor;
+            using var handle = Vector4.GetEmptyReusableNativeHandle();
+            Object.InternalRetrievingPropertyVector4(textField.SwigCPtr, TextField.Property.SelectionHighlightColor, handle);
+            return textField.internalSelectionHighlightColor.FillFrom(handle);
         }
 
         /// This will be public opened after ACR done. Before ACR, need to be hidden as inhouse API.
@@ -765,8 +772,8 @@ namespace Tizen.NUI.BaseComponents
             var textField = (TextField)bindable;
             if (newValue != null)
             {
-
-                Object.InternalSetPropertyVector4(textField.SwigCPtr, TextField.Property.InputColor, ((Vector4)newValue).SwigCPtr);
+                using var handle = ((Vector4)newValue).GetReusableNativeHandle();
+                Object.InternalSetPropertyVector4(textField.SwigCPtr, TextField.Property.InputColor, handle);
             }
         }
         internal static object GetInternalInputColorProperty(BindableObject bindable)
@@ -777,8 +784,9 @@ namespace Tizen.NUI.BaseComponents
             {
                 textField.internalInputColor = new Vector4(0, 0, 0, 0);
             }
-            Object.InternalRetrievingPropertyVector4(textField.SwigCPtr, TextField.Property.InputColor, textField.internalInputColor.SwigCPtr);
-            return textField.internalInputColor;
+            using var handle = Vector4.GetEmptyReusableNativeHandle();
+            Object.InternalRetrievingPropertyVector4(textField.SwigCPtr, TextField.Property.InputColor, handle);
+            return textField.internalInputColor.FillFrom(handle);
         }
 
         /// This will be public opened after ACR done. Before ACR, need to be hidden as inhouse API.
@@ -1203,8 +1211,8 @@ namespace Tizen.NUI.BaseComponents
             var textField = (TextField)bindable;
             if (newValue != null)
             {
-
-                Object.InternalSetPropertyVector4(textField.SwigCPtr, TextField.Property.GrabHandleColor, ((Color)newValue).SwigCPtr);
+                using var handle = ((Color)newValue).GetReusableNativeHandle();
+                Object.InternalSetPropertyVector4(textField.SwigCPtr, TextField.Property.GrabHandleColor, handle);
             }
         }
         internal static object GetInternalGrabHandleColorProperty(BindableObject bindable)
@@ -1215,8 +1223,9 @@ namespace Tizen.NUI.BaseComponents
             {
                 textField.internalGrabHandleColor = new Color(0, 0, 0, 0);
             }
-            Object.InternalRetrievingPropertyVector4(textField.SwigCPtr, TextField.Property.GrabHandleColor, textField.internalGrabHandleColor.SwigCPtr);
-            return textField.internalGrabHandleColor;
+            using var handle = Vector4.GetEmptyReusableNativeHandle();
+            Object.InternalRetrievingPropertyVector4(textField.SwigCPtr, TextField.Property.GrabHandleColor, handle);
+            return textField.internalGrabHandleColor.FillFrom(handle);
         }
 
         /// <summary>

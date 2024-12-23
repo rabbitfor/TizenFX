@@ -356,7 +356,7 @@ namespace Tizen.NUI
         [EditorBrowsable(EditorBrowsableState.Never)]
         public Vector4 GetTranslation()
         {
-            Vector4 ret = new Vector4(Interop.Matrix.GetTranslation(SwigCPtr), false);
+            Vector4 ret = Vector4.GetVector4FromPtr(Interop.Matrix.GetTranslation(SwigCPtr));
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
             return ret;
         }
@@ -385,7 +385,8 @@ namespace Tizen.NUI
         [EditorBrowsable(EditorBrowsableState.Never)]
         public void SetTranslation(Vector4 translation)
         {
-            Interop.Matrix.SetTranslationVector4(SwigCPtr, Vector4.getCPtr(translation));
+            using var handle = translation.GetReusableNativeHandle();
+            Interop.Matrix.SetTranslationVector4(SwigCPtr, handle);
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
         }
 
@@ -470,7 +471,8 @@ namespace Tizen.NUI
         [EditorBrowsable(EditorBrowsableState.Never)]
         public Vector4 Multiply(Vector4 rhs)
         {
-            Vector4 ret = new Vector4(Interop.Matrix.MultiplyVector4(SwigCPtr, Vector4.getCPtr(rhs)), true);
+            using var handle = rhs.GetReusableNativeHandle();
+            Vector4 ret = Vector4.GetVector4FromPtr(Interop.Matrix.MultiplyVector4(SwigCPtr, handle));
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
             return ret;
         }

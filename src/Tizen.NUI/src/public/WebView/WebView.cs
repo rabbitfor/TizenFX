@@ -438,7 +438,7 @@ namespace Tizen.NUI.BaseComponents
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         private delegate void WebViewUserMediaPermissionRequestCallback(IntPtr permission, string message);
-       
+
 
         /// <summary>
         /// Event for the PageLoadStarted signal which can be used to subscribe or unsubscribe the event handler.<br />
@@ -2113,7 +2113,7 @@ namespace Tizen.NUI.BaseComponents
         }
 
         private static readonly BindableProperty UrlProperty = null;
-        
+
         internal static void SetInternalUrlProperty(BindableObject bindable, object oldValue, object newValue)
         {
             var webview = (WebView)bindable;
@@ -2122,7 +2122,7 @@ namespace Tizen.NUI.BaseComponents
                 Tizen.NUI.Object.SetProperty(webview.SwigCPtr, WebView.Property.Url, new Tizen.NUI.PropertyValue((string)newValue));
             }
         }
-        
+
         internal static object GetInternalUrlProperty(BindableObject bindable)
         {
             var webview = (WebView)bindable;
@@ -2132,7 +2132,7 @@ namespace Tizen.NUI.BaseComponents
         }
 
         private static readonly BindableProperty UserAgentProperty = null;
-        
+
         internal static void SetInternalUserAgentProperty(BindableObject bindable, object oldValue, object newValue)
         {
             var webview = (WebView)bindable;
@@ -2141,7 +2141,7 @@ namespace Tizen.NUI.BaseComponents
                 Tizen.NUI.Object.SetProperty((HandleRef)webview.SwigCPtr, WebView.Property.UserAgent, new Tizen.NUI.PropertyValue((string)newValue));
             }
         }
-        
+
         internal static object GetInternalUserAgentProperty(BindableObject bindable)
         {
             var webview = (WebView)bindable;
@@ -2151,7 +2151,7 @@ namespace Tizen.NUI.BaseComponents
         }
 
         private static readonly BindableProperty ScrollPositionProperty = null;
-        
+
         internal static void SetInternalScrollPositionProperty(BindableObject bindable, object oldValue, object newValue)
         {
             var webview = (WebView)bindable;
@@ -2160,7 +2160,7 @@ namespace Tizen.NUI.BaseComponents
                 Tizen.NUI.Object.SetProperty(webview.SwigCPtr, WebView.Property.ScrollPosition, new Tizen.NUI.PropertyValue((Vector2)newValue));
             }
         }
-        
+
         internal static object GetInternalScrollPositionProperty(BindableObject bindable)
         {
             var webview = (WebView)bindable;
@@ -2170,7 +2170,7 @@ namespace Tizen.NUI.BaseComponents
         }
 
         private static readonly BindableProperty ScrollSizeProperty = null;
-        
+
         internal static object GetInternalScrollSizeProperty(BindableObject bindable)
         {
             var webview = (WebView)bindable;
@@ -2200,7 +2200,7 @@ namespace Tizen.NUI.BaseComponents
         }
 
         private static readonly BindableProperty VideoHoleEnabledProperty = null;
-        
+
         internal static void SetInternalVideoHoleEnabledProperty(BindableObject bindable, object oldValue, object newValue)
         {
             var webview = (WebView)bindable;
@@ -2209,7 +2209,7 @@ namespace Tizen.NUI.BaseComponents
                 Tizen.NUI.Object.SetProperty(webview.SwigCPtr, WebView.Property.VideoHoleEnabled, new Tizen.NUI.PropertyValue((bool)newValue));
             }
         }
-        
+
         internal static object GetInternalVideoHoleEnabledProperty(BindableObject bindable)
         {
             var webview = (WebView)bindable;
@@ -2219,7 +2219,7 @@ namespace Tizen.NUI.BaseComponents
         }
 
         private static readonly BindableProperty MouseEventsEnabledProperty = null;
-        
+
         internal static void SetInternalMouseEventsEnabledProperty(BindableObject bindable, object oldValue, object newValue)
         {
             var webview = (WebView)bindable;
@@ -2228,7 +2228,7 @@ namespace Tizen.NUI.BaseComponents
                 Tizen.NUI.Object.SetProperty(webview.SwigCPtr, WebView.Property.MouseEventsEnabled, new Tizen.NUI.PropertyValue((bool)newValue));
             }
         }
-        
+
         internal static object GetInternalMouseEventsEnabledProperty(BindableObject bindable)
         {
             var webview = (WebView)bindable;
@@ -2238,7 +2238,7 @@ namespace Tizen.NUI.BaseComponents
         }
 
         private static readonly BindableProperty KeyEventsEnabledProperty = null;
-        
+
         internal static void SetInternalKeyEventsEnabledProperty(BindableObject bindable, object oldValue, object newValue)
         {
             var webview = (WebView)bindable;
@@ -2247,7 +2247,7 @@ namespace Tizen.NUI.BaseComponents
                 Tizen.NUI.Object.SetProperty(webview.SwigCPtr, WebView.Property.KeyEventsEnabled, new Tizen.NUI.PropertyValue((bool)newValue));
             }
         }
-        
+
         internal static object GetInternalKeyEventsEnabledProperty(BindableObject bindable)
         {
             var webview = (WebView)bindable;
@@ -2257,7 +2257,7 @@ namespace Tizen.NUI.BaseComponents
         }
 
         private static readonly BindableProperty ContentBackgroundColorProperty = null;
-        
+
         internal static void SetInternalContentBackgroundColorProperty(BindableObject bindable, object oldValue, object newValue)
         {
             var webview = (WebView)bindable;
@@ -2267,7 +2267,7 @@ namespace Tizen.NUI.BaseComponents
                 Tizen.NUI.Object.SetProperty(webview.SwigCPtr, WebView.Property.DocumentBackgroundColor, new Tizen.NUI.PropertyValue((Color)newValue));
             }
         }
-        
+
         internal static object GetInternalContentBackgroundColorProperty(BindableObject bindable)
         {
             var webview = (WebView)bindable;
@@ -2275,7 +2275,7 @@ namespace Tizen.NUI.BaseComponents
         }
 
         private static readonly BindableProperty TilesClearedWhenHiddenProperty = null;
-        
+
         internal static void SetInternalTilesClearedWhenHiddenProperty(BindableObject bindable, object oldValue, object newValue)
         {
             var webview = (WebView)bindable;
@@ -2285,7 +2285,7 @@ namespace Tizen.NUI.BaseComponents
                 Tizen.NUI.Object.SetProperty(webview.SwigCPtr, WebView.Property.TilesClearedWhenHidden, new Tizen.NUI.PropertyValue((bool)newValue));
             }
         }
-        
+
         internal static object GetInternalTilesClearedWhenHiddenProperty(BindableObject bindable)
         {
             var webview = (WebView)bindable;
@@ -2293,7 +2293,7 @@ namespace Tizen.NUI.BaseComponents
         }
 
         private static readonly BindableProperty TileCoverAreaMultiplierProperty = null;
-        
+
         internal static void SetInternalTileCoverAreaMultiplierProperty(BindableObject bindable, object oldValue, object newValue)
         {
             var webview = (WebView)bindable;
@@ -2303,7 +2303,7 @@ namespace Tizen.NUI.BaseComponents
                 Tizen.NUI.Object.SetProperty(webview.SwigCPtr, WebView.Property.TileCoverAreaMultiplier, new Tizen.NUI.PropertyValue((float)newValue));
             }
         }
-        
+
         internal static object GetInternalTileCoverAreaMultiplierProperty(BindableObject bindable)
         {
             var webview = (WebView)bindable;
@@ -2311,7 +2311,7 @@ namespace Tizen.NUI.BaseComponents
         }
 
         private static readonly BindableProperty CursorEnabledByClientProperty = null;
-        
+
         internal static void SetInternalCursorEnabledByClientProperty(BindableObject bindable, object oldValue, object newValue)
         {
             var webview = (WebView)bindable;
@@ -2321,7 +2321,7 @@ namespace Tizen.NUI.BaseComponents
                 Tizen.NUI.Object.SetProperty(webview.SwigCPtr, WebView.Property.CursorEnabledByClient, new Tizen.NUI.PropertyValue((bool)newValue));
             }
         }
-        
+
         internal static object GetInternalCursorEnabledByClientProperty(BindableObject bindable)
         {
             var webview = (WebView)bindable;
@@ -2329,7 +2329,7 @@ namespace Tizen.NUI.BaseComponents
         }
 
         private static readonly BindableProperty SelectedTextProperty = null;
-        
+
         internal static object GetInternalSelectedTextProperty(BindableObject bindable)
         {
             var webview = (WebView)bindable;
@@ -2339,7 +2339,7 @@ namespace Tizen.NUI.BaseComponents
         }
 
         private static readonly BindableProperty PageZoomFactorProperty = null;
-        
+
         internal static void SetInternalPageZoomFactorProperty(BindableObject bindable, object oldValue, object newValue)
         {
             var webview = (WebView)bindable;
@@ -2348,7 +2348,7 @@ namespace Tizen.NUI.BaseComponents
                 Tizen.NUI.Object.SetProperty(webview.SwigCPtr, WebView.Property.PageZoomFactor, new Tizen.NUI.PropertyValue((float)newValue));
             }
         }
-        
+
         internal static object GetInternalPageZoomFactorProperty(BindableObject bindable)
         {
             var webview = (WebView)bindable;
@@ -2358,7 +2358,7 @@ namespace Tizen.NUI.BaseComponents
         }
 
         private static readonly BindableProperty TextZoomFactorProperty = null;
-        
+
         internal static void SetInternalTextZoomFactorProperty(BindableObject bindable, object oldValue, object newValue)
         {
             var webview = (WebView)bindable;
@@ -2367,7 +2367,7 @@ namespace Tizen.NUI.BaseComponents
                 Tizen.NUI.Object.SetProperty(webview.SwigCPtr, WebView.Property.TextZoomFactor, new Tizen.NUI.PropertyValue((float)newValue));
             }
         }
-        
+
         internal static object GetInternalTextZoomFactorProperty(BindableObject bindable)
         {
             var webview = (WebView)bindable;
@@ -2377,7 +2377,7 @@ namespace Tizen.NUI.BaseComponents
         }
 
         private static readonly BindableProperty LoadProgressPercentageProperty = null;
-        
+
         internal static object GetInternalLoadProgressPercentageProperty(BindableObject bindable)
         {
             var webview = (WebView)bindable;
@@ -3103,7 +3103,7 @@ namespace Tizen.NUI.BaseComponents
         {
             base.ApplyCornerRadius();
 
-            if (backgroundExtraData == null) 
+            if (backgroundExtraData == null)
             {
                 return;
             }
@@ -3111,11 +3111,13 @@ namespace Tizen.NUI.BaseComponents
             // Update corner radius properties to webView by ActionUpdateProperty
             if (backgroundExtraData.CornerRadius != null)
             {
-                Interop.View.InternalUpdateVisualPropertyVector4(this.SwigCPtr, WebView.Property.Url, Visual.Property.CornerRadius, Vector4.getCPtr(backgroundExtraData.CornerRadius));
+                using var handle = backgroundExtraData.CornerRadius.GetReusableNativeHandle();
+                Interop.View.InternalUpdateVisualPropertyVector4(this.SwigCPtr, WebView.Property.Url, Visual.Property.CornerRadius, handle);
             }
             if (backgroundExtraData.CornerSquareness != null)
             {
-                Interop.View.InternalUpdateVisualPropertyVector4(this.SwigCPtr, WebView.Property.Url, Visual.Property.CornerSquareness, Vector4.getCPtr(backgroundExtraData.CornerSquareness));
+                using var handle = backgroundExtraData.CornerSquareness.GetReusableNativeHandle();
+                Interop.View.InternalUpdateVisualPropertyVector4(this.SwigCPtr, WebView.Property.Url, Visual.Property.CornerSquareness, handle);
             }
             Interop.View.InternalUpdateVisualPropertyInt(this.SwigCPtr, WebView.Property.Url, Visual.Property.CornerRadiusPolicy, (int)backgroundExtraData.CornerRadiusPolicy);
         }
