@@ -25,7 +25,7 @@ namespace Tizen.NUI.HelloWorld
     public class App : NUIApplication
     {
         const int testVolumn = 1000;
-        View view;
+        View parent;
 
         public App(string styleSheet) : base(styleSheet)
         {
@@ -37,10 +37,20 @@ namespace Tizen.NUI.HelloWorld
 
             NUIApplication.IsUsingXaml = false;
 
-            NUIApplication.GetDefaultWindow().Add(new TextLabel()
+            NUIApplication.GetDefaultWindow().Add(parent = new View()
             {
-                Text = "Hello World",
-                TextColor = Color.White,
+                SizeWidth = 200f,
+                SizeHeight = 200f,
+                BackgroundColor = Color.Blue,
+                ClippingMode = ClippingModeType.ClipChildren
+            });
+
+            parent.Add(new View()
+            {
+                SizeWidth = 100f,
+                SizeHeight = 100f,
+                BackgroundColor = Color.Red,
+                OffScreenRendering = View.OffScreenRenderingType.RefreshAlways
             });
         }
 
