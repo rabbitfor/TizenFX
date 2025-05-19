@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns="http://tizen.org/ns/packages" api-version="7" package="org.tizen.nui.hello-world" version="1.0.2">
+  <profile name="common" />
+  <ui-application appid="org.tizen.nui.hello-world"
+					exec="Tizen.NUI.HelloWorld.dll"
+					type="dotnet-nui"
+					multiple="false"
+					taskmanage="true"
+					nodisplay="false"
+					launch_mode="single">
+    <label>Tizen.NUI.HelloWorld</label>
+    <metadata key="http://tizen.org/metadata/prefer_dotnet_aot" value="true" />
+  </ui-application>
+	<privileges>
+        <privilege>http://tizen.org/privilege/camera</privilege>
+  </privileges>
+</manifest>
