@@ -25,7 +25,7 @@ namespace Tizen.NUI.HelloWorld
     public class App : NUIApplication
     {
         const int testVolumn = 1000;
-        View view;
+        View view1;
 
         public App(string styleSheet) : base(styleSheet)
         {
@@ -37,16 +37,33 @@ namespace Tizen.NUI.HelloWorld
 
             NUIApplication.IsUsingXaml = false;
 
-            NUIApplication.GetDefaultWindow().Add(new TextLabel()
+            NUIApplication.GetDefaultWindow().KeyEvent += OnKeyEvent;
+
+            NUIApplication.GetDefaultWindow().Add(view1 = new View()
             {
-                Text = "Hello World",
-                TextColor = Color.White,
+                SizeWidth = 200f,
+                SizeHeight = 200f,
+                BackgroundColor = Color.White,
+                OffScreenRendering = View.OffScreenRenderingType.RefreshAlways
+            });
+            view1.Add(new View()
+            {
+                SizeWidth = 100f,
+                SizeHeight = 100f,
+                BackgroundColor = Color.Red
+            });
+            view1.Add(new View()
+            {
+                SizeWidth = 100f,
+                SizeHeight = 100f,
+                PositionX = 100f,
+                PositionY = 100f,
+                BackgroundColor = Color.Blue
             });
         }
 
         static void FullGC()
         {
-            // Tizen.Log.Info("NUI", $"GC!");
             global::System.GC.Collect();
             global::System.GC.WaitForPendingFinalizers();
             global::System.GC.Collect();
@@ -55,6 +72,14 @@ namespace Tizen.NUI.HelloWorld
         static void Main(string[] args)
         {
             new App("").Run(args);
+        }
+
+        private void OnKeyEvent(object sender, Window.KeyEventArgs e)
+        {
+            if (e.Key.State == Key.StateType.Up && e.Key.KeyPressedName == "0")
+            {
+                view1.SizeWidth = 100;
+            }
         }
     }
 }
